@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMY Agency – Kreativ. Innovativ. Digitale Lösungen.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .gradient-text {
+      background: linear-gradient(to right, #D4AF37, #FFD700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-text {
+      color: #D4AF37;
+    }
+  </style>
+</head>
+<body class="bg-[#f4f1e8] text-black scroll-smooth">
+
+  <!-- Intro Video Overlay -->
+  <div id="intro-video" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
+    <video id="trailer" autoplay muted playsinline class="w-full h-full object-cover">
+      <source src="intro.mp4" type="video/mp4" />
+      Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+  </div>
+
+  <script>
+    const intro = document.getElementById('intro-video');
+    const video = document.getElementById('trailer');
+
+    video.addEventListener('ended', () => {
+      intro.style.display = 'none';
+    });
+  </script>
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 py-4 bg-white/70 backdrop-blur sticky top-0 z-40 shadow">
+    <h1 class="text-2xl font-extrabold gradient-text">SMY Agency</h1>
+    <nav class="space-x-6 text-sm">
+      <a href="#leistungen" class="hover:text-[#D4AF37]">Leistungen</a>
+      <a href="#kunden" class="hover:text-[#D4AF37]">Kunden</a>
+      <a href="#kundenportfolio" class="hover:text-[#D4AF37]">Kundenportfolio</a>
+      <a href="#kontakt" class="hover:text-[#D4AF37]">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
+    <h2 class="text-4xl md:text-6xl font-bold gradient-text">Kreativ. Innovativ. Digitale Lösungen.</h2>
+    <p class="mt-4 text-gray-700 max-w-xl">Wir sind die SMY Agency – Deine Experten für Webdesign, Social Media & digitales Wachstum.</p>
+    <a href="#kontakt" class="mt-8 px-6 py-3 bg-[#D4AF37] text-white rounded-full hover:bg-yellow-500 transition font-semibold">Jetzt Kontakt aufnehmen</a>
+  </section>
+
+  <!-- Leistungen -->
+  <section id="leistungen" class="px-6 py-20 bg-white">
+    <div class="max-w-5xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-10 gold-text">Unsere Leistungen</h3>
+      <div class="grid md:grid-cols-3 gap-8 text-left">
+        <div class="bg-[#f9f6ef] p-6 rounded-xl shadow hover:scale-105 transition">
+          <h4 class="text-xl font-semibold mb-2 gold-text">Webdesign & Entwicklung</h4>
+          <p class="text-gray-700">Individuelle, responsive und performance-optimierte Websites – maßgeschneidert für deine Marke.</p>
+        </div>
+        <div class="bg-[#f9f6ef] p-6 rounded-xl shadow hover:scale-105 transition">
+          <h4 class="text-xl font-semibold mb-2 gold-text">Social Media Betreuung</h4>
+          <p class="text-gray-700">Ganzheitliches Social Media Management inkl. Content-Planung, Erstellung, Posten & Communitypflege.</p>
+        </div>
+        <div class="bg-[#f9f6ef] p-6 rounded-xl shadow hover:scale-105 transition">
+          <h4 class="text-xl font-semibold mb-2 gold-text">Imagefilme</h4>
+          <p class="text-gray-700">Professionelle Imagefilme, die deine Marke ins beste Licht rücken – für Website, Ads & Social Media.</p>
+        </div>
+        <div class="bg-[#f9f6ef] p-6 rounded-xl shadow hover:scale-105 transition">
+          <h4 class="text-xl font-semibold mb-2 gold-text">Grafikdesign</h4>
+          <p class="text-gray-700">Modernes Corporate Design: Logos, Flyer, Visitenkarten und alles, was deine Brand sichtbar macht.</p>
+        </div>
+        <div class="bg-[#f9f6ef] p-6 rounded-xl shadow hover:scale-105 transition">
+          <h4 class="text-xl font-semibold mb-2 gold-text">QR-Code Menükarten</h4>
+          <p class="text-gray-700">Digitale, mobile Menükarten mit QR-Codes – besonders für Gastronomie & Events geeignet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kundenstimmen -->
+  <section id="kunden" class="px-6 py-20 bg-[#f0eadb]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-10 gold-text">Kundenstimmen</h3>
+      <div class="grid md:grid-cols-3 gap-6 text-left">
+        <div class="bg-white p-6 rounded-xl shadow">
+          <div class="text-yellow-400 text-xl mb-2">★★★★★</div>
+          <p class="text-gray-700">„SMY hat unser komplettes Online-Erlebnis auf ein neues Level gehoben. Vom Design bis zur Umsetzung – einfach top!“</p>
+          <span class="block mt-4 text-sm gold-text font-semibold">– Anna M., Fashionlabel</span>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+          <div class="text-yellow-400 text-xl mb-2">★★★★★</div>
+          <p class="text-gray-700">„Wir bekommen dank SMY regelmäßig neue Anfragen über Social Media – professionelle Betreuung & starke Ergebnisse.“</p>
+          <span class="block mt-4 text-sm gold-text font-semibold">– Mehmet T., Eventlocation</span>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+          <div class="text-yellow-400 text-xl mb-2">★★★★★</div>
+          <p class="text-gray-700">„Kreativ, schnell, zuverlässig – genau das, was wir gesucht haben. Die Zusammenarbeit war super angenehm.“</p>
+          <span class="block mt-4 text-sm gold-text font-semibold">– Lisa R., Kosmetikstudio</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kundenportfolio -->
+  <section id="kundenportfolio" class="px-6 py-20 bg-[#fffaf2]">
+    <div class="max-w-6xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-10 gold-text">Kundenportfolio</h3>
+      <div class="grid md:grid-cols-3 gap-6 text-left">
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold gold-text mb-2">MHM Garten- & Landschaftsbau</h4>
+          <p class="text-gray-700">Webdesign, Social Media, Printdesign</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold gold-text mb-2">Logikids – Daniela Neuber</h4>
+          <p class="text-gray-700">Webdesign, Flyer, Social Media</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold gold-text mb-2">Gastpark Hotel</h4>
+          <p class="text-gray-700">Imagefilm, Website, Social Media</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold gold-text mb-2">E & M Eventpark GmbH</h4>
+          <p class="text-gray-700">Social Media Betreuung, Printmaterial</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold gold-text mb-2">Candelized</h4>
+          <p class="text-gray-700">Grafikdesign, Webdesign</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold gold-text mb-2">Steuerberater Yusuf Kavalci</h4>
+          <p class="text-gray-700">Corporate Design, Website</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="kontakt" class="px-6 py-20 bg-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-6 gold-text">Bereit für den nächsten Schritt?</h3>
+      <p class="text-gray-700 mb-6">Sag uns, was du brauchst – wir melden uns innerhalb von 24h zurück.</p>
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+        <a href="mailto:info.smyagency@gmail.com"
+           class="px-6 py-3 bg-[#D4AF37] text-white rounded-full hover:bg-yellow-500 transition font-semibold">
+           ✉️ E-Mail schreiben
+        </a>
+        <a href="https://wa.me/message/OUJTOIXGBVN4O1" target="_blank"
+           class="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition font-semibold">
+           💬 WhatsApp Chat
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 text-center text-gray-500 text-sm bg-[#f4f1e8]">
+    © 2024 SMY Agency. Alle Rechte vorbehalten.
+  </footer>
+
+</body>
+</html>
