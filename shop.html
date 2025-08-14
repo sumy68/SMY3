@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop – SMY Agency</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    .gradient-text { background: linear-gradient(to right, #D4AF37, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .gold-text { color: #D4AF37; }
+    .gold-bg { background: linear-gradient(90deg,#D4AF37,#FFD700); }
+    .shadow-soft { box-shadow: 0 10px 25px rgba(0,0,0,.08); }
+  </style>
+</head>
+<body class="bg-[#f4f1e8] text-black">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 py-4 bg-white/70 backdrop-blur sticky top-0 z-40 shadow">
+    <h1 class="text-2xl font-extrabold gradient-text">SMY Agency</h1>
+    <nav class="space-x-6 text-sm">
+      <a href="index.html#leistungen" class="hover:text-[#D4AF37]">Leistungen</a>
+      <a href="index.html#kunden" class="hover:text-[#D4AF37]">Kunden</a>
+      <a href="leitfaden.html" class="hover:text-[#D4AF37]">Leitfaden</a>
+      <a href="kundenportfolio.html" class="hover:text-[#D4AF37]">Kundenportfolio</a>
+      <a href="shop.html" class="hover:text-[#D4AF37] font-semibold">Shop</a>
+      <a href="index.html#kontakt" class="hover:text-[#D4AF37]">Kontakt</a>
+      <a href="impressum.html" class="hover:text-[#D4AF37]">Impressum</a>
+      <a href="datenschutz.html" class="hover:text-[#D4AF37]">Datenschutz</a>
+    </nav>
+  </header>
+
+  <!-- Shop Intro -->
+  <section class="max-w-6xl mx-auto px-6 py-12 text-center">
+    <h2 class="text-3xl font-extrabold mb-4">Unser Shop</h2>
+    <p class="text-gray-600 text-lg">Wähle dein digitales Produkt und starte sofort.</p>
+  </section>
+
+  <!-- Produktkarten -->
+  <section class="max-w-6xl mx-auto px-6 pb-16 grid md:grid-cols-2 gap-8">
+    
+    <!-- Leitfaden -->
+    <div class="bg-white rounded-2xl shadow-soft overflow-hidden flex flex-col">
+      <img src="images/leitfaden.jpg" alt="Social Media Leitfaden" class="h-56 w-full object-cover">
+      <div class="p-6 flex flex-col flex-grow">
+        <h3 class="text-xl font-bold mb-2">Individueller Social Media Leitfaden</h3>
+        <p class="text-sm text-gray-600 mb-4 flex-grow">Dein maßgeschneiderter Leitfaden für erfolgreiche Social Media Strategien.</p>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl font-extrabold gold-text">€150</span>
+        </div>
+        <a href="leitfaden.html" class="block gold-bg text-black font-bold text-center rounded-xl py-3 hover:opacity-90 transition">
+          Zum Produkt
+        </a>
+      </div>
+    </div>
+
+    <!-- Videopack -->
+    <div class="bg-white rounded-2xl shadow-soft overflow-hidden flex flex-col">
+      <img src="images/hero.jpg" alt="30.000 Luxury Clips Pack" class="h-56 w-full object-cover">
+      <div class="p-6 flex flex-col flex-grow">
+        <h3 class="text-xl font-bold mb-2">30.000 Luxury Aesthetic Clips Pack</h3>
+        <p class="text-sm text-gray-600 mb-4 flex-grow">Perfekt für Reels, Shorts und Ads – kuratiert im edlen Gold-&-Beige-Look.</p>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-2xl font-extrabold gold-text">€28</span>
+          <span class="line-through text-gray-400">€70</span>
+          <span class="text-xs px-2 py-1 rounded-full bg-[#f8e9b5] text-black font-semibold">-60%</span>
+        </div>
+        <a href="videos.html" class="block gold-bg text-black font-bold text-center rounded-xl py-3 hover:opacity-90 transition">
+          Zum Produkt
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-[#f4f1e8] text-gray-600 text-sm">
+    <div class="max-w-6xl mx-auto px-4 text-center space-y-4">
+      <nav class="space-x-6">
+        <a href="index.html#leistungen" class="hover:text-[#D4AF37]">Leistungen</a>
+        <a href="leitfaden.html" class="hover:text-[#D4AF37]">Leitfaden</a>
+        <a href="index.html#kunden" class="hover:text-[#D4AF37]">Kunden</a>
+        <a href="kundenportfolio.html" class="hover:text-[#D4AF37]">Kundenportfolio</a>
+        <a href="shop.html" class="hover:text-[#D4AF37] font-semibold">Shop</a>
+        <a href="index.html#kontakt" class="hover:text-[#D4AF37]">Kontakt</a>
+        <a href="impressum.html" class="hover:text-[#D4AF37]">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-[#D4AF37]">Datenschutz</a>
+      </nav>
+      <p class="text-gray-500">© 2025 SMY Agency. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
