@@ -162,97 +162,65 @@
     Hochauflösend, flüssig und gemacht, damit dein Content heraussticht.
   </p>
 
-  <div class="video-grid">
-    <div class="tile">
-      <video class="tile-video" src="videos/clip1.mp4" playsinline preload="metadata"></video>
-      <div class="play-overlay">▶</div>
+  <div class="video-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="tile relative rounded-xl overflow-hidden shadow-soft">
+      <video class="tile-video w-full h-64 object-cover" src="videos/clip1.mp4" playsinline preload="auto"></video>
+      <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer">
+        <div class="play-button w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
+          <span class="text-3xl text-black">▶</span>
+        </div>
+      </div>
     </div>
-    <div class="tile">
-      <video class="tile-video" src="videos/clip2.mp4" playsinline preload="metadata"></video>
-      <div class="play-overlay">▶</div>
+    <div class="tile relative rounded-xl overflow-hidden shadow-soft">
+      <video class="tile-video w-full h-64 object-cover" src="videos/clip2.mp4" playsinline preload="auto"></video>
+      <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer">
+        <div class="play-button w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
+          <span class="text-3xl text-black">▶</span>
+        </div>
+      </div>
     </div>
-    <div class="tile">
-      <video class="tile-video" src="videos/clip3.mp4" playsinline preload="metadata"></video>
-      <div class="play-overlay">▶</div>
+    <div class="tile relative rounded-xl overflow-hidden shadow-soft">
+      <video class="tile-video w-full h-64 object-cover" src="videos/clip3.mp4" playsinline preload="auto"></video>
+      <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer">
+        <div class="play-button w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
+          <span class="text-3xl text-black">▶</span>
+        </div>
+      </div>
     </div>
-    <div class="tile">
-      <video class="tile-video" src="videos/clip4.mp4" playsinline preload="metadata"></video>
-      <div class="play-overlay">▶</div>
+    <div class="tile relative rounded-xl overflow-hidden shadow-soft">
+      <video class="tile-video w-full h-64 object-cover" src="videos/clip4.mp4" playsinline preload="auto"></video>
+      <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer">
+        <div class="play-button w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
+          <span class="text-3xl text-black">▶</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<style>
-  .video-grid {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(2, 1fr); /* 2 Spalten mobil */
-  }
-  @media (min-width: 1024px) {
-    .video-grid { grid-template-columns: repeat(4, 1fr); } /* 4 Spalten ab Desktop */
-  }
-  .tile {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #000;
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
-    cursor: pointer;
-  }
-  .tile::before {
-    content: "";
-    display: block;
-    aspect-ratio: 9 / 16; /* Hochformat Reels/Shorts */
-    width: 100%;
-  }
-  .tile-video {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-  }
-  .play-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: white;
-    background: rgba(0,0,0,0.3);
-    transition: opacity 0.3s ease;
-    pointer-events: none; /* nicht blockierend */
-  }
-  .tile.playing .play-overlay {
-    opacity: 0;
-    visibility: hidden;
-  }
-</style>
-
 <script>
-  const videos = document.querySelectorAll(".tile-video");
+  const tiles = document.querySelectorAll('.tile');
+  const videos = document.querySelectorAll('.tile-video');
 
-  videos.forEach(video => {
-    const tile = video.closest(".tile");
-    video.addEventListener("click", () => {
-      if (video.paused) {
-        // Alle anderen pausieren und Overlay wieder zeigen
-        videos.forEach(v => {
-          if (!v.paused) {
-            v.pause();
-            v.closest(".tile").classList.remove("playing");
-          }
-        });
-        // Dieses starten
-        video.play();
-        tile.classList.add("playing");
-      } else {
-        video.pause();
-        tile.classList.remove("playing");
-      }
+  tiles.forEach(tile => {
+    const video = tile.querySelector('.tile-video');
+    const overlay = tile.querySelector('.play-overlay');
+
+    overlay.addEventListener('click', () => {
+      // Alle Videos stoppen
+      videos.forEach(v => { v.pause(); v.currentTime = 0; });
+      document.querySelectorAll('.play-overlay').forEach(o => o.style.display = 'flex');
+
+      // Aktuelles starten
+      video.play();
+      overlay.style.display = 'none';
     });
+
+    // Wenn pausiert oder zu Ende → Overlay wieder anzeigen
+    video.addEventListener('pause', () => overlay.style.display = 'flex');
+    video.addEventListener('ended', () => overlay.style.display = 'flex');
   });
 </script>
-
 
   
   <!-- Nutzen / Vorteile -->
