@@ -155,7 +155,7 @@
     </div>
   </section>
 
-<!-- ====== Video-Grid (4 Videos nebeneinander, nur 1 spielt, mit Play-Overlay) ====== -->
+<!-- ====== Video-Grid (4 Videos, performant, nur 1 spielt, Play-Overlay, Lazy-Load) ====== -->
 <section class="max-w-6xl mx-auto px-6 py-10">
   <h2 class="text-2xl font-extrabold mb-4">Sieh dir die Clips in Aktion an</h2>
   <p class="text-sm text-gray-600 mb-6">
@@ -163,62 +163,138 @@
   </p>
 
   <div class="video-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    <div class="tile relative rounded-xl overflow-hidden shadow-soft">
-      <video class="tile-video w-full h-64 object-cover" src="videos/clip1.mp4" playsinline preload="auto"></video>
-      <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer">
-        <div class="play-button w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
-          <span class="text-3xl text-black">▶</span>
-        </div>
+    <!-- Jede Kachel: kein src, sondern data-src -> Lazy-Load -->
+    <div class="tile relative rounded-2xl overflow-hidden shadow-soft bg-[#e9e4d8]">
+      <div class="ratio"></div>
+      <video class="tile-video" data-src="videos/clip1.mp4" playsinline preload="metadata" muted></video>
+      <div class="play-overlay">
+        <div class="play-button"><span>▶</span></div>
       </div>
     </div>
-    <div class="tile relative rounded-xl overflow-hidden shadow-soft">
-      <video class="tile-video w-full h-64 object-cover" src="videos/clip2.mp4" playsinline preload="auto"></video>
-      <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer">
-        <div class="play-button w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
-          <span class="text-3xl text-black">▶</span>
-        </div>
+
+    <div class="tile relative rounded-2xl overflow-hidden shadow-soft bg-[#e9e4d8]">
+      <div class="ratio"></div>
+      <video class="tile-video" data-src="videos/clip2.mp4" playsinline preload="metadata" muted></video>
+      <div class="play-overlay">
+        <div class="play-button"><span>▶</span></div>
       </div>
     </div>
-    <div class="tile relative rounded-xl overflow-hidden shadow-soft">
-      <video class="tile-video w-full h-64 object-cover" src="videos/clip3.mp4" playsinline preload="auto"></video>
-      <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer">
-        <div class="play-button w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
-          <span class="text-3xl text-black">▶</span>
-        </div>
+
+    <div class="tile relative rounded-2xl overflow-hidden shadow-soft bg-[#e9e4d8]">
+      <div class="ratio"></div>
+      <video class="tile-video" data-src="videos/clip3.mp4" playsinline preload="metadata" muted></video>
+      <div class="play-overlay">
+        <div class="play-button"><span>▶</span></div>
       </div>
     </div>
-    <div class="tile relative rounded-xl overflow-hidden shadow-soft">
-      <video class="tile-video w-full h-64 object-cover" src="videos/clip4.mp4" playsinline preload="auto"></video>
-      <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer">
-        <div class="play-button w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
-          <span class="text-3xl text-black">▶</span>
-        </div>
+
+    <div class="tile relative rounded-2xl overflow-hidden shadow-soft bg-[#e9e4d8]">
+      <div class="ratio"></div>
+      <video class="tile-video" data-src="videos/clip4.mp4" playsinline preload="metadata" muted></video>
+      <div class="play-overlay">
+        <div class="play-button"><span>▶</span></div>
       </div>
     </div>
   </div>
 </section>
 
+<style>
+  /* Feste 9:16-Fläche, verhindert Layout-Sprünge */
+  .ratio { padding-top: calc(16 / 9 * 100%); } /* 9:16 Hochformat */
+  .tile-video, .play-overlay { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+  .play-overlay {
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(0,0,0,.30); cursor:pointer; transition:opacity .25s ease;
+  }
+  .tile.playing .play-overlay { opacity:0; pointer-events:none; }
+
+  .play-button {
+    width:64px; height:64px; border-radius:9999px; background:#fff;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(0,0,0,.18);
+  }
+  .play-button span { font-size:28px; line-height:1; color:#000; }
+</style>
+
 <script>
-  const tiles = document.querySelectorAll('.tile');
+  // Videos & Overlays
+  const tiles  = document.querySelectorAll('.tile');
   const videos = document.querySelectorAll('.tile-video');
 
+  // Lazy-Load: Quelle erst setzen, wenn Kachel sichtbar wird
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const video = entry.target.querySelector('.tile-video');
+      if (!video.src && video.dataset.src) {
+        video.src = video.dataset.src; // Quelle setzen
+        video.load();
+        // erstes Frame anzeigen, ohne zu spielen
+        const onLoaded = () => { 
+          try { video.currentTime = 0.01; } catch(e) {}
+          video.pause();
+          video.removeEventListener('loadeddata', onLoaded);
+          video.removeEventListener('loadedmetadata', onLoaded);
+        };
+        video.addEventListener('loadeddata', onLoaded);
+        video.addEventListener('loadedmetadata', onLoaded);
+      }
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '200px 0px' });
+  tiles.forEach(t => io.observe(t));
+
+  // Nur 1 Video gleichzeitig spielen lassen
+  function pauseOthers(except) {
+    videos.forEach(v => {
+      if (v !== except && !v.paused) v.pause();
+    });
+    // Overlays der anderen wieder einblenden
+    tiles.forEach(tile => {
+      const v = tile.querySelector('.tile-video');
+      if (v !== except && !tile.classList.contains('playing')) {
+        tile.querySelector('.play-overlay').style.opacity = 1;
+        tile.querySelector('.play-overlay').style.pointerEvents = 'auto';
+      }
+    });
+  }
+
   tiles.forEach(tile => {
-    const video = tile.querySelector('.tile-video');
+    const video   = tile.querySelector('.tile-video');
     const overlay = tile.querySelector('.play-overlay');
 
+    // Klick auf Overlay startet das Video
     overlay.addEventListener('click', () => {
-      // Alle Videos stoppen
-      videos.forEach(v => { v.pause(); v.currentTime = 0; });
-      document.querySelectorAll('.play-overlay').forEach(o => o.style.display = 'flex');
-
-      // Aktuelles starten
-      video.play();
-      overlay.style.display = 'none';
+      pauseOthers(video);
+      video.play().then(() => {
+        tile.classList.add('playing');
+      }).catch(() => {
+        // Autoplay blockiert? (iOS ohne User-Geste) -> sicherheitshalber Fokus auf Video und nochmal play
+        video.focus();
+        video.play();
+        tile.classList.add('playing');
+      });
     });
 
-    // Wenn pausiert oder zu Ende → Overlay wieder anzeigen
-    video.addEventListener('pause', () => overlay.style.display = 'flex');
-    video.addEventListener('ended', () => overlay.style.display = 'flex');
+    // Klick auf Video pausiert
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        pauseOthers(video);
+        video.play();
+        tile.classList.add('playing');
+      } else {
+        video.pause();
+      }
+    });
+
+    // Beim Pausieren / Ende Overlay zurück
+    function showOverlay() {
+      tile.classList.remove('playing');
+      overlay.style.opacity = 1;
+      overlay.style.pointerEvents = 'auto';
+    }
+    video.addEventListener('pause', showOverlay);
+    video.addEventListener('ended', showOverlay);
   });
 </script>
 

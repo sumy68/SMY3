@@ -1,1 +1,29 @@
+# MacOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Editor settings
+.vscode/
+.idea/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node modules (falls du später npm nutzt)
+node_modules/
+
+# Build/Cache
+dist/
+build/
+.cache/
+.tmp/
+
+# System files
+Desktop.ini
+Thumbs.db
