@@ -6,102 +6,104 @@
   <title>Über uns | SMY Agency</title>
   <meta name="description" content="Wer hinter SMY Agency steckt: Story, Werte und warum wir Projekte radikal sauber umsetzen." />
 
-  <!-- Fonts (wie bei dir: Inter) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <!-- Header wird via main.js geladen -->
+  <!-- HEADER -->
   <div id="site-header"></div>
 
   <main>
-
-    <!-- HERO (weiß) -->
-    <section class="uc-hero">
-      <div class="container uc-hero__inner">
-        <p class="uc-kicker reveal">Über uns</p>
-        <h1 class="uc-title reveal">
-          Nicht nur “Design”.
-          <span class="uc-title__accent">Wir bauen Ergebnisse.</span>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="page-hero__container">
+        <span class="page-hero__badge">Über uns</span>
+        <h1 class="page-hero__title">
+          Nicht nur "Design".<br>
+          <span class="accent">Wir bauen Ergebnisse.</span>
         </h1>
-        <p class="uc-subtitle reveal">
-          Ich bin Sümi – Gründerin von SMY Agency. Ich kombiniere Creative + Tech, damit deine Marke nicht nur gut aussieht,
-          sondern messbar wächst.
+        <p class="page-hero__lead">
+          Ich bin Sümi – Gründerin von SMY Agency. Ich kombiniere Creative + Tech, 
+          damit deine Marke nicht nur gut aussieht, sondern messbar wächst.
         </p>
-
-        <div class="uc-hero__cta reveal">
+        <div class="page-hero__actions">
           <a class="btn btn--primary" href="services.html#kontakt">Projekt anfragen</a>
-          <a class="btn btn--ghost" href="audit.html">Kostenlosen Audit starten</a>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT (schwarz) -->
-    <section class="uc-about">
-      <div class="container uc-about__grid">
-        <div class="uc-about__media reveal">
-          <!-- Bild: pack dein Foto hier rein -->
-          <img
-            class="uc-about__img"
-            src="assets/suemi.jpg"
-            alt="Sümi – Gründerin von SMY Agency"
-            loading="lazy"
-          />
-          <div class="uc-about__badge reveal">
-            <span class="dot"></span>
-            SMY Agency • Creative-Tech
-          </div>
-        </div>
-
-        <div class="uc-about__content">
-          <h2 class="uc-h2 reveal">Warum SMY?</h2>
-          <p class="uc-p reveal">
-            Weil die meisten Websites & Ads “hübsch” sind – aber nichts konvertiert.
-            Ich baue Systeme: klare Struktur, starke Creatives, sauberes Tracking und eine Nutzerführung, die verkauft.
-          </p>
-
-          <div class="uc-bullets">
-            <div class="uc-bullet reveal">
-              <span class="uc-bullet__icon">01</span>
-              <div>
-                <h3>Clean & Premium</h3>
-                <p>Design, das nach Marke aussieht – nicht nach Template.</p>
-              </div>
-            </div>
-
-            <div class="uc-bullet reveal">
-              <span class="uc-bullet__icon">02</span>
-              <div>
-                <h3>Conversion first</h3>
-                <p>Texte, CTAs, Struktur – alles auf Anfragen ausgerichtet.</p>
-              </div>
-            </div>
-
-            <div class="uc-bullet reveal">
-              <span class="uc-bullet__icon">03</span>
-              <div>
-                <h3>Fast delivery</h3>
-                <p>Schnell, aber nicht messy: Prozesse sitzen, Output knallt.</p>
-              </div>
+    <!-- ABOUT WITH IMAGE -->
+    <section class="about-section">
+      <div class="about-section__container">
+        <div class="about-grid">
+          <!-- Image -->
+          <div class="about-image">
+            <img 
+              src="assets/suemi.jpg" 
+              alt="Sümi – Gründerin von SMY Agency"
+              loading="lazy"
+            />
+            <div class="about-badge">
+              <span class="badge-dot"></span>
+              SMY Agency · Creative-Tech
             </div>
           </div>
 
-          <div class="uc-stats">
-            <div class="uc-stat reveal">
-              <div class="uc-stat__num">1–3</div>
-              <div class="uc-stat__label">Wochen bis Launch</div>
+          <!-- Content -->
+          <div class="about-content">
+            <h2 class="about-content__title">Warum SMY?</h2>
+            <p class="about-content__text">
+              Weil die meisten Websites & Ads "hübsch" sind – aber nichts konvertiert. 
+              Ich baue Systeme: klare Struktur, starke Creatives, sauberes Tracking und 
+              eine Nutzerführung, die verkauft.
+            </p>
+
+            <!-- Values -->
+            <div class="value-list">
+              <div class="value-item">
+                <div class="value-item__number">01</div>
+                <div class="value-item__content">
+                  <h3>Clean & Premium</h3>
+                  <p>Design, das nach Marke aussieht – nicht nach Template.</p>
+                </div>
+              </div>
+
+              <div class="value-item">
+                <div class="value-item__number">02</div>
+                <div class="value-item__content">
+                  <h3>Conversion first</h3>
+                  <p>Texte, CTAs, Struktur – alles auf Anfragen ausgerichtet.</p>
+                </div>
+              </div>
+
+              <div class="value-item">
+                <div class="value-item__number">03</div>
+                <div class="value-item__content">
+                  <h3>Fast delivery</h3>
+                  <p>Schnell, aber nicht messy: Prozesse sitzen, Output knallt.</p>
+                </div>
+              </div>
             </div>
-            <div class="uc-stat reveal">
-              <div class="uc-stat__num">100%</div>
-              <div class="uc-stat__label">Custom Look</div>
-            </div>
-            <div class="uc-stat reveal">
-              <div class="uc-stat__num">↗</div>
-              <div class="uc-stat__label">Fokus: Leads</div>
+
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+              <div class="quick-stat">
+                <div class="quick-stat__value">1–3</div>
+                <div class="quick-stat__label">Wochen bis Launch</div>
+              </div>
+              <div class="quick-stat">
+                <div class="quick-stat__value">100%</div>
+                <div class="quick-stat__label">Custom Look</div>
+              </div>
+              <div class="quick-stat">
+                <div class="quick-stat__value">↗</div>
+                <div class="quick-stat__label">Fokus: Leads</div>
+              </div>
             </div>
           </div>
         </div>
@@ -109,267 +111,53 @@
     </section>
 
     <!-- TIMELINE -->
-    <section class="uc-timeline">
-      <div class="container">
-        <h2 class="uc-h2 reveal">Kurze Story</h2>
+    <section class="timeline-section">
+      <div class="timeline-section__container">
+        <h2 class="timeline-section__title">Kurze Story</h2>
 
-        <div class="uc-steps">
-          <div class="uc-step reveal">
-            <div class="uc-step__dot"></div>
-            <div class="uc-step__body">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-item__dot"></div>
+            <div class="timeline-item__content">
               <h3>Start</h3>
-              <p>Von “ich mach das schnell selbst” zu echten Kundenprojekten.</p>
+              <p>Von "ich mach das schnell selbst" zu echten Kundenprojekten.</p>
             </div>
           </div>
 
-          <div class="uc-step reveal">
-            <div class="uc-step__dot"></div>
-            <div class="uc-step__body">
+          <div class="timeline-item">
+            <div class="timeline-item__dot"></div>
+            <div class="timeline-item__content">
               <h3>System</h3>
               <p>Design + Entwicklung + Ads in einem Flow – ohne Chaos.</p>
             </div>
           </div>
 
-          <div class="uc-step reveal">
-            <div class="uc-step__dot"></div>
-            <div class="uc-step__body">
+          <div class="timeline-item">
+            <div class="timeline-item__dot"></div>
+            <div class="timeline-item__content">
               <h3>Heute</h3>
               <p>SMY Agency als Creative-Tech Partner für Brands, die wachsen wollen.</p>
             </div>
           </div>
         </div>
-
-        <div class="uc-cta reveal">
-          <h3>Wenn du willst, dass es endlich professionell wirkt:</h3>
-          <p>Dann lass uns kurz sprechen – 15 Minuten reichen meistens schon.</p>
-          <a class="btn btn--primary" href="services.html#kontakt">Call buchen</a>
-        </div>
       </div>
     </section>
 
+    <!-- CTA SECTION -->
+    <section class="about-cta">
+      <div class="about-cta__container">
+        <h2>Wenn du willst, dass es endlich professionell wirkt:</h2>
+        <p>Dann lass uns kurz sprechen – 15 Minuten reichen meistens schon.</p>
+        <a class="btn btn--primary btn--large" href="services.html#kontakt">
+          Projekt starten
+        </a>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer wird via main.js geladen -->
+  <!-- FOOTER -->
   <div id="site-footer"></div>
 
   <script src="main.js"></script>
-
-  <!-- Page-only Styles + Reveal Animation -->
-  <style>
-    :root{
-      --red:#e10600;
-      --ink:#0b0b0d;
-      --muted:#a7a7ad;
-      --paper:#ffffff;
-      --card:#111114;
-      --line:rgba(255,255,255,.12);
-      --shadow: 0 30px 80px rgba(0,0,0,.45);
-      --radius: 22px;
-    }
-    body{ font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-
-    .container{ max-width:1100px; margin:0 auto; padding:0 18px; }
-
-    .uc-hero{ background: var(--paper); padding: 88px 0 56px; }
-    .uc-hero__inner{ text-align:center; }
-    .uc-kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-      font-size:12px; color:#111; opacity:.75;
-      padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.10);
-      margin-bottom:16px;
-    }
-    .uc-title{
-      font-size: clamp(34px, 4vw, 56px);
-      line-height:1.05;
-      margin:0 0 14px;
-      color:#0d0d10;
-      font-weight:900;
-    }
-    .uc-title__accent{ color: var(--red); }
-    .uc-subtitle{
-      max-width: 760px;
-      margin: 0 auto 26px;
-      font-size: 16px;
-      line-height:1.7;
-      color: rgba(15,15,18,.78);
-    }
-
-    .uc-hero__cta{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
-
-    /* Buttons – passt zu deinem schwarz/rot Look */
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 13px 18px;
-      border-radius: 999px;
-      font-weight: 800;
-      text-decoration:none;
-      transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
-      will-change: transform;
-    }
-    .btn--primary{ background: var(--red); color:#fff; box-shadow: 0 14px 34px rgba(225,6,0,.25); }
-    .btn--primary:hover{ transform: translateY(-1px); }
-    .btn--ghost{ background: #fff; color:#111; border:1px solid rgba(0,0,0,.12); }
-    .btn--ghost:hover{ transform: translateY(-1px); }
-
-    .uc-about{
-      background: radial-gradient(1200px 600px at 50% 0%, rgba(225,6,0,.12), transparent 60%),
-                  linear-gradient(180deg, #070708, #0b0b0d);
-      padding: 70px 0;
-      color:#fff;
-    }
-    .uc-about__grid{
-      display:grid;
-      grid-template-columns: 420px 1fr;
-      gap: 42px;
-      align-items:center;
-    }
-    .uc-about__media{ position:relative; }
-    .uc-about__img{
-      width:100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: var(--shadow);
-      background:#0f0f12;
-    }
-    .uc-about__badge{
-      position:absolute;
-      left:14px; bottom:14px;
-      display:inline-flex; align-items:center; gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.55);
-      border:1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.92);
-      font-weight: 700;
-      backdrop-filter: blur(8px);
-    }
-    .dot{ width:10px; height:10px; border-radius:99px; background: var(--red); box-shadow: 0 0 0 6px rgba(225,6,0,.18); }
-
-    .uc-h2{
-      font-size: 28px;
-      line-height:1.2;
-      margin: 0 0 12px;
-      font-weight: 900;
-    }
-    .uc-p{
-      margin: 0 0 18px;
-      color: rgba(255,255,255,.80);
-      line-height: 1.8;
-    }
-
-    .uc-bullets{ display:grid; gap: 14px; margin-top: 18px; }
-    .uc-bullet{
-      display:flex; gap: 14px;
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .uc-bullet__icon{
-      min-width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      display:flex; align-items:center; justify-content:center;
-      background: rgba(225,6,0,.12);
-      border: 1px solid rgba(225,6,0,.25);
-      color: #fff;
-      font-weight: 900;
-    }
-    .uc-bullet h3{ margin:0 0 4px; font-size: 15px; font-weight: 900; }
-    .uc-bullet p{ margin:0; color: rgba(255,255,255,.72); line-height:1.7; font-size: 14px; }
-
-    .uc-stats{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .uc-stat{
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(0,0,0,.30);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .uc-stat__num{ font-weight: 950; font-size: 20px; }
-    .uc-stat__label{ color: rgba(255,255,255,.68); margin-top: 6px; font-size: 13px; }
-
-    .uc-timeline{
-      background: #0b0b0d;
-      color:#fff;
-      padding: 70px 0;
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-    .uc-steps{ margin-top: 18px; display:grid; gap: 14px; }
-    .uc-step{
-      display:grid;
-      grid-template-columns: 26px 1fr;
-      gap: 14px;
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .uc-step__dot{
-      width: 12px; height: 12px;
-      margin-top: 4px;
-      border-radius: 99px;
-      background: var(--red);
-      box-shadow: 0 0 0 8px rgba(225,6,0,.14);
-    }
-    .uc-step h3{ margin:0 0 6px; font-weight: 900; }
-    .uc-step p{ margin:0; color: rgba(255,255,255,.74); line-height:1.7; }
-
-    .uc-cta{
-      margin-top: 26px;
-      padding: 22px;
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(225,6,0,.14), rgba(255,255,255,.04));
-      border: 1px solid rgba(225,6,0,.20);
-      text-align:center;
-    }
-    .uc-cta h3{ margin:0 0 8px; font-size: 18px; font-weight: 950; }
-    .uc-cta p{ margin:0 0 14px; color: rgba(255,255,255,.75); }
-
-    /* Reveal animation */
-    .reveal{
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity .55s ease, transform .55s ease;
-      will-change: opacity, transform;
-    }
-    .reveal.is-visible{
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 940px){
-      .uc-about__grid{ grid-template-columns: 1fr; }
-      .uc-about__img{ aspect-ratio: 16 / 10; }
-      .uc-stats{ grid-template-columns: 1fr; }
-    }
-  </style>
-
-  <script>
-    // Simple reveal observer (nur für diese Seite)
-    (function(){
-      const els = document.querySelectorAll('.reveal');
-      if (!('IntersectionObserver' in window) || !els.length) {
-        els.forEach(el => el.classList.add('is-visible'));
-        return;
-      }
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
-            io.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      els.forEach(el => io.observe(el));
-    })();
-  </script>
 </body>
 </html>

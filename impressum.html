@@ -3,111 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Impressum – SMY Agency</title>
+  <title>Impressum | SMY Agency</title>
   <meta name="robots" content="index,follow" />
+  <meta name="description" content="Impressum und rechtliche Angaben der SMY Agency – Sümeyye Abur, München" />
 
-  <!-- Deine normale Site CSS -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Font (falls du die nicht schon global drin hast, sonst kannst du das rauswerfen) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="page page--legal">
-  <!-- Header wird per main.js aus partials/header.html geladen -->
+<body>
+  <!-- HEADER -->
   <div id="site-header"></div>
 
-  <main class="legal">
-    <div class="legal__container">
-      <header class="legal__head">
-        <h1 class="legal__title">Impressum</h1>
-        <p class="legal__lead">Angaben gemäß § 5 TMG</p>
-      </header>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero page-hero--legal">
+      <div class="page-hero__container">
+        <span class="page-hero__badge">Rechtliches</span>
+        <h1 class="page-hero__title">Impressum</h1>
+        <p class="page-hero__lead">
+          Angaben gemäß § 5 TMG
+        </p>
+      </div>
+    </section>
 
-      <section class="legal__card">
-        <h2 class="legal__h2">Anbieter</h2>
-        <p>
-          Sümeyye Abur<br>
-          Schellingstr. 109a<br>
-          80798 München<br>
-          Deutschland
-        </p>
+    <!-- LEGAL CONTENT -->
+    <section class="legal-section">
+      <div class="legal-section__container">
+        <!-- Anbieter -->
+        <div class="legal-card">
+          <h2 class="legal-card__title">Anbieter</h2>
+          <div class="legal-card__content">
+            <p>
+              Sümeyye Abur<br>
+              Schellingstr. 109a<br>
+              80798 München<br>
+              Deutschland
+            </p>
 
-        <p>
-          Tel.: +49 1523 6137216<br>
-          E-Mail: <a class="legal__link" href="mailto:info@smyagency.de">info@smyagency.de</a>
-        </p>
+            <p>
+              Tel.: <a href="tel:+4915236137216">+49 1523 6137216</a><br>
+              E-Mail: <a href="mailto:info@smyagency.de">info@smyagency.de</a>
+            </p>
 
-        <p>USt. wird nicht ausgewiesen (Kleinunternehmerregelung).</p>
-      </section>
+            <p>USt. wird nicht ausgewiesen (Kleinunternehmerregelung).</p>
+          </div>
+        </div>
 
-      <section class="legal__card">
-        <h2 class="legal__h2">Verantwortlich i.S.d. § 18 Abs. 2 MStV</h2>
-        <p>
-          Sümeyye Abur<br>
-          Schellingstr. 109a<br>
-          80798 München
-        </p>
-      </section>
+        <!-- Verantwortlich -->
+        <div class="legal-card">
+          <h2 class="legal-card__title">Verantwortlich i.S.d. § 18 Abs. 2 MStV</h2>
+          <div class="legal-card__content">
+            <p>
+              Sümeyye Abur<br>
+              Schellingstr. 109a<br>
+              80798 München
+            </p>
+          </div>
+        </div>
 
-      <section class="legal__card">
-        <h2 class="legal__h2">Online-Streitbeilegung</h2>
-        <p>
-          Plattform der EU-Kommission zur Online-Streitbeilegung:
-          <a class="legal__link" href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">
-            https://ec.europa.eu/consumers/odr/
-          </a>
-        </p>
-        <p>
-          Wir sind zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle weder verpflichtet noch bereit.
-        </p>
-      </section>
+        <!-- Online-Streitbeilegung -->
+        <div class="legal-card">
+          <h2 class="legal-card__title">Online-Streitbeilegung</h2>
+          <div class="legal-card__content">
+            <p>
+              Plattform der EU-Kommission zur Online-Streitbeilegung:<br>
+              <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">
+                https://ec.europa.eu/consumers/odr/
+              </a>
+            </p>
+            <p>
+              Wir sind zur Teilnahme an einem Streitbeilegungsverfahren vor einer 
+              Verbraucherschlichtungsstelle weder verpflichtet noch bereit.
+            </p>
+          </div>
+        </div>
 
-      <section class="legal__card">
-        <h2 class="legal__h2">Haftung für Inhalte</h2>
-        <p>
-          Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
-          Nach §§ 8 bis 10 TMG sind wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen
-          zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-        </p>
-        <p>
-          Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
-          Eine Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden entsprechender Rechtsverletzungen
-          entfernen wir diese Inhalte umgehend.
-        </p>
-      </section>
+        <!-- Haftung für Inhalte -->
+        <div class="legal-card">
+          <h2 class="legal-card__title">Haftung für Inhalte</h2>
+          <div class="legal-card__content">
+            <p>
+              Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen 
+              Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind 
+              wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen 
+              zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit 
+              hinweisen.
+            </p>
+            <p>
+              Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den 
+              allgemeinen Gesetzen bleiben hiervon unberührt. Eine Haftung ist jedoch erst ab dem 
+              Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden 
+              entsprechender Rechtsverletzungen entfernen wir diese Inhalte umgehend.
+            </p>
+          </div>
+        </div>
 
-      <section class="legal__card">
-        <h2 class="legal__h2">Haftung für Links</h2>
-        <p>
-          Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
-          Deshalb können wir für diese fremden Inhalte keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.
-        </p>
-        <p>
-          Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete
-          Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.
-        </p>
-      </section>
+        <!-- Haftung für Links -->
+        <div class="legal-card">
+          <h2 class="legal-card__title">Haftung für Links</h2>
+          <div class="legal-card__content">
+            <p>
+              Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir 
+              keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte keine Gewähr 
+              übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter 
+              verantwortlich.
+            </p>
+            <p>
+              Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Eine permanente 
+              inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte 
+              einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen 
+              entfernen wir derartige Links umgehend.
+            </p>
+          </div>
+        </div>
 
-      <section class="legal__card">
-        <h2 class="legal__h2">Urheberrecht</h2>
-        <p>
-          Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
-          Downloads und Kopien dieser Seite sind nur für den privaten Gebrauch gestattet.
-        </p>
-        <p>
-          Inhalte Dritter werden als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen Hinweis.
-          Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Inhalte umgehend.
-        </p>
-      </section>
+        <!-- Urheberrecht -->
+        <div class="legal-card">
+          <h2 class="legal-card__title">Urheberrecht</h2>
+          <div class="legal-card__content">
+            <p>
+              Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten 
+              unterliegen dem deutschen Urheberrecht. Downloads und Kopien dieser Seite sind 
+              nur für den privaten Gebrauch gestattet.
+            </p>
+            <p>
+              Inhalte Dritter werden als solche gekennzeichnet. Sollten Sie trotzdem auf eine 
+              Urheberrechtsverletzung aufmerksam werden, bitten wir um einen Hinweis. Bei 
+              Bekanntwerden von Rechtsverletzungen entfernen wir derartige Inhalte umgehend.
+            </p>
+          </div>
+        </div>
 
-      <p class="legal__meta">München, 21.12.2025</p>
-    </div>
+        <!-- Meta -->
+        <p class="legal-meta">Stand: Januar 2026</p>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer wird per main.js aus partials/footer.html geladen -->
+  <!-- FOOTER -->
   <div id="site-footer"></div>
 
   <script src="main.js"></script>
