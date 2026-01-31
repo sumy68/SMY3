@@ -6,9 +6,10 @@
   <title>Projekte | SMY Agency</title>
   <meta name="description" content="Ausgewählte Projekte & Kundenarbeiten von SMY Agency – Webdesign, Entwicklung, Marketing & Print." />
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,144 +18,200 @@
   <!-- HEADER -->
   <div id="site-header"></div>
 
-  <main class="projects">
-
+  <main>
     <!-- HERO -->
-    <section class="projects-hero">
-      <div class="projects-container">
-        <p class="projects-eyebrow">SMY Agency / Projekte</p>
-        <h1 class="projects-title">Ausgewählte Projekte.</h1>
-        <p class="projects-lead">
-          Einblick in echte Kundenarbeiten – von Webdesign über Entwicklung bis Marketing & Print.
+    <section class="page-hero">
+      <div class="page-hero__container">
+        <span class="page-hero__badge">Portfolio</span>
+        <h1 class="page-hero__title">Ausgewählte Projekte</h1>
+        <p class="page-hero__lead">
+          Von Tech-Startups bis lokalen Unternehmen – ein Einblick in unsere Arbeit
         </p>
       </div>
     </section>
 
-    <!-- GRID -->
-    <section class="projects-gridsec">
-      <div class="projects-container">
-
-        <div class="projects-grid">
-
-          <!-- CARD -->
-          <article class="project-card">
-            <h3>Picsart Inc.</h3>
-            <p>Analytics- & Reporting-Infrastruktur für Creator-Content</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Picsart Inc.</h3>
-            <p>Webbasierte Medien-Kollaborationsplattform mit Live-Videofeedback</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Picsart Inc.</h3>
-            <p>Podcast-Hosting-Plattform inkl. Analytics & Transkodierung</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Picsart Inc.</h3>
-            <p>Livestream-Backend mit API-Anbindung & OBS-Integration</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Picsart Inc.</h3>
-            <p>Cloudbasierte Video-Editing- & Render-Plattform (GPU-basiert)</p>
-          </article>
-
-          <article class="project-card">
-            <h3>MHM Garten- & Landschaftsbau</h3>
-            <p>Webdesign & Printdesign</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Logikids – Daniela Neuber</h3>
-            <p>Webdesign, Flyer & Social Media</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Gastpark Hotel</h3>
-            <p>Websiteoptimierung</p>
-          </article>
-
-          <article class="project-card">
-            <h3>E & M Eventpark GmbH</h3>
-            <p>Webdesign</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Candelized</h3>
-            <p>Grafikdesign & Webdesign</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Steuerberater Yusuf Kavalci</h3>
-            <p>Website, Logo & Visitenkarte</p>
-          </article>
-
-          <article class="project-card">
-            <h3>KFZ-Sachverständiger BAS</h3>
-            <p>Visitenkarten & Website</p>
-          </article>
-
-          <article class="project-card">
-            <h3>HappINess e. V.</h3>
-            <p>IT-Betreuung, Website, Print & Social Media Content</p>
-          </article>
-
-          <article class="project-card">
-            <h3>DJane Anastasia Chesnocova</h3>
-            <p>Grafikdesign – Albumcover „LIGHTS“</p>
-          </article>
-
-          <article class="project-card">
-            <h3>CI Dienstleistungen</h3>
-            <p>
-              Website, Print, Spezialanfertigung (Alu-Dibond),
-              Google-Konto-Einrichtung, SEO & Ticketsystem
+    <!-- FEATURED PROJECTS -->
+    <section class="featured-projects">
+      <div class="featured-projects__container">
+        <h2 class="section-subtitle">Featured Work</h2>
+        
+        <div class="featured-grid">
+          <!-- Featured 1 -->
+          <article class="featured-card">
+            <div class="featured-card__tag">Enterprise Tech</div>
+            <h3 class="featured-card__title">Picsart Inc.</h3>
+            <p class="featured-card__text">
+              Entwicklung von 5 hochskalierbaren Plattformen: Analytics-Infrastruktur, 
+              Live-Kollaboration, Podcast-Hosting, Livestream-Backend und cloudbasierte 
+              Video-Editing-Lösung mit GPU-Rendering.
             </p>
+            <div class="featured-card__tags">
+              <span>Backend Development</span>
+              <span>Cloud Architecture</span>
+              <span>Video Processing</span>
+            </div>
           </article>
 
-          <article class="project-card">
-            <h3>KG Handel GmbH</h3>
-            <p>Logoerstellung & Firmenstempel</p>
+          <!-- Featured 2 -->
+          <article class="featured-card">
+            <div class="featured-card__tag">Full Service</div>
+            <h3 class="featured-card__title">Cleorova Shapewear</h3>
+            <p class="featured-card__text">
+              Komplettes Brand-Ecosystem aus einer Hand: KI-generierte Produktfotos, 
+              Branding & Logo-Design, professionelle Website-Entwicklung, Instagram-Strategie 
+              und Performance-Ads. Von der Vision zur fertigen E-Commerce Brand.
+            </p>
+            <div class="featured-card__tags">
+              <span>KI Photoshoots</span>
+              <span>Branding & Logo</span>
+              <span>Website</span>
+              <span>Instagram</span>
+              <span>Ads</span>
+            </div>
           </article>
 
-          <article class="project-card">
-            <h3>Karise UG</h3>
-            <p>Logoerstellung</p>
+          <!-- Featured 3 -->
+          <article class="featured-card">
+            <div class="featured-card__tag">Full Service</div>
+            <h3 class="featured-card__title">CI Dienstleistungen</h3>
+            <p class="featured-card__text">
+              Komplette digitale Transformation: Website, Printmedien, Spezialanfertigungen 
+              (Alu-Dibond), Google Business Setup, SEO-Optimierung und Ticketsystem-Integration.
+            </p>
+            <div class="featured-card__tags">
+              <span>Webdesign</span>
+              <span>Print</span>
+              <span>SEO</span>
+              <span>Business Setup</span>
+            </div>
           </article>
-
-          <article class="project-card">
-            <h3>Herbalife Promoter</h3>
-            <p>Instagram Social-Media-Betreuung, FB Ads Kampagnen</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Elias Sterzl Gartenbau</h3>
-            <p>Website & Google SEO Optimierung</p>
-          </article>
-
-          <article class="project-card">
-            <h3>Uwe Schuster</h3>
-            <p>Website, Flyer, Social Media Managment</p>
-          </article>
-
         </div>
-
       </div>
     </section>
 
-    <!-- FOOT CTA -->
-    <section class="projects-foot">
-      <div class="projects-container">
-        <p>Weitere Arbeiten findest du auf Instagram.</p>
-        <a class="projects-instacta" href="https://www.instagram.com/smy_agency" target="_blank" rel="noopener">
-          @smy_agency ansehen →
+    <!-- ALL PROJECTS -->
+    <section class="all-projects">
+      <div class="all-projects__container">
+        <h2 class="section-subtitle">Alle Projekte</h2>
+        
+        <div class="projects-grid">
+          <!-- Web & Development -->
+          <div class="project-category">
+            <h3 class="project-category__title">Web & Development</h3>
+            
+            <div class="project-list">
+              <div class="project-item">
+                <h4>MHM Garten- & Landschaftsbau</h4>
+                <p>Webdesign & Printdesign</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>Logikids – Daniela Neuber</h4>
+                <p>Webdesign, Flyer & Social Media</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>Gastpark Hotel</h4>
+                <p>Website-Optimierung & Performance</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>E & M Eventpark GmbH</h4>
+                <p>Responsive Webdesign</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>Candelized</h4>
+                <p>Grafikdesign & Webdesign</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>Elias Sterzl Gartenbau</h4>
+                <p>Website & Google SEO Optimierung</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>Uwe Schuster</h4>
+                <p>Website, Flyer & Social Media Management</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branding & Design -->
+          <div class="project-category">
+            <h3 class="project-category__title">Branding & Design</h3>
+            
+            <div class="project-list">
+              <div class="project-item">
+                <h4>Steuerberater Yusuf Kavalci</h4>
+                <p>Komplette Brand Identity: Logo, Website & Visitenkarten</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>KFZ-Sachverständiger BAS</h4>
+                <p>Corporate Design & Website</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>KG Handel GmbH</h4>
+                <p>Logoerstellung & Firmenstempel</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>Karise UG</h4>
+                <p>Logo & Brand Identity</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>DJane Anastasia Chesnocova</h4>
+                <p>Albumcover Design "LIGHTS"</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Marketing & Social -->
+          <div class="project-category">
+            <h3 class="project-category__title">Marketing & Social Media</h3>
+            
+            <div class="project-list">
+              <div class="project-item">
+                <h4>HappINess e.V.</h4>
+                <p>IT-Betreuung, Website, Print & Social Media Content</p>
+              </div>
+              
+              <div class="project-item">
+                <h4>Herbalife Promoter</h4>
+                <p>Instagram Management & Facebook Ads Kampagnen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="projects-cta">
+      <div class="projects-cta__container">
+        <h2>Mehr Einblicke auf Instagram</h2>
+        <p>Behind-the-Scenes, aktuelle Projekte und kreative Prozesse</p>
+        <a href="https://www.instagram.com/smy_agency" target="_blank" rel="noopener" class="btn btn--primary btn--large">
+          @smy_agency folgen
         </a>
       </div>
     </section>
 
+    <!-- PROJECT CTA -->
+    <section class="cta-audit">
+      <div class="cta-audit__container">
+        <h2>Bereit für dein Projekt?</h2>
+        <p>
+          Lass uns gemeinsam etwas Großartiges entwickeln – von der ersten Idee bis zur erfolgreichen Umsetzung.
+        </p>
+        <a href="services.html#kontakt" class="btn btn--primary btn--large">
+          🚀 Projekt starten
+        </a>
+      </div>
+    </section>
   </main>
 
   <!-- FOOTER -->

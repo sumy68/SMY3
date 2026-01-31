@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leistungen | SMY Agency</title>
+  <title>Services | SMY Agency</title>
+  <meta name="description" content="Webdesign, Social Media, Ads, Branding, App-Entwicklung & mehr – Full-Service Digital-Agentur aus München." />
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -16,285 +18,289 @@
   <!-- HEADER -->
   <div id="site-header"></div>
 
-  <main class="svc">
-    <!-- HERO (weiß) -->
-    <section class="svc-hero">
-      <div class="svc-container">
-        <p class="svc-eyebrow">SMY Agency / Leistungen</p>
-        <h1 class="svc-title">Unsere Leistungen.</h1>
-        <p class="svc-lead">
-          Ein klarer Stack aus Design, Dev & Performance – damit aus Klicks Kunden werden.
+  <main>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="page-hero__container">
+        <span class="page-hero__badge">Services</span>
+        <h1 class="page-hero__title">Was wir liefern</h1>
+        <p class="page-hero__lead">
+          Ein klarer Stack aus Design, Development & Performance – damit aus Klicks Kunden werden. 
           Ohne Agentur-Blabla. Mit Output.
         </p>
-
-        <!-- Optional: Wenn du den Button oben auch weg willst, einfach löschen -->
-        <a class="svc-cta" href="#kontakt">
-          Kontakt öffnen <span aria-hidden="true">→</span>
+        <a class="btn btn--primary" href="#kontakt">
+          Projekt starten
         </a>
       </div>
     </section>
 
-    <!-- CONTENT -->
-    <section class="svc-content">
-      <div class="svc-container">
+    <!-- SERVICES GRID -->
+    <section class="services-section">
+      <div class="services-section__container">
+        <h2 class="section-subtitle">Alle Services</h2>
+        
+        <div class="services-accordion">
+          <!-- Service 1 -->
+          <details class="service-item" open>
+            <summary>
+              <span class="service-item__title">💻 Website & Webdesign</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>High-Speed Websites, SEO-ready, CMS/Shop, Funnel-Pages, Buchung & Mehrsprachigkeit.</p>
+              <ul>
+                <li>Landingpages & Funnels</li>
+                <li>WordPress / Headless / Static</li>
+                <li>Shop-Setups (Stripe, Checkout, Tracking)</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Projekt starten →</a>
+            </div>
+          </details>
 
-        <div class="svc-grid">
-          <!-- Accordion -->
-          <div class="svc-acc" id="svc-acc">
+          <!-- Service 2 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">📱 Social Media Management</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Content-Plan, Produktion, Posting, Community, UGC & Reporting – inkl. SocialPro App.</p>
+              <ul>
+                <li>Redaktionsplan & Posting</li>
+                <li>UGC-Creator Koordination</li>
+                <li>Auswertung & Optimierung</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Anfragen →</a>
+            </div>
+          </details>
 
-            <details class="svc-item" open>
-              <summary>
-                <span class="svc-item-title">💻 Website & Webdesign</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>High-Speed Websites, SEO-ready, CMS/Shop, Funnel-Pages, Buchung & Mehrsprachigkeit.</p>
-                <ul>
-                  <li>Landingpages & Funnels</li>
-                  <li>WordPress / Headless / Static</li>
-                  <li>Shop-Setups (Stripe, Checkout, Tracking)</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Projekt starten →</a>
-              </div>
-            </details>
+          <!-- Service 3 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">📢 Performance-Ads</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Meta & Google Ads, Funnels, Landingpages, A/B-Testing, Lead-Gen, Tracking.</p>
+              <ul>
+                <li>Setup + Creative-Testing</li>
+                <li>Pixel/CAPI/Conversion Tracking</li>
+                <li>Optimierung auf Leads/Umsatz</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Jetzt skalieren →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">📱 Social Media Management</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Content-Plan, Produktion, Posting, Community, UGC & Reporting – inkl. SocialPro App.</p>
-                <ul>
-                  <li>Redaktionsplan & Posting</li>
-                  <li>UGC-Creator Koordination</li>
-                  <li>Auswertung & Optimierung</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Anfragen →</a>
-              </div>
-            </details>
+          <!-- Service 4 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">🎨 Grafikdesign & Branding</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Logo, Brand-Guides, Slides, Flyer, Plakate, Packaging – alles on brand.</p>
+              <ul>
+                <li>Branding & CI</li>
+                <li>Social Templates</li>
+                <li>Pitchdecks / Slides</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Design anfragen →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">📢 Performance-Ads</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Meta & Google Ads, Funnels, Landingpages, A/B-Testing, Lead-Gen, Tracking.</p>
-                <ul>
-                  <li>Setup + Creative-Testing</li>
-                  <li>Pixel/CAPI/Conversion Tracking</li>
-                  <li>Optimierung auf Leads/Umsatz</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Jetzt skalieren →</a>
-              </div>
-            </details>
+          <!-- Service 5 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">🎥 Video- & Audioproduktion</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Imagefilme, Reels, Podcasts, Voice-Overs, Color-Grading & Sounddesign.</p>
+              <ul>
+                <li>Reels/Shorts Produktion</li>
+                <li>Brand-Clips & Ads</li>
+                <li>Audio/Voice/Podcast</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Showreel anfragen →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">🎨 Grafikdesign & Branding</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Logo, Brand-Guides, Slides, Flyer, Plakate, Packaging – alles on brand.</p>
-                <ul>
-                  <li>Branding & CI</li>
-                  <li>Social Templates</li>
-                  <li>Pitchdecks / Slides</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Design anfragen →</a>
-              </div>
-            </details>
+          <!-- Service 6 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">📲 App-Entwicklung</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>iOS/Android mit Expo React Native, APIs, Auth, Payments, Analytics.</p>
+              <ul>
+                <li>MVP bis Launch</li>
+                <li>Auth, Payments, Subscriptions</li>
+                <li>Admin/Backend & Integrationen</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">App besprechen →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">🎥 Video- & Audioproduktion</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Imagefilme, Reels, Podcasts, Voice-Overs, Color-Grading & Sounddesign.</p>
-                <ul>
-                  <li>Reels/Shorts Produktion</li>
-                  <li>Brand-Clips & Ads</li>
-                  <li>Audio/Voice/Podcast</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Showreel anfragen →</a>
-              </div>
-            </details>
+          <!-- Service 7 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">🖨️ Design & Druck</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Visitenkarten, Flyer, Broschüren, Alu-Dibond, Messewände – FOGRA-ready.</p>
+              <ul>
+                <li>Layout + Druckdaten</li>
+                <li>Produktion + Lieferung</li>
+                <li>Werbetechnik Basics</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Druck anfragen →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">📲 App-Entwicklung</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>iOS/Android mit Expo React Native, APIs, Auth, Payments, Analytics.</p>
-                <ul>
-                  <li>MVP bis Launch</li>
-                  <li>Auth, Payments, Subscriptions</li>
-                  <li>Admin/Backend & Integrationen</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">App besprechen →</a>
-              </div>
-            </details>
+          <!-- Service 8 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">👕 Textildruck & Kleidung</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Workwear & Merch: Flex, Flock, DTF, Stick – kurze Lieferzeiten.</p>
+              <ul>
+                <li>Merch & Teamwear</li>
+                <li>Design + Produktion</li>
+                <li>Klein- & Großauflagen</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Anfragen →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">🖨️ Design & Druck</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Visitenkarten, Flyer, Broschüren, Alu-Dibond, Messewände – FOGRA-ready.</p>
-                <ul>
-                  <li>Layout + Druckdaten</li>
-                  <li>Produktion + Lieferung</li>
-                  <li>Werbetechnik Basics</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Druck anfragen →</a>
-              </div>
-            </details>
+          <!-- Service 9 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">🚗 Autobeschriftung</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Folie, Teil- & Vollfolierung, Design, Produktion & Montage.</p>
+              <ul>
+                <li>Design & Mockups</li>
+                <li>Produktion</li>
+                <li>Montage (Partner)</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Fahrzeug branden →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">👕 Textildruck & Kleidung</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Workwear & Merch: Flex, Flock, DTF, Stick – kurze Lieferzeiten.</p>
-                <ul>
-                  <li>Merch & Teamwear</li>
-                  <li>Design + Produktion</li>
-                  <li>Klein- & Großauflagen</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Anfragen →</a>
-              </div>
-            </details>
+          <!-- Service 10 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">🛍️ Werbeartikel</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Tassen, Taschen, Give-aways – CI-konform & ready for campaigns.</p>
+              <ul>
+                <li>Auswahl + Branding</li>
+                <li>Produktion</li>
+                <li>Lieferung</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Sortiment anfragen →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">🚗 Autobeschriftung</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Folie, Teil- & Vollfolierung, Design, Produktion & Montage.</p>
-                <ul>
-                  <li>Design & Mockups</li>
-                  <li>Produktion</li>
-                  <li>Montage (Partner)</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Fahrzeug branden →</a>
-              </div>
-            </details>
+          <!-- Service 11 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">🤖 Generative AI & Chatbots</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Automatisierte Beratung, Content-Automation, Knowledge-Graphs, Agenten-Workflows.</p>
+              <ul>
+                <li>Website-Chatbot & Lead-Qualifizierung</li>
+                <li>Automationen (Zapier/Make/Custom)</li>
+                <li>KI-Use-Cases für Teams</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Use-Case checken →</a>
+            </div>
+          </details>
 
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">🛍️ Werbeartikel</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Tassen, Taschen, Give-aways – CI-konform & ready for campaigns.</p>
-                <ul>
-                  <li>Auswahl + Branding</li>
-                  <li>Produktion</li>
-                  <li>Lieferung</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Sortiment anfragen →</a>
-              </div>
-            </details>
-
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">🤖 Generative AI & Chatbots</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Automatisierte Beratung, Content-Automation, Knowledge-Graphs, Agenten-Workflows.</p>
-                <ul>
-                  <li>Website-Chatbot & Lead-Qualifizierung</li>
-                  <li>Automationen (Zapier/Make/Custom)</li>
-                  <li>KI-Use-Cases für Teams</li>
-                </ul>
-                <a class="svc-mini" href="#kontakt">Use-Case checken →</a>
-              </div>
-            </details>
-
-            <details class="svc-item">
-              <summary>
-                <span class="svc-item-title">📸 UGC Content & Creator Management</span>
-                <span class="svc-plus" aria-hidden="true"></span>
-              </summary>
-              <div class="svc-body">
-                <p>Authentische Videos & Fotos von echten Menschen – für Social Ads, Reels & Marken-Storytelling.</p>
-                <ul>
-                  <li>Creator-Suche + Briefing</li>
-                  <li>Produktion + Schnitt</li>
-                  <li>Nutzungsrechte für Ads</li>
-                </ul>
-                <a class="svc-mini" href="ugc.html">Mehr zu UGC →</a>
-              </div>
-            </details>
-
-          </div>
+          <!-- Service 12 -->
+          <details class="service-item">
+            <summary>
+              <span class="service-item__title">📸 UGC Content & Creator Management</span>
+              <span class="service-item__toggle"></span>
+            </summary>
+            <div class="service-item__content">
+              <p>Authentische Videos & Fotos von echten Menschen – für Social Ads, Reels & Marken-Storytelling.</p>
+              <ul>
+                <li>Creator-Suche + Briefing</li>
+                <li>Produktion + Schnitt</li>
+                <li>Nutzungsrechte für Ads</li>
+              </ul>
+              <a class="service-item__link" href="#kontakt">Mehr zu UGC →</a>
+            </div>
+          </details>
         </div>
-
       </div>
     </section>
 
     <!-- KONTAKT -->
-    <section class="svc-contact" id="kontakt">
-      <div class="svc-container">
-        <h2 class="svc-contact__title">Kontakt</h2>
-        <p class="svc-contact__lead">
+    <section class="contact-section" id="kontakt">
+      <div class="contact-section__container">
+        <h2 class="contact-section__title">Projekt anfragen</h2>
+        <p class="contact-section__lead">
           Sag kurz Ziel + Budget + Deadline – wir melden uns mit dem besten Plan.
         </p>
 
-        <form class="svc-form" action="https://formspree.io/f/movggzpl" method="POST">
-          <div class="svc-form__grid">
-            <label class="svc-field">
-              <span>Name</span>
+        <form class="contact-form" action="https://formspree.io/f/movggzpl" method="POST">
+          <div class="contact-form__grid">
+            <label class="form-field">
+              <span>Name *</span>
               <input name="name" type="text" autocomplete="name" required />
             </label>
 
-            <label class="svc-field">
-              <span>E-Mail</span>
+            <label class="form-field">
+              <span>E-Mail *</span>
               <input name="email" type="email" autocomplete="email" required />
             </label>
           </div>
 
-          <label class="svc-field">
+          <label class="form-field">
             <span>Unternehmen (optional)</span>
             <input name="company" type="text" autocomplete="organization" />
           </label>
 
-          <div class="svc-form__grid">
-            <label class="svc-field">
-              <span>Ziel</span>
+          <div class="contact-form__grid">
+            <label class="form-field">
+              <span>Ziel *</span>
               <input name="goal" type="text" placeholder="z.B. mehr Leads / neue Website / Ads skalieren" required />
             </label>
 
-            <label class="svc-field">
+            <label class="form-field">
               <span>Budget (optional)</span>
               <input name="budget" type="text" placeholder="z.B. 1.500€ / 3.000€ / 5k+" />
             </label>
           </div>
 
-          <label class="svc-field">
+          <label class="form-field">
             <span>Deadline (optional)</span>
             <input name="deadline" type="text" placeholder="z.B. bis Ende Januar" />
           </label>
 
-          <label class="svc-field">
-            <span>Nachricht</span>
+          <label class="form-field">
+            <span>Nachricht *</span>
             <textarea name="message" rows="5" placeholder="Erzähl kurz was du brauchst…" required></textarea>
           </label>
 
-          <button class="svc-form__submit" type="submit">
+          <button class="contact-form__submit" type="submit">
             Absenden <span aria-hidden="true">→</span>
           </button>
         </form>
       </div>
     </section>
-
   </main>
 
   <!-- FOOTER -->
