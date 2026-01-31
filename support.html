@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support – SocialPro | SMY Agency</title>
+  <meta name="description" content="Support für die App SocialPro: Hilfe, Kontakt, FAQ, Fehlerbehebung, Versionshinweise und rechtliche Informationen." />
+  <link rel="canonical" href="https://smyagency.de/support" />
+  <link rel="alternate" hreflang="de" href="https://smyagency.de/support" />
+  <link rel="alternate" hreflang="en" href="https://smyagency.de/en/support" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    .gradient-text { background: linear-gradient(to right, #D4AF37, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .gold-text { color: #D4AF37; }
+    .lang-btn[aria-current="true"] { outline: 2px solid #D4AF37; }
+  </style>
+</head>
+<body class="bg-[#f4f1e8] text-black scroll-smooth">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 py-4 bg-white/70 backdrop-blur sticky top-0 z-40 shadow">
+    <h1 class="text-2xl font-extrabold gradient-text">SMY Agency</h1>
+    <nav class="space-x-6 text-sm hidden md:block">
+      <a href="/index.html#leistungen" class="hover:text-[#D4AF37]" data-i18n="nav.services">Leistungen</a>
+      <a href="/index.html#kunden" class="hover:text-[#D4AF37]" data-i18n="nav.clients">Kunden</a>
+      <a href="/kundenportfolio.html" class="hover:text-[#D4AF37]" data-i18n="nav.portfolio">Kundenportfolio</a>
+      <a href="/shop.html" class="hover:text-[#D4AF37] font-semibold" data-i18n="nav.shop">Shop</a>
+      <a href="/index.html#kontakt" class="hover:text-[#D4AF37]" data-i18n="nav.contact">Kontakt</a>
+      <a href="/impressum.html" class="hover:text-[#D4AF37]" data-i18n="nav.imprint">Impressum</a>
+      <a href="/datenschutz.html" class="hover:text-[#D4AF37]" data-i18n="nav.privacy">Datenschutz</a>
+    </nav>
+    <!-- Language switch -->
+    <div class="flex items-center gap-2">
+      <button class="lang-btn rounded-xl px-3 py-1 text-sm hover:bg-white" data-lang="de" aria-current="true">DE</button>
+      <button class="lang-btn rounded-xl px-3 py-1 text-sm hover:bg-white" data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-extrabold mb-2 text-[#D4AF37]" data-i18n="h.supportTitle">Support für SocialPro</h2>
+    <p class="text-gray-700 mb-8" data-i18n="p.intro">Brauchst du Hilfe bei der Nutzung von <span class="font-semibold">SocialPro</span>? Hier findest du Antworten, Kontaktmöglichkeiten und schnelle Lösungen.</p>
+
+    <!-- Quick help cards -->
+    <section class="grid md:grid-cols-3 gap-6 mb-10">
+      <a href="#faq" class="block bg-white rounded-2xl shadow p-5 hover:shadow-md transition">
+        <h3 class="font-semibold mb-1" data-i18n="cards.faqTitle">Häufige Fragen</h3>
+        <p class="text-sm text-gray-600" data-i18n="cards.faqText">Schnelle Antworten zu Konto, Planung, KI-Vorschlägen u.v.m.</p>
+      </a>
+      <a href="#kontakt" class="block bg-white rounded-2xl shadow p-5 hover:shadow-md transition">
+        <h3 class="font-semibold mb-1" data-i18n="cards.contactTitle">Kontaktiere uns</h3>
+        <p class="text-sm text-gray-600" data-i18n="cards.contactText">E-Mail-Support – in der Regel innerhalb von 1–2 Werktagen.</p>
+      </a>
+      <a href="#fehlerbehebung" class="block bg-white rounded-2xl shadow p-5 hover:shadow-md transition">
+        <h3 class="font-semibold mb-1" data-i18n="cards.troubleshootTitle">Fehlerbehebung</h3>
+        <p class="text-sm text-gray-600" data-i18n="cards.troubleshootText">Soforthilfe bei Login-, Sync- oder Upload-Problemen.</p>
+      </a>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt" class="mb-12">
+      <h3 class="text-2xl font-bold mb-3" data-i18n="h.contact">Kontakt</h3>
+      <div class="bg-white rounded-2xl shadow p-6 space-y-2">
+        <p data-i18n="contact.email">Support-E-Mail: <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a></p>
+        <p data-i18n="contact.hours">Geschäftszeiten: Mo–Fr, 10:00–16:00 Uhr (MEZ)</p>
+        <p class="text-sm text-gray-600" data-i18n="contact.hint">Bitte füge bei technischen Problemen folgende Infos bei: App-Version, iOS-Version, Gerät, Schritte zum Nachstellen, Screenshots (optional).</p>
+      </div>
+    </section>
+
+    <!-- Optionales Formular -->
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold mb-3" data-i18n="h.ticket">Ticket erstellen</h3>
+      <form class="bg-white rounded-2xl shadow p-6 grid gap-4" method="POST" action="#">
+        <div>
+          <label for="name" class="block text-sm font-medium" data-i18n="form.nameLabel">Name</label>
+          <input id="name" name="name" type="text" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="" data-i18n-placeholder="form.namePlaceholder">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium" data-i18n="form.emailLabel">E-Mail</label>
+          <input id="email" name="email" type="email" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="" data-i18n-placeholder="form.emailPlaceholder">
+        </div>
+        <div>
+          <label for="betreff" class="block text-sm font-medium" data-i18n="form.subjectLabel">Betreff</label>
+          <input id="betreff" name="betreff" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="" data-i18n-placeholder="form.subjectPlaceholder">
+        </div>
+        <div>
+          <label for="nachricht" class="block text-sm font-medium" data-i18n="form.messageLabel">Nachricht</label>
+          <textarea id="nachricht" name="nachricht" rows="5" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="" data-i18n-placeholder="form.messagePlaceholder"></textarea>
+        </div>
+        <div class="flex items-center gap-3">
+          <input id="consent" type="checkbox" required class="rounded border-gray-300">
+          <label for="consent" class="text-sm" data-i18n="form.consent">Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. Details in der <a href="/datenschutz.html" class="underline text-blue-700">Datenschutzerklärung</a>.</label>
+        </div>
+        <button type="submit" class="w-full md:w-auto bg-[#D4AF37] text-black font-semibold px-6 py-3 rounded-2xl shadow hover:shadow-md" data-i18n="form.submit">Senden</button>
+        <p class="text-xs text-gray-500" data-i18n="form.footnote">Durch Absenden akzeptierst du unsere <a href="/datenschutz.html" class="underline">Datenschutzbestimmungen</a>.</p>
+      </form>
+    </section>
+
+    <!-- Fehlerbehebung -->
+    <section id="fehlerbehebung" class="mb-12">
+      <h3 class="text-2xl font-bold mb-3" data-i18n="h.troubleshoot">Fehlerbehebung (Schnellhilfe)</h3>
+      <div class="bg-white rounded-2xl shadow p-6 space-y-3">
+        <details class="group">
+          <summary class="cursor-pointer font-semibold" data-i18n="trouble.loginTitle">App lässt sich nicht einloggen</summary>
+          <ul class="list-disc pl-5 mt-2 text-gray-700">
+            <li data-i18n="trouble.login1">Prüfe Internetverbindung und Uhrzeit/Datum des Geräts.</li>
+            <li data-i18n="trouble.login2">App vollständig schließen und erneut öffnen.</li>
+            <li data-i18n="trouble.login3">Passwort zurücksetzen und erneut versuchen.</li>
+          </ul>
+        </details>
+        <details class="group">
+          <summary class="cursor-pointer font-semibold" data-i18n="trouble.aiTitle">KI-Vorschläge erscheinen nicht</summary>
+          <ul class="list-disc pl-5 mt-2 text-gray-700">
+            <li data-i18n="trouble.ai1">Sorge für mindestens einige veröffentlichte/analysierte Posts, damit die KI genug Daten hat.</li>
+            <li data-i18n="trouble.ai2">Aktualisiere auf die neueste App-Version.</li>
+            <li data-i18n="trouble.ai3">Öffne <em>Einstellungen → Berechtigungen</em> und erlaube den Zugriff auf benötigte Daten/Netzwerk.</li>
+          </ul>
+        </details>
+        <details class="group">
+          <summary class="cursor-pointer font-semibold" data-i18n="trouble.syncTitle">Sync-/Upload-Probleme</summary>
+          <ul class="list-disc pl-5 mt-2 text-gray-700">
+            <li data-i18n="trouble.sync1">WLAN/Mobilfunk prüfen, ggf. Netzwerk wechseln.</li>
+            <li data-i18n="trouble.sync2">Genügend Gerätespeicher sicherstellen.</li>
+            <li data-i18n="trouble.sync3">Abmelden → erneut anmelden.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mb-12">
+      <h3 class="text-2xl font-bold mb-3" data-i18n="h.faq">FAQ</h3>
+      <div class="bg-white rounded-2xl shadow divide-y">
+        <details class="p-6">
+          <summary class="font-semibold cursor-pointer" data-i18n="faq.platformsQ">Welche Plattformen unterstützt SocialPro?</summary>
+          <p class="mt-2 text-gray-700" data-i18n="faq.platformsA">Aktuell iOS (iPhone/iPad). Weitere Plattformen sind in Planung.</p>
+        </details>
+        <details class="p-6">
+          <summary class="font-semibold cursor-pointer" data-i18n="faq.aiQ">Ist die Nutzung der KI kostenpflichtig?</summary>
+          <p class="mt-2 text-gray-700" data-i18n="faq.aiA">Je nach Tarif. Details findest du in der App unter <em>Einstellungen → Abos</em>.</p>
+        </details>
+        <details class="p-6">
+          <summary class="font-semibold cursor-pointer" data-i18n="faq.bugsQ">Wie melde ich einen Fehler?</summary>
+          <p class="mt-2 text-gray-700" data-i18n="faq.bugsA">Sende uns eine E-Mail an <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a> oder nutze das Formular oben. Bitte füge App-/iOS-Version und Screenshots bei.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Version & Rechtliches Links -->
+    <section class="mb-4 text-sm text-gray-600">
+      <p><span class="font-semibold" data-i18n="meta.appVersionLabel">Aktuelle App-Version:</span> 1.0.0 • <span class="font-semibold" data-i18n="meta.updatedLabel">Letztes Update dieser Seite:</span> <time datetime="2025-10-02">02.10.2025</time></p>
+      <p><span data-i18n="meta.moreInfo">Weitere Informationen:</span> <a href="/impressum.html" class="underline" data-i18n="meta.imprint">Impressum</a> · <a href="/datenschutz.html" class="underline" data-i18n="meta.privacy">Datenschutz</a></p>
+    </section>
+  </main>
+
+  <footer class="py-8 bg-[#f4f1e8] text-gray-600 text-sm">
+    <div class="max-w-6xl mx-auto px-4 text-center space-y-4">
+      <nav class="space-x-6">
+        <a href="/index.html#leistungen" class="hover:text-[#D4AF37]" data-i18n="nav.services">Leistungen</a>
+        <a href="/index.html#kunden" class="hover:text-[#D4AF37]" data-i18n="nav.clients">Kunden</a>
+        <a href="/kundenportfolio.html" class="hover:text-[#D4AF37]" data-i18n="nav.portfolio">Kundenportfolio</a>
+        <a href="/shop.html" class="hover:text-[#D4AF37] font-semibold" data-i18n="nav.shop">Shop</a>
+        <a href="/index.html#kontakt" class="hover:text-[#D4AF37]" data-i18n="nav.contact">Kontakt</a>
+        <a href="/impressum.html" class="hover:text-[#D4AF37]" data-i18n="nav.imprint">Impressum</a>
+        <a href="/datenschutz.html" class="hover:text-[#D4AF37]" data-i18n="nav.privacy">Datenschutz</a>
+      </nav>
+      <p class="text-gray-500">© 2025 SMY Agency. <span data-i18n="footer.rights">Alle Rechte vorbehalten.</span></p>
+    </div>
+  </footer>
+
+  <script>
+    const strings = {
+      de: {
+        'nav.services':'Leistungen','nav.clients':'Kunden','nav.portfolio':'Kundenportfolio','nav.shop':'Shop','nav.contact':'Kontakt','nav.imprint':'Impressum','nav.privacy':'Datenschutz',
+        'h.supportTitle':'Support für SocialPro','p.intro':'Brauchst du Hilfe bei der Nutzung von <span class="font-semibold">SocialPro</span>? Hier findest du Antworten, Kontaktmöglichkeiten und schnelle Lösungen.',
+        'cards.faqTitle':'Häufige Fragen','cards.faqText':'Schnelle Antworten zu Konto, Planung, KI-Vorschlägen u.v.m.','cards.contactTitle':'Kontaktiere uns','cards.contactText':'E-Mail-Support – in der Regel innerhalb von 1–2 Werktagen.','cards.troubleshootTitle':'Fehlerbehebung','cards.troubleshootText':'Soforthilfe bei Login-, Sync- oder Upload-Problemen.',
+        'h.contact':'Kontakt','contact.email':'Support-E-Mail: <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a>','contact.hours':'Geschäftszeiten: Mo–Fr, 10:00–16:00 Uhr (MEZ)','contact.hint':'Bitte füge bei technischen Problemen folgende Infos bei: App-Version, iOS-Version, Gerät, Schritte zum Nachstellen, Screenshots (optional).',
+        'h.ticket':'Ticket erstellen','form.nameLabel':'Name','form.emailLabel':'E-Mail','form.subjectLabel':'Betreff','form.messageLabel':'Nachricht','form.namePlaceholder':'Dein Name','form.emailPlaceholder':'deine@email.de','form.subjectPlaceholder':'Worum geht es?','form.messagePlaceholder':'Beschreibe dein Anliegen…','form.consent':'Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. Details in der <a href="/datenschutz.html" class="underline text-blue-700">Datenschutzerklärung</a>.','form.submit':'Senden','form.footnote':'Durch Absenden akzeptierst du unsere <a href="/datenschutz.html" class="underline">Datenschutzbestimmungen</a>.',
+        'h.troubleshoot':'Fehlerbehebung (Schnellhilfe)','trouble.loginTitle':'App lässt sich nicht einloggen','trouble.login1':'Prüfe Internetverbindung und Uhrzeit/Datum des Geräts.','trouble.login2':'App vollständig schließen und erneut öffnen.','trouble.login3':'Passwort zurücksetzen und erneut versuchen.','trouble.aiTitle':'KI-Vorschläge erscheinen nicht','trouble.ai1':'Sorge für mindestens einige veröffentlichte/analysierte Posts, damit die KI genug Daten hat.','trouble.ai2':'Aktualisiere auf die neueste App-Version.','trouble.ai3':'Öffne <em>Einstellungen → Berechtigungen</em> und erlaube den Zugriff auf benötigte Daten/Netzwerk.','trouble.syncTitle':'Sync-/Upload-Probleme','trouble.sync1':'WLAN/Mobilfunk prüfen, ggf. Netzwerk wechseln.','trouble.sync2':'Genügend Gerätespeicher sicherstellen.','trouble.sync3':'Abmelden → erneut anmelden.',
+        'h.faq':'FAQ','faq.platformsQ':'Welche Plattformen unterstützt SocialPro?','faq.platformsA':'Aktuell iOS (iPhone/iPad). Weitere Plattformen sind in Planung.','faq.aiQ':'Ist die Nutzung der KI kostenpflichtig?','faq.aiA':'Je nach Tarif. Details findest du in der App unter <em>Einstellungen → Abos</em>.','faq.bugsQ':'Wie melde ich einen Fehler?','faq.bugsA':'Sende uns eine E-Mail an <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a> oder nutze das Formular oben. Bitte füge App-/iOS-Version und Screenshots bei.',
+        'meta.appVersionLabel':'Aktuelle App-Version:','meta.updatedLabel':'Letztes Update dieser Seite:','meta.moreInfo':'Weitere Informationen:','meta.imprint':'Impressum','meta.privacy':'Datenschutz',
+        'footer.rights':'Alle Rechte vorbehalten.'
+      },
+      en: {
+        'nav.services':'Services','nav.clients':'Clients','nav.portfolio':'Portfolio','nav.shop':'Shop','nav.contact':'Contact','nav.imprint':'Imprint','nav.privacy':'Privacy',
+        'h.supportTitle':'Support for SocialPro','p.intro':'Need help using <span class="font-semibold">SocialPro</span>? Here you will find answers, contact options and quick solutions.',
+        'cards.faqTitle':'FAQ','cards.faqText':'Quick answers about account, planning, AI suggestions and more.','cards.contactTitle':'Contact us','cards.contactText':'Email support – usually within 1–2 business days.','cards.troubleshootTitle':'Troubleshooting','cards.troubleshootText':'Immediate help with login, sync or upload issues.',
+        'h.contact':'Contact','contact.email':'Support email: <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a>','contact.hours':'Business hours: Mon–Fri, 10:00–16:00 (CET)','contact.hint':'For technical issues, please include: app version, iOS version, device, steps to reproduce, screenshots (optional).',
+        'h.ticket':'Create a ticket','form.nameLabel':'Name','form.emailLabel':'Email','form.subjectLabel':'Subject','form.messageLabel':'Message','form.namePlaceholder':'Your name','form.emailPlaceholder':'you@example.com','form.subjectPlaceholder':'What is it about?','form.messagePlaceholder':'Describe your request…','form.consent':'I agree that my data will be processed to handle this request. Details in our <a href="/datenschutz.html" class="underline text-blue-700">privacy policy</a>.','form.submit':'Send','form.footnote':'By submitting you accept our <a href="/datenschutz.html" class="underline">privacy terms</a>.',
+        'h.troubleshoot':'Troubleshooting (Quick help)','trouble.loginTitle':'Cannot log in','trouble.login1':'Check internet connection and device date/time.','trouble.login2':'Force close the app and reopen.','trouble.login3':'Reset your password and try again.','trouble.aiTitle':'AI suggestions do not appear','trouble.ai1':'Make sure there are some published/analyzed posts so the AI has enough data.','trouble.ai2':'Update to the latest app version.','trouble.ai3':'Open <em>Settings → Permissions</em> and allow required data/network access.','trouble.syncTitle':'Sync/Upload issues','trouble.sync1':'Check Wi‑Fi/cellular, try another network.','trouble.sync2':'Ensure enough device storage.','trouble.sync3':'Sign out and sign back in.',
+        'h.faq':'FAQ','faq.platformsQ':'Which platforms does SocialPro support?','faq.platformsA':'Currently iOS (iPhone/iPad). More platforms are planned.','faq.aiQ':'Is the AI feature paid?','faq.aiA':'Depends on your plan. See in-app under <em>Settings → Subscriptions</em>.','faq.bugsQ':'How do I report a bug?','faq.bugsA':'Email <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a> or use the form above. Please include app/iOS version and screenshots.',
+        'meta.appVersionLabel':'Current app version:','meta.updatedLabel':'Last update of this page:','meta.moreInfo':'More information:','meta.imprint':'Imprint','meta.privacy':'Privacy',
+        'footer.rights':'All rights reserved.'
+      }
+    };
+
+    const applyLang = (lang) => {
+      const dict = strings[lang] || strings.de;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const html = dict[key];
+        if (html !== undefined) el.innerHTML = html;
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        const val = dict[key];
+        if (val !== undefined) el.setAttribute('placeholder', val);
+      });
+      // toggle button state
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.setAttribute('aria-current', btn.dataset.lang === lang ? 'true' : 'false'));
+      localStorage.setItem('lang', lang);
+    };
+
+    // init
+    const initial = (new URLSearchParams(location.search).get('lang')) || localStorage.getItem('lang') || (navigator.language || 'de').slice(0,2);
+    applyLang(initial === 'en' ? 'en' : 'de');
+
+    // events
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
+  </script>
+</body>
+</html>

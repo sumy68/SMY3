@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMY Agency – Kostenloses Brand Workbook</title>
+  <meta name="description" content="Hol dir dein kostenloses Brand Workbook: Klarer Fahrplan für deine Marke, Content und Positionierung – inklusive Newsletter-Updates von SMY Agency.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --brand: #e11d48;
+      --brand-700: #be123c;
+      --ink: #0f172a;
+      --muted: #6b7280;
+      --paper: #faf7f5;
+    }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .brand-gradient {
+      background-image: linear-gradient(90deg, var(--brand), #f43f5e, #ef4444);
+    }
+    .brand-text {
+      background: linear-gradient(90deg, var(--brand), #f43f5e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .glass-effect { backdrop-filter: saturate(140%) blur(10px); }
+    .soft-shadow { box-shadow: 0 2px 12px rgba(15,23,42,0.06), 0 12px 30px rgba(15,23,42,0.05); }
+  </style>
+
+  <!-- Brevo Styles -->
+  <style>
+    @font-face {
+      font-display: block;
+      font-family: Roboto;
+      src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"),
+           url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff");
+    }
+    @font-face {
+      font-display: fallback;
+      font-family: Roboto;
+      font-weight: 600;
+      src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2) format("woff2"),
+           url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff) format("woff");
+    }
+    @font-face {
+      font-display: fallback;
+      font-family: Roboto;
+      font-weight: 700;
+      src: url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2) format("woff2"),
+           url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff) format("woff");
+    }
+    #sib-container input:-ms-input-placeholder {
+      text-align: left;
+      font-family: Helvetica, sans-serif;
+      color: #c0ccda;
+    }
+    #sib-container input::placeholder {
+      text-align: left;
+      font-family: Helvetica, sans-serif;
+      color: #c0ccda;
+    }
+    #sib-container textarea::placeholder {
+      text-align: left;
+      font-family: Helvetica, sans-serif;
+      color: #c0ccda;
+    }
+    #sib-container a {
+      text-decoration: underline;
+      color: #2BB2FC;
+    }
+  </style>
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+</head>
+
+<body class="min-h-full scroll-smooth">
+
+  <!-- Obere Leiste -->
+  <div class="sticky top-0 z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 flex items-center justify-between rounded-2xl border border-black/5 bg-white/80 px-4 py-3 shadow-sm ring-1 ring-black/5 backdrop-blur-md">
+        <a href="#top" class="flex items-center gap-2">
+          <span class="inline-block h-8 w-8 rounded-full brand-gradient"></span>
+          <span class="text-lg sm:text-xl font-extrabold tracking-tight">SMY <span class="brand-text">Agency</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-3">
+          <a href="#vorteile" class="text-sm font-medium hover:text-[var(--brand)]">Für wen</a>
+          <a href="#inside" class="text-sm font-medium hover:text-[var(--brand)]">Inhalt</a>
+          <a href="#faq" class="text-sm font-medium hover:text-[var(--brand)]">Fragen</a>
+          <a href="#lead" class="inline-flex items-center rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-700)]">Workbook sichern</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero mit Brevo Formular -->
+  <section id="top" class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-10 brand-gradient opacity-10"></div>
+    <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-20 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+      <div>
+        <p class="text-sm uppercase tracking-widest text-[var(--brand)] font-semibold">Kostenloses Brand Workbook</p>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold leading-tight">
+          <span class="brand-text">Bau dir eine Brand,</span><br />
+          die nach dir aussieht – nicht nach Trends.
+        </h1>
+        <p class="mt-4 text-[17px] text-[var(--muted)] max-w-xl">
+          In diesem Workbook findest du meine Frameworks für Positionierung, Brand Story und Content-Struktur – damit deine Marke klar, wiedererkennbar und profitabel wird.
+        </p>
+        <ul class="mt-5 space-y-2 text-sm text-[var(--muted)]">
+          <li>✅ Klarer Fahrplan statt Social-Media-Chaos</li>
+          <li>✅ Worksheets zum Ausfüllen – direkt umsetzbar</li>
+          <li>✅ Zugriff auf zukünftige Updates & Brand-Content per E-Mail</li>
+        </ul>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="#lead" class="inline-flex items-center justify-center rounded-full bg-[var(--brand)] px-6 py-3 font-semibold text-white shadow hover:bg-[var(--brand-700)]">
+            Workbook kostenlos sichern
+          </a>
+          <a href="#inside" class="inline-flex items-center justify-center rounded-full border border-black/10 bg-white px-6 py-3 font-semibold hover:bg-gray-50">
+            Schau rein, was drin ist
+          </a>
+        </div>
+        <div class="mt-6 flex items-center gap-3 text-sm text-[var(--muted)]">
+          <div class="flex items-center gap-1">📩 <span>Direkt per E-Mail</span></div>
+          <div class="flex items-center gap-1">🧠 <span>Brand & Content Fokus</span></div>
+          <div class="flex items-center gap-1">🔥 <span>Kein Bullshit, nur Praxis</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="relative rounded-3xl border border-black/10 bg-white p-5 soft-shadow" id="lead">
+          <div class="absolute -top-3 right-5 rounded-full bg-[var(--brand)] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+            Kostenlos
+          </div>
+          <h3 class="text-xl font-bold">Trag dich ein & hol dir das Workbook</h3>
+          <p class="mt-1 text-sm text-[var(--muted)]">
+            Trag hier deine E-Mail ein – du bekommst das Workbook direkt zugeschickt
+            und erhältst zukünftige Brand- und Content-Insights von mir per Newsletter.
+          </p>
+
+          <!-- 💌 BREVO FORMULAR-BEREICH -->
+          <div class="mt-5" id="brevo-form">
+            <!-- Begin Brevo Form -->
+            <div class="sib-form" style="text-align: center; background-color: #EFF2F7;">
+              <div id="sib-form-container" class="sib-form-container">
+
+                <div id="error-message" class="sib-form-message-panel"
+                     style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;max-width:540px;">
+                  <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                    <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
+                      <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
+                    </svg>
+                    <span class="sib-form-message-panel__inner-text">
+                      Ups! Deine Anmeldung konnte nicht gespeichert werden. Bitte versuche es erneut.
+                    </span>
+                  </div>
+                </div>
+
+                <div id="success-message" class="sib-form-message-panel"
+                     style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#085229; background-color:#e7faf0; border-radius:3px; border-color:#13ce66;max-width:540px;">
+                  <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                    <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
+                      <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
+                    </svg>
+                    <span class="sib-form-message-panel__inner-text">
+                      Danke! Bitte bestätige jetzt deine E-Mail – ich sende dir danach das Workbook zu.
+                    </span>
+                  </div>
+                </div>
+
+                <div id="sib-container" class="sib-container--large sib-container--vertical"
+                     style="text-align:center; background-color:rgba(255,255,255,1); max-width:540px; border-radius:18px; border-width:1px; border-color:#C0CCD9; border-style:solid; direction:ltr; padding:20px;">
+                  <form id="sib-form" method="POST"
+                        action="https://986865f8.sibforms.com/serve/MUIFABDYw_2A6Yv-pD2h0w2wmrAMZ89hkCKplnMcb6NKYWHVYMNm1kmp_BYisbXriHYBJTG_wicDRCMnJmRIWjkbngmTMPR44QnB17MikyL4NnIuQrnnHwNbCNUMsuOxBpRFGVlZmlmes_wd2feZ8nAEoR8ZuHBSXKDQ-k7ycsUIydVK27HBIurV-2eqnQyt3CjbPRDuUuX2mLgv7g=="
+                        data-type="subscription">
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-form-block"
+                           style="font-size:24px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#3C4858; background-color:transparent;">
+                        <p>Brand Workbook</p>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-form-block"
+                           style="font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#3C4858; background-color:transparent;">
+                        <div class="sib-text-form-block">
+                          <p>Trag deine E-Mail ein und ich sende dir das Workbook per Mail zu.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-input sib-form-block">
+                        <div class="form__entry entry_block">
+                          <div class="form__label-row">
+                            <label class="entry__label"
+                                   style="font-weight:700; font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#3c4858;"
+                                   for="EMAIL" data-required="*">
+                              E-Mail-Adresse für den Workbook-Versand
+                            </label>
+                            <div class="entry__field">
+                              <input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="off"
+                                     placeholder="name@beispiel.de" data-required="true" required />
+                            </div>
+                          </div>
+                          <label class="entry__error entry__error--primary"
+                                 style="font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
+                          </label>
+                          <label class="entry__specification"
+                                 style="font-size:12px; text-align:left; font-family:Helvetica, sans-serif; color:#8390A4;">
+                            Ich sende dir das Workbook direkt nach deiner Bestätigung zu.
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-form-block" style="text-align:left; font-size:12px; font-family:Helvetica, sans-serif; color:#3c4858;">
+                        <label class="flex gap-2">
+                          <input type="checkbox" required style="margin-top:3px;">
+                          <span>Ich stimme zu, E-Mails von SMY Agency zu erhalten. Details in der Datenschutzerklärung.</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-form-block" style="text-align: left">
+                        <button class="sib-form-block__button sib-form-block__button-with-loader"
+                                style="width:100%; font-size:16px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#e11d48; border-radius:999px; border-width:0; padding:10px 18px;"
+                                form="sib-form" type="submit">
+                          <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="">
+                            <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+                          </svg>
+                          Workbook erhalten
+                        </button>
+                      </div>
+                    </div>
+
+                    <input type="text" name="email_address_check" value="" class="input--hidden">
+                    <input type="hidden" name="locale" value="de">
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- End Brevo Form -->
+          </div>
+
+          <p class="mt-4 text-[11px] text-[var(--muted)]">
+            Mit deiner Anmeldung erhältst du regelmäßig E-Mails zu Branding, Content und SMY Agency Angeboten.
+            Du kannst dich jederzeit mit einem Klick wieder abmelden.
+          </p>
+
+          <p class="mt-1 text-[11px] text-[var(--muted)]">
+            Hinweise zum Datenschutz findest du in unserer
+            <a href="datenschutz.html" class="underline" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Abschnitt: Für wen ist das Workbook -->
+    <section id="vorteile" class="py-16">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-10">
+            <h3 class="text-2xl sm:text-3xl font-extrabold">Für wen ist dieses Workbook?</h3>
+            <p class="mt-2 text-[var(--muted)]">Für Creatorinnen, Selbstständige und Brands, die mehr wollen als nur „mehr Reichweite“.</p>
+          </div>
+          <div class="grid gap-6 md:grid-cols-3">
+            <div class="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+              <div class="h-10 w-10 rounded-xl bg-[var(--brand)]/10 flex items-center justify-center text-[var(--brand)] text-xl">👩‍💻</div>
+              <h4 class="mt-3 font-semibold">Solo-Selbstständige</h4>
+              <p class="text-sm text-[var(--muted)]">Du bist Dienstleisterin oder Coach und willst deine Brand endlich klar aufstellen.</p>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+              <div class="h-10 w-10 rounded-xl bg-[var(--brand)]/10 flex items-center justify-center text-[var(--brand)] text-xl">📱</div>
+              <h4 class="mt-3 font-semibold">Content Creator</h4>
+              <p class="text-sm text-[var(--muted)]">Du willst nicht nur posten, sondern eine echte Marke aufbauen, die gebucht wird.</p>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+              <div class="h-10 w-10 rounded-xl bg-[var(--brand)]/10 flex items-center justify-center text-[var(--brand)] text-xl">🏢</div>
+              <h4 class="mt-3 font-semibold">Kleine Brands & Teams</h4>
+              <p class="text-sm text-[var(--muted)]">Ihr wollt euren Auftritt schärfen – vom Social Content bis zur Website.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+      <!-- Abschnitt: Was ist drin im Workbook -->
+      <section id="inside" class="bg-white py-16">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-10">
+            <h3 class="text-2xl sm:text-3xl font-extrabold">Das steckt im Workbook</h3>
+            <p class="mt-2 text-[var(--muted)]">Die wichtigsten Frameworks aus deiner Brand- und Content-Arbeit – runtergebrochen auf Worksheets.</p>
+          </div>
+          <div class="grid gap-6 md:grid-cols-2">
+            <div class="rounded-2xl border border-black/10 bg-[#fafafa] p-6">
+              <h4 class="font-semibold mb-2">Brand Fundamentals</h4>
+              <ul class="space-y-1 text-sm text-[var(--muted)]">
+                <li>• Brand Journey Framework (Worksheet)</li>
+                <li>• Brand Story zum Ausfüllen</li>
+                <li>• Positionierung & Zielgruppe klarziehen</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-[#fafafa] p-6">
+              <h4 class="font-semibold mb-2">Content & Distribution</h4>
+              <ul class="space-y-1 text-sm text-[var(--muted)]">
+                <li>• Waterfall Distribution Method (Playbook)</li>
+                <li>• Storytelling-Ansätze für deine Posts</li>
+                <li>• Content Hackathon – Ideen in Masse generieren</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-[#fafafa] p-6">
+              <h4 class="font-semibold mb-2">Team & Strukturen</h4>
+              <ul class="space-y-1 text-sm text-[var(--muted)]">
+                <li>• Job Description (Worksheet + Beispiel)</li>
+                <li>• Hiring Funnel & Onboarding (30/60/90)</li>
+                <li>• Full Time vs. Freelancer/Agentur – Entscheidungs-Worksheet</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-[#fafafa] p-6">
+              <h4 class="font-semibold mb-2">Dein Alltag als Maker</h4>
+              <ul class="space-y-1 text-sm text-[var(--muted)]">
+                <li>• Maker vs. Manager Schedule</li>
+                <li>• Remote vs. Hybrid – was passt zu dir?</li>
+                <li>• Raum für deine eigenen Regeln & Routinen</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-10 text-center">
+            <a href="#lead" class="inline-flex items-center rounded-full bg-[var(--brand)] px-6 py-3 font-semibold text-white hover:bg-[var(--brand-700)]">
+              Workbook per E-Mail erhalten
+            </a>
+          </div>
+        </div>
+      </section>
+    
+      <!-- FAQ -->
+      <section id="faq" class="py-16">
+        <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl sm:text-3xl font-extrabold">Häufige Fragen</h3>
+          </div>
+          <div class="space-y-3" id="faqList">
+            <details class="group rounded-2xl border border-black/10 bg-white p-4 open:shadow-sm">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-2">
+                <span class="font-semibold">Kostet das Workbook wirklich nichts?</span>
+                <span class="text-[var(--muted)] group-open:rotate-180 transition">⌄</span>
+              </summary>
+              <p class="mt-2 text-sm text-[var(--muted)]">
+                Ja. Das Workbook ist kostenlos. Im Gegenzug meldest du dich für meinen Newsletter an,
+                in dem ich regelmäßig Einblicke in Branding, Content und SMY Agency gebe.
+              </p>
+            </details>
+            <details class="group rounded-2xl border border-black/10 bg-white p-4 open:shadow-sm">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-2">
+                <span class="font-semibold">Wie bekomme ich das Workbook?</span>
+                <span class="text-[var(--muted)] group-open:rotate-180 transition">⌄</span>
+              </summary>
+              <p class="mt-2 text-sm text-[var(--muted)]">
+                Du trägst deine E-Mail im Formular ein, bestätigst deine Anmeldung (falls Double-Opt-in aktiviert ist)
+                und bekommst dann automatisch eine E-Mail mit dem Download-Link.
+              </p>
+            </details>
+            <details class="group rounded-2xl border border-black/10 bg-white p-4 open:shadow-sm">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-2">
+                <span class="font-semibold">Kann ich mich wieder abmelden?</span>
+                <span class="text-[var(--muted)] group-open:rotate-180 transition">⌄</span>
+              </summary>
+              <p class="mt-2 text-sm text-[var(--muted)]">
+                Klar. In jeder E-Mail gibt es einen Abmelde-Link. Ein Klick und du bist wieder raus.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+    
+      <!-- Footer -->
+      <footer class="py-10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-sm text-[var(--muted)] space-y-4">
+          <nav class="flex flex-wrap justify-center gap-4">
+            <a href="index.html#leistungen" class="hover:text-[var(--brand)]">Leistungen</a>
+            <a href="Kundenportfolio.html" class="hover:text-[var(--brand)]">Portfolio</a>
+            <a href="shop.html" class="hover:text-[var(--brand)]">Shop</a>
+            <a href="index.html#pakete" class="hover:text-[var(--brand)]">Preise</a>
+            <a href="support.html" class="hover:text-[var(--brand)]">Support</a>
+            <a href="impressum.html" class="hover:text-[var(--brand)]">Impressum</a>
+            <a href="datenschutz.html" class="hover:text-[var(--brand)]">Datenschutz</a>
+          </nav>
+          <p>© 2025 SMY Agency. Alle Rechte vorbehalten.</p>
+        </div>
+      </footer>
+    
+      <!-- Brevo Scripts -->
+      <script>
+        window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+        window.LOCALE = 'de';
+        window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Die eingegebenen Daten sind ungültig. Bitte überprüfe deine Angaben.";
+        window.REQUIRED_ERROR_MESSAGE = "Dieses Feld darf nicht leer sein.";
+        window.GENERIC_INVALID_MESSAGE = "Die eingegebenen Daten sind ungültig. Bitte überprüfe deine Angaben.";
+        window.translation = {
+          common: {
+            selectedList: '{quantity} Liste ausgewählt',
+            selectedLists: '{quantity} Listen ausgewählt',
+            selectedOption: '{quantity} ausgewählt',
+            selectedOptions: '{quantity} ausgewählt',
+          }
+        };
+        var AUTOHIDE = Boolean(0);
+      </script>
+      <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+    
+    </body>
+    </html>
+    

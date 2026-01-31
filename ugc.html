@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SMY Agency – Performance Creatives für Social Ads</title>
+  <meta name="description" content="Wöchentlich neue Performance Creatives: UGC, datenbasierte Hooks, Varianten-Testing. Ready für Meta, TikTok, YouTube – Dark mit roten Akzenten.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      /* Markenfarben */
+      --accent:#e11d48;               
+      --accent-strong:#be123c;
+      --accent-glow: rgba(225, 29, 72, 0.6);
+      --accent-glow-soft: rgba(225, 29, 72, 0.28);
+
+      /* Oberfläche */
+      --canvas:#0a0a0a;               
+      --panel:#111213;                
+      --text:#f8fafc;                 
+      --text-muted:#9ca3af;           
+      --ring:#1f2937;                 
+
+      /* Glows */
+      --card-outer: 0 0 40px var(--accent-glow-soft), 0 0 100px rgba(225,29,72,0.18);
+      --card-inner: inset 0 0 14px rgba(225,29,72,0.22);
+    }
+
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;
+      background:var(--canvas);
+      color:var(--text);
+    }
+
+    .brand-headline{
+      background: linear-gradient(90deg,#ffffff 0%, #d1d5db 50%, #ffffff 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+
+    .glow-card{
+      background: var(--panel);
+      border: 1px solid rgba(225,29,72,0.35);
+      box-shadow: var(--card-outer);
+      border-radius: 22px;
+      position: relative;
+    }
+    .glow-card::after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: 22px;
+      box-shadow: var(--card-inner);
+      pointer-events:none;
+    }
+
+    .glow-cta{
+      background: var(--panel);
+      border: 1px solid rgba(225,29,72,0.45);
+      border-radius: 28px;
+      box-shadow: 0 0 55px var(--accent-glow), 0 0 140px rgba(225,29,72,0.2);
+    }
+
+    .will-animate{opacity:0; transform: translateY(24px) scale(.98); transition: all .7s cubic-bezier(.2,.7,.2,1);}
+    .is-visible{opacity:1; transform: translateY(0) scale(1);}
+
+    @keyframes pulseRing {
+      0%{ box-shadow: 0 0 0 0 rgba(225,29,72,0.55); }
+      70%{ box-shadow: 0 0 0 16px rgba(225,29,72,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(225,29,72,0); }
+    }
+
+    .media-radius{border-radius: 18px;}
+  </style>
+</head>
+<body class="min-h-full scroll-smooth">
+
+  <!-- Kopfbereich -->
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 flex items-center justify-between rounded-2xl border border-[var(--ring)] bg-[#0d0e10]/85 px-4 py-3 backdrop-blur-md">
+        <a href="#seitenanfang" class="flex items-center gap-2">
+          <span class="inline-block h-8 w-8 rounded-full" style="background: radial-gradient(circle at 30% 30%, var(--accent) 0%, #7f1d1d 60%, #0a0a0a 100%);"></span>
+          <span class="text-lg sm:text-xl font-extrabold tracking-tight">SMY <span style="color:var(--accent);">Agency</span></span>
+        </a>
+        <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
+          <a href="#beispiele" class="hover:text-[var(--accent)]">Beispiele</a>
+          <a href="#leistungszahlen" class="hover:text-[var(--accent)]">Zahlen</a>
+          <a href="#ablauf" class="hover:text-[var(--accent)]">Ablauf</a>
+          <a href="#fragen" class="hover:text-[var(--accent)]">FAQ</a>
+          <a href="#erstgespraech" class="inline-flex items-center rounded-full bg-[var(--accent)] px-4 py-2 text-white hover:bg-[var(--accent-strong)]" style="animation:pulseRing 2.2s infinite;">30 Minuten Erstgespräch</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="seitenanfang" class="relative isolate overflow-hidden">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-20 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+      <div class="will-animate">
+        <p class="text-sm uppercase tracking-widest text-[var(--accent)] font-semibold">Performance Creatives für Social Ads</p>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold leading-tight brand-headline">
+          Jede Woche neue Creatives.<br/>UGC-stark. Datenbasiert. Skalierbar.
+        </h1>
+        <p class="mt-4 text-[17px] text-[var(--text-muted)] max-w-xl">
+          Wir liefern kontinuierlich Werbe-Creatives auf Basis echter Account-Daten. Meta, TikTok, YouTube – startbereit in allen Formaten.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="#erstgespraech" class="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 font-semibold text-white hover:bg-[var(--accent-strong)]">Jetzt 30 Minuten Erstgespräch buchen</a>
+          <a href="#beispiele" class="inline-flex items-center justify-center rounded-full border border-[var(--ring)] bg-[#0d0e10] px-6 py-3 font-semibold hover:bg-[#15171a]">Creative Beispiele ansehen</a>
+        </div>
+        <div class="mt-6 flex items-center gap-3 text-sm text-[var(--text-muted)]">
+          <span>🔁 Wöchentliche Lieferungen</span>
+          <span>🧪 Varianten-Testing</span>
+          <span>🎯 Hook-Strategie</span>
+        </div>
+      </div>
+
+      <!-- Video Grid -->
+      <div class="will-animate" id="beispiele">
+        <div class="grid grid-cols-3 gap-3">
+          <video class="media-radius border border-[var(--ring)]" autoplay muted loop playsinline poster="assets/examples/poster-01.jpg">
+            <source src="assets/examples/asset-01.mp4" type="video/mp4" />
+          </video>
+          <video class="media-radius border border-[var(--ring)]" autoplay muted loop playsinline poster="assets/examples/poster-02.jpg">
+            <source src="assets/examples/asset-02.mp4" type="video/mp4" />
+          </video>
+          <video class="media-radius border border-[var(--ring)]" autoplay muted loop playsinline poster="assets/examples/poster-03.jpg">
+            <source src="assets/examples/asset-03.mp4" type="video/mp4" />
+          </video>
+          <video class="media-radius border border-[var(--ring)]" autoplay muted loop playsinline poster="assets/examples/poster-04.jpg">
+            <source src="assets/examples/asset-04.mp4" type="video/mp4" />
+          </video>
+          <video class="media-radius border border-[var(--ring)] col-span-1 row-span-2" autoplay muted loop playsinline poster="assets/examples/poster-05.jpg">
+            <source src="assets/examples/asset-05.mp4" type="video/mp4" />
+          </video>
+          <video class="media-radius border border-[var(--ring)]" autoplay muted loop playsinline poster="assets/examples/poster-06.jpg">
+            <source src="assets/examples/asset-06.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kennzahlen -->
+  <section id="leistungszahlen" class="py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 sm:grid-cols-4">
+        <div class="glow-card p-6 text-center will-animate">
+          <div class="text-3xl font-extrabold counter" data-target="7">0</div>
+          <div class="mt-1 text-sm text-[var(--text-muted)]">Jahre Erfahrung</div>
+        </div>
+        <div class="glow-card p-6 text-center will-animate">
+          <div class="text-3xl font-extrabold counter" data-target="600">0</div>
+          <div class="mt-1 text-sm text-[var(--text-muted)]">Creator Netzwerk</div>
+        </div>
+        <div class="glow-card p-6 text-center will-animate">
+          <div class="text-3xl font-extrabold counter" data-target="8000">0</div>
+          <div class="mt-1 text-sm text-[var(--text-muted)]">Creatives pro Jahr</div>
+        </div>
+        <div class="glow-card p-6 text-center will-animate">
+          <div class="text-3xl font-extrabold counter" data-target="3">0</div>
+          <div class="mt-1 text-sm text-[var(--text-muted)]">x bessere Performance möglich*</div>
+        </div>
+      </div>
+      <p class="mt-3 text-xs text-[var(--text-muted)]">*Erfahrung aus Projekten. Ergebnisse variieren nach Branche, Budget und Funnel-Reife.</p>
+    </div>
+  </section>
+
+  <!-- Nutzenblock -->
+  <section class="py-16">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="glow-card p-8 text-center will-animate">
+        <span class="inline-flex items-center rounded-full bg-[var(--accent)]/15 px-3 py-1 text-xs font-bold text-[var(--accent)]">
+          Dein Ergebnis
+        </span>
+        <h3 class="mt-4 text-2xl font-extrabold">
+          Mehr Geld, mehr Zeit, mehr Freude an der Skalierung deiner Marke
+        </h3>
+        <p class="mt-3 text-sm text-[var(--text-muted)]">
+          Was erhältst du mit unserem Service?
+        </p>
+        <ul class="mt-6 space-y-3 text-sm text-left mx-auto max-w-md">
+          <li class="flex items-start gap-2">
+            <span class="mt-1 inline-block h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+            <span>Einzigartige Creative Konzepte, die dir neue Marktanteile sichern.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1 inline-block h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+            <span>Creatives, die für geringere Kosten neue Kunden gewinnen.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1 inline-block h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+            <span>Schnelleres Testen neuer Ideen mit klaren Learnings.</span>
+          </li>
+        </ul>
+        <a
+          href="#erstgespraech"
+          class="mt-8 inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-8 py-3 font-semibold text-white hover:bg-[var(--accent-strong)]"
+        >
+          Jetzt 30 Minuten Erstgespräch buchen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 will-animate">
+        <h3 class="text-2xl sm:text-3xl font-extrabold">Sind unsere Creatives auch für dich der größte Hebel für mehr Umsatz?</h3>
+        <p class="mt-2 text-[var(--text-muted)]">Wir lassen neue Creatives 14 Tage mit deinen Zielgruppen und Budgets laufen – und vergleichen fair gegen bestehende Creatives.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        <figure class="glow-card p-6 will-animate">
+          <blockquote class="text-[15px] text-[var(--text)]">„Schnelle Umsetzung, starke UGC-Hooks, spürbar bessere Akquise­kosten. Kommunikation top.“</blockquote>
+          <figcaption class="mt-4 text-sm text-[var(--text-muted)]">Basil Flachsmann • Giahí AG</figcaption>
+        </figure>
+        <figure class="glow-card p-6 will-animate">
+          <blockquote class="text-[15px] text-[var(--text)]">„Strategie einmal auf links gedreht – endlich strukturiertes Varianten-Testing. Bringt uns richtig voran.“</blockquote>
+          <figcaption class="mt-4 text-sm text-[var(--text-muted)]">Philipp Strobel • Jungholz Designprodukte</figcaption>
+        </figure>
+        <figure class="glow-card p-6 will-animate">
+          <blockquote class="text-[15px] text-[var(--text)]">„Erste Ergebnisse nach wenigen Tagen positiv. Fokus auf Zielgruppen war goldrichtig.“</blockquote>
+          <figcaption class="mt-4 text-sm text-[var(--text-muted)]">Simone von Rickenbach • Fidea Design</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ablauf -->
+  <section id="ablauf" class="py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 will-animate">
+        <h3 class="text-2xl sm:text-3xl font-extrabold">In zwei Schritten zu mehr Winning-Creatives</h3>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="glow-card p-6 will-animate">
+          <span class="inline-flex items-center rounded-full bg-[var(--accent)]/15 px-3 py-1 text-xs font-bold text-[var(--accent)]">Creative Analyse</span>
+          <h4 class="mt-3 font-semibold">30 Minuten für profitable Creatives</h4>
+          <p class="mt-2 text-sm text-[var(--text-muted)]">Erstgespräch, Zieldefinition, kurzer Audit deines Ad-Kontos und Contents. Danach liefern wir wöchentlich performante Creatives – ohne Mehraufwand für dich.</p>
+        </div>
+        <div class="glow-card p-6 will-animate">
+          <span class="inline-flex items-center rounded-full bg-[var(--accent)]/15 px-3 py-1 text-xs font-bold text-[var(--accent)]">Creative Umsetzung</span>
+          <h4 class="mt-3 font-semibold">Kompletter Prozess aus einer Hand</h4>
+          <p class="mt-2 text-sm text-[var(--text-muted)]">Research, Skript, Produktion, Schnitt, Untertitel, Export aller Formate und Übergabe direkt in deinen Ad-Account – inklusive Folgetests.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA MIT CALENDLY-LINK -->
+  <section id="erstgespraech" class="py-16">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="glow-cta p-8 text-center will-animate">
+        <h3 class="text-2xl sm:text-3xl font-extrabold">Buche dir jetzt dein kostenloses Erstgespräch.</h3>
+        <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+
+          <!-- Calendly Button -->
+          <a 
+            href="https://calendly.com/smyagency-info/ugc-meeting"
+            class="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-8 py-3 font-semibold text-white hover:bg-[var(--accent-strong)]"
+          >
+            Jetzt 30 Minuten Erstgespräch buchen
+          </a>
+
+          <a href="audit.html" class="inline-flex items-center justify-center rounded-full border border-[var(--ring)] bg-[#0d0e10] px-8 py-3 font-semibold hover:bg-[#15171a]">
+            Vorab: Mini-Audit anfordern
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="fragen" class="py-16">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8 will-animate">
+        <h3 class="text-2xl sm:text-3xl font-extrabold">Häufig gestellte Fragen</h3>
+      </div>
+      <div class="space-y-3">
+        <details class="glow-card p-4 open:shadow will-animate">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-2">
+            <span class="font-semibold">Produziert ihr nur die Creatives oder betreut ihr auch die Anzeigen?</span>
+            <span class="text-[var(--text-muted)]">+</span>
+          </summary>
+          <p class="mt-2 text-sm text-[var(--text-muted)]">Standardmäßig liefern wir Creatives, Ausspielung übernimmst du oder deine Agentur. Auf Wunsch helfen wir bei Zielgruppen, Kampagnen-Setup und Skalierung.</p>
+        </details>
+        <details class="glow-card p-4 will-animate">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-2">
+            <span class="font-semibold">Wie schnell erhalte ich die ersten Creatives?</span>
+            <span class="text-[var(--text-muted)]">+</span>
+          </summary>
+          <p class="mt-2 text-sm text-[var(--text-muted)]">In der Regel ungefähr eine Woche nach Kick-off und Asset-Übergabe (abhängig von Auslastung).</p>
+        </details>
+        <details class="glow-card p-4 will-animate">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-2">
+            <span class="font-semibold">Welche Nutzungsrechte erhalte ich?</span>
+            <span class="text-[var(--text-muted)]">+</span>
+          </summary>
+          <p class="mt-2 text-sm text-[var(--text-muted)]">Uneingeschränkte Nutzungs- und Bearbeitungsrechte für Paid Social. Rohmaterial auf Wunsch.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t border-[var(--ring)]">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-sm text-[var(--text-muted)] space-y-4">
+      <nav class="flex flex-wrap justify-center gap-4">
+        <a href="index.html#leistungen" class="hover:text-[var(--accent)]">Leistungen</a>
+        <a href="Kundenportfolio.html" class="hover:text-[var(--accent)]">Portfolio</a>
+        <a href="shop.html" class="hover:text-[var(--accent)]">Shop</a>
+        <a href="index.html#pakete" class="hover:text-[var(--accent)]">Preise</a>
+        <a href="support.html" class="hover:text-[var(--accent)]">Support</a>
+        <a href="impressum.html" class="hover:text-[var(--accent)]">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-[var(--accent)]">Datenschutz</a>
+      </nav>
+      <p>© 2024 SMY Agency. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <!-- Animations -->
+  <script>
+    const visibilityObserverForSections = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.will-animate').forEach((element) => {
+      visibilityObserverForSections.observe(element);
+    });
+
+    const counterElements = document.querySelectorAll('.counter');
+
+    function animateCounter(element) {
+      const targetNumber = Number(element.getAttribute('data-target'));
+      const animationSpeedSteps = 150;
+      const incrementValue = targetNumber / animationSpeedSteps;
+      let currentValue = 0;
+
+      function step() {
+        currentValue += incrementValue;
+        if (currentValue < targetNumber) {
+          element.textContent = Math.floor(currentValue);
+          requestAnimationFrame(step);
+        } else {
+          const isTimes = element.getAttribute('data-target') === '3';
+          element.textContent = targetNumber + (isTimes ? '×' : '+');
+        }
+      }
+      step();
+    }
+
+    const visibilityObserverForCounters = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    counterElements.forEach(counter => visibilityObserverForCounters.observe(counter));
+  </script>
+</body>
+</html>
