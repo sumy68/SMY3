@@ -1,42 +1,49 @@
 // ==============================
-// HEADER LADEN
+// SMY AGENCY – CLEAN VERSION
+// Optimized JS with better performance
 // ==============================
-fetch('/partials/header.html')
-  .then(r => r.text())
-  .then(html => {
-    document.body.insertAdjacentHTML('afterbegin', html);
-  });
-
 
 // ==============================
-// FOOTER LADEN
+// HEADER & FOOTER LOADING
 // ==============================
-fetch('/partials/footer.html')
-  .then(r => r.text())
-  .then(html => {
-    document.body.insertAdjacentHTML('beforeend', html);
+const loadPartial = async (url, position) => {
+  try {
+    const response = await fetch(url);
+    const html = await response.text();
+    document.body.insertAdjacentHTML(position, html);
+    return true;
+  } catch (error) {
+    console.error(`Failed to load ${url}:`, error);
+    return false;
+  }
+};
 
-    const footer = document.querySelector('.footer-curtain');
-    const yearEl = document.getElementById('wq-year');
+// Load header
+loadPartial('/partials/header.html', 'afterbegin');
 
-    if (yearEl) {
-      yearEl.textContent = new Date().getFullYear();
-    }
-
-    if (footer) {
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            footer.classList.add('is-visible');
-          }
-        },
-        { threshold: 0.2 }
-      );
-
-      obs.observe(footer);
-    }
-  });
-
+// Load footer
+loadPartial('/partials/footer.html', 'beforeend').then(() => {
+  // Update year
+  const yearEl = document.getElementById('wq-year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+  
+  // Footer curtain animation
+  const footer = document.querySelector('.footer-curtain');
+  if (footer) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          footer.classList.add('is-visible');
+          observer.unobserve(footer);
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    observer.observe(footer);
+  }
+});
 
 // ==============================
 // MOBILE NAV TOGGLE
@@ -44,181 +51,190 @@ fetch('/partials/footer.html')
 document.addEventListener('click', (e) => {
   const toggle = document.querySelector('.wq-nav-toggle');
   const nav = document.querySelector('.wq-nav');
+  
   if (!toggle || !nav) return;
-
+  
   if (toggle.contains(e.target)) {
     nav.classList.toggle('is-open');
     toggle.setAttribute(
       'aria-expanded',
       nav.classList.contains('is-open')
     );
+  } else if (!nav.contains(e.target) && nav.classList.contains('is-open')) {
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
   }
 });
 
-
 // ==============================
-// HERO ROTATING WORD (FUNKT SAFE)
+// ROTATING WORD (OPTIMIZED)
 // ==============================
-(() => {
-  const words = [
-    "designen",
-    "entwickeln",
-    "drucken",
-    "optimieren",
-    "vermarkten"
-  ];
-
-  const el = document.getElementById("wqWord");
-  if (!el) return;
-
-  let i = 0;
-
-  el.textContent = words[i];
-  el.classList.add("wq-word-in");
-
-  setInterval(() => {
-    el.classList.remove("wq-word-in");
-    el.classList.add("wq-word-out");
-
+const initRotatingWord = () => {
+  const words = ['designen', 'entwickeln', 'drucken', 'optimieren', 'vermarkten'];
+  const element = document.getElementById('rotatingWord');
+  
+  if (!element) return;
+  
+  let currentIndex = 0;
+  
+  const rotateWord = () => {
+    element.classList.add('fade-out');
+    
     setTimeout(() => {
-      i = (i + 1) % words.length;
-      el.textContent = words[i];
-
-      el.classList.remove("wq-word-out");
-      el.classList.add("wq-word-in");
-    }, 280);
-  }, 1500);
-})();
+      currentIndex = (currentIndex + 1) % words.length;
+      element.textContent = words[currentIndex];
+      element.classList.remove('fade-out');
+    }, 300);
+  };
+  
+  setInterval(rotateWord, 2000);
+};
 
 // ==============================
-// REVEAL + STAGGER + COUNTERS
+// COUNTER ANIMATION (OPTIMIZED)
 // ==============================
-(() => {
-    const revealEls = Array.from(document.querySelectorAll('.wq-reveal'));
-    if (!revealEls.length) return;
+const initCounters = () => {
+  const counters = document.querySelectorAll('[data-count]');
   
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!counters.length) return;
   
-    const runCounter = (box) => {
-      const target = Number(box.getAttribute('data-count') || '0');
-      const suffix = box.getAttribute('data-suffix') || '';
-      const numEl = box.querySelector('.wq-stat__num');
-      if (!numEl || !target) return;
-  
-      if (box.__counted) return;
-      box.__counted = true;
-  
-      if (prefersReduced) {
-        numEl.textContent = `${target}${suffix}`;
-        return;
+  const animateCounter = (element, target) => {
+    const duration = 1500;
+    const start = performance.now();
+    const suffix = element.querySelector('.stat__number').textContent.replace(/[0-9]/g, '');
+    
+    const updateCounter = (currentTime) => {
+      const elapsed = currentTime - start;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(easeOutCubic * target);
+      
+      element.querySelector('.stat__number').textContent = current + suffix;
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
       }
-  
-      const duration = 900; // ms
-      const start = performance.now();
-      const from = 0;
-  
-      const tick = (now) => {
-        const t = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - t, 3);
-        const val = Math.round(from + (target - from) * eased);
-        numEl.textContent = `${val}${suffix}`;
-        if (t < 1) requestAnimationFrame(tick);
-      };
-  
-      requestAnimationFrame(tick);
     };
+    
+    requestAnimationFrame(updateCounter);
+  };
   
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-  
-        const el = entry.target;
-  
-        // stagger innerhalb eines Parents mit data-stagger
-        const parent = el.closest('[data-stagger]');
-        if (parent) {
-          const siblings = Array.from(parent.querySelectorAll('.wq-reveal'));
-          const idx = siblings.indexOf(el);
-          const delay = prefersReduced ? 0 : Math.max(0, idx) * 110;
-          el.style.transitionDelay = `${delay}ms`;
-        }
-  
-        el.classList.add('is-visible');
-  
-        // counter wenn’s ein stat ist
-        if (el.classList.contains('wq-stat')) {
-          runCounter(el);
-        }
-  
-        io.unobserve(el);
-      });
-    }, { threshold: 0.18 });
-  
-    revealEls.forEach(el => io.observe(el));
-  })();
-  
-  (() => {
-    const wrap = document.querySelector('[data-parallax="proof"]');
-    if (!wrap) return;
-  
-    const cards = Array.from(wrap.querySelectorAll('.wq-proof__card'));
-    if (!cards.length) return;
-  
-    let raf = 0;
-  
-    const update = () => {
-      raf = 0;
-      const rect = wrap.getBoundingClientRect();
-      const vh = window.innerHeight || 800;
-  
-      const start = vh * 0.9;
-      const end = -vh * 0.7;
-      const t = (start - rect.top) / (start - end);
-      const p = Math.max(0, Math.min(1, t));
-  
-      const base = 140; // subtil wie screenshot
-  
-      cards.forEach((card, idx) => {
-        const depth = Number(card.getAttribute('data-depth') || (0.5 + idx * 0.12));
-        const y = (p * base * depth) - (base * depth * 0.5);
-        card.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
-      });
-    };
-  
-    const on = () => { if (!raf) raf = requestAnimationFrame(update); };
-    window.addEventListener('scroll', on, { passive: true });
-    window.addEventListener('resize', on);
-    update();
-  })();
-  
-  /* =========================
-   USE CASES FILTER
-========================= */
-(function () {
-    const pills = document.querySelectorAll(".uc-pill");
-    const cards = document.querySelectorAll(".uc-card");
-  
-    if (!pills.length || !cards.length) return;
-  
-    function setActive(btn) {
-      pills.forEach(p => p.classList.remove("is-active"));
-      btn.classList.add("is-active");
-    }
-  
-    function applyFilter(filter) {
-      cards.forEach(card => {
-        const cat = card.getAttribute("data-cat");
-        card.style.display = (filter === "all" || cat === filter) ? "" : "none";
-      });
-    }
-  
-    pills.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const filter = btn.getAttribute("data-filter");
-        setActive(btn);
-        applyFilter(filter);
-      });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.animated) {
+        const target = parseInt(entry.target.dataset.count);
+        animateCounter(entry.target, target);
+        entry.target.dataset.animated = 'true';
+        observer.unobserve(entry.target);
+      }
     });
-  })();
+  }, { threshold: 0.5 });
   
+  counters.forEach(counter => observer.observe(counter));
+};
+
+// ==============================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ==============================
+const initSmoothScroll = () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      
+      e.preventDefault();
+      const target = document.querySelector(href);
+      
+      if (target) {
+        const headerOffset = 80;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+};
+
+// ==============================
+// INTERSECTION OBSERVER FOR FADE-IN
+// ==============================
+const initFadeInAnimation = () => {
+  const elements = document.querySelectorAll('.fade-in-up');
   
+  if (!elements.length) return;
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+  
+  elements.forEach(el => observer.observe(el));
+};
+
+// ==============================
+// HEADER SCROLL EFFECT
+// ==============================
+const initHeaderScroll = () => {
+  const header = document.querySelector('.wq-header');
+  if (!header) return;
+  
+  let lastScroll = 0;
+  
+  const handleScroll = () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 100) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    
+    lastScroll = currentScroll;
+  };
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
+};
+
+// ==============================
+// INIT ALL ON DOM READY
+// ==============================
+const init = () => {
+  initRotatingWord();
+  initCounters();
+  initSmoothScroll();
+  initFadeInAnimation();
+  initHeaderScroll();
+};
+
+// Wait for DOM
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
+// ==============================
+// PERFORMANCE MONITORING (DEV ONLY)
+// ==============================
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+  window.addEventListener('load', () => {
+    if (window.performance) {
+      const perfData = window.performance.timing;
+      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+      console.log('Page Load Time:', pageLoadTime + 'ms');
+    }
+  });
+}

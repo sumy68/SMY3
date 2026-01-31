@@ -3,254 +3,370 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMY Agency – Digitale Produkte</title>
-
+  <title>SMY Agency – Digitale Produkte & Services</title>
+  
+  <!-- Fonts: Bessere Auswahl als nur Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-
   <!-- HEADER -->
   <div id="site-header"></div>
 
   <main>
     <!-- HERO -->
-    <section class="wq-hero">
-      <div class="wq-hero__inner">
-        <p class="wq-hero__kicker">Schnell. Unkompliziert. Kompetent.</p>
-
-        <h1 class="wq-hero__title">
-          Wir
-          <span id="wqWord" class="wq-hero__word wq-word-in">designen</span><br>
+    <section class="hero">
+      <div class="hero__container">
+        <span class="hero__badge">Schnell · Unkompliziert · Kompetent</span>
+        
+        <h1 class="hero__title">
+          Wir <span id="rotatingWord" class="hero__word">designen</span><br>
           digitale Produkte<br>
-          für Ihren Erfolg.
+          für deinen Erfolg
         </h1>
+        
+        <p class="hero__lead">
+          Premium Output ohne Chaos. Ein klarer Prozess, der Ergebnisse bringt.
+        </p>
+        
+        <div class="hero__actions">
+          <a href="services.html#kontakt" class="btn btn--primary">Projekt anfragen</a>
+          <a href="services.html" class="btn btn--ghost">Unsere Services</a>
+        </div>
       </div>
     </section>
 
-    <section class="wq-afterhero">
-        <div class="wq-afterhero__inner">
-      
-          <!-- top line shimmer -->
-          <div class="wq-shimmer-line"></div>
-      
-          <div class="wq-afterhero__head wq-reveal" data-stagger>
-            <p class="wq-afterhero__eyebrow">Was wir liefern</p>
-            <h2 class="wq-afterhero__title">
-              Premium Output – ohne Chaos.<br>
-              <span class="wq-afterhero__sub">Ein klarer Prozess, der Ergebnisse bringt.</span>
-            </h2>
-          </div>
-      
-          <!-- stats -->
-          <div class="wq-stats">
-            <div class="wq-stat wq-reveal" data-count="120" data-suffix="+">
-              <div class="wq-stat__num">0</div>
-              <div class="wq-stat__label">Projekte umgesetzt</div>
-            </div>
-      
-            <div class="wq-stat wq-reveal" data-count="7" data-suffix=" Tage">
-              <div class="wq-stat__num">0</div>
-              <div class="wq-stat__label">Ø bis zum ersten Entwurf</div>
-            </div>
-      
-            <div class="wq-stat wq-reveal" data-count="35" data-suffix="%">
-              <div class="wq-stat__num">0</div>
-              <div class="wq-stat__label">Ø Conversion-Boost (Case-basiert)</div>
-            </div>
-          </div>
-      
-          <!-- verb grid -->
-          <div class="wq-verbgrid" data-stagger>
-            <article class="wq-verbcard wq-reveal">
-              <div class="wq-verbcard__top">
-                <span class="wq-verb">DESIGNEN</span>
-                <span class="wq-dot"></span>
-              </div>
-              <h3>Brand, der hängen bleibt.</h3>
-              <p>Web & Visuals, die nicht “okay” sind – sondern premium wirken.</p>
-            </article>
-      
-            <article class="wq-verbcard wq-reveal">
-              <div class="wq-verbcard__top">
-                <span class="wq-verb">ENTWICKELN</span>
-                <span class="wq-dot"></span>
-              </div>
-              <h3>Builds, die schnell sind.</h3>
-              <p>Saubere Technik, responsive – und ready für Wachstum.</p>
-            </article>
-      
-            <article class="wq-verbcard wq-reveal">
-              <div class="wq-verbcard__top">
-                <span class="wq-verb">DRUCKEN</span>
-                <span class="wq-dot"></span>
-              </div>
-              <h3>Offline sichtbar.</h3>
-              <p>Flyer, Schilder, Branding – alles im selben Look & Feel.</p>
-            </article>
-      
-            <article class="wq-verbcard wq-reveal">
-              <div class="wq-verbcard__top">
-                <span class="wq-verb">OPTIMIEREN</span>
-                <span class="wq-dot"></span>
-              </div>
-              <h3>Mehr Leads, weniger Bounce.</h3>
-              <p>Conversion-Flow, Speed, SEO-Basics – ohne Rumgefrickel.</p>
-            </article>
-      
-            <article class="wq-verbcard wq-reveal">
-              <div class="wq-verbcard__top">
-                <span class="wq-verb">VERMARKTEN</span>
-                <span class="wq-dot"></span>
-              </div>
-              <h3>Reichweite → Umsatz.</h3>
-              <p>Ads, Content, Funnels – passend zur Brand, nicht random.</p>
-            </article>
-          </div>
-      
-          <p class="wq-afterhero-line">
-            Erfahre, wie wir Unternehmen digital sichtbar machen →
-            <a href="/Leistungen.html">zu unseren Leistungen</a>
-          </p>
-          
-          <section class="wq-proof" id="proof">
-            <div class="wq-proof__wrap">
-          
-              <!-- LEFT BIG PANEL -->
-              <div class="wq-proof__left">
-                <h2>Von Klicks zu Kunden – echte Ergebnisse aus echten Projekten.</h2>
-              </div>
-          
-              <!-- RIGHT CARDS -->
-              <div class="wq-proof__right" data-parallax="proof">
-          
-                <article class="wq-proof__card" data-depth="0.55">
-                  <div class="kpi">+62%</div>
-                  <p>längere durchschnittliche Sitzungsdauer nach Website-Optimierung (Partner-Projekt)</p>
-                  <div class="spark"></div>
-                </article>
-          
-                <article class="wq-proof__card" data-depth="0.90">
-                  <div class="kpi">−18%</div>
-                  <p>geringere Absprungrate nach Struktur- & UX-Überarbeitung</p>
-                  <div class="spark"></div>
-                </article>
-          
-                <article class="wq-proof__card" data-depth="0.70">
-                  <div class="kpi">+41%</div>
-                  <p>mehr organischer Traffic innerhalb von 6 Monaten durch SEO & Content</p>
-                </article>
-          
-                <article class="wq-proof__card" data-depth="1.05">
-                  <div class="kpi">90+</div>
-                  <p>Google PageSpeed Score bei optimierten Landingpages</p>
-                </article>
-          
-                <article class="wq-proof__card" data-depth="0.95">
-                  <div class="kpi">+27%</div>
-                  <p>höhere Conversion Rate nach Funnel- & Copy-Optimierung</p>
-                  <div class="spark"></div>
-                </article>
-          
-                <article class="wq-proof__card" data-depth="1.15">
-                  <div class="kpi">100k+</div>
-                  <p>Ad-Spend & Performance-Erfahrung aus Partner- & Agenturprojekten</p>
-                </article>
-          
-              </div>
-            </div>
-          </section>
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stats__container">
+        <div class="stat" data-count="120">
+          <div class="stat__number">0+</div>
+          <div class="stat__label">Projekte umgesetzt</div>
+        </div>
+        
+        <div class="stat" data-count="7">
+          <div class="stat__number">0</div>
+          <div class="stat__label">Tage bis zum Entwurf</div>
+        </div>
+        
+        <div class="stat" data-count="35">
+          <div class="stat__number">0%</div>
+          <div class="stat__label">Conversion-Boost</div>
+        </div>
+      </div>
+    </section>
 
-          <!-- GOOGLE REVIEWS -->
-<section id="google-reviews" class="reviews-section">
-    <div class="reviews-inner">
-      <h2>Was unsere Kunden sagen</h2>
-    </div>
-  
-    <!-- Trustindex Widget -->
-    <div class="reviews-widget">
-      <div class="ti-widget"></div>
-    </div>
-  </section>
-  
-  <script defer async src="https://cdn.trustindex.io/loader.js?566d85c608ec8068e276e087a9d"></script>
-  
-  <section class="audit-cta">
-    <div class="audit-cta__inner">
-      <h2>
-        <span class="accent">Gratis Audit</span> für dein Business
-      </h2>
-  
-      <p>
-        Wir checken deine Website, Socials & Ads –  
-        du bekommst eine klare Roadmap mit echten Quick-Wins.  
-        <strong>100 % kostenlos.</strong>
-      </p>
-  
-      <a href="audit.html" class="btn-primary">
-        🚀 Kostenloses Audit sichern
-      </a>
-    </div>
-  </section>
-      
+    <!-- SERVICES -->
+    <section class="services">
+      <div class="services__container">
+        <h2 class="section-title">Was wir liefern</h2>
+        
+        <div class="services__grid">
+          <article class="service-card">
+            <div class="service-card__icon">→</div>
+            <h3>Designen</h3>
+            <p>Brand, der hängen bleibt. Web & Visuals, die nicht "okay" sind – sondern premium wirken.</p>
+          </article>
+          
+          <article class="service-card">
+            <div class="service-card__icon">⚡</div>
+            <h3>Entwickeln</h3>
+            <p>Builds, die schnell sind. Saubere Technik, responsive – und ready für Wachstum.</p>
+          </article>
+          
+          <article class="service-card">
+            <div class="service-card__icon">✦</div>
+            <h3>Drucken</h3>
+            <p>Offline sichtbar. Flyer, Schilder, Branding – alles im selben Look & Feel.</p>
+          </article>
+          
+          <article class="service-card">
+            <div class="service-card__icon">↗</div>
+            <h3>Optimieren</h3>
+            <p>Mehr Leads, weniger Bounce. Conversion-Flow, Speed, SEO-Basics – ohne Rumgefrickel.</p>
+          </article>
+          
+          <article class="service-card">
+            <div class="service-card__icon">◉</div>
+            <h3>Vermarkten</h3>
+            <p>Reichweite → Umsatz. Ads, Content, Funnels – passend zur Brand, nicht random.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
+    <!-- PROOF / RESULTS -->
+    <section class="proof">
+      <div class="proof__container">
+        <h2 class="section-title">Echte Ergebnisse</h2>
+        <p class="section-lead">Von Klicks zu Kunden – echte Zahlen aus echten Projekten</p>
+        
+        <div class="proof__grid">
+          <div class="proof-card">
+            <div class="proof-card__kpi">+62%</div>
+            <p>längere Sitzungsdauer nach Website-Optimierung</p>
+          </div>
+          
+          <div class="proof-card">
+            <div class="proof-card__kpi">−18%</div>
+            <p>geringere Absprungrate nach UX-Überarbeitung</p>
+          </div>
+          
+          <div class="proof-card">
+            <div class="proof-card__kpi">+41%</div>
+            <p>mehr organischer Traffic durch SEO & Content</p>
+          </div>
+          
+          <div class="proof-card">
+            <div class="proof-card__kpi">90+</div>
+            <p>Google PageSpeed Score bei Landingpages</p>
+          </div>
+          
+          <div class="proof-card">
+            <div class="proof-card__kpi">+27%</div>
+            <p>höhere Conversion nach Funnel-Optimierung</p>
+          </div>
+          
+          <div class="proof-card">
+            <div class="proof-card__kpi">100k+</div>
+            <p>Ad-Spend & Performance-Erfahrung</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- PARTNER / COPA -->
-<section id="partner-copa" class="partner">
-    <div class="partner-container">
-      <div class="partner-head">
-        <p class="partner-eyebrow">Technologiepartner</p>
-        <h3>
-          Unser Technologiepartner:
-          <span class="partner-brand">COPA</span> 🇩🇪🤝🇦🇲
-        </h3>
-        <p class="partner-lead">
-          Enterprise-Technologie & KI-Systeme kombiniert mit lokaler Umsetzung
-          durch SMY Agency.
+    <!-- REVIEWS -->
+    <section class="reviews">
+      <div class="reviews__container">
+        <h2 class="section-title">Was unsere Kunden sagen</h2>
+        <p class="section-lead">Echte Google-Bewertungen von echten Kunden</p>
+        
+        <div class="reviews__grid">
+          <!-- Review 1 -->
+          <article class="review-card">
+            <div class="review-card__stars">
+              ★★★★★
+            </div>
+            <p class="review-card__text">
+              "Ich habe mir eine Website von SMY Agency anlegen lassen und bin sehr zufrieden, meine Vorstellungen wurden umgesetzt und auch im Prozess entstandene Änderungswünsche angepasst."
+            </p>
+            <div class="review-card__footer">
+              <div class="review-card__avatar">
+                <span>E</span>
+              </div>
+              <div class="review-card__author">
+                <div class="review-card__name">Elli Sterzl</div>
+                <div class="review-card__meta">vor einem Monat · Google</div>
+              </div>
+            </div>
+          </article>
+          
+          <!-- Review 2 -->
+          <article class="review-card">
+            <div class="review-card__stars">
+              ★★★★★
+            </div>
+            <p class="review-card__text">
+              "Vielen Dank an die SMY Agency für die mega Website und den Messeaufsteller! Wir haben den Aufsteller mittlerweile schon zwei Mal auf Veranstaltungen genutzt – immer noch super robust und sieht aus wie neu. Die Zusammenarbeit war easy, schnell und professionell."
+            </p>
+            <div class="review-card__footer">
+              <div class="review-card__avatar">
+                <span>F</span>
+              </div>
+              <div class="review-card__author">
+                <div class="review-card__name">Fliesen Ideal GmbH</div>
+                <div class="review-card__meta">vor einem Monat · Google</div>
+              </div>
+            </div>
+          </article>
+          
+          <!-- Review 3 -->
+          <article class="review-card">
+            <div class="review-card__stars">
+              ★★★★★
+            </div>
+            <p class="review-card__text">
+              "Danke an SMY! 🙌 Wir wurden einen Monat lang über Instagram begleitet, haben viel Neues gelernt und richtig tolle Ergebnisse mit top Postings erzielen können. Absolute Empfehlung!"
+            </p>
+            <div class="review-card__footer">
+              <div class="review-card__avatar">
+                <span>Y</span>
+              </div>
+              <div class="review-card__author">
+                <div class="review-card__name">Yasemin Erdem</div>
+                <div class="review-card__meta">vor 4 Monaten · Google</div>
+              </div>
+            </div>
+          </article>
+          
+          <!-- Review 4 -->
+          <article class="review-card">
+            <div class="review-card__stars">
+              ★★★★★
+            </div>
+            <p class="review-card__text">
+              "Vielen Dank an das Team der SMY Agency für die super Zusammenarbeit. Meine Webseite, die Flyer und das Werbeschild wurden in kürzester Zeit umgesetzt – und das Ergebnis ist wirklich top."
+            </p>
+            <div class="review-card__footer">
+              <div class="review-card__avatar">
+                <span>C</span>
+              </div>
+              <div class="review-card__author">
+                <div class="review-card__name">Ceetin Klein</div>
+                <div class="review-card__meta">vor 4 Monaten · Google</div>
+              </div>
+            </div>
+          </article>
+          
+          <!-- Review 5 -->
+          <article class="review-card">
+            <div class="review-card__stars">
+              ★★★★★
+            </div>
+            <p class="review-card__text">
+              "Ich bin absolut begeistert von der Arbeit! Die Zusammenarbeit war von Anfang an unkompliziert, freundlich und sehr professionell. Meine Wünsche wurden nicht nur umgesetzt, sondern oft sogar mit kreativen Ideen und hilfreichen Tipps übertroffen."
+            </p>
+            <div class="review-card__footer">
+              <div class="review-card__avatar">
+                <span>I</span>
+              </div>
+              <div class="review-card__author">
+                <div class="review-card__name">Ismayil Bas</div>
+                <div class="review-card__meta">vor 5 Monaten · Google</div>
+              </div>
+            </div>
+          </article>
+          
+          <!-- Review 6 -->
+          <article class="review-card">
+            <div class="review-card__stars">
+              ★★★★★
+            </div>
+            <p class="review-card__text">
+              "Ich bin absolut begeistert von der Arbeit, die SMY Agency bei der Erstellung meiner Webseite geleistet hat. Von Anfang an war die Kommunikation freundlich, professionell und sehr zielorientiert. Sehr empfehlenswert 🩵"
+            </p>
+            <div class="review-card__footer">
+              <div class="review-card__avatar">
+                <span>C</span>
+              </div>
+              <div class="review-card__author">
+                <div class="review-card__name">Candelized</div>
+                <div class="review-card__meta">vor einem Jahr · Google</div>
+              </div>
+            </div>
+          </article>
+          
+          <!-- Review 7 -->
+          <article class="review-card">
+            <div class="review-card__stars">
+              ★★★★★
+            </div>
+            <p class="review-card__text">
+              "Ich bin absolut begeistert von der Zusammenarbeit mit Smy! Sie haben meine Website erstellt und optimiert. Besonders beeindruckt war ich von den fairen Preisen und dem 24/7-Support – ich konnte mich jederzeit melden und bekam sofort Hilfe."
+            </p>
+            <div class="review-card__footer">
+              <div class="review-card__avatar">
+                <span>M</span>
+              </div>
+              <div class="review-card__author">
+                <div class="review-card__name">Mubin Ahmetovic</div>
+                <div class="review-card__meta">MHM Garten & Landschaftsbau · Google</div>
+              </div>
+            </div>
+          </article>
+          
+          <!-- Review 8 -->
+          <article class="review-card">
+            <div class="review-card__stars">
+              ★★★★★
+            </div>
+            <p class="review-card__text">
+              "Super kompetente Agentur und sehr faire Preise. Wir hatten 24/7 Support bei Fragen. Vielen Dank für das Logo, Visitenkarten und die Top Website."
+            </p>
+            <div class="review-card__footer">
+              <div class="review-card__avatar">
+                <span>K</span>
+              </div>
+              <div class="review-card__author">
+                <div class="review-card__name">Kevser Kavalci</div>
+                <div class="review-card__meta">Steuerberatung Yusuf KAVALCI · Google</div>
+              </div>
+            </div>
+          </article>
+        </div>
+        
+        <!-- Rating Summary -->
+        <div class="reviews__summary">
+          <div class="reviews__rating">
+            <div class="reviews__rating-number">5.0</div>
+            <div class="reviews__rating-stars">★★★★★</div>
+            <div class="reviews__rating-text">Basierend auf Google-Bewertungen</div>
+          </div>
+          <a href="https://g.page/r/Cb-CsgZPf7TWEAE/review" target="_blank" class="reviews__cta">
+            Bewertung schreiben
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA AUDIT -->
+    <section class="cta-audit">
+      <div class="cta-audit__container">
+        <h2>Bereit für dein nächstes Projekt?</h2>
+        <p>
+          Erzähl uns von deiner Idee – wir entwickeln gemeinsam die perfekte Lösung.
+          <strong>Kostenlose Erstberatung.</strong>
         </p>
+        <a href="services.html#kontakt" class="btn btn--primary btn--large">
+          🚀 Projekt anfragen
+        </a>
       </div>
-  
-      <div class="partner-grid">
-        <div class="partner-card">
-          <h4>Strategisch & Kreativ</h4>
-          <ul>
-            <li>Strategie & Kampagnen</li>
-            <li>Bewegtbild & Cloud-Editing</li>
-            <li>Audioproduktion & Sounddesign</li>
-            <li>Reporting & Visualisierung</li>
-          </ul>
+    </section>
+
+    <!-- PARTNER -->
+    <section class="partner">
+      <div class="partner__container">
+        <span class="partner__badge">Technologiepartner</span>
+        
+        <h3 class="partner__title">
+          Unser Partner: <span class="accent">COPA</span> 🇩🇪🤝🇦🇲
+        </h3>
+        
+        <p class="partner__lead">
+          Enterprise-Technologie & KI-Systeme kombiniert mit lokaler Umsetzung durch SMY Agency.
+        </p>
+        
+        <div class="partner__grid">
+          <div class="partner-card">
+            <h4>Strategisch & Kreativ</h4>
+            <ul>
+              <li>Strategie & Kampagnen</li>
+              <li>Bewegtbild & Cloud-Editing</li>
+              <li>Audioproduktion & Sounddesign</li>
+              <li>Reporting & Visualisierung</li>
+            </ul>
+          </div>
+          
+          <div class="partner-card">
+            <h4>KI & Daten</h4>
+            <ul>
+              <li>Generative AI & Chatbots</li>
+              <li>Dashboards & Predictive Models</li>
+              <li>Knowledge Graphs</li>
+              <li>Sentiment- & Topic-Analyse</li>
+            </ul>
+          </div>
         </div>
-  
-        <div class="partner-card">
-          <h4>KI & Daten</h4>
-          <ul>
-            <li>Generative AI & Chatbots</li>
-            <li>Dashboards & Predictive Models</li>
-            <li>Knowledge Graphs</li>
-            <li>Sentiment- & Topic-Analyse</li>
-          </ul>
-        </div>
-      </div>
-  
-      <div class="partner-points">
-        <span>Lokaler Ansprechpartner</span>
-        <span>High-End Technologie</span>
-        <span>Beratung & Umsetzung aus einer Hand</span>
-      </div>
-  
-      <div class="partner-cta">
-        <a href="https://www.copa.team" target="_blank" rel="noopener">
+        
+        <a href="https://www.copa.team" target="_blank" class="partner__link">
           Mehr über COPA →
         </a>
       </div>
-    </div>
-  </section>
-  
-
+    </section>
   </main>
 
   <!-- FOOTER -->
