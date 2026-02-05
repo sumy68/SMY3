@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Feet by Nadina | Mobile Fußpflege München & Bayern</title>
+    <meta name="description" content="Professionelle mobile Fußpflege mit Hausbesuch in München und Bayern. Medizinische & kosmetische Fußpflege, Diabetiker-Fußpflege, Nageldesign. Jetzt Termin buchen!">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #8B7355;
+            --color-primary-light: #A68B6A;
+            --color-primary-dark: #6B5A45;
+            --color-accent: #D4A574;
+            --color-accent-light: #E8C9A8;
+            --color-cream: #FDF8F3;
+            --color-cream-dark: #F5EDE4;
+            --color-dark: #2C2420;
+            --color-dark-light: #4A3F38;
+            --color-text: #3D3530;
+            --color-text-light: #6B6058;
+            --color-white: #FFFFFF;
+            --color-gold: #C9A86C;
+            
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Montserrat', -apple-system, sans-serif;
+            
+            --shadow-soft: 0 4px 30px rgba(139, 115, 85, 0.1);
+            --shadow-medium: 0 10px 50px rgba(139, 115, 85, 0.15);
+            --shadow-strong: 0 20px 60px rgba(44, 36, 32, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-cream);
+            color: var(--color-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 2rem;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            padding: 0.75rem 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-cta {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .nav-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .nav-mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--color-dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, var(--color-accent-light) 0%, transparent 70%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--color-cream), transparent);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-accent-light);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .hero-badge::before {
+            content: '🏠';
+            font-size: 1rem;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--color-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .accent {
+            color: var(--color-primary);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-light);
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+            font-weight: 400;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-dark);
+            border: 2px solid var(--color-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-accent-light);
+        }
+
+        .hero-feature {
+            text-align: center;
+        }
+
+        .hero-feature-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            line-height: 1;
+        }
+
+        .hero-feature-label {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.25rem;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 200px 200px 20px 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+            background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-cream-dark) 100%);
+        }
+
+        .hero-float-card {
+            position: absolute;
+            background: var(--color-white);
+            padding: 1.25rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-medium);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-float-card-1 {
+            bottom: 80px;
+            left: -40px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-float-card-1 .icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-accent-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .hero-float-card-1 .text strong {
+            display: block;
+            font-size: 0.9375rem;
+            color: var(--color-dark);
+        }
+
+        .hero-float-card-1 .text span {
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+        }
+
+        .hero-float-card-2 {
+            top: 100px;
+            right: -30px;
+            animation-delay: 2s;
+        }
+
+        .hero-float-card-2 .stars {
+            color: var(--color-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-float-card-2 p {
+            font-size: 0.8125rem;
+            color: var(--color-text);
+            margin-top: 0.25rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 2rem;
+            background: var(--color-white);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--color-accent-light), transparent);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.25rem, 4vw, 3rem);
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.0625rem;
+            color: var(--color-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--color-cream);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            font-size: 0.9375rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        .service-card .price {
+            display: inline-block;
+            margin-top: 1.25rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-white);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 2rem;
+            background: var(--color-cream);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-main {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow-strong);
+            background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-cream-dark) 100%);
+        }
+
+        .about-image-accent {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 200px;
+            height: 200px;
+            background: var(--color-primary);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .about-image-accent .text {
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .about-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            font-size: 1.0625rem;
+            color: var(--color-text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .about-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-accent-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .about-feature-text h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .about-feature-text p {
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+            margin: 0;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 8rem 2rem;
+            background: var(--color-dark);
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .process .section-label {
+            color: var(--color-accent);
+        }
+
+        .process .section-title {
+            color: var(--color-white);
+        }
+
+        .process .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .process-step-number::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: calc(100% + 2rem);
+            height: 2px;
+            background: linear-gradient(to right, var(--color-primary), transparent);
+        }
+
+        .process-step:last-child .process-step-number::after {
+            display: none;
+        }
+
+        .process-step h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-step p {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 2rem;
+            background: var(--color-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: var(--color-cream);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            font-family: var(--font-display);
+            font-size: 5rem;
+            color: var(--color-accent-light);
+            line-height: 1;
+            opacity: 0.5;
+        }
+
+        .testimonial-stars {
+            color: var(--color-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--color-text);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-weight: 600;
+        }
+
+        .testimonial-author-info strong {
+            display: block;
+            font-size: 0.9375rem;
+            color: var(--color-dark);
+        }
+
+        .testimonial-author-info span {
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+        }
+
+        /* Area Section */
+        .area {
+            padding: 8rem 2rem;
+            background: var(--color-cream);
+        }
+
+        .area-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .area-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .area-badge {
+            background: var(--color-white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--color-text);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        .area-badge:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+            transform: translateY(-2px);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.25rem, 4vw, 3rem);
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+        }
+
+        .cta .btn-white {
+            background: var(--color-white);
+            color: var(--color-primary);
+        }
+
+        .cta .btn-white:hover {
+            background: var(--color-cream);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .cta-contact {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--color-white);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .cta-contact-item:hover {
+            opacity: 0.8;
+        }
+
+        .cta-contact-item svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .footer h4 {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: var(--color-white);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-mobile-toggle {
+                display: flex;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-cta-group {
+                justify-content: center;
+            }
+
+            .hero-features {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .hero-float-card {
+                display: none;
+            }
+
+            .hero-image {
+                height: 400px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image-accent {
+                position: static;
+                width: 100%;
+                height: auto;
+                padding: 2rem;
+                margin-top: 1.5rem;
+                flex-direction: row;
+                gap: 1rem;
+            }
+
+            .about-image-accent .number {
+                font-size: 2.5rem;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .process-step-number::after {
+                display: none;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-contact {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding-top: 6rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-features {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .area-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">Happy Feet <span>by Nadina</span></a>
+        <ul class="nav-links">
+            <li><a href="#services">Leistungen</a></li>
+            <li><a href="#about">Über mich</a></li>
+            <li><a href="#process">Ablauf</a></li>
+            <li><a href="#area">Einsatzgebiet</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Termin buchen</a>
+        <div class="nav-mobile-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">Mobile Fußpflege mit Hausbesuch</div>
+                <h1>Gepflegte Füße.<br><span class="accent">Bequem zu Hause.</span></h1>
+                <p class="hero-subtitle">
+                    Professionelle Fußpflege direkt bei Ihnen – in München und ganz Bayern. 
+                    Entspannen Sie sich, während ich mich um Ihre Füße kümmere.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#contact" class="btn btn-primary">
+                        Termin vereinbaren
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#services" class="btn btn-outline">Leistungen ansehen</a>
+                </div>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <div class="hero-feature-number">500+</div>
+                        <div class="hero-feature-label">Zufriedene Kunden</div>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="hero-feature-number">10+</div>
+                        <div class="hero-feature-label">Jahre Erfahrung</div>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="hero-feature-number">100%</div>
+                        <div class="hero-feature-label">Mobiler Service</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-float-card hero-float-card-1">
+                    <div class="icon">🏠</div>
+                    <div class="text">
+                        <strong>Hausbesuch</strong>
+                        <span>Ich komme zu Ihnen</span>
+                    </div>
+                </div>
+                <div class="hero-float-card hero-float-card-2">
+                    <div class="stars">★★★★★</div>
+                    <p>5.0 auf Google</p>
+                </div>
+                <div class="hero-image-wrapper">
+                    <div class="hero-image"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Meine Leistungen</div>
+                <h2 class="section-title">Professionelle Fußpflege</h2>
+                <p class="section-subtitle">
+                    Von der medizinischen Behandlung bis zum ästhetischen Nageldesign – 
+                    alles aus einer Hand, direkt bei Ihnen zu Hause.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🦶</div>
+                    <h3>Medizinische Fußpflege</h3>
+                    <p>Professionelle Behandlung von Hornhaut, Hühneraugen, eingewachsenen Nägeln und mehr.</p>
+                    <span class="price">Ab 45€</span>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Kosmetische Fußpflege</h3>
+                    <p>Wellness für Ihre Füße mit Peeling, Massage und pflegenden Behandlungen.</p>
+                    <span class="price">Ab 35€</span>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💅</div>
+                    <h3>Nageldesign & Lackieren</h3>
+                    <p>Schöne Nägel mit hochwertigen Lacken und kreativem Nageldesign.</p>
+                    <span class="price">Ab 25€</span>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💙</div>
+                    <h3>Diabetiker-Fußpflege</h3>
+                    <p>Spezialisierte, sanfte Behandlung für Diabetiker mit besonderer Sorgfalt.</p>
+                    <span class="price">Ab 50€</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="about-container">
+                <div class="about-image">
+                    <div class="about-image-main"></div>
+                    <div class="about-image-accent">
+                        <span class="text">📷 Hier kommt dein Foto rein</span>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <div class="section-label">Über mich</div>
+                    <h2>Hallo, ich bin Nadina</h2>
+                    <p>
+                        Als ausgebildete Fußpflegerin mit über 10 Jahren Erfahrung ist es meine 
+                        Leidenschaft, Menschen zu gepflegten und gesunden Füßen zu verhelfen.
+                    </p>
+                    <p>
+                        Der mobile Service ermöglicht es mir, Sie in Ihrer vertrauten Umgebung 
+                        zu behandeln – ob zu Hause, im Pflegeheim oder am Arbeitsplatz. Ich bringe 
+                        alles mit, was für eine professionelle Behandlung nötig ist.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <div class="about-feature-text">
+                                <h4>Zertifiziert</h4>
+                                <p>Staatlich geprüfte Fußpflegerin</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">🏠</div>
+                            <div class="about-feature-text">
+                                <h4>100% Mobil</h4>
+                                <p>Ich komme direkt zu Ihnen</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">⏰</div>
+                            <div class="about-feature-text">
+                                <h4>Flexible Zeiten</h4>
+                                <p>Auch Abende & Wochenenden</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">💯</div>
+                            <div class="about-feature-text">
+                                <h4>Hygiene-Standards</h4>
+                                <p>Sterilisierte Instrumente</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">So einfach geht's</div>
+                <h2 class="section-title">Ihr Termin in 3 Schritten</h2>
+                <p class="section-subtitle">
+                    Unkompliziert und bequem – von der Buchung bis zur Behandlung.
+                </p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-step-number">1</div>
+                    <h3>Kontakt aufnehmen</h3>
+                    <p>Rufen Sie mich an oder schreiben Sie mir per WhatsApp. Wir besprechen Ihre Wünsche.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">2</div>
+                    <h3>Termin vereinbaren</h3>
+                    <p>Wir finden gemeinsam einen passenden Termin – auch kurzfristig möglich.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">3</div>
+                    <h3>Behandlung genießen</h3>
+                    <p>Ich komme zu Ihnen und Sie entspannen in Ihrer gewohnten Umgebung.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Kundenstimmen</div>
+                <h2 class="section-title">Das sagen meine Kunden</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Nadina ist einfach großartig! Sie ist pünktlich, professionell und meine 
+                        Füße haben sich noch nie so gut angefühlt. Der Hausbesuch-Service ist für 
+                        mich als Seniorin ein absoluter Segen."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MH</div>
+                        <div class="testimonial-author-info">
+                            <strong>Maria H.</strong>
+                            <span>München-Schwabing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Als Diabetikerin brauche ich besondere Pflege. Nadina nimmt sich immer 
+                        viel Zeit und geht sehr behutsam vor. Ich vertraue ihr seit Jahren 
+                        und kann sie nur empfehlen!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">KB</div>
+                        <div class="testimonial-author-info">
+                            <strong>Klaus B.</strong>
+                            <span>Starnberg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Endlich muss ich nicht mehr ins Studio fahren! Nadina kommt zu mir 
+                        nach Hause und die Behandlung ist erstklassig. Meine Füße sind bereit 
+                        für den Sommer. Vielen Dank!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SL</div>
+                        <div class="testimonial-author-info">
+                            <strong>Sandra L.</strong>
+                            <span>München-Bogenhausen</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Area Section -->
+    <section class="area" id="area">
+        <div class="section-container">
+            <div class="area-container">
+                <div class="section-header">
+                    <div class="section-label">Einsatzgebiet</div>
+                    <h2 class="section-title">Wo ich Sie besuche</h2>
+                    <p class="section-subtitle">
+                        Ich bin in München und dem gesamten Umland für Sie unterwegs. 
+                        Auch weitere Strecken nach Absprache möglich.
+                    </p>
+                </div>
+
+                <div class="area-badges">
+                    <span class="area-badge">München Stadt</span>
+                    <span class="area-badge">Starnberg</span>
+                    <span class="area-badge">Fürstenfeldbruck</span>
+                    <span class="area-badge">Dachau</span>
+                    <span class="area-badge">Freising</span>
+                    <span class="area-badge">Erding</span>
+                    <span class="area-badge">Ebersberg</span>
+                    <span class="area-badge">Bad Aibling</span>
+                    <span class="area-badge">Rosenheim</span>
+                    <span class="area-badge">+ weitere auf Anfrage</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="cta-container">
+            <h2>Bereit für gepflegte Füße?</h2>
+            <p>
+                Vereinbaren Sie jetzt Ihren persönlichen Termin – ich freue mich auf Sie!
+            </p>
+            <a href="tel:+4915123456789" class="btn btn-white">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                Jetzt anrufen
+            </a>
+            <div class="cta-contact">
+                <a href="tel:+4915123456789" class="cta-contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    +49 151 2345 6789
+                </a>
+                <a href="https://wa.me/4915123456789" class="cta-contact-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">Happy Feet <span>by Nadina</span></a>
+                    <p>
+                        Professionelle mobile Fußpflege in München und Bayern. 
+                        Ich komme zu Ihnen – bequem, hygienisch und zuverlässig.
+                    </p>
+                </div>
+                <div>
+                    <h4>Leistungen</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Medizinische Fußpflege</a></li>
+                        <li><a href="#services">Kosmetische Fußpflege</a></li>
+                        <li><a href="#services">Nageldesign</a></li>
+                        <li><a href="#services">Diabetiker-Fußpflege</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Einsatzgebiet</h4>
+                    <ul class="footer-links">
+                        <li><a href="#area">München</a></li>
+                        <li><a href="#area">Starnberg</a></li>
+                        <li><a href="#area">Dachau</a></li>
+                        <li><a href="#area">+ Umland</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+4915123456789">+49 151 2345 6789</a></li>
+                        <li><a href="mailto:info@happyfeet-nadina.de">info@happyfeet-nadina.de</a></li>
+                        <li><a href="https://wa.me/4915123456789">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Happy Feet by Nadina. Alle Rechte vorbehalten.</p>
+                <div class="footer-legal">
+                    <a href="#">Impressum</a>
+                    <a href="#">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth reveal on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .process-step, .testimonial-card, .about-feature').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
