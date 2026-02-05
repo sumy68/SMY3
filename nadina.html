@@ -1095,35 +1095,267 @@
         }
 
         @media (max-width: 480px) {
+            .nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-logo {
+                font-size: 1.125rem;
+            }
+
+            .nav-cta {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
             .hero {
-                padding-top: 6rem;
+                padding: 5rem 1rem 3rem;
+                min-height: auto;
+            }
+
+            .hero-badge {
+                font-size: 0.65rem;
+                padding: 0.4rem 0.75rem;
+                margin-bottom: 1.25rem;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9375rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.8125rem;
+                width: 100%;
+                justify-content: center;
             }
 
             .hero-features {
-                flex-direction: column;
+                flex-direction: row;
+                gap: 1.5rem;
+                margin-top: 2rem;
+                padding-top: 1.5rem;
+            }
+
+            .hero-feature-number {
+                font-size: 1.75rem;
+            }
+
+            .hero-feature-label {
+                font-size: 0.65rem;
+            }
+
+            .hero-visual {
+                max-width: 100%;
+                margin-top: 2rem;
+            }
+
+            .hero-image {
+                height: 280px;
+                border-radius: 100px 100px 16px 16px;
+            }
+
+            .hero-image-wrapper {
+                border-radius: 100px 100px 16px 16px;
+            }
+
+            /* Sections */
+            .services,
+            .about,
+            .process,
+            .testimonials,
+            .area,
+            .cta {
+                padding: 4rem 1rem;
+            }
+
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+
+            .section-label {
+                font-size: 0.6875rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.9375rem;
+            }
+
+            /* Services */
+            .services-grid {
+                grid-template-columns: 1fr;
                 gap: 1rem;
             }
 
-            .services-grid {
-                grid-template-columns: 1fr;
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .service-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.125rem;
+            }
+
+            .service-card p {
+                font-size: 0.875rem;
+            }
+
+            /* About */
+            .about-container {
+                gap: 2rem;
+            }
+
+            .about-image-main {
+                height: 300px;
+                border-radius: 16px;
+            }
+
+            .about-image-accent {
+                padding: 1.25rem;
+                border-radius: 12px;
+            }
+
+            .about-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .about-content p {
+                font-size: 0.9375rem;
             }
 
             .about-features {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
+            .about-feature {
+                background: var(--color-white);
+                padding: 1rem;
+                border-radius: 12px;
+            }
+
+            /* Process */
+            .process-steps {
+                gap: 1.5rem;
+            }
+
+            .process-step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .process-step h3 {
+                font-size: 1.25rem;
+            }
+
+            .process-step p {
+                font-size: 0.875rem;
+            }
+
+            /* Testimonials */
+            .testimonials-grid {
+                gap: 1rem;
+            }
+
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .testimonial-card::before {
+                font-size: 3rem;
+                top: 1rem;
+                left: 1.25rem;
+            }
+
+            .testimonial-text {
+                font-size: 0.9375rem;
+            }
+
+            .testimonial-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 0.75rem;
+            }
+
+            /* Area */
             .area-badges {
-                flex-direction: column;
-                align-items: center;
+                gap: 0.5rem;
             }
 
-            .btn {
-                width: 100%;
-                justify-content: center;
+            .area-badge {
+                padding: 0.5rem 1rem;
+                font-size: 0.8125rem;
+            }
+
+            /* CTA */
+            .cta h2 {
+                font-size: 1.75rem;
+            }
+
+            .cta p {
+                font-size: 1rem;
+            }
+
+            .cta-contact {
+                gap: 0.75rem;
+            }
+
+            .cta-contact-item {
+                font-size: 0.875rem;
+            }
+
+            /* Footer */
+            .footer {
+                padding: 3rem 1rem 1.5rem;
+            }
+
+            .footer-main {
+                gap: 2rem;
+            }
+
+            .footer-brand p {
+                font-size: 0.875rem;
+                max-width: 100%;
+            }
+
+            .footer h4 {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-links a {
+                font-size: 0.875rem;
+            }
+
+            .footer-bottom {
+                font-size: 0.75rem;
+            }
+
+            .footer-legal {
+                gap: 1.5rem;
             }
         }
     </style>
