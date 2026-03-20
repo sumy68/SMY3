@@ -147,18 +147,22 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
   
+  .wq-header__logo img {
+    height: 150px; /* Logo-Größe nach Wunsch */
+    width: auto;
+    max-height: 100%;
+  }
+  
   .wq-header__inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1.125rem 1.5rem;
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 70px; /* fixe Header-Höhe */
   }
   
-  .wq-header__logo img {
-    height: 40px;
-  }
   
   .wq-nav {
     display: flex;

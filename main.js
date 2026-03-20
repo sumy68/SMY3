@@ -26,7 +26,7 @@ loadPartial('/partials/footer.html', 'beforeend').then(() => {
   // Update year
   const yearEl = document.getElementById('wq-year');
   if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
+    yearEl.textContent = '2024';
   }
   
   // Footer curtain animation
