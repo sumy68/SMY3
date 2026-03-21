@@ -70,7 +70,7 @@ document.addEventListener('click', (e) => {
 // ROTATING WORD (OPTIMIZED)
 // ==============================
 const initRotatingWord = () => {
-  const words = ['designen', 'entwickeln', 'drucken', 'optimieren', 'vermarkten'];
+  const words = ['designen', 'entwickeln', 'drucken', 'optimieren', 'vermarkten', 'vertreiben'];
   const element = document.getElementById('rotatingWord');
   
   if (!element) return;
