@@ -42,8 +42,8 @@
   --font-mono:        'Space Mono', ui-monospace, monospace;
 
   /* Fluid Type-Scale (clamp: min, preferred, max) */
-  --fs-display:  clamp(2.75rem, 6vw + 1rem, 5.5rem);   /* Hero H1 */
-  --fs-h1:       clamp(2.25rem, 4vw + 1rem, 3.5rem);
+  --fs-display:  clamp(2.1rem, 5.5vw + 1rem, 5.5rem);   /* Hero H1 */
+  --fs-h1:       clamp(1.85rem, 4vw + 1rem, 3.5rem);
   --fs-h2:       clamp(1.75rem, 2.5vw + 1rem, 2.75rem);
   --fs-h3:       clamp(1.25rem, 1vw + 0.75rem, 1.6rem);
   --fs-lead:     clamp(1.05rem, 0.5vw + 1rem, 1.35rem);
@@ -105,7 +105,7 @@
 
 * { margin: 0; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
@@ -128,6 +128,7 @@ h1, h2, h3, h4 {
   line-height: var(--lh-tight);
   letter-spacing: var(--tracking-tight);
   font-weight: 700;
+  overflow-wrap: break-word;
 }
 
 ::selection { background: var(--smy-red); color: #fff; }
@@ -157,6 +158,7 @@ h1, h2, h3, h4 {
 .ds-eyebrow {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-xs);
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
@@ -585,7 +587,8 @@ h1, h2, h3, h4 {
 }
 .ds-footer__links {
   display: flex;
-  gap: var(--space-md);
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
   list-style: none;
   font-size: var(--fs-sm);
 }
@@ -1116,6 +1119,112 @@ h1, h2, h3, h4 {
   font-size: var(--fs-xs);
   color: var(--text-muted);
   margin-top: var(--space-md);
+}
+
+/* ─────────────────────────────────────────────
+   27. LEADS-HERO (zweispaltig, Text + Datacard)
+   ───────────────────────────────────────────── */
+.ds-hero-split {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  padding-block: calc(84px + var(--space-2xl)) var(--space-2xl);
+}
+@media (max-width: 820px) {
+  .ds-hero-split { grid-template-columns: 1fr; gap: var(--space-lg); }
+}
+
+/* ─────────────────────────────────────────────
+   28. MOBILE NAVIGATION (Hamburger)
+   ───────────────────────────────────────────── */
+.ds-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.ds-burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #0a0d12;
+  border-radius: 2px;
+  transition: transform var(--transition-base), opacity var(--transition-fast);
+}
+.ds-burger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ds-burger.is-active span:nth-child(2) { opacity: 0; }
+.ds-burger.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 760px) {
+  .ds-burger { display: flex; }
+
+  .ds-nav__links {
+    display: none;
+    position: fixed;
+    top: 84px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    padding: 0;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .ds-nav__links.is-open { display: flex; }
+  .ds-nav__links li { width: 100%; }
+  .ds-nav__links a {
+    display: block;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: #0a0d12;
+  }
+  .ds-nav__links a::after { display: none; }
+  .ds-nav__links .btn--primary {
+    margin: 1rem 1.5rem;
+    text-align: center;
+    color: #fff;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   29. WEITERE MOBILE-ANPASSUNGEN
+   ───────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .ds-trustbar { gap: var(--space-xs) var(--space-md); }
+  .ds-trustbar span { font-size: 0.7rem; }
+
+  /* Hero-Buttons: volle Breite, sauber untereinander */
+  .ds-hero__actions .btn,
+  .ds-page-hero__actions .btn { width: 100%; }
+
+  /* Stats sauber untereinander statt gequetscht */
+  .ds-stats { grid-template-columns: 1fr; }
+  .ds-stat { border-right: 0; border-bottom: 1px solid var(--border-subtle); }
+  .ds-stat:last-child { border-bottom: 0; }
+
+  /* Eyebrow-Tracking reduzieren, damit lange Labels passen */
+  .ds-eyebrow { letter-spacing: 0.1em; }
+
+  /* Datacard kompakter */
+  .ds-datacard { font-size: 0.68rem; }
+
+  .ds-section { padding-block: var(--space-xl); }
+  .ds-hero { min-height: auto; padding-block: var(--space-3xl) var(--space-xl); }
 }
 
 /* ─────────────────────────────────────────────

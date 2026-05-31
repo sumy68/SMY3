@@ -216,6 +216,32 @@
     onScrollHeader();
   }
 
+  /* ── 6b. Mobile-Navigation (Hamburger) ────────────────── */
+  var nav = document.querySelector('.ds-header .ds-nav');
+  var navLinks = document.querySelector('.ds-header .ds-nav__links');
+  if (nav && navLinks) {
+    var burger = document.createElement('button');
+    burger.className = 'ds-burger';
+    burger.setAttribute('aria-label', 'Menü öffnen');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.innerHTML = '<span></span><span></span><span></span>';
+    nav.appendChild(burger);
+
+    var setMenu = function (open) {
+      navLinks.classList.toggle('is-open', open);
+      burger.classList.toggle('is-active', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    };
+    burger.addEventListener('click', function () {
+      setMenu(!navLinks.classList.contains('is-open'));
+    });
+    // beim Klick auf einen Link das Menü schließen
+    navLinks.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setMenu(false);
+    });
+  }
+
   /* ── 7. Rotierendes Hero-Wort ─────────────────────────── */
   var word = document.getElementById('rotatingWord');
   if (word) {
