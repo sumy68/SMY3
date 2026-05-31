@@ -6,83 +6,75 @@
   <title>Projekte | SMY Agency</title>
   <meta name="description" content="Ausgewählte Projekte & Kundenarbeiten von SMY Agency – Webdesign, Entwicklung, Marketing & Print." />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="design-demo.css" />
 </head>
 
 <body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
   <!-- HEADER -->
-  <div id="site-header"></div>
+  <header class="ds-header">
+    <div class="ds-container ds-nav">
+      <a href="index.html" class="ds-logo"><img src="assets/logo-header.png" alt="SMY Agency" /></a>
+      <nav>
+        <ul class="ds-nav__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projekte</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="services.html#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="page-hero__container">
-        <span class="page-hero__badge">Portfolio</span>
-        <h1 class="page-hero__title">Ausgewählte Projekte</h1>
-        <p class="page-hero__lead">
-          Von Tech-Startups bis lokalen Unternehmen – ein Einblick in unsere Arbeit
+    <!-- PAGE HERO -->
+    <section class="ds-page-hero">
+      <div class="ds-container">
+        <span class="ds-eyebrow ds-rise">Portfolio</span>
+        <h1 class="ds-page-hero__title ds-rise ds-rise-2">Ausgewählte Projekte</h1>
+        <p class="ds-lead ds-rise ds-rise-3">
+          Von Tech-Startups bis lokalen Unternehmen – ein Einblick in unsere Arbeit.
         </p>
       </div>
     </section>
 
-    <!-- FEATURED PROJECTS -->
-    <section class="featured-projects">
-      <div class="featured-projects__container">
-        <h2 class="section-subtitle">Featured Work</h2>
-        
-        <div class="featured-grid">
-          <!-- Featured 1 -->
-          <article class="featured-card">
-            <div class="featured-card__tag">Enterprise Tech</div>
-            <h3 class="featured-card__title">Picsart Inc.</h3>
-            <p class="featured-card__text">
-              Entwicklung von 5 hochskalierbaren Plattformen: Analytics-Infrastruktur, 
-              Live-Kollaboration, Podcast-Hosting, Livestream-Backend und cloudbasierte 
-              Video-Editing-Lösung mit GPU-Rendering.
-            </p>
-            <div class="featured-card__tags">
-              <span>Backend Development</span>
-              <span>Cloud Architecture</span>
-              <span>Video Processing</span>
+    <!-- FEATURED -->
+    <section class="ds-section" style="background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal">Featured Work</span>
+        <h2 class="ds-section-title reveal" data-delay="1">Projekte, auf die wir <span class="ds-accent">stolz sind</span>.</h2>
+
+        <div class="ds-featured-grid">
+          <article class="ds-featured reveal">
+            <div class="ds-featured__tag">Enterprise Tech</div>
+            <h3>Picsart Inc.</h3>
+            <p>Entwicklung von 5 hochskalierbaren Plattformen: Analytics-Infrastruktur, Live-Kollaboration, Podcast-Hosting, Livestream-Backend und cloudbasierte Video-Editing-Lösung mit GPU-Rendering.</p>
+            <div class="ds-featured__tags">
+              <span class="ds-chip">Backend</span><span class="ds-chip">Cloud Architecture</span><span class="ds-chip">Video Processing</span>
             </div>
           </article>
 
-          <!-- Featured 2 -->
-          <article class="featured-card">
-            <div class="featured-card__tag">Full Service</div>
-            <h3 class="featured-card__title">Cleorova Shapewear</h3>
-            <p class="featured-card__text">
-              Komplettes Brand-Ecosystem aus einer Hand: KI-generierte Produktfotos, 
-              Branding & Logo-Design, professionelle Website-Entwicklung, Instagram-Strategie 
-              und Performance-Ads. Von der Vision zur fertigen E-Commerce Brand.
-            </p>
-            <div class="featured-card__tags">
-              <span>KI Photoshoots</span>
-              <span>Branding & Logo</span>
-              <span>Website</span>
-              <span>Instagram</span>
-              <span>Ads</span>
+          <article class="ds-featured reveal" data-delay="1">
+            <div class="ds-featured__tag">Full Service</div>
+            <h3>Cleorova Shapewear</h3>
+            <p>Komplettes Brand-Ecosystem aus einer Hand: KI-generierte Produktfotos, Branding &amp; Logo-Design, Website-Entwicklung, Instagram-Strategie und Performance-Ads. Von der Vision zur fertigen E-Commerce Brand.</p>
+            <div class="ds-featured__tags">
+              <span class="ds-chip">KI Photoshoots</span><span class="ds-chip">Branding</span><span class="ds-chip">Website</span><span class="ds-chip">Instagram</span><span class="ds-chip">Ads</span>
             </div>
           </article>
 
-          <!-- Featured 3 -->
-          <article class="featured-card">
-            <div class="featured-card__tag">Full Service</div>
-            <h3 class="featured-card__title">CI Dienstleistungen</h3>
-            <p class="featured-card__text">
-              Komplette digitale Transformation: Website, Printmedien, Spezialanfertigungen 
-              (Alu-Dibond), Google Business Setup, SEO-Optimierung und Ticketsystem-Integration.
-            </p>
-            <div class="featured-card__tags">
-              <span>Webdesign</span>
-              <span>Print</span>
-              <span>SEO</span>
-              <span>Business Setup</span>
+          <article class="ds-featured reveal" data-delay="2">
+            <div class="ds-featured__tag">Full Service</div>
+            <h3>CI Dienstleistungen</h3>
+            <p>Komplette digitale Transformation: Website, Printmedien, Spezialanfertigungen (Alu-Dibond), Google Business Setup, SEO-Optimierung und Ticketsystem-Integration.</p>
+            <div class="ds-featured__tags">
+              <span class="ds-chip">Webdesign</span><span class="ds-chip">Print</span><span class="ds-chip">SEO</span><span class="ds-chip">Business Setup</span>
             </div>
           </article>
         </div>
@@ -90,133 +82,69 @@
     </section>
 
     <!-- ALL PROJECTS -->
-    <section class="all-projects">
-      <div class="all-projects__container">
-        <h2 class="section-subtitle">Alle Projekte</h2>
-        
-        <div class="projects-grid">
-          <!-- Web & Development -->
-          <div class="project-category">
-            <h3 class="project-category__title">Web & Development</h3>
-            
-            <div class="project-list">
-              <div class="project-item">
-                <h4>MHM Garten- & Landschaftsbau</h4>
-                <p>Webdesign & Printdesign</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>Logikids – Daniela Neuber</h4>
-                <p>Webdesign, Flyer & Social Media</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>Gastpark Hotel</h4>
-                <p>Website-Optimierung & Performance</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>E & M Eventpark GmbH</h4>
-                <p>Responsive Webdesign</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>Candelized</h4>
-                <p>Grafikdesign & Webdesign</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>Elias Sterzl Gartenbau</h4>
-                <p>Website & Google SEO Optimierung</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>Uwe Schuster</h4>
-                <p>Website, Flyer & Social Media Management</p>
-              </div>
-            </div>
+    <section class="ds-section">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal">Alle Projekte</span>
+        <div class="ds-projcols">
+          <div class="ds-projcat reveal">
+            <h3 class="ds-projcat__title">Web &amp; Development</h3>
+            <div class="ds-projitem"><h4>MHM Garten- &amp; Landschaftsbau</h4><p>Webdesign &amp; Printdesign</p></div>
+            <div class="ds-projitem"><h4>Logikids – Daniela Neuber</h4><p>Webdesign, Flyer &amp; Social Media</p></div>
+            <div class="ds-projitem"><h4>Gastpark Hotel</h4><p>Website-Optimierung &amp; Performance</p></div>
+            <div class="ds-projitem"><h4>E &amp; M Eventpark GmbH</h4><p>Responsive Webdesign</p></div>
+            <div class="ds-projitem"><h4>Candelized</h4><p>Grafikdesign &amp; Webdesign</p></div>
+            <div class="ds-projitem"><h4>Elias Sterzl Gartenbau</h4><p>Website &amp; Google SEO Optimierung</p></div>
+            <div class="ds-projitem"><h4>Uwe Schuster</h4><p>Website, Flyer &amp; Social Media</p></div>
           </div>
 
-          <!-- Branding & Design -->
-          <div class="project-category">
-            <h3 class="project-category__title">Branding & Design</h3>
-            
-            <div class="project-list">
-              <div class="project-item">
-                <h4>Steuerberater Yusuf Kavalci</h4>
-                <p>Komplette Brand Identity: Logo, Website & Visitenkarten</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>KFZ-Sachverständiger BAS</h4>
-                <p>Corporate Design & Website</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>KG Handel GmbH</h4>
-                <p>Logoerstellung & Firmenstempel</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>Karise UG</h4>
-                <p>Logo & Brand Identity</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>DJane Anastasia Chesnocova</h4>
-                <p>Albumcover Design "LIGHTS"</p>
-              </div>
-            </div>
+          <div class="ds-projcat reveal" data-delay="1">
+            <h3 class="ds-projcat__title">Branding &amp; Design</h3>
+            <div class="ds-projitem"><h4>Steuerberater Yusuf Kavalci</h4><p>Brand Identity: Logo, Website &amp; Visitenkarten</p></div>
+            <div class="ds-projitem"><h4>KFZ-Sachverständiger BAS</h4><p>Corporate Design &amp; Website</p></div>
+            <div class="ds-projitem"><h4>KG Handel GmbH</h4><p>Logoerstellung &amp; Firmenstempel</p></div>
+            <div class="ds-projitem"><h4>Karise UG</h4><p>Logo &amp; Brand Identity</p></div>
+            <div class="ds-projitem"><h4>DJane Anastasia Chesnocova</h4><p>Albumcover Design „LIGHTS"</p></div>
           </div>
 
-          <!-- Marketing & Social -->
-          <div class="project-category">
-            <h3 class="project-category__title">Marketing & Social Media</h3>
-            
-            <div class="project-list">
-              <div class="project-item">
-                <h4>HappINess e.V.</h4>
-                <p>IT-Betreuung, Website, Print & Social Media Content</p>
-              </div>
-              
-              <div class="project-item">
-                <h4>Herbalife Promoter</h4>
-                <p>Instagram Management & Facebook Ads Kampagnen</p>
-              </div>
-            </div>
+          <div class="ds-projcat reveal" data-delay="2">
+            <h3 class="ds-projcat__title">Marketing &amp; Social</h3>
+            <div class="ds-projitem"><h4>HappINess e.V.</h4><p>IT-Betreuung, Website, Print &amp; Social Content</p></div>
+            <div class="ds-projitem"><h4>Herbalife Promoter</h4><p>Instagram Management &amp; Facebook Ads</p></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA SECTION -->
-    <section class="projects-cta">
-      <div class="projects-cta__container">
-        <h2>Mehr Einblicke auf Instagram</h2>
-        <p>Behind-the-Scenes, aktuelle Projekte und kreative Prozesse</p>
-        <a href="https://www.instagram.com/smy_agency" target="_blank" rel="noopener" class="btn btn--primary btn--large">
-          @smy_agency folgen
-        </a>
-      </div>
-    </section>
-
-    <!-- PROJECT CTA -->
-    <section class="cta-audit">
-      <div class="cta-audit__container">
-        <h2>Bereit für dein Projekt?</h2>
-        <p>
-          Lass uns gemeinsam etwas Großartiges entwickeln – von der ersten Idee bis zur erfolgreichen Umsetzung.
-        </p>
-        <a href="services.html#kontakt" class="btn btn--primary btn--large">
-          🚀 Projekt starten
-        </a>
+    <!-- CTA -->
+    <section class="ds-section">
+      <div class="ds-container">
+        <div class="ds-cta reveal">
+          <span class="ds-eyebrow" style="justify-content:center;">Mehr Einblicke</span>
+          <h2>Bereit für dein Projekt?</h2>
+          <p>Lass uns gemeinsam etwas Großartiges entwickeln – von der ersten Idee bis zur erfolgreichen Umsetzung.</p>
+          <div style="display:flex; gap:var(--space-sm); justify-content:center; flex-wrap:wrap;">
+            <a href="services.html#kontakt" class="btn btn--primary btn--large" data-magnetic>🚀 Projekt starten</a>
+            <a href="https://www.instagram.com/smy_agency" target="_blank" rel="noopener" class="btn btn--ghost btn--large" data-magnetic>@smy_agency folgen</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- FOOTER -->
-  <div id="site-footer"></div>
+  <footer class="ds-footer">
+    <div class="ds-container ds-footer__inner">
+      <a href="index.html" class="ds-logo">SMY <em>Agency</em></a>
+      <ul class="ds-footer__links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projekte</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="services.html#kontakt">Kontakt</a></li>
+      </ul>
+      <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
+    </div>
+  </footer>
 
-  <script src="main.js"></script>
+  <script src="design-demo.js"></script>
 </body>
 </html>

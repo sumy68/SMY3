@@ -6,104 +6,86 @@
   <title>Über uns | SMY Agency</title>
   <meta name="description" content="Wer hinter SMY Agency steckt: Story, Werte und warum wir Projekte radikal sauber umsetzen." />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="design-demo.css" />
 </head>
 
 <body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
   <!-- HEADER -->
-  <div id="site-header"></div>
+  <header class="ds-header">
+    <div class="ds-container ds-nav">
+      <a href="index.html" class="ds-logo"><img src="assets/logo-header.png" alt="SMY Agency" /></a>
+      <nav>
+        <ul class="ds-nav__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projekte</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="services.html#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="page-hero__container">
-        <span class="page-hero__badge">Über uns</span>
-        <h1 class="page-hero__title">
-          Nicht nur "Design".<br>
-          <span class="accent">Wir bauen Ergebnisse.</span>
+    <!-- PAGE HERO -->
+    <section class="ds-page-hero">
+      <div class="ds-container">
+        <span class="ds-eyebrow ds-rise">Über uns</span>
+        <h1 class="ds-page-hero__title ds-rise ds-rise-2">
+          Nicht nur „Design".<br><span class="ds-accent">Wir bauen Ergebnisse.</span>
         </h1>
-        <p class="page-hero__lead">
-          Ich bin Sümi – Gründerin von SMY Agency. Ich kombiniere Creative + Tech, 
+        <p class="ds-lead ds-rise ds-rise-3">
+          Ich bin Sümi – Gründerin von SMY Agency. Ich kombiniere Creative + Tech,
           damit deine Marke nicht nur gut aussieht, sondern messbar wächst.
         </p>
-        <div class="page-hero__actions">
-          <a class="btn btn--primary" href="services.html#kontakt">Projekt anfragen</a>
+        <div class="ds-page-hero__actions ds-rise ds-rise-4">
+          <a class="btn btn--primary btn--large" href="services.html#kontakt" data-magnetic>Projekt anfragen</a>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT WITH IMAGE -->
-    <section class="about-section">
-      <div class="about-section__container">
-        <div class="about-grid">
-          <!-- Image -->
-          <div class="about-image">
-            <img 
-              src="assets/suemi.jpg" 
-              alt="Sümi – Gründerin von SMY Agency"
-              loading="lazy"
-            />
-            <div class="about-badge">
-              <span class="badge-dot"></span>
-              SMY Agency · CEO
-            </div>
+    <!-- ABOUT -->
+    <section class="ds-section" style="background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);">
+      <div class="ds-container">
+        <div class="ds-about-grid">
+          <div class="ds-about-img reveal">
+            <img src="assets/suemi.jpg" alt="Sümi – Gründerin von SMY Agency" loading="lazy" />
+            <div class="ds-about-badge"><span class="ds-badge-dot"></span> SMY Agency · CEO</div>
           </div>
 
-          <!-- Content -->
-          <div class="about-content">
-            <h2 class="about-content__title">Warum SMY?</h2>
-            <p class="about-content__text">
-              Weil die meisten Websites & Ads "hübsch" sind – aber nichts konvertiert. 
-              Ich baue Systeme: klare Struktur, starke Creatives, sauberes Tracking und 
+          <div class="reveal" data-delay="1">
+            <span class="ds-eyebrow">Warum SMY?</span>
+            <p class="ds-lead" style="margin-block: var(--space-sm) var(--space-md);">
+              Weil die meisten Websites &amp; Ads „hübsch" sind – aber nichts konvertiert.
+              Ich baue Systeme: klare Struktur, starke Creatives, sauberes Tracking und
               eine Nutzerführung, die verkauft.
             </p>
 
-            <!-- Values -->
-            <div class="value-list">
-              <div class="value-item">
-                <div class="value-item__number">01</div>
-                <div class="value-item__content">
-                  <h3>Clean & Premium</h3>
-                  <p>Design, das nach Marke aussieht – nicht nach Template.</p>
-                </div>
+            <div class="ds-values">
+              <div class="ds-value">
+                <div class="ds-value__num">01</div>
+                <div><h3>Clean &amp; Premium</h3><p>Design, das nach Marke aussieht – nicht nach Template.</p></div>
               </div>
-
-              <div class="value-item">
-                <div class="value-item__number">02</div>
-                <div class="value-item__content">
-                  <h3>Conversion first</h3>
-                  <p>Texte, CTAs, Struktur – alles auf Anfragen ausgerichtet.</p>
-                </div>
+              <div class="ds-value">
+                <div class="ds-value__num">02</div>
+                <div><h3>Conversion first</h3><p>Texte, CTAs, Struktur – alles auf Anfragen ausgerichtet.</p></div>
               </div>
-
-              <div class="value-item">
-                <div class="value-item__number">03</div>
-                <div class="value-item__content">
-                  <h3>Fast delivery</h3>
-                  <p>Schnell, aber nicht messy: Prozesse sitzen, Output knallt.</p>
-                </div>
+              <div class="ds-value">
+                <div class="ds-value__num">03</div>
+                <div><h3>Fast delivery</h3><p>Schnell, aber nicht messy: Prozesse sitzen, Output knallt.</p></div>
               </div>
             </div>
 
-            <!-- Quick Stats -->
-            <div class="quick-stats">
-              <div class="quick-stat">
-                <div class="quick-stat__value">1–3</div>
-                <div class="quick-stat__label">Wochen bis Launch</div>
-              </div>
-              <div class="quick-stat">
-                <div class="quick-stat__value">100%</div>
-                <div class="quick-stat__label">Custom Look</div>
-              </div>
-              <div class="quick-stat">
-                <div class="quick-stat__value">↗</div>
-                <div class="quick-stat__label">Fokus: Leads</div>
-              </div>
+            <div class="ds-quickstats">
+              <div><div class="ds-quickstat__val">1–3</div><div class="ds-quickstat__label">Wochen bis Launch</div></div>
+              <div><div class="ds-quickstat__val">100%</div><div class="ds-quickstat__label">Custom Look</div></div>
+              <div><div class="ds-quickstat__val ds-accent">↗</div><div class="ds-quickstat__label">Fokus: Leads</div></div>
             </div>
           </div>
         </div>
@@ -111,53 +93,43 @@
     </section>
 
     <!-- TIMELINE -->
-    <section class="timeline-section">
-      <div class="timeline-section__container">
-        <h2 class="timeline-section__title">Kurze Story</h2>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-item__dot"></div>
-            <div class="timeline-item__content">
-              <h3>Start</h3>
-              <p>Von "ich mach das schnell selbst" zu echten Kundenprojekten.</p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-item__dot"></div>
-            <div class="timeline-item__content">
-              <h3>System</h3>
-              <p>Design + Entwicklung + Ads in einem Flow – ohne Chaos.</p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-item__dot"></div>
-            <div class="timeline-item__content">
-              <h3>Heute</h3>
-              <p>SMY Agency als Creative-Tech Partner für Brands, die wachsen wollen.</p>
-            </div>
-          </div>
+    <section class="ds-section">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal" style="justify-content:center; display:flex;">Kurze Story</span>
+        <div class="ds-timeline">
+          <div class="ds-tl-item reveal"><h3>Start</h3><p>Von „ich mach das schnell selbst" zu echten Kundenprojekten.</p></div>
+          <div class="ds-tl-item reveal" data-delay="1"><h3>System</h3><p>Design + Entwicklung + Ads in einem Flow – ohne Chaos.</p></div>
+          <div class="ds-tl-item reveal" data-delay="2"><h3>Heute</h3><p>SMY Agency als Creative-Tech Partner für Brands, die wachsen wollen.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- CTA SECTION -->
-    <section class="about-cta">
-      <div class="about-cta__container">
-        <h2>Wenn du willst, dass es endlich professionell wirkt:</h2>
-        <p>Dann lass uns kurz sprechen – 15 Minuten reichen meistens schon.</p>
-        <a class="btn btn--primary btn--large" href="services.html#kontakt">
-          Projekt starten
-        </a>
+    <!-- CTA -->
+    <section class="ds-section">
+      <div class="ds-container">
+        <div class="ds-cta reveal">
+          <h2>Wenn du willst, dass es endlich professionell wirkt:</h2>
+          <p>Dann lass uns kurz sprechen – 15 Minuten reichen meistens schon.</p>
+          <a class="btn btn--primary btn--large" href="services.html#kontakt" data-magnetic>Projekt starten</a>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- FOOTER -->
-  <div id="site-footer"></div>
+  <footer class="ds-footer">
+    <div class="ds-container ds-footer__inner">
+      <a href="index.html" class="ds-logo">SMY <em>Agency</em></a>
+      <ul class="ds-footer__links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projekte</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="services.html#kontakt">Kontakt</a></li>
+      </ul>
+      <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
+    </div>
+  </footer>
 
-  <script src="main.js"></script>
+  <script src="design-demo.js"></script>
 </body>
 </html>

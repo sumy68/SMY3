@@ -4,15 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SMY Agency – Digitale Produkte & Services</title>
-  
-  <!-- Fonts: Bessere Auswahl als nur Inter -->
+
+  <!-- Fonts: Space Grotesk (Display) · DM Sans (Body) · Space Mono (Labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Design-System + Demo-Showcase (live style.css bleibt unangetastet) -->
+  <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="design-demo.css" />
   <!-- Meta Pixel Code -->
-<script>
+  <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -31,386 +33,317 @@
 </head>
 
 <body>
-  <!-- HEADER -->
-  <div id="site-header"></div>
+  <!-- folgender Glow folgt der Maus -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header class="ds-header">
+    <div class="ds-container ds-nav">
+      <a href="index.html" class="ds-logo"><img src="assets/logo-header.png" alt="SMY Agency" /></a>
+      <nav>
+        <ul class="ds-nav__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projekte</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="services.html#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero__container">
-        <span class="hero__badge">Schnell · Unkompliziert · Kompetent</span>
-        
-        <h1 class="hero__title">
-          Wir <span id="rotatingWord" class="hero__word">designen</span><br>
+    <!-- ══════════ HERO ══════════ -->
+    <section class="ds-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <canvas class="hero-particles" aria-hidden="true"></canvas>
+      <div class="ds-container ds-hero__inner">
+        <span class="ds-eyebrow ds-rise">Schnell · Unkompliziert · Kompetent</span>
+
+        <h1 class="ds-hero__title ds-rise ds-rise-2">
+          Wir <span id="rotatingWord" class="ds-hero__word">designen</span><br>
           digitale Produkte<br>
           für deinen Erfolg
         </h1>
-        
-        <p class="hero__lead">
-          Wir holen dir Kunden. Wir bauen dir die Präsenz. Du fokussierst dich aufs Business.
+
+        <p class="ds-lead ds-rise ds-rise-3">
+          Wir holen dir Kunden. Wir bauen dir die Präsenz.
+          Du fokussierst dich aufs Business.
         </p>
-        
-        <div class="hero__actions">
-          <a href="services.html#kontakt" class="btn btn--primary">Projekt anfragen</a>
-          <a href="services.html" class="btn btn--ghost">Unsere Services</a>
+
+        <div class="ds-hero__actions ds-rise ds-rise-4">
+          <a href="#kontakt" class="btn btn--primary btn--large" data-magnetic>Projekt anfragen</a>
+          <a href="#services" class="btn btn--ghost btn--large" data-magnetic>Unsere Services</a>
+        </div>
+
+        <div class="ds-hero__trust ds-rise ds-rise-4">
+          <span>★ 5.0 Google-Bewertungen</span>
+          <span>◆ 120+ Projekte</span>
+          <span>⚡ Entwurf in 7 Tagen</span>
         </div>
       </div>
     </section>
 
-    <!-- STATS -->
-    <section class="stats">
-      <div class="stats__container">
-        <div class="stat" data-count="120">
-          <div class="stat__number">0+</div>
-          <div class="stat__label">Projekte umgesetzt</div>
-        </div>
-        
-        <div class="stat" data-count="7">
-          <div class="stat__number">0</div>
-          <div class="stat__label">Tage bis zum Entwurf</div>
-        </div>
-        
-        <div class="stat" data-count="35">
-          <div class="stat__number">0%</div>
-          <div class="stat__label">Conversion-Boost</div>
+    <!-- ══════════ MARQUEE ══════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Webdesign</span><span>Branding</span><span>KI-Visuals</span>
+        <span>B2B Vertrieb</span><span>Ads</span><span>Print</span><span>SEO</span>
+        <span>Webdesign</span><span>Branding</span><span>KI-Visuals</span>
+        <span>B2B Vertrieb</span><span>Ads</span><span>Print</span><span>SEO</span>
+      </div>
+    </div>
+
+    <!-- ══════════ STATS ══════════ -->
+    <section class="ds-section" id="stats">
+      <div class="ds-container">
+        <div class="ds-stats reveal">
+          <div class="ds-stat">
+            <div class="ds-stat__num"><span data-count="120" data-suffix="+">0</span></div>
+            <div class="ds-stat__label">Projekte umgesetzt</div>
+          </div>
+          <div class="ds-stat">
+            <div class="ds-stat__num"><span data-count="7">0</span></div>
+            <div class="ds-stat__label">Tage bis zum Entwurf</div>
+          </div>
+          <div class="ds-stat">
+            <div class="ds-stat__num"><span class="ds-accent" data-count="35" data-suffix="%">0</span></div>
+            <div class="ds-stat__label">Conversion-Boost</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section class="services">
-      <div class="services__container">
-        <h2 class="section-title">Was wir liefern</h2>
-        
-        <div class="services__grid">
-          <article class="service-card">
-            <div class="service-card__icon">→</div>
+    <!-- ══════════ SERVICES ══════════ -->
+    <section class="ds-section" id="services" style="background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal">Was wir liefern</span>
+        <h2 class="ds-section-title reveal" data-delay="1">
+          Eine Brand, die <span class="ds-accent">hängen bleibt</span> – on- und offline.
+        </h2>
+
+        <div class="ds-grid" style="margin-top: var(--space-xl);">
+          <article class="ds-card reveal" data-delay="1">
+            <div class="ds-card__icon">→</div>
             <h3>Designen</h3>
-            <p>Brand, der hängen bleibt. Web & Visuals, die nicht "okay" sind – sondern premium wirken.</p>
+            <p>Brand, der hängen bleibt. Web &amp; Visuals, die nicht „okay" sind – sondern premium wirken.</p>
           </article>
-          
-          <article class="service-card">
-            <div class="service-card__icon">⚡</div>
+
+          <article class="ds-card reveal" data-delay="2">
+            <div class="ds-card__icon">⚡</div>
             <h3>Entwickeln</h3>
             <p>Builds, die schnell sind. Saubere Technik, responsive – und ready für Wachstum.</p>
           </article>
-          
-          <article class="service-card">
-            <div class="service-card__icon">✦</div>
+
+          <article class="ds-card reveal" data-delay="3">
+            <div class="ds-card__icon">✦</div>
             <h3>Drucken</h3>
-            <p>Offline sichtbar. Flyer, Schilder, Branding – alles im selben Look & Feel.</p>
+            <p>Offline sichtbar. Flyer, Schilder, Branding – alles im selben Look &amp; Feel.</p>
           </article>
-          
-          <article class="service-card">
-            <div class="service-card__icon">↗</div>
+
+          <article class="ds-card reveal" data-delay="1">
+            <div class="ds-card__icon">↗</div>
             <h3>Optimieren</h3>
             <p>Mehr Leads, weniger Bounce. Conversion-Flow, Speed, SEO-Basics – ohne Rumgefrickel.</p>
           </article>
-          
-          <article class="service-card">
-            <div class="service-card__icon">◉</div>
+
+          <article class="ds-card reveal" data-delay="2">
+            <div class="ds-card__icon">◉</div>
             <h3>Vermarkten</h3>
             <p>Reichweite → Umsatz. Ads, Content, Funnels – passend zur Brand, nicht random.</p>
           </article>
 
-          <article class="service-card service-card--highlight">
-            <div class="service-card__icon">📊</div>
+          <article class="ds-card reveal" data-delay="3">
+            <div class="ds-card__icon">🗂️</div>
             <h3>B2B Leads</h3>
-            <p>Verifizierte Kontaktdaten für Vertrieb & Akquise. Branchenspezifisch, regional filterbar – als CSV.</p>
+            <p>Verifizierte Kontaktdaten für Vertrieb &amp; Akquise. Branchenspezifisch, regional filterbar – als CSV.</p>
           </article>
 
-  
-<article class="service-card service-card--highlight">
-  <div class="service-card__icon">📊</div>
-  <h3>B2B Vertrieb</h3>
-  <p>Wir übernehmen deinen kompletten Neukundenvertrieb. Von der Zielgruppenanalyse bis zur Terminvereinbarung – du lehnst dich zurück, wir bringen die Anfragen.</p>
-  <div style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:0.4rem;">
-    <span style="font-size:0.78rem; padding:0.25rem 0.6rem; border:1px solid #333; border-radius:20px;">🌿 Galabau</span>
-    <span style="font-size:0.78rem; padding:0.25rem 0.6rem; border:1px solid #333; border-radius:20px;">🧹 Gebäudereinigung</span>
-    <span style="font-size:0.78rem; padding:0.25rem 0.6rem; border:1px solid #333; border-radius:20px;">🏗️ Maler & Handwerk</span>
-    <span style="font-size:0.78rem; padding:0.25rem 0.6rem; border:1px solid #333; border-radius:20px;">🚛 Umzug</span>
-    <span style="font-size:0.78rem; padding:0.25rem 0.6rem; border:1px solid #333; border-radius:20px;">🔧 Facility</span>
-  </div>
-</article>
-          
+          <article class="ds-card reveal" data-delay="1">
+            <div class="ds-card__icon">📊</div>
+            <h3>B2B Vertrieb</h3>
+            <p>Kompletter Neukundenvertrieb – von der Zielgruppenanalyse bis zur Terminvereinbarung. Du lehnst dich zurück, wir bringen die Anfragen.</p>
+            <div style="margin-top: var(--space-md); display:flex; flex-wrap:wrap; gap:var(--space-2xs);">
+              <span class="ds-chip">🌿 Galabau</span>
+              <span class="ds-chip">🧹 Reinigung</span>
+              <span class="ds-chip">🏗️ Handwerk</span>
+              <span class="ds-chip">🚛 Umzug</span>
+              <span class="ds-chip">🔧 Facility</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-   
-
-<!-- ══ SMY STUDIO SECTION ══ -->
-<!-- Einfügen zwischen </section> (Services) und <section class="proof"> -->
-
-  <section class="studio-label">
-    <div class="studio-label__container">
-      <span class="studio-label__badge">Unser KI-Visual Label</span>
-      <div class="studio-label__inner">
-        <div class="studio-label__text">
-          <h2 class="studio-label__title">
-            Neu: <span class="accent">SMY STUDIO</span>
-          </h2>
-          <p class="studio-label__lead">
-            Premium KI-Brandfotos & KI-Videos für Personal Brands, Beauty Clinics & E-Commerce – ohne Fotoshooting, in 48–72h geliefert.
-          </p>
-          <ul class="studio-label__list">
-            <li>✦ KI-Brandfotos in mehreren Looks & Settings</li>
-            <li>✦ KI-Brand Videos & Reels für Instagram & TikTok</li>
-            <li>✦ Ads Creatives & Performance Visuals</li>
-            <li>✦ Lieferung in 48–72h – kein Drehtag, keine Kamera</li>
-          </ul>
-          <a href="https://smystudio.eu" target="_blank" class="btn btn--primary">
-            Zu SMY STUDIO →
-          </a>
-        </div>
-        <div class="studio-label__visual">
-          <div class="studio-label__card">
-            <div class="studio-label__logo">SMY <em>STUDIO</em></div>
-            <p>KI-Brandfotos & KI-Videos</p>
-            <div class="studio-label__tags">
-              <span>Personal Brand</span>
-              <span>Beauty</span>
-              <span>E-Commerce</span>
-              <span>Ads</span>
+    <!-- ══════════ SMY STUDIO ══════════ -->
+    <section class="ds-section" id="studio">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal">Unser KI-Visual Label</span>
+        <div class="ds-studio__inner">
+          <div class="reveal" data-delay="1">
+            <h2 class="ds-studio__title">Neu: <span class="ds-accent">SMY STUDIO</span></h2>
+            <p class="ds-lead">
+              Premium KI-Brandfotos &amp; KI-Videos für Personal Brands, Beauty Clinics &amp;
+              E-Commerce – ohne Fotoshooting, in 48–72h geliefert.
+            </p>
+            <ul class="ds-studio__list">
+              <li>KI-Brandfotos in mehreren Looks &amp; Settings</li>
+              <li>KI-Brand Videos &amp; Reels für Instagram &amp; TikTok</li>
+              <li>Ads Creatives &amp; Performance Visuals</li>
+              <li>Lieferung in 48–72h – kein Drehtag, keine Kamera</li>
+            </ul>
+            <a href="https://smystudio.eu" target="_blank" rel="noopener" class="btn btn--primary" data-magnetic>Zu SMY STUDIO →</a>
+          </div>
+          <div class="ds-studio__card reveal" data-delay="2">
+            <div class="ds-studio__logo">SMY <em>STUDIO</em></div>
+            <p>KI-Brandfotos &amp; KI-Videos</p>
+            <div class="ds-studio__tags">
+              <span class="ds-chip">Personal Brand</span>
+              <span class="ds-chip">Beauty</span>
+              <span class="ds-chip">E-Commerce</span>
+              <span class="ds-chip">Ads</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-    <!-- REVIEWS -->
-    <section class="reviews">
-      <div class="reviews__container">
-        <h2 class="section-title">Was unsere Kunden sagen</h2>
-        
-        <div class="reviews__grid">
-          <!-- Review 1 -->
-          <article class="review-card">
-            <div class="review-card__stars">
-              ★★★★★
-            </div>
-            <p class="review-card__text">
-              "Ich habe mir eine Website von SMY Agency anlegen lassen und bin sehr zufrieden, meine Vorstellungen wurden umgesetzt und auch im Prozess entstandene Änderungswünsche angepasst."
-            </p>
-            <div class="review-card__footer">
-              <div class="review-card__avatar">
-                <span>E</span>
-              </div>
-              <div class="review-card__author">
-                <div class="review-card__name">Elli Sterzl</div>
-                <div class="review-card__meta">vor einem Monat · Google</div>
-              </div>
+    <!-- ══════════ REVIEWS ══════════ -->
+    <section class="ds-section" id="reviews" style="background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal">Was unsere Kunden sagen</span>
+        <h2 class="ds-section-title reveal" data-delay="1">Bewertungen, die <span class="ds-accent">für sich sprechen</span>.</h2>
+
+        <div class="ds-reviews-grid">
+          <article class="ds-review reveal">
+            <div class="ds-review__stars">★★★★★</div>
+            <p class="ds-review__text">„Ich habe mir eine Website von SMY Agency anlegen lassen und bin sehr zufrieden, meine Vorstellungen wurden umgesetzt und auch im Prozess entstandene Änderungswünsche angepasst."</p>
+            <div class="ds-review__footer">
+              <div class="ds-review__avatar">E</div>
+              <div><div class="ds-review__name">Elli Sterzl</div><div class="ds-review__meta">vor einem Monat · Google</div></div>
             </div>
           </article>
-          
-          <!-- Review 2 -->
-          <article class="review-card">
-            <div class="review-card__stars">
-              ★★★★★
-            </div>
-            <p class="review-card__text">
-              "Vielen Dank an die SMY Agency für die mega Website und den Messeaufsteller! Wir haben den Aufsteller mittlerweile schon zwei Mal auf Veranstaltungen genutzt – immer noch super robust und sieht aus wie neu. Die Zusammenarbeit war easy, schnell und professionell."
-            </p>
-            <div class="review-card__footer">
-              <div class="review-card__avatar">
-                <span>F</span>
-              </div>
-              <div class="review-card__author">
-                <div class="review-card__name">Fliesen Ideal GmbH</div>
-                <div class="review-card__meta">vor einem Monat · Google</div>
-              </div>
+
+          <article class="ds-review reveal" data-delay="1">
+            <div class="ds-review__stars">★★★★★</div>
+            <p class="ds-review__text">„Vielen Dank an die SMY Agency für die mega Website und den Messeaufsteller! Die Zusammenarbeit war easy, schnell und professionell."</p>
+            <div class="ds-review__footer">
+              <div class="ds-review__avatar">F</div>
+              <div><div class="ds-review__name">Fliesen Ideal GmbH</div><div class="ds-review__meta">vor einem Monat · Google</div></div>
             </div>
           </article>
-          
-          <!-- Review 3 -->
-          <article class="review-card">
-            <div class="review-card__stars">
-              ★★★★★
-            </div>
-            <p class="review-card__text">
-              "Danke an SMY! 🙌 Wir wurden einen Monat lang über Instagram begleitet, haben viel Neues gelernt und richtig tolle Ergebnisse mit top Postings erzielen können. Absolute Empfehlung!"
-            </p>
-            <div class="review-card__footer">
-              <div class="review-card__avatar">
-                <span>Y</span>
-              </div>
-              <div class="review-card__author">
-                <div class="review-card__name">Yasemin Erdem</div>
-                <div class="review-card__meta">vor 4 Monaten · Google</div>
-              </div>
+
+          <article class="ds-review reveal" data-delay="2">
+            <div class="ds-review__stars">★★★★★</div>
+            <p class="ds-review__text">„Danke an SMY! 🙌 Wir wurden einen Monat lang über Instagram begleitet, haben viel Neues gelernt und richtig tolle Ergebnisse erzielt. Absolute Empfehlung!"</p>
+            <div class="ds-review__footer">
+              <div class="ds-review__avatar">Y</div>
+              <div><div class="ds-review__name">Yasemin Erdem</div><div class="ds-review__meta">vor 4 Monaten · Google</div></div>
             </div>
           </article>
-          
-          <!-- Review 4 -->
-          <article class="review-card">
-            <div class="review-card__stars">
-              ★★★★★
-            </div>
-            <p class="review-card__text">
-              "Vielen Dank an das Team der SMY Agency für die super Zusammenarbeit. Meine Webseite, die Flyer und das Werbeschild wurden in kürzester Zeit umgesetzt – und das Ergebnis ist wirklich top."
-            </p>
-            <div class="review-card__footer">
-              <div class="review-card__avatar">
-                <span>C</span>
-              </div>
-              <div class="review-card__author">
-                <div class="review-card__name">Ceetin Klein</div>
-                <div class="review-card__meta">vor 4 Monaten · Google</div>
-              </div>
+
+          <article class="ds-review reveal">
+            <div class="ds-review__stars">★★★★★</div>
+            <p class="ds-review__text">„Meine Webseite, die Flyer und das Werbeschild wurden in kürzester Zeit umgesetzt – und das Ergebnis ist wirklich top."</p>
+            <div class="ds-review__footer">
+              <div class="ds-review__avatar">C</div>
+              <div><div class="ds-review__name">Ceetin Klein</div><div class="ds-review__meta">vor 4 Monaten · Google</div></div>
             </div>
           </article>
-          
-          <!-- Review 5 -->
-          <article class="review-card">
-            <div class="review-card__stars">
-              ★★★★★
-            </div>
-            <p class="review-card__text">
-              "Ich bin absolut begeistert von der Arbeit! Die Zusammenarbeit war von Anfang an unkompliziert, freundlich und sehr professionell. Meine Wünsche wurden nicht nur umgesetzt, sondern oft sogar mit kreativen Ideen und hilfreichen Tipps übertroffen."
-            </p>
-            <div class="review-card__footer">
-              <div class="review-card__avatar">
-                <span>I</span>
-              </div>
-              <div class="review-card__author">
-                <div class="review-card__name">Ismayil Bas</div>
-                <div class="review-card__meta">vor 5 Monaten · Google</div>
-              </div>
+
+          <article class="ds-review reveal" data-delay="1">
+            <div class="ds-review__stars">★★★★★</div>
+            <p class="ds-review__text">„Die Zusammenarbeit war von Anfang an unkompliziert, freundlich und sehr professionell. Meine Wünsche wurden oft sogar mit kreativen Ideen übertroffen."</p>
+            <div class="ds-review__footer">
+              <div class="ds-review__avatar">I</div>
+              <div><div class="ds-review__name">Ismayil Bas</div><div class="ds-review__meta">vor 5 Monaten · Google</div></div>
             </div>
           </article>
-          
-          <!-- Review 6 -->
-          <article class="review-card">
-            <div class="review-card__stars">
-              ★★★★★
-            </div>
-            <p class="review-card__text">
-              "Ich bin absolut begeistert von der Arbeit, die SMY Agency bei der Erstellung meiner Webseite geleistet hat. Von Anfang an war die Kommunikation freundlich, professionell und sehr zielorientiert. Sehr empfehlenswert 🩵"
-            </p>
-            <div class="review-card__footer">
-              <div class="review-card__avatar">
-                <span>C</span>
-              </div>
-              <div class="review-card__author">
-                <div class="review-card__name">Candelized</div>
-                <div class="review-card__meta">vor einem Jahr · Google</div>
-              </div>
-            </div>
-          </article>
-          
-          <!-- Review 7 -->
-          <article class="review-card">
-            <div class="review-card__stars">
-              ★★★★★
-            </div>
-            <p class="review-card__text">
-              "Ich bin absolut begeistert von der Zusammenarbeit mit Smy! Sie haben meine Website erstellt und optimiert. Besonders beeindruckt war ich von den fairen Preisen und dem 24/7-Support – ich konnte mich jederzeit melden und bekam sofort Hilfe."
-            </p>
-            <div class="review-card__footer">
-              <div class="review-card__avatar">
-                <span>M</span>
-              </div>
-              <div class="review-card__author">
-                <div class="review-card__name">Mubin Ahmetovic</div>
-                <div class="review-card__meta">MHM Garten & Landschaftsbau · Google</div>
-              </div>
-            </div>
-          </article>
-          
-          <!-- Review 8 -->
-          <article class="review-card">
-            <div class="review-card__stars">
-              ★★★★★
-            </div>
-            <p class="review-card__text">
-              "Super kompetente Agentur und sehr faire Preise. Wir hatten 24/7 Support bei Fragen. Vielen Dank für das Logo, Visitenkarten und die Top Website."
-            </p>
-            <div class="review-card__footer">
-              <div class="review-card__avatar">
-                <span>K</span>
-              </div>
-              <div class="review-card__author">
-                <div class="review-card__name">Kevser Kavalci</div>
-                <div class="review-card__meta">Steuerberatung Yusuf KAVALCI · Google</div>
-              </div>
+
+          <article class="ds-review reveal" data-delay="2">
+            <div class="ds-review__stars">★★★★★</div>
+            <p class="ds-review__text">„Besonders beeindruckt war ich von den fairen Preisen und dem 24/7-Support – ich konnte mich jederzeit melden und bekam sofort Hilfe."</p>
+            <div class="ds-review__footer">
+              <div class="ds-review__avatar">M</div>
+              <div><div class="ds-review__name">Mubin Ahmetovic</div><div class="ds-review__meta">MHM Garten &amp; Landschaftsbau · Google</div></div>
             </div>
           </article>
         </div>
-        
-        <!-- Rating Summary -->
-        <div class="reviews__summary">
-          <div class="reviews__rating">
-            <div class="reviews__rating-number">5.0</div>
-            <div class="reviews__rating-stars">★★★★★</div>
-            <div class="reviews__rating-text">Basierend auf Google-Bewertungen</div>
+
+        <div class="ds-reviews__summary reveal">
+          <div>
+            <div class="ds-reviews__num">5.0</div>
+            <div class="ds-reviews__sumstars">★★★★★</div>
+            <div class="ds-reviews__sumtext">Basierend auf Google-Bewertungen</div>
           </div>
-          <a href="https://g.page/r/Cb-CsgZPf7TWEAE/review" target="_blank" class="reviews__cta">
-            Bewertung schreiben
-          </a>
+          <a href="https://g.page/r/Cb-CsgZPf7TWEAE/review" target="_blank" rel="noopener" class="btn btn--ghost" data-magnetic>Bewertung schreiben</a>
         </div>
       </div>
     </section>
 
-    <!-- CTA AUDIT -->
-    <section class="cta-audit">
-      <div class="cta-audit__container">
-        <h2>Bereit für dein nächstes Projekt?</h2>
-        <p>
-          Erzähl uns von deiner Idee – wir entwickeln gemeinsam die perfekte Lösung.
-          <strong>Kostenlose Erstberatung.</strong>
+    <!-- ══════════ PARTNER (COPA) ══════════ -->
+    <section class="ds-section" id="partner">
+      <div class="ds-container" style="text-align:center;">
+        <span class="ds-eyebrow reveal" style="justify-content:center;">Technologiepartner</span>
+        <h2 class="ds-section-title reveal" data-delay="1" style="margin-inline:auto;">
+          Unser Partner: <span class="ds-accent">COPA</span> 🇩🇪🤝🇦🇲
+        </h2>
+        <p class="ds-lead reveal" data-delay="1" style="margin-inline:auto;">
+          Enterprise-Technologie &amp; KI-Systeme kombiniert mit lokaler Umsetzung durch SMY Agency.
         </p>
-        <a href="services.html#kontakt" class="btn btn--primary btn--large">
-          🚀 Projekt anfragen
-        </a>
-      </div>
-    </section>
 
-    <!-- PARTNER -->
-    <section class="partner">
-      <div class="partner__container">
-        <span class="partner__badge">Technologiepartner</span>
-        
-        <h3 class="partner__title">
-          Unser Partner: <span class="accent">COPA</span> 🇩🇪🤝🇦🇲
-        </h3>
-        
-        <p class="partner__lead">
-          Enterprise-Technologie & KI-Systeme kombiniert mit lokaler Umsetzung durch SMY Agency.
-        </p>
-        
-        <div class="partner__grid">
-          <div class="partner-card">
-            <h4>Strategisch & Kreativ</h4>
+        <div class="ds-partner-grid">
+          <div class="ds-partner-card reveal" data-delay="1" style="text-align:left;">
+            <h4>Strategisch &amp; Kreativ</h4>
             <ul>
-              <li>Strategie & Kampagnen</li>
-              <li>Bewegtbild & Cloud-Editing</li>
-              <li>Audioproduktion & Sounddesign</li>
-              <li>Reporting & Visualisierung</li>
+              <li>Strategie &amp; Kampagnen</li>
+              <li>Bewegtbild &amp; Cloud-Editing</li>
+              <li>Audioproduktion &amp; Sounddesign</li>
+              <li>Reporting &amp; Visualisierung</li>
             </ul>
           </div>
-          
-          <div class="partner-card">
-            <h4>KI & Daten</h4>
+          <div class="ds-partner-card reveal" data-delay="2" style="text-align:left;">
+            <h4>KI &amp; Daten</h4>
             <ul>
-              <li>Generative AI & Chatbots</li>
-              <li>Dashboards & Predictive Models</li>
+              <li>Generative AI &amp; Chatbots</li>
+              <li>Dashboards &amp; Predictive Models</li>
               <li>Knowledge Graphs</li>
-              <li>Sentiment- & Topic-Analyse</li>
+              <li>Sentiment- &amp; Topic-Analyse</li>
             </ul>
           </div>
         </div>
-        
-        <a href="https://www.copa.team" target="_blank" class="partner__link">
-          Mehr über COPA →
-        </a>
+
+        <a href="https://www.copa.team" target="_blank" rel="noopener" class="ds-link reveal">Mehr über COPA →</a>
+      </div>
+    </section>
+
+    <!-- ══════════ CTA ══════════ -->
+    <section class="ds-section" id="kontakt">
+      <div class="ds-container">
+        <div class="ds-cta reveal">
+          <span class="ds-eyebrow" style="justify-content:center;">Kostenlose Erstberatung</span>
+          <h2>Bereit für dein nächstes Projekt?</h2>
+          <p>Erzähl uns von deiner Idee – wir entwickeln gemeinsam die perfekte Lösung.</p>
+          <a href="#" class="btn btn--primary btn--large" data-magnetic>🚀 Projekt anfragen</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <div id="site-footer"></div>
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="ds-footer">
+    <div class="ds-container ds-footer__inner">
+      <a href="index.html" class="ds-logo">SMY <em>Agency</em></a>
+      <ul class="ds-footer__links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projekte</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+      </ul>
+      <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
+    </div>
+  </footer>
 
-  <script src="main.js"></script>
+  <script src="design-demo.js"></script>
 </body>
 </html>

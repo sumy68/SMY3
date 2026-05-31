@@ -8,188 +8,160 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="design-demo.css" />
 </head>
 
 <body>
-  <div id="site-header"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="ds-header">
+    <div class="ds-container ds-nav">
+      <a href="index.html" class="ds-logo"><img src="assets/logo-header.png" alt="SMY Agency" /></a>
+      <nav>
+        <ul class="ds-nav__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projekte</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="services.html#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
-
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="page-hero__container">
-        <span class="page-hero__badge">B2B Vertrieb</span>
-        <h1 class="page-hero__title">Wir bringen dir<br>die Kunden.</h1>
-        <p class="page-hero__lead">
-          Du konzentrierst dich auf dein Handwerk – wir holen die Aufträge. Kompletter Neukundenvertrieb für Handwerk & Dienstleister: Leads, Kaltakquise, E-Mails & Anrufe.
+    <!-- PAGE HERO -->
+    <section class="ds-page-hero">
+      <div class="ds-container">
+        <span class="ds-eyebrow ds-rise">B2B Vertrieb</span>
+        <h1 class="ds-page-hero__title ds-rise ds-rise-2">Wir bringen dir<br><span class="ds-accent">die Kunden.</span></h1>
+        <p class="ds-lead ds-rise ds-rise-3">
+          Du konzentrierst dich auf dein Handwerk – wir holen die Aufträge. Kompletter
+          Neukundenvertrieb für Handwerk &amp; Dienstleister: Leads, Kaltakquise, E-Mails &amp; Anrufe.
         </p>
-        <a class="btn btn--primary" href="services.html#kontakt">Jetzt anfragen</a>
+        <div class="ds-page-hero__actions ds-rise ds-rise-4">
+          <a class="btn btn--primary btn--large" href="services.html#kontakt" data-magnetic>Jetzt anfragen</a>
+        </div>
       </div>
     </section>
 
-    <!-- WIE ES FUNKTIONIERT -->
-    <section class="services-section">
-      <div class="services-section__container">
-        <h2 class="section-subtitle">So läuft's ab</h2>
+    <!-- SO LÄUFT'S AB -->
+    <section class="ds-section" style="background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal">So läuft's ab</span>
+        <h2 class="ds-section-title reveal" data-delay="1">Von der Zielgruppe bis zum <span class="ds-accent">fertigen Kunden</span>.</h2>
 
-        <div class="services-accordion">
+        <div class="ds-steps">
+          <div class="ds-step reveal">
+            <div class="ds-step__num">01</div>
+            <h3>Zielgruppe definieren</h3>
+            <p>Wir analysieren gemeinsam deinen Wunschkunden – Branche, Region, Betriebsgröße. Du sagst wer, wir übernehmen den Rest.</p>
+          </div>
+          <div class="ds-step reveal" data-delay="1">
+            <div class="ds-step__num">02</div>
+            <h3>Leads scrapen &amp; verifizieren</h3>
+            <p>Wir erstellen eine saubere Kontaktliste mit Firmenname, Ansprechpartner, E-Mail &amp; Telefon – regional gefiltert, verifiziert, sofort einsatzbereit.</p>
+          </div>
+          <div class="ds-step reveal" data-delay="2">
+            <div class="ds-step__num">03</div>
+            <h3>Kaltakquise per E-Mail &amp; Telefon</h3>
+            <p>Wir kontaktieren deine Zielgruppe auf allen Kanälen – mit einer klaren Sequenz aus E-Mails und persönlichen Anrufen. Kein Template-Spam, sondern echte Kommunikation.</p>
+            <ul class="ds-step__list">
+              <li>📧 3 E-Mails im richtigen Abstand</li>
+              <li>📞 Persönliche Anrufe bei qualifizierten Leads</li>
+              <li>✓ DSGVO-konform &amp; professionell</li>
+            </ul>
+          </div>
+          <div class="ds-step reveal" data-delay="3">
+            <div class="ds-step__num">04</div>
+            <h3>Wir übernehmen den Abschluss</h3>
+            <p>Interessierte Betriebe melden sich bei uns. Wir führen das Erstgespräch, qualifizieren den Lead und schließen ab – du bekommst den Kunden fertig übergeben.</p>
+          </div>
+        </div>
 
-          <details class="service-item" open>
-            <summary>
-              <span class="service-item__title">1️⃣ Zielgruppe definieren</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Wir analysieren gemeinsam deinen Wunschkunden – Branche, Region, Betriebsgröße. Du sagst wer, wir übernehmen den Rest.</p>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">2️⃣ Leads scrapen & verifizieren</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Wir erstellen eine saubere Kontaktliste mit Firmenname, Ansprechpartner, E-Mail & Telefon – regional gefiltert, verifiziert, sofort einsatzbereit.</p>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">3️⃣ Kaltakquise per E-Mail & Telefon</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Wir kontaktieren deine Zielgruppe auf allen Kanälen – mit einer klaren Sequenz aus E-Mails und persönlichen Anrufen. Kein Template-Spam, sondern echte Kommunikation die Vertrauen aufbaut.</p>
-              <ul>
-                <li>📧 3 E-Mails im richtigen Abstand</li>
-                <li>📞 Persönliche Anrufe bei qualifizierten Leads</li>
-                <li>✓ DSGVO-konform & professionell</li>
-              </ul>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">4️⃣ Wir übernehmen den Abschluss</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Interessierte Betriebe melden sich bei uns. Wir führen das Erstgespräch, qualifizieren den Lead und schließen den Vertrag ab – du bekommst den Kunden fertig übergeben.</p>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">💰 Provision</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Kein Retainer, kein Risiko. Du zahlst nur wenn wir liefern.</p>
-              <ul>
-                <li>Vertragsabschluss läuft über uns</li>
-                <li>Einmalige Provision bei Abschluss</li>
-                <li>100 % des ersten Netto-Monatswertes</li>
-                <li>Danach gehört der Kunde komplett dir</li>
-              </ul>
-            </div>
-          </details>
-
+        <!-- Provision -->
+        <div class="ds-cta reveal" style="margin-top: var(--space-xl); text-align:left;">
+          <span class="ds-eyebrow">💰 Provision</span>
+          <h2 style="font-size: var(--fs-h2); margin-block: var(--space-sm);">Kein Retainer, kein Risiko.</h2>
+          <p style="margin: 0 0 var(--space-md);">Du zahlst nur, wenn wir liefern.</p>
+          <ul class="ds-card__list" style="max-width:520px;">
+            <li>Vertragsabschluss läuft über uns</li>
+            <li>Einmalige Provision bei Abschluss</li>
+            <li>100 % des ersten Netto-Monatswertes</li>
+            <li>Danach gehört der Kunde komplett dir</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- BRANCHEN -->
-    <section class="services-section" style="padding-top:0;">
-      <div class="services-section__container">
-        <h2 class="section-subtitle">Für wen wir arbeiten</h2>
+    <section class="ds-section">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal">Für wen wir arbeiten</span>
+        <h2 class="ds-section-title reveal" data-delay="1">Branchen, die wir <span class="ds-accent">füllen</span>.</h2>
 
-        <div class="services-accordion">
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">🌿 Garten & Landschaftsbau</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Gewerbekunden, Hausverwaltungen & Immobilienfirmen die laufende Grünpflege, Neubepflanzung oder Winterdienst-Verträge vergeben.</p>
-              <a class="service-item__link" href="services.html#kontakt">Jetzt anfragen →</a>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">🧹 Gebäudereinigung & Facility</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Büros, Gewerbeimmobilien & Unternehmen die regelmäßige Unterhaltsreinigung oder Baureinigung ausschreiben.</p>
-              <a class="service-item__link" href="services.html#kontakt">Jetzt anfragen →</a>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">🏗️ Maler, Trockenbau & Handwerk</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Bauunternehmen, Hausverwalter & Immobilienentwickler als Auftraggeber für Folgegewerke & Sanierungen.</p>
-              <a class="service-item__link" href="services.html#kontakt">Jetzt anfragen →</a>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">🚛 Umzug & Entrümpelung</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Unternehmen, Hausverwaltungen & Privatkunden mit konkretem Bedarf – regional und zeitnah.</p>
-              <a class="service-item__link" href="services.html#kontakt">Jetzt anfragen →</a>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">🔧 Haustechnik & Hausmeisterservice</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Gewerbeobjekte & Hausverwaltungen die Wartungs- und Hausmeisterdienste regelmäßig vergeben.</p>
-              <a class="service-item__link" href="services.html#kontakt">Jetzt anfragen →</a>
-            </div>
-          </details>
-
-          <details class="service-item">
-            <summary>
-              <span class="service-item__title">➕ Deine Branche</span>
-              <span class="service-item__toggle"></span>
-            </summary>
-            <div class="service-item__content">
-              <p>Nicht dabei? Kein Problem. Wir scrapen gezielt nach deiner Zielgruppe – bundesweit oder regional. Einfach anfragen.</p>
-              <a class="service-item__link" href="services.html#kontakt">Jetzt anfragen →</a>
-            </div>
-          </details>
-
+        <div class="ds-grid" style="margin-top: var(--space-xl);">
+          <article class="ds-card reveal">
+            <div class="ds-card__icon">🌿</div>
+            <h3>Garten &amp; Landschaftsbau</h3>
+            <p>Gewerbekunden, Hausverwaltungen &amp; Immobilienfirmen, die laufende Grünpflege, Neubepflanzung oder Winterdienst-Verträge vergeben.</p>
+          </article>
+          <article class="ds-card reveal" data-delay="1">
+            <div class="ds-card__icon">🧹</div>
+            <h3>Gebäudereinigung &amp; Facility</h3>
+            <p>Büros, Gewerbeimmobilien &amp; Unternehmen, die regelmäßige Unterhaltsreinigung oder Baureinigung ausschreiben.</p>
+          </article>
+          <article class="ds-card reveal" data-delay="2">
+            <div class="ds-card__icon">🏗️</div>
+            <h3>Maler, Trockenbau &amp; Handwerk</h3>
+            <p>Bauunternehmen, Hausverwalter &amp; Immobilienentwickler als Auftraggeber für Folgegewerke &amp; Sanierungen.</p>
+          </article>
+          <article class="ds-card reveal">
+            <div class="ds-card__icon">🚛</div>
+            <h3>Umzug &amp; Entrümpelung</h3>
+            <p>Unternehmen, Hausverwaltungen &amp; Privatkunden mit konkretem Bedarf – regional und zeitnah.</p>
+          </article>
+          <article class="ds-card reveal" data-delay="1">
+            <div class="ds-card__icon">🔧</div>
+            <h3>Haustechnik &amp; Hausmeisterservice</h3>
+            <p>Gewerbeobjekte &amp; Hausverwaltungen, die Wartungs- und Hausmeisterdienste regelmäßig vergeben.</p>
+          </article>
+          <article class="ds-card reveal" data-delay="2">
+            <div class="ds-card__icon">➕</div>
+            <h3>Deine Branche</h3>
+            <p>Nicht dabei? Kein Problem. Wir scrapen gezielt nach deiner Zielgruppe – bundesweit oder regional. Einfach anfragen.</p>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="cta-audit">
-      <div class="cta-audit__container">
-        <h2>Bereit für neue Aufträge?</h2>
-        <p>Sag uns deine Branche & Region – wir zeigen dir was möglich ist. <strong>Kostenlose Erstberatung.</strong></p>
-        <a href="services.html#kontakt" class="btn btn--primary btn--large">🚀 Kostenlos anfragen</a>
+    <section class="ds-section">
+      <div class="ds-container">
+        <div class="ds-cta reveal">
+          <h2>Bereit für neue Aufträge?</h2>
+          <p>Sag uns deine Branche &amp; Region – wir zeigen dir, was möglich ist. <strong>Kostenlose Erstberatung.</strong></p>
+          <a href="services.html#kontakt" class="btn btn--primary btn--large" data-magnetic>🚀 Kostenlos anfragen</a>
+        </div>
       </div>
     </section>
-
   </main>
 
-  <div id="site-footer"></div>
-  <script src="main.js"></script>
+  <footer class="ds-footer">
+    <div class="ds-container ds-footer__inner">
+      <a href="index.html" class="ds-logo">SMY <em>Agency</em></a>
+      <ul class="ds-footer__links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projekte</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="services.html#kontakt">Kontakt</a></li>
+      </ul>
+      <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
+    </div>
+  </footer>
+
+  <script src="design-demo.js"></script>
 </body>
 </html>

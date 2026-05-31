@@ -4,150 +4,100 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Impressum | SMY Agency</title>
-  <meta name="robots" content="index,follow" />
-  <meta name="description" content="Impressum und rechtliche Angaben der SMY Agency – Sümeyye Abur, München" />
+  <meta name="description" content="Impressum und rechtliche Angaben der SMY Agency – Sümeyye Abur, Manching" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="design-demo.css" />
 </head>
 
 <body>
-  <!-- HEADER -->
-  <div id="site-header"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="ds-header">
+    <div class="ds-container ds-nav">
+      <a href="index.html" class="ds-logo"><img src="assets/logo-header.png" alt="SMY Agency" /></a>
+      <nav>
+        <ul class="ds-nav__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projekte</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="services.html#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
-    <!-- HERO -->
-    <section class="page-hero page-hero--legal">
-      <div class="page-hero__container">
-        <span class="page-hero__badge">Rechtliches</span>
-        <h1 class="page-hero__title">Impressum</h1>
-        <p class="page-hero__lead">
-          Angaben gemäß § 5 TMG
-        </p>
+    <section class="ds-page-hero">
+      <div class="ds-container">
+        <span class="ds-eyebrow ds-rise">Rechtliches</span>
+        <h1 class="ds-page-hero__title ds-rise ds-rise-2">Impressum</h1>
+        <p class="ds-lead ds-rise ds-rise-3">Angaben gemäß § 5 TMG</p>
       </div>
     </section>
 
-    <!-- LEGAL CONTENT -->
-    <section class="legal-section">
-      <div class="legal-section__container">
-        <!-- Anbieter -->
-        <div class="legal-card">
-          <h2 class="legal-card__title">Anbieter</h2>
-          <div class="legal-card__content">
-            <p>
-              Sümeyye Abur<br>
-              Schellingstr. 109a<br>
-              80798 München<br>
-              Deutschland
-            </p>
-
-            <p>
-              Tel.: <a href="tel:+4915236137216">+49 1523 6137216</a><br>
-              E-Mail: <a href="mailto:info@smyagency.de">info@smyagency.de</a>
-            </p>
-
+    <section class="ds-section">
+      <div class="ds-container">
+        <div class="ds-legal">
+          <div class="ds-legal__card reveal">
+            <h2>Anbieter</h2>
+            <p>Sümeyye Abur<br>Ursinusstr. 7<br>85077 Manching<br>Deutschland</p>
+            <p>Tel.: <a href="tel:+4915236137216">+49 1523 6137216</a><br>E-Mail: <a href="mailto:info@smyagency.de">info@smyagency.de</a></p>
             <p>Nicht Umsatzsteuerpflichtig gemäß §19 Abs. 1 UStG.</p>
           </div>
-        </div>
 
-        <!-- Verantwortlich -->
-        <div class="legal-card">
-          <h2 class="legal-card__title">Verantwortlich i.S.d. § 18 Abs. 2 MStV</h2>
-          <div class="legal-card__content">
-            <p>
-              Sümeyye Abur<br>
-              Schellingstr. 109a<br>
-              80798 München
-            </p>
+          <div class="ds-legal__card reveal">
+            <h2>Verantwortlich i.S.d. § 18 Abs. 2 MStV</h2>
+            <p>Sümeyye Abur<br>Ursinusstr. 7<br>85077 Manching</p>
           </div>
-        </div>
 
-        <!-- Online-Streitbeilegung -->
-        <div class="legal-card">
-          <h2 class="legal-card__title">Online-Streitbeilegung</h2>
-          <div class="legal-card__content">
-            <p>
-              Plattform der EU-Kommission zur Online-Streitbeilegung:<br>
-              <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">
-                https://ec.europa.eu/consumers/odr/
-              </a>
-            </p>
-            <p>
-              Wir sind zur Teilnahme an einem Streitbeilegungsverfahren vor einer 
-              Verbraucherschlichtungsstelle weder verpflichtet noch bereit.
-            </p>
+          <div class="ds-legal__card reveal">
+            <h2>Online-Streitbeilegung</h2>
+            <p>Plattform der EU-Kommission zur Online-Streitbeilegung:<br>
+              <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a></p>
+            <p>Wir sind zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle weder verpflichtet noch bereit.</p>
           </div>
-        </div>
 
-        <!-- Haftung für Inhalte -->
-        <div class="legal-card">
-          <h2 class="legal-card__title">Haftung für Inhalte</h2>
-          <div class="legal-card__content">
-            <p>
-              Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen 
-              Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind 
-              wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen 
-              zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit 
-              hinweisen.
-            </p>
-            <p>
-              Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den 
-              allgemeinen Gesetzen bleiben hiervon unberührt. Eine Haftung ist jedoch erst ab dem 
-              Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden 
-              entsprechender Rechtsverletzungen entfernen wir diese Inhalte umgehend.
-            </p>
+          <div class="ds-legal__card reveal">
+            <h2>Haftung für Inhalte</h2>
+            <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+            <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden entsprechender Rechtsverletzungen entfernen wir diese Inhalte umgehend.</p>
           </div>
-        </div>
 
-        <!-- Haftung für Links -->
-        <div class="legal-card">
-          <h2 class="legal-card__title">Haftung für Links</h2>
-          <div class="legal-card__content">
-            <p>
-              Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir 
-              keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte keine Gewähr 
-              übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter 
-              verantwortlich.
-            </p>
-            <p>
-              Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Eine permanente 
-              inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte 
-              einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen 
-              entfernen wir derartige Links umgehend.
-            </p>
+          <div class="ds-legal__card reveal">
+            <h2>Haftung für Links</h2>
+            <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p>
+            <p>Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.</p>
           </div>
-        </div>
 
-        <!-- Urheberrecht -->
-        <div class="legal-card">
-          <h2 class="legal-card__title">Urheberrecht</h2>
-          <div class="legal-card__content">
-            <p>
-              Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten 
-              unterliegen dem deutschen Urheberrecht. Downloads und Kopien dieser Seite sind 
-              nur für den privaten Gebrauch gestattet.
-            </p>
-            <p>
-              Inhalte Dritter werden als solche gekennzeichnet. Sollten Sie trotzdem auf eine 
-              Urheberrechtsverletzung aufmerksam werden, bitten wir um einen Hinweis. Bei 
-              Bekanntwerden von Rechtsverletzungen entfernen wir derartige Inhalte umgehend.
-            </p>
+          <div class="ds-legal__card reveal">
+            <h2>Urheberrecht</h2>
+            <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Downloads und Kopien dieser Seite sind nur für den privaten Gebrauch gestattet.</p>
+            <p>Inhalte Dritter werden als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen Hinweis. Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Inhalte umgehend.</p>
           </div>
-        </div>
 
-        <!-- Meta -->
-        <p class="legal-meta">Stand: 10. März 2026</p>
+          <p class="ds-legal__meta">Stand: 31. Mai 2026</p>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <div id="site-footer"></div>
+  <footer class="ds-footer">
+    <div class="ds-container ds-footer__inner">
+      <a href="index.html" class="ds-logo">SMY <em>Agency</em></a>
+      <ul class="ds-footer__links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+      </ul>
+      <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
+    </div>
+  </footer>
 
-  <script src="main.js"></script>
+  <script src="design-demo.js"></script>
 </body>
 </html>

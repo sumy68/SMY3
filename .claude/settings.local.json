@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open design-demo.html)",
+      "Bash(open design-leads.html)",
+      "Bash(open design-vertrieb.html)"
+    ]
+  }
+}
