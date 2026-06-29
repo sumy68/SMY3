@@ -46,8 +46,8 @@
   margin-inline: auto;
   padding-inline: var(--container-pad);
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
   align-items: center;
 }
 
@@ -132,7 +132,7 @@
   perspective-origin: 50% 42%;
   display: grid;
   place-items: center;
-  min-height: 420px;
+  min-height: 480px;
 }
 
 /* schwebende Tag-Pills um die Geräte */
@@ -167,7 +167,7 @@
 .sc-laptop {
   --open: clamp(0, calc(var(--p) / 0.6), 1);          /* Aufklappen 0→0.6 */
   --tail: clamp(0, calc((var(--p) - 0.55) / 0.45), 1); /* Rest-Phase */
-  width: min(100%, 560px);
+  width: min(100%, 660px);
   transform-style: preserve-3d;
   transform:
     rotateX(calc((1 - var(--tail)) * 6deg))
@@ -307,7 +307,7 @@
 }
 
 /* Tag-Positionen Akt 1 */
-.sc-laptop-wrap { position: relative; width: min(100%, 560px); transform-style: preserve-3d; }
+.sc-laptop-wrap { position: relative; width: min(100%, 660px); transform-style: preserve-3d; }
 .sc-act--web .sc-tag--1 { top: 6%; right: -4%; animation: sc-float 6s ease-in-out infinite; }
 .sc-act--web .sc-tag--2 { bottom: 10%; left: -6%; animation: sc-float 7s ease-in-out infinite .8s; }
 .sc-act--web .sc-tag--3 { top: 40%; right: -8%; animation: sc-float 8s ease-in-out infinite .4s; }

@@ -31,6 +31,8 @@
   box-shadow: 0 0 14px var(--smy-red-glow);
   transform: scaleY(var(--thread));
   transform-origin: top center;
+  /* glättet gebündelte Scroll-Updates auf iOS → flüssige Füllung */
+  transition: transform 0.3s linear;
 }
 .thread__tip {
   position: absolute;
@@ -43,6 +45,7 @@
   transform: translate(-50%, -50%);
   z-index: 4;
   opacity: clamp(0, calc(var(--thread) * 30), 1);
+  transition: top 0.3s linear;
 }
 
 /* ── Station ── */

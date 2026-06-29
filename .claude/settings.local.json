@@ -3,7 +3,11 @@
     "allow": [
       "Bash(open design-demo.html)",
       "Bash(open design-leads.html)",
-      "Bash(open design-vertrieb.html)"
+      "Bash(open design-vertrieb.html)",
+      "WebFetch(domain:smyagency.de)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
