@@ -1,0 +1,141 @@
+/* ============================================================
+   SMY AGENCY — BRAND SECTION MOTION  (#services)
+   Kreative Motion für „Eine Brand, die hängen bleibt".
+   Scoped auf #services, baut auf design-system.css auf.
+   ============================================================ */
+
+/* 3D-Bühne für die Card-Tilts */
+#services .ds-grid { perspective: 1300px; }
+
+/* ─────────────────────────────────────────────
+   1. HEADLINE — selbst-zeichnender Unterstrich
+   ───────────────────────────────────────────── */
+#services .ds-section-title .ds-accent {
+  position: relative;
+  display: inline-block;
+  color: var(--smy-red-bright);
+}
+#services .ds-section-title .ds-accent::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -0.06em;
+  height: 0.11em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--smy-red), var(--smy-red-bright));
+  box-shadow: 0 4px 16px var(--smy-red-glow);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+#services .ds-section-title.is-in .ds-accent::after { transform: scaleX(1); }
+
+/* ─────────────────────────────────────────────
+   2. CINEMATISCHER, GESTAFFELTER CARD-AUFTRITT
+   (überschreibt .reveal dank #id-Spezifität)
+   ───────────────────────────────────────────── */
+#services .ds-grid .ds-card.reveal {
+  opacity: 0;
+  transform: translateY(48px) scale(0.94) rotateX(10deg);
+  transform-origin: 50% 100%;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#services .ds-grid .ds-card.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0);
+}
+/* Wellen-Stagger */
+#services .ds-grid .ds-card:nth-child(1) { transition-delay: 0.00s; }
+#services .ds-grid .ds-card:nth-child(2) { transition-delay: 0.07s; }
+#services .ds-grid .ds-card:nth-child(3) { transition-delay: 0.14s; }
+#services .ds-grid .ds-card:nth-child(4) { transition-delay: 0.21s; }
+#services .ds-grid .ds-card:nth-child(5) { transition-delay: 0.28s; }
+#services .ds-grid .ds-card:nth-child(6) { transition-delay: 0.35s; }
+#services .ds-grid .ds-card:nth-child(7) { transition-delay: 0.42s; }
+
+/* ─────────────────────────────────────────────
+   3. INTERAKTIVE CARDS — Tilt · Spotlight · Tiefe
+   ───────────────────────────────────────────── */
+#services .ds-card {
+  isolation: isolate;
+  overflow: visible;            /* echtes 3D statt 2D-Clipping */
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Cursor-Spotlight (über BG, unter Text) */
+#services .ds-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    300px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(225, 6, 0, 0.20),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+#services .ds-card:hover::after { opacity: 1; }
+
+/* Icon springt nach vorn, dreht & füllt sich rot */
+#services .ds-card__icon {
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              background var(--transition-base),
+              color var(--transition-base);
+}
+#services .ds-card:hover .ds-card__icon {
+  transform: translateZ(45px) rotate(-8deg) scale(1.14);
+  background: var(--smy-red);
+  color: #fff;
+  box-shadow: 0 16px 34px var(--smy-red-glow);
+}
+
+/* Inhalt mit leichter Parallax-Tiefe */
+#services .ds-card h3 { transition: transform var(--transition-base); }
+#services .ds-card:hover h3 { transform: translateZ(26px); }
+#services .ds-card p { transition: transform var(--transition-base); }
+#services .ds-card:hover p { transform: translateZ(14px); }
+
+/* Schimmernder Lichtstreifen oben beim Hover */
+#services .ds-card::before {
+  background: linear-gradient(90deg, transparent, var(--smy-red), transparent);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+#services .ds-card:hover::before {
+  opacity: 1;
+  animation: brand-shimmer 1.6s linear infinite;
+}
+@keyframes brand-shimmer {
+  to { background-position: -200% 0; }
+}
+
+/* ─────────────────────────────────────────────
+   4. CHIPS (B2B Vertrieb) — sanftes Aufploppen beim Hover
+   ───────────────────────────────────────────── */
+#services .ds-card .ds-chip {
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+#services .ds-card:hover .ds-chip {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────
+   5. REDUCED MOTION / TOUCH
+   ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #services .ds-grid .ds-card.reveal { transform: none; }
+  #services .ds-section-title .ds-accent::after { transition: none; transform: scaleX(1); }
+  #services .ds-card::before { animation: none !important; }
+}
+@media (hover: none) {
+  #services .ds-card::after { display: none; }
+}

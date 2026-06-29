@@ -1,0 +1,214 @@
+/* ============================================================
+   SMY AGENCY — ROTER FADEN (Services-Timeline)
+   Vertikale rote Linie, die sich beim Scrollen füllt.
+   Jede Leistung = Station mit aufleuchtendem Knoten.
+   Scoped auf .thread, baut auf design-system.css auf.
+   ============================================================ */
+
+.thread {
+  position: relative;
+  max-width: 940px;
+  margin: var(--space-2xl) auto 0;
+  --thread: 0;
+}
+
+/* ── Die Linie (Track + roter Füll-Fortschritt + Glüh-Punkt) ── */
+.thread__line {
+  position: absolute;
+  top: 12px; bottom: 12px;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--border-strong);
+  border-radius: 2px;
+  z-index: 1;
+}
+.thread__fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--smy-red), var(--smy-red-bright));
+  box-shadow: 0 0 14px var(--smy-red-glow);
+  transform: scaleY(var(--thread));
+  transform-origin: top center;
+}
+.thread__tip {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--thread) * 100%);
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--smy-red-bright);
+  box-shadow: 0 0 0 4px var(--smy-red-soft), 0 0 22px 5px var(--smy-red-glow);
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  opacity: clamp(0, calc(var(--thread) * 30), 1);
+}
+
+/* ── Station ── */
+.thread__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space-3xl);
+  margin-bottom: var(--space-2xl);
+  perspective: 1000px;
+}
+.thread__step:last-child { margin-bottom: 0; }
+
+/* Knoten auf der Linie */
+.thread__node {
+  position: absolute;
+  left: 50%;
+  top: 26px;
+  transform: translate(-50%, -50%);
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg-panel);
+  border: 2px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text-muted);
+  z-index: 3;
+  transition: color .4s ease, background .4s ease,
+              border-color .4s ease, box-shadow .4s ease, transform .4s ease;
+}
+.thread__step.is-lit .thread__node {
+  background: var(--smy-red);
+  border-color: var(--smy-red-bright);
+  color: #fff;
+  box-shadow: 0 0 0 7px var(--smy-red-soft), 0 0 28px var(--smy-red-glow);
+}
+
+/* ── Karte ── */
+.thread__card {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  opacity: 0;
+  transform: translateX(-34px);
+  transition: opacity .7s cubic-bezier(0.16,1,0.3,1),
+              transform .7s cubic-bezier(0.16,1,0.3,1),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.thread__step.is-in .thread__card { opacity: 1; transform: none; }
+
+/* Seiten-Verteilung (Zickzack) */
+.thread__step--left  .thread__card { grid-column: 1; }
+.thread__step--right .thread__card { grid-column: 2; }
+.thread__step--right .thread__card { transform: translateX(34px); }
+.thread__step.is-in.thread__step--right .thread__card { transform: none; }
+
+/* kleiner Konnektor von der Karte zur Linie */
+.thread__card::after {
+  content: "";
+  position: absolute;
+  top: 26px;
+  width: var(--space-3xl);
+  height: 2px;
+  background: linear-gradient(90deg, var(--border-strong), transparent);
+}
+.thread__step--left  .thread__card::after { right: calc(var(--space-3xl) * -1); background: linear-gradient(90deg, var(--border-strong), transparent); }
+.thread__step--right .thread__card::after { left:  calc(var(--space-3xl) * -1); background: linear-gradient(270deg, var(--border-strong), transparent); }
+
+.thread__card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Karten-Inhalt */
+.thread__card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+.thread__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px; height: 46px;
+  flex: none;
+  border-radius: var(--radius-md);
+  background: var(--smy-red-soft);
+  border: 1px solid var(--border-accent);
+  font-size: 1.3rem;
+  transition: transform var(--transition-base);
+}
+.thread__card:hover .thread__icon { transform: scale(1.08) rotate(-6deg); }
+.thread__card h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  color: var(--text-primary);
+}
+.thread__card > p {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+.thread__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-md);
+  display: grid;
+  gap: var(--space-2xs);
+}
+.thread__list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
+.thread__list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.55em;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--smy-red);
+}
+.thread__more {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--smy-red-bright);
+  display: inline-flex;
+  gap: var(--space-2xs);
+  transition: gap var(--transition-base);
+}
+.thread__card:hover .thread__more { gap: var(--space-sm); }
+
+/* ── Mobile: Linie links, alles einspaltig ── */
+@media (max-width: 760px) {
+  .thread { margin-top: var(--space-xl); }
+  .thread__line { left: 26px; }
+  .thread__step {
+    grid-template-columns: 1fr;
+    margin-bottom: var(--space-xl);
+    padding-left: 72px;
+  }
+  .thread__node { left: 26px; width: 48px; height: 48px; }
+  .thread__card,
+  .thread__step--left .thread__card,
+  .thread__step--right .thread__card { grid-column: 1; transform: translateX(24px); }
+  .thread__step.is-in .thread__card { transform: none; }
+  .thread__card::after,
+  .thread__step--left .thread__card::after,
+  .thread__step--right .thread__card::after {
+    left: -46px; right: auto;
+    width: 46px;
+    background: linear-gradient(270deg, var(--border-strong), transparent);
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .thread__fill { transform: scaleY(1); }
+  .thread__card { opacity: 1 !important; transform: none !important; }
+}

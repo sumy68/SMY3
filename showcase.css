@@ -1,0 +1,576 @@
+/* ============================================================
+   SMY AGENCY — SIGNATURE SHOWCASE
+   Apple-Style 3-Akt Scroll-Story (Web · Design · Social)
+   Scroll-gescrubbt über die CSS-Variable --p (0 → 1),
+   gesetzt von showcase.js. Nutzt Tokens aus design-system.css.
+   ============================================================ */
+
+.sc {
+  position: relative;
+  background: var(--bg-base);
+  overflow: clip;
+}
+
+/* Sanfter Verlauf in den nächsten Bereich */
+.sc::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 160px;
+  background: linear-gradient(transparent, var(--bg-base));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Akt-Hülle: hoch genug, damit die Bühne „gepinnt" scrollt ── */
+.sc-act {
+  position: relative;
+  min-height: 150vh;
+  --p: 0;
+}
+
+.sc-act__stage {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-2xl);
+}
+
+.sc-act__inner {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+/* Akt 2 spiegeln (Visual links) */
+.sc-act--reverse .sc-act__visual { order: -1; }
+
+/* ── Copy ── */
+.sc-act__copy { max-width: 30rem; }
+
+.sc-act__index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+.sc-act__index::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--smy-red);
+}
+
+.sc-act__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 1rem + 3.5vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+.sc-act__title .ds-accent,
+.sc-act__title em {
+  color: var(--smy-red);
+  font-style: normal;
+}
+
+.sc-act__lead {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.sc-act__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-lg);
+  display: grid;
+  gap: var(--space-sm);
+}
+.sc-act__features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+}
+.sc-act__features svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--smy-red);
+}
+
+/* Sanftes Einschweben der Copy je nach Scroll-Fortschritt */
+.sc-act__copy > * {
+  opacity: clamp(0, calc((var(--p) - 0.04) * 6), 1);
+  transform: translateY(calc((1 - clamp(0, calc((var(--p) - 0.04) * 6), 1)) * 26px));
+  transition: opacity .2s linear, transform .2s linear;
+}
+
+/* ── Visual-Bühne (3D-Perspektive) ── */
+.sc-act__visual {
+  position: relative;
+  perspective: 1700px;
+  perspective-origin: 50% 42%;
+  display: grid;
+  place-items: center;
+  min-height: 420px;
+}
+
+/* schwebende Tag-Pills um die Geräte */
+.sc-tag {
+  position: absolute;
+  z-index: 6;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: .04em;
+  color: var(--text-primary);
+  background: rgba(20, 25, 34, 0.72);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  opacity: clamp(0, calc((var(--p) - 0.18) * 5), 1);
+}
+.sc-tag b { color: var(--smy-red); font-weight: 700; }
+
+/* sanftes Dauer-Schweben */
+@keyframes sc-float {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -10px; }
+}
+
+/* ════════════════════════════════════════════
+   AKT 1 — MACBOOK
+   ════════════════════════════════════════════ */
+.sc-laptop {
+  --open: clamp(0, calc(var(--p) / 0.6), 1);          /* Aufklappen 0→0.6 */
+  --tail: clamp(0, calc((var(--p) - 0.55) / 0.45), 1); /* Rest-Phase */
+  width: min(100%, 560px);
+  transform-style: preserve-3d;
+  transform:
+    rotateX(calc((1 - var(--tail)) * 6deg))
+    translateY(calc(var(--tail) * -8px));
+  filter: drop-shadow(0 50px 60px rgba(0,0,0,.6));
+}
+
+.sc-laptop__lid {
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  /* geschlossen: nach hinten geklappt → offen: aufrecht */
+  transform: rotateX(calc(-86deg * (1 - var(--open))));
+}
+
+.sc-laptop__screen {
+  position: relative;
+  aspect-ratio: 16 / 10.2;
+  border-radius: 16px 16px 6px 6px;
+  background: #05070b;
+  border: 2px solid #20252f;
+  padding: 9px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+  overflow: hidden;
+}
+/* Kamera-Punkt */
+.sc-laptop__screen::before {
+  content: "";
+  position: absolute;
+  top: 4px; left: 50%;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #2b313c;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+/* der eigentliche „Website"-Inhalt im Screen */
+.sc-ui {
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 80% -10%, rgba(225,6,0,.22), transparent 55%),
+    linear-gradient(160deg, #0d1118, #070a0e);
+  opacity: var(--open);
+  display: flex;
+  flex-direction: column;
+}
+.sc-ui__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,.03);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.sc-ui__dot { width: 7px; height: 7px; border-radius: 50%; background: #3a414e; }
+.sc-ui__dot:nth-child(1){ background:#ff5f57; }
+.sc-ui__dot:nth-child(2){ background:#febc2e; }
+.sc-ui__dot:nth-child(3){ background:#28c840; }
+.sc-ui__url {
+  margin-left: 8px;
+  flex: 1;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  padding-inline: 8px;
+}
+.sc-ui__body { flex: 1; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.sc-ui__pill {
+  width: 92px; height: 12px; border-radius: 999px;
+  background: var(--smy-red-soft);
+  border: 1px solid var(--border-accent);
+}
+.sc-ui__h {
+  width: 78%; height: 20px; border-radius: 6px;
+  background: linear-gradient(90deg, #fff, #c8ccd4);
+  opacity: .92;
+  transform: translateY(calc((1 - var(--tail)) * 14px));
+  transition: transform .2s linear;
+}
+.sc-ui__h--2 { width: 56%; }
+.sc-ui__cards { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.sc-ui__card {
+  height: 46px; border-radius: 8px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border-subtle);
+  opacity: var(--tail);
+  transform: translateY(calc((1 - var(--tail)) * 16px));
+  transition: opacity .2s linear, transform .2s linear;
+}
+.sc-ui__card:nth-child(2){ transition-delay:.04s; }
+.sc-ui__card:nth-child(3){ transition-delay:.08s; }
+.sc-ui__btn {
+  align-self: flex-start;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--smy-red);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 9px;
+}
+
+/* Unterteil / Tastatur-Deck */
+.sc-laptop__base {
+  position: relative;
+  height: 15px;
+  margin-top: -1px;
+  border-radius: 4px 4px 11px 11px;
+  background: linear-gradient(#3a4150, #161a21 70%);
+  box-shadow: 0 2px 2px rgba(0,0,0,.5);
+  transform: translateZ(1px);
+}
+.sc-laptop__base::before { /* Scharnier */
+  content: "";
+  position: absolute;
+  inset-inline: 14%;
+  top: 0; height: 3px;
+  background: #05070a;
+  border-radius: 0 0 4px 4px;
+}
+.sc-laptop__base::after { /* Touchpad-Aussparung */
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 2px;
+  width: 70px; height: 4px;
+  background: rgba(255,255,255,.08);
+  border-radius: 0 0 4px 4px;
+  transform: translateX(-50%);
+}
+
+/* Tag-Positionen Akt 1 */
+.sc-laptop-wrap { position: relative; width: min(100%, 560px); transform-style: preserve-3d; }
+.sc-act--web .sc-tag--1 { top: 6%; right: -4%; animation: sc-float 6s ease-in-out infinite; }
+.sc-act--web .sc-tag--2 { bottom: 10%; left: -6%; animation: sc-float 7s ease-in-out infinite .8s; }
+.sc-act--web .sc-tag--3 { top: 40%; right: -8%; animation: sc-float 8s ease-in-out infinite .4s; }
+
+/* ════════════════════════════════════════════
+   AKT 2 — DESIGN-LEINWAND
+   ════════════════════════════════════════════ */
+.sc-canvas {
+  --draw: clamp(0, calc(var(--p) / 0.55), 1);
+  --pop:  clamp(0, calc((var(--p) - 0.3) / 0.5), 1);
+  position: relative;
+  width: min(100%, 520px);
+  aspect-ratio: 4 / 3.4;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(160deg, rgba(20,25,34,.95), rgba(10,13,18,.97));
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform: rotateX(8deg) rotateY(-6deg);
+  transform-style: preserve-3d;
+}
+/* Werkzeug-Leiste oben */
+.sc-canvas__bar {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(255,255,255,.02);
+}
+.sc-canvas__bar i {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: rgba(255,255,255,.05);
+  display: inline-block;
+}
+.sc-canvas__bar i:first-child { background: var(--smy-red-soft); border:1px solid var(--border-accent); }
+.sc-canvas__title {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+/* Karo-Grid */
+.sc-canvas__grid {
+  position: absolute;
+  inset: 38px 0 0 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: var(--draw);
+}
+
+.sc-canvas__art { position: absolute; inset: 38px 0 0 0; }
+.sc-canvas__art svg { width: 100%; height: 100%; }
+
+/* gezeichnete Pfade */
+.sc-draw {
+  fill: none;
+  stroke: var(--smy-red);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--len, 600);
+  stroke-dashoffset: calc(var(--len, 600) * (1 - var(--draw)));
+}
+.sc-draw--soft { stroke: rgba(255,255,255,.5); stroke-width: 1.5; }
+
+/* eingeblendete Form-/Text-Bausteine */
+.sc-shape {
+  opacity: var(--pop);
+  transform: scale(calc(.7 + var(--pop) * .3));
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Farb-Swatches */
+.sc-swatches {
+  position: absolute;
+  left: 16px; bottom: 16px;
+  display: flex;
+  gap: 7px;
+  z-index: 4;
+}
+.sc-swatches span {
+  width: 22px; height: 22px; border-radius: 7px;
+  border: 1px solid rgba(255,255,255,.18);
+  opacity: var(--pop);
+  transform: translateY(calc((1 - var(--pop)) * 16px));
+  box-shadow: 0 4px 10px rgba(0,0,0,.4);
+}
+.sc-swatches span:nth-child(1){ background:#E10600; }
+.sc-swatches span:nth-child(2){ background:#FF6B6B; }
+.sc-swatches span:nth-child(3){ background:#0E1116; }
+.sc-swatches span:nth-child(4){ background:#F4F6F8; }
+.sc-swatches span:nth-child(5){ background:#FFB020; }
+
+/* „designender" Cursor */
+.sc-cursor {
+  position: absolute;
+  z-index: 7;
+  left: 0; top: 0;
+  width: 16px; height: 16px;
+  color: #fff;
+  /* bewegt sich diagonal über die Leinwand */
+  translate:
+    calc(40px + var(--draw) * 250px)
+    calc(60px + var(--draw) * 150px);
+  transition: translate .1s linear;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.6));
+}
+.sc-cursor::after {
+  content: "SMY";
+  position: absolute;
+  left: 14px; top: 14px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--smy-red);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.sc-act--design .sc-tag--1 { top: 2%; right: 2%; animation: sc-float 6.5s ease-in-out infinite; }
+.sc-act--design .sc-tag--2 { bottom: -3%; right: 16%; animation: sc-float 7.5s ease-in-out infinite .6s; }
+
+/* ════════════════════════════════════════════
+   AKT 3 — IPHONE
+   ════════════════════════════════════════════ */
+.sc-phone {
+  --rise: clamp(0, calc(var(--p) / 0.55), 1);
+  position: relative;
+  width: min(74%, 300px);
+  aspect-ratio: 9 / 19.3;
+  border-radius: 46px;
+  background: linear-gradient(150deg, #2a2f38, #0c0e13);
+  padding: 11px;
+  box-shadow:
+    0 50px 70px rgba(0,0,0,.6),
+    inset 0 0 0 2px rgba(255,255,255,.06);
+  transform-style: preserve-3d;
+  transform:
+    translateY(calc((1 - var(--rise)) * 60px))
+    rotateX(calc((1 - var(--rise)) * 14deg))
+    rotateY(-8deg);
+  opacity: clamp(0, calc(var(--rise) * 1.4), 1);
+}
+.sc-phone__screen {
+  position: relative;
+  height: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #000;
+}
+.sc-phone__screen video,
+.sc-phone__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Dynamic Island */
+.sc-phone__island {
+  position: absolute;
+  top: 12px; left: 50%;
+  transform: translateX(-50%);
+  width: 92px; height: 26px;
+  background: #000;
+  border-radius: 999px;
+  z-index: 5;
+}
+/* Verlauf unten für Lesbarkeit */
+.sc-phone__screen::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0; bottom: 0;
+  height: 45%;
+  background: linear-gradient(transparent, rgba(0,0,0,.75));
+  z-index: 2;
+}
+
+/* Social-UI Overlay (rechts: Like/Comment/Share) */
+.sc-phone__rail {
+  position: absolute;
+  right: 10px; bottom: 92px;
+  z-index: 4;
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  color: #fff;
+}
+.sc-phone__rail button {
+  all: unset;
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #fff;
+  cursor: pointer;
+}
+.sc-phone__rail svg { width: 26px; height: 26px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
+
+/* untere Caption */
+.sc-phone__cap {
+  position: absolute;
+  left: 14px; bottom: 26px;
+  right: 56px;
+  z-index: 4;
+  color: #fff;
+}
+.sc-phone__cap b { font-family: var(--font-display); font-weight: 700; font-size: 13px; }
+.sc-phone__cap span { display:block; font-size: 11px; opacity: .85; margin-top: 2px; }
+
+/* schwebende Likes/Hearts */
+.sc-burst {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  pointer-events: none;
+}
+.sc-burst i {
+  position: absolute;
+  bottom: 70px;
+  color: var(--smy-red-bright);
+  opacity: 0;
+}
+.sc-burst i svg { width: 28px; height: 28px; }
+@keyframes sc-heart {
+  0%   { opacity: 0; transform: translateY(0) scale(.4); }
+  15%  { opacity: 1; transform: translateY(-10px) scale(1); }
+  100% { opacity: 0; transform: translateY(-180px) scale(.9); }
+}
+
+.sc-act--social .sc-tag--1 { top: 8%; left: -2%; animation: sc-float 6.5s ease-in-out infinite; }
+.sc-act--social .sc-tag--2 { bottom: 14%; right: -2%; animation: sc-float 7.2s ease-in-out infinite .5s; }
+
+/* ════════════════════════════════════════════
+   REDUCED MOTION / RESPONSIVE
+   ════════════════════════════════════════════ */
+@media (max-width: 880px) {
+  .sc-act { min-height: 130vh; }
+  .sc-act__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+  .sc-act__copy { max-width: 34rem; margin-inline: auto; }
+  .sc-act__index { justify-content: center; }
+  .sc-act--reverse .sc-act__visual { order: 0; }
+  .sc-act__features { text-align: left; max-width: 22rem; margin-inline: auto; }
+  .sc-tag { display: none; }
+  .sc-act__visual { min-height: 360px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-act { min-height: auto; }
+  .sc-act__stage { position: static; min-height: auto; }
+  .sc-act { --p: 1; }
+  .sc-laptop, .sc-phone, .sc-act__copy > * { transform: none !important; }
+  .sc-tag, .sc-burst i { animation: none !important; }
+}

@@ -1,0 +1,150 @@
+/* ============================================================
+   SMY AGENCY — SUBPAGES PREMIUM LAYER
+   Hebt die Unterseiten auf Startseiten-Niveau:
+   · animierte Aurora im Page-Hero
+   · Cursor-Spotlight + sanfter 3D-Tilt auf Cards
+   · edlere Hover-States für Projekt-Listen
+   Setzt auf design-system.css auf, ändert dessen Tokens nicht.
+   ============================================================ */
+
+/* ─────────────────────────────────────────────
+   1. ANIMIERTE AURORA IM PAGE-HERO
+   (per subpages.js als erstes Kind injiziert)
+   ───────────────────────────────────────────── */
+.sp-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.sp-aurora i {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(70px);
+  will-change: transform;
+}
+.sp-aurora i:nth-child(1) {
+  width: 46vw; max-width: 520px; aspect-ratio: 1;
+  left: -8%; top: -45%;
+  background: radial-gradient(circle, var(--smy-red-glow), transparent 62%);
+  opacity: 0.5;
+  animation: sp-drift 18s ease-in-out infinite;
+}
+.sp-aurora i:nth-child(2) {
+  width: 38vw; max-width: 440px; aspect-ratio: 1;
+  right: -6%; top: -30%;
+  background: radial-gradient(circle, rgba(255, 45, 45, 0.22), transparent 62%);
+  opacity: 0.4;
+  animation: sp-drift 24s ease-in-out infinite reverse;
+}
+@keyframes sp-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(8%, 6%) scale(1.1); }
+  66%      { transform: translate(-6%, 3%) scale(0.95); }
+}
+
+/* Hero-Titel: dezenter Verlauf für „teureren" Look */
+.ds-page-hero__title {
+  background: linear-gradient(180deg, var(--text-primary), #c4c9d2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ─────────────────────────────────────────────
+   2. CARD-SPOTLIGHT + 3D-TILT
+   ───────────────────────────────────────────── */
+/* 3D-Bühne auf die Grids legen */
+.ds-grid, .ds-bento, .ds-featured-grid {
+  perspective: 1200px;
+}
+
+.ds-card, .ds-featured {
+  isolation: isolate;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.ds-featured { overflow: hidden; }
+
+/* Spotlight, der dem Cursor folgt (liegt über dem BG, unter dem Text) */
+.ds-card::after,
+.ds-featured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(225, 6, 0, 0.16),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.ds-card:hover::after,
+.ds-featured:hover::after { opacity: 1; }
+
+/* feiner Rand-Glanz beim Hover */
+.ds-card:hover,
+.ds-featured:hover {
+  border-color: var(--border-accent);
+}
+
+/* Icon reagiert leicht mit (Tiefe) */
+.ds-card__icon {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.ds-card:hover .ds-card__icon {
+  transform: translateZ(28px) scale(1.06);
+  box-shadow: 0 10px 24px var(--smy-red-glow);
+}
+
+/* ─────────────────────────────────────────────
+   3. PROJEKT-LISTEN (ds-projitem) PREMIUM HOVER
+   ───────────────────────────────────────────── */
+.ds-projitem {
+  position: relative;
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-base),
+              transform var(--transition-base),
+              padding var(--transition-base);
+}
+.ds-projitem::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 3px; height: 0;
+  background: var(--smy-red);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  transition: height var(--transition-base);
+}
+.ds-projitem:hover {
+  background: var(--bg-panel);
+  transform: translateX(6px);
+}
+.ds-projitem:hover::before { height: 60%; }
+.ds-projitem:hover h4 { color: var(--smy-red-bright); }
+
+/* ─────────────────────────────────────────────
+   4. SANFTERE REVEALS (gestaffelt)
+   ───────────────────────────────────────────── */
+.reveal { will-change: opacity, transform; }
+
+/* ─────────────────────────────────────────────
+   5. REDUCED MOTION
+   ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sp-aurora i { animation: none !important; }
+  .ds-card, .ds-featured { transform: none !important; }
+}
+
+/* Touch-Geräte: keine Tilt-Transforms (werden per JS eh nur bei hover gesetzt) */
+@media (hover: none) {
+  .ds-card::after, .ds-featured::after { display: none; }
+}

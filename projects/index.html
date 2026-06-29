@@ -10,8 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="design-system.css" />
-  <link rel="stylesheet" href="design-demo.css" />
+  <link rel="stylesheet" href="/design-system.css" />
+  <link rel="stylesheet" href="/design-demo.css" />
+  <link rel="stylesheet" href="/subpages.css" />
 </head>
 
 <body>
@@ -20,13 +21,13 @@
   <!-- HEADER -->
   <header class="ds-header">
     <div class="ds-container ds-nav">
-      <a href="/" class="ds-logo"><img src="assets/logo-header.png" alt="SMY Agency" /></a>
+      <a href="/" class="ds-logo"><img src="/assets/logo-header.png" alt="SMY Agency" /></a>
       <nav>
         <ul class="ds-nav__links">
-          <li><a href="/services">Services</a></li>
-          <li><a href="/projects">Projekte</a></li>
-          <li><a href="/ueber-uns">Über uns</a></li>
-          <li><a href="/services#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projekte</a></li>
+          <li><a href="/ueber-uns/">Über uns</a></li>
+          <li><a href="/services/#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
         </ul>
       </nav>
     </div>
@@ -52,20 +53,20 @@
 
         <div class="ds-featured-grid">
           <article class="ds-featured reveal">
+            <div class="ds-featured__tag">Full Service</div>
+            <h3>MJ Lernförderung</h3>
+            <p>Rundum-Betreuung für eine Lernförderung in Hannover: eine maßgeschneiderte Verwaltungsplattform (Schüler- &amp; Lehrkraft-Verwaltung, Stundenerfassung mit digitaler Unterschrift, Honorar-Abrechnung per Klick, PDF-/Excel-Nachweise, DSGVO-konform mit EU-Hosting) – plus Website, Logo &amp; Branding, Flyer-Druck, Google-Business-Optimierung sowie laufende Social-Media- und Google-/Meta-Ads-Betreuung.</p>
+            <div class="ds-featured__tags">
+              <span class="ds-chip">Verwaltungsplattform</span><span class="ds-chip">Website</span><span class="ds-chip">Branding</span><span class="ds-chip">Print</span><span class="ds-chip">Google &amp; Meta Ads</span><span class="ds-chip">Social Media</span><span class="ds-chip">DSGVO</span>
+            </div>
+          </article>
+
+          <article class="ds-featured reveal" data-delay="1">
             <div class="ds-featured__tag">Enterprise Tech</div>
             <h3>Picsart Inc.</h3>
             <p>Entwicklung von 5 hochskalierbaren Plattformen: Analytics-Infrastruktur, Live-Kollaboration, Podcast-Hosting, Livestream-Backend und cloudbasierte Video-Editing-Lösung mit GPU-Rendering.</p>
             <div class="ds-featured__tags">
               <span class="ds-chip">Backend</span><span class="ds-chip">Cloud Architecture</span><span class="ds-chip">Video Processing</span>
-            </div>
-          </article>
-
-          <article class="ds-featured reveal" data-delay="1">
-            <div class="ds-featured__tag">Full Service</div>
-            <h3>Cleorova Shapewear</h3>
-            <p>Komplettes Brand-Ecosystem aus einer Hand: KI-generierte Produktfotos, Branding &amp; Logo-Design, Website-Entwicklung, Instagram-Strategie und Performance-Ads. Von der Vision zur fertigen E-Commerce Brand.</p>
-            <div class="ds-featured__tags">
-              <span class="ds-chip">KI Photoshoots</span><span class="ds-chip">Branding</span><span class="ds-chip">Website</span><span class="ds-chip">Instagram</span><span class="ds-chip">Ads</span>
             </div>
           </article>
 
@@ -88,6 +89,8 @@
         <div class="ds-projcols">
           <div class="ds-projcat reveal">
             <h3 class="ds-projcat__title">Web &amp; Development</h3>
+            <div class="ds-projitem"><h4>MJ Lernförderung</h4><p>Verwaltungsplattform &amp; Website</p></div>
+            <div class="ds-projitem"><h4>Cleorova Shapewear</h4><p>E-Commerce Website, KI-Produktfotos, Branding &amp; Ads</p></div>
             <div class="ds-projitem"><h4>MHM Garten- &amp; Landschaftsbau</h4><p>Webdesign &amp; Printdesign</p></div>
             <div class="ds-projitem"><h4>Logikids – Daniela Neuber</h4><p>Webdesign, Flyer &amp; Social Media</p></div>
             <div class="ds-projitem"><h4>Gastpark Hotel</h4><p>Website-Optimierung &amp; Performance</p></div>
@@ -99,6 +102,7 @@
 
           <div class="ds-projcat reveal" data-delay="1">
             <h3 class="ds-projcat__title">Branding &amp; Design</h3>
+            <div class="ds-projitem"><h4>MJ Lernförderung</h4><p>Logo, Corporate Design &amp; Flyer-Print</p></div>
             <div class="ds-projitem"><h4>Steuerberater Yusuf Kavalci</h4><p>Brand Identity: Logo, Website &amp; Visitenkarten</p></div>
             <div class="ds-projitem"><h4>KFZ-Sachverständiger BAS</h4><p>Corporate Design &amp; Website</p></div>
             <div class="ds-projitem"><h4>KG Handel GmbH</h4><p>Logoerstellung &amp; Firmenstempel</p></div>
@@ -108,6 +112,7 @@
 
           <div class="ds-projcat reveal" data-delay="2">
             <h3 class="ds-projcat__title">Marketing &amp; Social</h3>
+            <div class="ds-projitem"><h4>MJ Lernförderung</h4><p>Social Media, Google &amp; Meta Ads</p></div>
             <div class="ds-projitem"><h4>HappINess e.V.</h4><p>IT-Betreuung, Website, Print &amp; Social Content</p></div>
             <div class="ds-projitem"><h4>Herbalife Promoter</h4><p>Instagram Management &amp; Facebook Ads</p></div>
           </div>
@@ -123,7 +128,7 @@
           <h2>Bereit für dein Projekt?</h2>
           <p>Lass uns gemeinsam etwas Großartiges entwickeln – von der ersten Idee bis zur erfolgreichen Umsetzung.</p>
           <div style="display:flex; gap:var(--space-sm); justify-content:center; flex-wrap:wrap;">
-            <a href="/services#kontakt" class="btn btn--primary btn--large" data-magnetic>🚀 Projekt starten</a>
+            <a href="/services/#kontakt" class="btn btn--primary btn--large" data-magnetic>🚀 Projekt starten</a>
             <a href="https://www.instagram.com/smy_agency" target="_blank" rel="noopener" class="btn btn--ghost btn--large" data-magnetic>@smy_agency folgen</a>
           </div>
         </div>
@@ -136,15 +141,16 @@
     <div class="ds-container ds-footer__inner">
       <a href="/" class="ds-logo">SMY <em>Agency</em></a>
       <ul class="ds-footer__links">
-        <li><a href="/services">Services</a></li>
-        <li><a href="/projects">Projekte</a></li>
-        <li><a href="/ueber-uns">Über uns</a></li>
-        <li><a href="/services#kontakt">Kontakt</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/projects/">Projekte</a></li>
+        <li><a href="/ueber-uns/">Über uns</a></li>
+        <li><a href="/services/#kontakt">Kontakt</a></li>
       </ul>
       <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
     </div>
   </footer>
 
-  <script src="design-demo.js"></script>
+  <script src="/design-demo.js"></script>
+  <script src="/subpages.js"></script>
 </body>
 </html>
