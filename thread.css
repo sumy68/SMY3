@@ -191,6 +191,7 @@
 @media (max-width: 760px) {
   .thread { margin-top: var(--space-xl); }
   .thread__line { left: 26px; }
+  .thread__tip { left: 26px; }
   .thread__step {
     grid-template-columns: 1fr;
     margin-bottom: var(--space-xl);
