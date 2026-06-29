@@ -128,14 +128,7 @@
   transform: translateY(-2px);
 }
 
-/* ─────────────────────────────────────────────
-   5. REDUCED MOTION / TOUCH
-   ───────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  #services .ds-grid .ds-card.reveal { transform: none; }
-  #services .ds-section-title .ds-accent::after { transition: none; transform: scaleX(1); }
-  #services .ds-card::before { animation: none !important; }
-}
+/* Motion läuft bewusst auf allen Geräten gleich (Mobile = Desktop). */
 @media (hover: none) {
   #services .ds-card::after { display: none; }
 }

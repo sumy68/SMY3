@@ -152,6 +152,7 @@
   white-space: nowrap;
   box-shadow: var(--shadow-md);
   opacity: clamp(0, calc((var(--p) - 0.18) * 5), 1);
+  transition: opacity 0.3s linear;
 }
 .sc-tag b { color: var(--smy-red); font-weight: 700; }
 
@@ -173,6 +174,7 @@
     rotateX(calc((1 - var(--tail)) * 6deg))
     translateY(calc(var(--tail) * -8px));
   filter: drop-shadow(0 50px 60px rgba(0,0,0,.6));
+  transition: transform 0.3s linear;
 }
 
 .sc-laptop__lid {
@@ -181,6 +183,7 @@
   transform-origin: 50% 100%;
   /* geschlossen: nach hinten geklappt → offen: aufrecht */
   transform: rotateX(calc(-86deg * (1 - var(--open))));
+  transition: transform 0.3s linear;
 }
 
 .sc-laptop__screen {
@@ -216,6 +219,7 @@
   opacity: var(--open);
   display: flex;
   flex-direction: column;
+  transition: opacity 0.3s linear;
 }
 .sc-ui__bar {
   display: flex;
@@ -362,6 +366,7 @@
     linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
   background-size: 28px 28px;
   opacity: var(--draw);
+  transition: opacity 0.3s linear;
 }
 
 .sc-canvas__art { position: absolute; inset: 38px 0 0 0; }
@@ -376,6 +381,7 @@
   stroke-linejoin: round;
   stroke-dasharray: var(--len, 600);
   stroke-dashoffset: calc(var(--len, 600) * (1 - var(--draw)));
+  transition: stroke-dashoffset 0.3s linear;
 }
 .sc-draw--soft { stroke: rgba(255,255,255,.5); stroke-width: 1.5; }
 
@@ -385,6 +391,7 @@
   transform: scale(calc(.7 + var(--pop) * .3));
   transform-box: fill-box;
   transform-origin: center;
+  transition: opacity 0.3s linear, transform 0.3s linear;
 }
 
 /* Farb-Swatches */
@@ -458,6 +465,7 @@
     rotateX(calc((1 - var(--rise)) * 14deg))
     rotateY(-8deg);
   opacity: clamp(0, calc(var(--rise) * 1.4), 1);
+  transition: transform 0.3s linear, opacity 0.3s linear;
 }
 .sc-phone__screen {
   position: relative;
@@ -567,10 +575,5 @@
   .sc-act__visual { min-height: 360px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sc-act { min-height: auto; }
-  .sc-act__stage { position: static; min-height: auto; }
-  .sc-act { --p: 1; }
-  .sc-laptop, .sc-phone, .sc-act__copy > * { transform: none !important; }
-  .sc-tag, .sc-burst i { animation: none !important; }
-}
+/* Motion läuft bewusst auf allen Geräten gleich (Mobile = Desktop) –
+   kein Abschalten via prefers-reduced-motion. */

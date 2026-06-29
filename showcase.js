@@ -23,10 +23,7 @@
     } catch (e) { /* Pfad evtl. noch nicht messbar – Default greift */ }
   });
 
-  if (prefersReduced) {
-    acts.forEach(function (a) { a.style.setProperty('--p', '1'); });
-    return;
-  }
+  /* Motion läuft bewusst auf allen Geräten (Mobile = Desktop). */
 
   /* ── 2. Scroll → --p pro Akt ──────────────────────────── */
   var ticking = false;

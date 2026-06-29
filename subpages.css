@@ -136,13 +136,7 @@
    ───────────────────────────────────────────── */
 .reveal { will-change: opacity, transform; }
 
-/* ─────────────────────────────────────────────
-   5. REDUCED MOTION
-   ───────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .sp-aurora i { animation: none !important; }
-  .ds-card, .ds-featured { transform: none !important; }
-}
+/* Motion läuft bewusst auf allen Geräten gleich (Mobile = Desktop). */
 
 /* Touch-Geräte: keine Tilt-Transforms (werden per JS eh nur bei hover gesetzt) */
 @media (hover: none) {

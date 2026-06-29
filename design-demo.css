@@ -111,7 +111,4 @@ body.cursor-active .cursor-glow { opacity: 0.5; }
   to { transform: translateX(-50%); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .aurora::before, .aurora::after, .marquee__track { animation: none; }
-  .hero-particles { display: none; }
-}
+/* Motion läuft bewusst auf allen Geräten gleich (Mobile = Desktop). */

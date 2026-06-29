@@ -210,8 +210,4 @@
   }
 }
 
-/* ── Reduced Motion ── */
-@media (prefers-reduced-motion: reduce) {
-  .thread__fill { transform: scaleY(1); }
-  .thread__card { opacity: 1 !important; transform: none !important; }
-}
+/* Motion läuft bewusst auf allen Geräten gleich (Mobile = Desktop). */

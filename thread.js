@@ -16,11 +16,7 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
 
-  if (reduced) {
-    thread.style.setProperty('--thread', '1');
-    steps.forEach(function (s) { s.classList.add('is-in', 'is-lit'); });
-    return;
-  }
+  /* Motion läuft bewusst auf allen Geräten (Mobile = Desktop). */
 
   /* Stationen enthüllen */
   if ('IntersectionObserver' in window) {

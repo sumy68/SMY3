@@ -17,7 +17,7 @@
 
   /* ── 1. Hero-Partikelnetz (Canvas, KI-Vibe) ───────────── */
   var canvas = document.querySelector('.hero-particles');
-  if (canvas && canvas.getContext && !prefersReduced) {
+  if (canvas && canvas.getContext) {
     var ctx = canvas.getContext('2d');
     var hero = canvas.parentElement;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -148,7 +148,7 @@
   }
 
   /* ── 3. Magnetische Buttons ───────────────────────────── */
-  if (!prefersReduced && window.matchMedia('(hover: hover)').matches) {
+  if (window.matchMedia('(hover: hover)').matches) {
     document.querySelectorAll('[data-magnetic]').forEach(function (btn) {
       btn.addEventListener('mousemove', function (e) {
         var r = btn.getBoundingClientRect();

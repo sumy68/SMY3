@@ -407,15 +407,12 @@ h1, h2, h3, h4 {
 }
 
 /* ─────────────────────────────────────────────
-   8. MOTION (reduzierte Bewegung respektieren)
+   8. MOTION
+   Hinweis: Animationen laufen bewusst auf allen Geräten gleich
+   (auch bei iOS „Bewegung reduzieren") – ausdrücklicher Wunsch:
+   Mobile = Desktop. Daher KEIN globales Abschalten via
+   prefers-reduced-motion.
    ───────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
 
 /* fade-in on load (klein & dezent) */
 @keyframes ds-rise {
