@@ -587,6 +587,8 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
   gap: var(--space-sm) var(--space-md);
   list-style: none;
+  padding: 0;
+  margin: 0;
   font-size: var(--fs-sm);
 }
 .ds-footer__links a:hover { color: var(--smy-red-bright); }
@@ -1195,6 +1197,17 @@ h1, h2, h3, h4 {
     margin: 1rem 1.5rem;
     text-align: center;
     color: #fff;
+  }
+
+  /* Footer: auf Mobile zentriert gestapelt statt zerfranst */
+  .ds-footer__inner {
+    display: block;
+    text-align: center;
+  }
+  .ds-footer__inner > * + * { margin-top: var(--space-lg); }
+  .ds-footer__links {
+    justify-content: center;
+    gap: var(--space-sm) var(--space-md);
   }
 }
 
