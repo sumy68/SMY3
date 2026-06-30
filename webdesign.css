@@ -1,0 +1,287 @@
+/* ──────────────────────────────────────────────────────────────
+   webdesign.css — Versteckte Landingpage /webdesign/ (Ads-Funnel)
+   Baut auf design-system.css + subpages.css auf. Nur Page-Specifics.
+   ────────────────────────────────────────────────────────────── */
+
+/* Schmaler Container für Lese- & Formularsektionen */
+.ds-container--narrow {
+  max-width: 820px;
+}
+
+/* Header: nur Logo + CTA, kein Nav */
+.wd-header .ds-nav { justify-content: space-between; }
+
+/* Hero-Trust-Zeile */
+.wd-trust {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xs) var(--space-md);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+.wd-trust span { white-space: nowrap; }
+
+/* ── Problem-Sektion ───────────────────────────────────────── */
+.wd-pain {
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+.wd-pain li {
+  position: relative;
+  padding-left: 2rem;
+  font-size: var(--fs-lead);
+  color: var(--text-secondary);
+}
+.wd-pain li::before {
+  content: "✕";
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  color: var(--smy-red);
+  font-weight: 700;
+}
+.wd-pain li strong { color: var(--text-primary); }
+.wd-pain-kicker {
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  border-left: 3px solid var(--smy-red);
+  background: var(--bg-panel);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-lead);
+  color: var(--text-primary);
+}
+
+/* ── Preiskalkulator ───────────────────────────────────────── */
+.wd-calc-section { scroll-margin-top: 90px; }
+
+.wd-calc {
+  margin-top: var(--space-xl);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.wd-q { border: 0; margin: 0 0 var(--space-lg); padding: 0; }
+.wd-q:last-child { margin-bottom: 0; }
+.wd-q legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+  padding: 0;
+}
+.wd-q legend em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.wd-q__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: 0 0 auto;
+  border-radius: var(--radius-full);
+  background: var(--smy-red);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
+.wd-options {
+  display: grid;
+  gap: var(--space-sm);
+}
+.wd-options--cols {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+/* Option-Karte (Radio/Checkbox als Karte) */
+.wd-opt { position: relative; display: block; cursor: pointer; }
+.wd-opt input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+.wd-opt__box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  height: 100%;
+  padding: var(--space-md);
+  background: var(--bg-base);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+}
+.wd-opt__title { font-family: var(--font-display); color: var(--text-primary); font-size: var(--fs-body); overflow-wrap: anywhere; }
+.wd-opt__sub { font-size: var(--fs-sm); color: var(--text-muted); }
+
+.wd-opt:hover .wd-opt__box { border-color: var(--border-accent); transform: translateY(-2px); }
+.wd-opt input:focus-visible + .wd-opt__box { box-shadow: 0 0 0 3px var(--smy-red-soft); }
+.wd-opt input:checked + .wd-opt__box {
+  border-color: var(--smy-red);
+  background: var(--smy-red-soft, rgba(225,6,0,0.08));
+}
+.wd-opt input:checked + .wd-opt__box .wd-opt__sub { color: var(--text-secondary); }
+.wd-opt--wide { grid-column: 1 / -1; }
+
+/* Ergebnis-Anzeige */
+.wd-result {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  text-align: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-accent);
+  background: var(--bg-elevated);
+  display: grid;
+  gap: var(--space-xs);
+  box-shadow: var(--shadow-glow);
+}
+.wd-result__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+.wd-result__range {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+.wd-result__range .ds-accent,
+#wd-low, #wd-high { color: var(--smy-red-bright, #ff2b25); }
+.wd-result__dash { color: var(--text-muted); }
+.wd-result__note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+.wd-result__sub {
+  margin-top: var(--space-2xs);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+.wd-result__sub strong { color: var(--text-primary); }
+
+/* Lead-Formular Feinheiten */
+.wd-lead { margin-top: var(--space-lg); }
+.wd-lead .btn { justify-self: stretch; text-align: center; }
+.wd-lead__fineprint {
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  margin: 0;
+}
+.wd-lead.is-sent {
+  text-align: center;
+  padding: var(--space-xl);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  background: var(--bg-panel);
+}
+
+/* ── Social Proof ──────────────────────────────────────────── */
+.wd-quote p {
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+  font-style: italic;
+}
+.wd-quote__name {
+  display: block;
+  margin-top: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.wd-proof-note {
+  text-align: center;
+  margin-top: var(--space-lg);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* ── Garantie-Box ──────────────────────────────────────────── */
+.wd-guarantee {
+  margin-top: var(--space-xl);
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-accent);
+  background: var(--bg-panel);
+}
+.wd-guarantee__icon { font-size: 2rem; line-height: 1; }
+.wd-guarantee strong { color: var(--text-primary); font-family: var(--font-display); }
+.wd-guarantee p { margin: 0.25rem 0 0; color: var(--text-secondary); }
+
+/* ── FAQ (native details) ──────────────────────────────────── */
+.wd-faq {
+  margin-top: var(--space-xl);
+  display: grid;
+  gap: var(--space-sm);
+}
+.wd-faq__item {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-panel);
+  overflow: hidden;
+}
+.wd-faq__item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.wd-faq__item summary::-webkit-details-marker { display: none; }
+.wd-faq__item summary::after {
+  content: "+";
+  color: var(--smy-red);
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+.wd-faq__item[open] summary::after { transform: rotate(45deg); }
+.wd-faq__item p {
+  margin: 0;
+  padding: 0 var(--space-lg) var(--space-md);
+  color: var(--text-secondary);
+}
+
+/* ── Final CTA ─────────────────────────────────────────────── */
+.wd-final { text-align: center; }
+.wd-final .ds-page-hero__actions { margin-top: var(--space-lg); }
+
+@media (max-width: 560px) {
+  .wd-options--cols { grid-template-columns: 1fr; }
+  .wd-result__range { font-size: var(--fs-h2); }
+}
