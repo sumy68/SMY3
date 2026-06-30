@@ -14,7 +14,7 @@
   var LABELS = {
     type:  { neu: 'Neue Website', relaunch: 'Relaunch', onepager: 'Landingpage / Onepager' },
     scope: { '1-3': '1–3 Seiten', '4-8': '4–8 Seiten', '9+': '9+ Seiten' },
-    addon: { seo: 'Google-/KI-Sichtbarkeit', karriere: 'Karriere-/Bewerbungsseite', copy: 'Texterstellung', branding: 'Logo / Branding' },
+    addon: { seo: 'Google-/KI-Sichtbarkeit', karriere: 'Karriere-/Bewerbungsseite', branding: 'Logo / Branding' },
     speed: { standard: 'Standard', express: 'Express (+20 %)' }
   };
 
