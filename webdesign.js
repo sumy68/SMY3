@@ -103,6 +103,13 @@
       headers: { 'Accept': 'application/json' }
     }).then(function (res) {
       if (res.ok) {
+        // Meta Pixel: Lead-Conversion melden (nur bei echtem Erfolg)
+        if (window.fbq) {
+          fbq('track', 'Lead', {
+            content_name: 'Webdesign Kalkulator',
+            currency: 'EUR'
+          });
+        }
         lead.classList.add('is-sent');
         lead.innerHTML =
           '<span class="wd-result__range" style="display:block;margin-bottom:.5rem;">Danke! ✓</span>' +
