@@ -21,14 +21,14 @@ test('Validierung meldet fehlende Pflichtfelder und schlechte URLs', () => {
   assert.ok(errors.some((e) => e.includes('url')));
 });
 
-test('Featured sind genau MJ Lernförderung und Tolgi', () => {
+test('Featured sind genau MJ Lernförderung und Picsart', () => {
   const featured = references.filter((e) => e.featured).map((e) => e.name);
-  assert.deepStrictEqual(featured, ['MJ Lernförderung', 'Tolgi Versicherung']);
+  assert.deepStrictEqual(featured, ['MJ Lernförderung', 'Picsart Inc.']);
 });
 
 test('gewünschte Kunden und Partner sind enthalten', () => {
   const names = (typ) => references.filter((e) => e.typ === typ).map((e) => e.name);
-  ['MJ Lernförderung', 'HappINess e. V.', 'Tolgi Versicherung', 'Fastreinigung', 'CI Dienstleistungen']
+  ['MJ Lernförderung', 'HappINess e. V.', 'Picsart Inc.', 'Fastreinigung', 'CI Dienstleistungen']
     .forEach((name) => assert.ok(names('kunde').includes(name), name));
   ['PSYNOW', 'CI Dienstleistungen'].forEach((name) => assert.ok(names('partner').includes(name), name));
 });
@@ -101,4 +101,18 @@ test('CI Dienstleistungen verlinkt die eigene Website', () => {
   const found = loadData(ROOT).references.filter((entry) => entry.name === 'CI Dienstleistungen');
   assert.strictEqual(found.length, 2);
   found.forEach((entry) => assert.strictEqual(entry.url, 'https://ci-dienstleistungen.com'));
+});
+
+test('Picsart steht als Featured-Karte auf der Projekte-Seite und nicht doppelt in der Liste', () => {
+  const html = projects();
+  assert.strictEqual((html.match(/Picsart Inc\./g) || []).length, 1);
+  assert.match(html, /ds-featured__tag">Enterprise Tech<\/div><h3>Picsart Inc\.<\/h3>/);
+  assert.ok(html.indexOf('MJ Lernförderung') < html.indexOf('Picsart Inc.'));
+  assert.ok(html.indexOf('Picsart Inc.') < html.indexOf('Alle Projekte'));
+});
+
+test('die entfernte Referenz kommt in Daten und Seite nicht mehr vor', () => {
+  const removed = new RegExp(`tol${'gi'}`, 'i');
+  assert.ok(!removed.test(projects()));
+  assert.ok(!removed.test(fs.readFileSync(path.join(ROOT, 'data/references.js'), 'utf8')));
 });
