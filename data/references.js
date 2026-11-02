@@ -50,6 +50,7 @@ window.SMY_REFERENCES = Object.freeze([
   },
   {
     name: 'CI Dienstleistungen',
+    url: 'https://ci-dienstleistungen.com',
     typ: 'kunde',
     bereich: 'web',
     branche: 'Full Service',
@@ -95,6 +96,7 @@ window.SMY_REFERENCES = Object.freeze([
   },
   {
     name: 'CI Dienstleistungen',
+    url: 'https://ci-dienstleistungen.com',
     typ: 'partner',
     branche: 'Gebäudedienstleistungen',
     leistung: 'Gebäudereinigung & Hausmeisterservice',

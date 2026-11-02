@@ -96,3 +96,9 @@ test('/projects/ spricht mit Sie an', () => {
 test('GGM Gastro ist nicht enthalten', () => {
   assert.doesNotMatch(JSON.stringify(references), /\bggm\b/i);
 });
+
+test('CI Dienstleistungen verlinkt die eigene Website', () => {
+  const found = loadData(ROOT).references.filter((entry) => entry.name === 'CI Dienstleistungen');
+  assert.strictEqual(found.length, 2);
+  found.forEach((entry) => assert.strictEqual(entry.url, 'https://ci-dienstleistungen.com'));
+});
