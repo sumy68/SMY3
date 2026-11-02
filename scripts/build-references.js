@@ -23,7 +23,6 @@ const PARTNER_SUBLINE = 'Mit unseren Vertriebspartnern bieten wir Ihnen Lösunge
 const REVIEW_NOTE = 'Auszüge aus öffentlichen Google-Bewertungen unseres Unternehmensprofils.';
 const PLACEHOLDER = /\[(NAME|STERNE|MM\/JJJJ)\]/;
 const SCHEMA_ORG_ID = 'https://smyagency.de/#organization';
-const HERO_NEUTRAL = 'Kundenstimmen aus Projekten in ganz Deutschland';
 const ANONYMOUS_REVIEW = 'Google-Rezension';
 const UNVERIFIED_LABEL = 'Kundenstimme';
 const ELEVATED = 'background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);';
@@ -124,8 +123,8 @@ function visibleRating(rating, geprueft) {
 }
 
 function renderHeroRating(rating) {
-  if (!isRatingSet(rating)) return `<span>${HERO_NEUTRAL}</span>`;
-  return `<span>★ ${formatSchnitt(rating)} aus ${rating.anzahl} Google-Bewertungen</span>`;
+  if (!isRatingSet(rating)) return '';
+  return `<div class="ds-hero__trust ds-rise ds-rise-4"><span>★ ${formatSchnitt(rating)} aus ${rating.anzahl} Google-Bewertungen</span></div>`;
 }
 
 /* Setzt oder entfernt aggregateRating im Schema, andere Knoten bleiben unverändert. */

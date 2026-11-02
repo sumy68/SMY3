@@ -182,12 +182,11 @@ test('Schema enthält aggregateRating nur bei vollständigen Werten', () => {
   assert.strictEqual(rating.reviewCount, '42');
 });
 
-const NEUTRAL_HERO = '<span>Kundenstimmen aus Projekten in ganz Deutschland</span>';
 
-test('Hero zeigt die Google-Zahl nur bei vollständigen Werten, sonst den neutralen Satz', () => {
-  assert.strictEqual(renderHeroRating({ anzahl: null, schnitt: null }), NEUTRAL_HERO);
-  assert.strictEqual(renderHeroRating({ anzahl: 42, schnitt: null }), NEUTRAL_HERO);
-  assert.strictEqual(renderHeroRating({ ...RATED, schnitt: 5 }), '<span>★ 5.0 aus 42 Google-Bewertungen</span>');
+test('Hero zeigt die Google-Zahl nur bei vollständigen Werten, sonst gar nichts', () => {
+  assert.strictEqual(renderHeroRating({ anzahl: null, schnitt: null }), '');
+  assert.strictEqual(renderHeroRating({ anzahl: 42, schnitt: null }), '');
+  assert.strictEqual(renderHeroRating({ ...RATED, schnitt: 5 }), '<div class="ds-hero__trust ds-rise ds-rise-4"><span>★ 5.0 aus 42 Google-Bewertungen</span></div>');
 });
 
 test('Google-Zahl hängt am Schalter reviewsGeprueft', () => {
@@ -201,12 +200,15 @@ test('Startseite nennt vor dem Abgleich keine Google-Zahl, die Werte bleiben kon
   const { googleRating, reviewsGeprueft } = loadData(ROOT);
   assert.strictEqual(reviewsGeprueft, false);
   assert.strictEqual(googleRating.anzahl, 120);
-  assert.ok(html.includes(NEUTRAL_HERO));
+  ['Schnell · Unkompliziert', 'Kundenstimmen aus Projekten', '◆ 120+ Projekte', '⚡ Entwurf in 7 Tagen', 'class="ds-hero__trust'].forEach((text) => {
+    assert.ok(!html.includes(text), text);
+  });
+  assert.ok(html.includes('<!-- GOOGLE_RATING:START -->'));
   ['aggregateRating', 'reviewCount', 'ratingValue', '★ 5.0', 'Google-Bewertungen', 'ds-reviews__num'].forEach((text) => {
     assert.ok(!html.includes(text), text);
   });
   assert.ok(!('aggregateRating' in orgOf(html)));
-  assert.ok(html.includes('120+ Projekte'));
+  assert.ok(html.includes('data-count="120"'));
   assert.ok(html.includes('data-count="35"'));
 });
 
