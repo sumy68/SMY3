@@ -19,17 +19,46 @@ test('Bewertungsdaten sind gültig', () => {
   assert.deepStrictEqual(validateReviews(reviews, profileUrl), []);
 });
 
-test('nur die 12 zu prüfenden Bewertungen sind erfasst und keine ist freigegeben', () => {
-  assert.strictEqual(reviews.length, 12);
-  reviews.forEach((r) => assert.strictEqual(r.freigegeben, false, r.text));
+test('alle 20 Bewertungen sind erfasst, freigegeben und ohne Hilfsfeld', () => {
+  assert.strictEqual(reviews.length, 20);
+  reviews.forEach((r) => {
+    assert.strictEqual(r.freigegeben, true, r.text);
+    assert.strictEqual(r.sterne, 5, r.text);
+    assert.strictEqual(r.quelle, 'google', r.text);
+    assert.ok(r.name && !r.name.startsWith('['), r.text);
+    assert.ok(!('bisherigeAngabe' in r), r.text);
+    assert.ok(!/vor \d|vor einem|, Google$/.test(r.name), r.name);
+  });
+  assert.ok(!fs.readFileSync(path.join(ROOT, 'data/reviews.js'), 'utf8').includes('bisherigeAngabe:'));
 });
 
-test('leads, ugc und leitfaden enthalten keine Kundenstimmen mehr', () => {
-  ['leads/index.html', 'ugc.html', 'leitfaden.html'].forEach((page) => {
-    assert.strictEqual(reviews.filter((r) => r.seiten.includes(page)).length, 0, page);
+test('anonyme Bewertungen auf webdesign heißen Google-Rezension', () => {
+  const page = reviews.filter((r) => r.seiten.includes('webdesign/index.html'));
+  assert.strictEqual(page.length, 3);
+  page.forEach((r) => assert.strictEqual(r.name, 'Google-Rezension'));
+});
+
+test('jede Bewertungsseite zeigt ihre Bewertungen mit Name, Sternen, Label und Hinweis', () => {
+  Object.keys(REVIEW_PAGES).forEach((page) => {
     const html = fs.readFileSync(path.join(ROOT, page), 'utf8');
-    ['Kundenstimmen', 'Was unsere Kunden sagen', 'Das sagen unsere', 'ds-review', 'rv-card', 'Sind unsere Creatives']
-      .forEach((text) => assert.ok(!html.includes(text), `${page}: ${text}`));
+    const own = reviews.filter((r) => r.seiten.includes(page));
+    assert.ok(own.length >= 2, page);
+    own.forEach((r) => assert.ok(html.includes(r.text.replace(/&/g, '&amp;')), `${page}: ${r.text}`));
+    assert.ok(html.includes('★★★★★'), page);
+    assert.ok(html.includes('Google-Bewertung'), page);
+    assert.ok(html.includes('Auszüge aus öffentlichen Google-Bewertungen unseres Unternehmensprofils.'), page);
+    assert.ok(html.includes('href="https://g.page/r/Cb-CsgZPf7TWEAE" target="_blank" rel="noopener noreferrer">Alle Bewertungen ansehen'), page);
+  });
+  assert.ok(fs.readFileSync(path.join(ROOT, 'ugc.html'), 'utf8').includes('14 Tage mit deinen Zielgruppen'));
+});
+
+test('Datum ist optional: ohne Datum kein Fehler und keine Datumsausgabe', () => {
+  const { datum, ...undated } = approved();
+  assert.deepStrictEqual(validateReviews([undated], PROFILE), []);
+  ['index.html', 'ugc.html'].forEach((page) => {
+    const html = renderReviews(page, [{ ...undated, seiten: [page] }], PROFILE);
+    assert.ok(html.includes('Google-Bewertung'));
+    assert.ok(!html.includes(' · Google-Bewertung'));
   });
 });
 
@@ -56,12 +85,8 @@ test('Validierung meldet unbekannte Seiten und fremde Quellen', () => {
   assert.strictEqual(validateReviews([approved({ quelle: 'trustpilot' })], PROFILE).length, 1);
 });
 
-test('nicht freigegebene Bewertungen werden nirgends ausgegeben', () => {
-  Object.keys(REVIEW_PAGES).forEach((page) => {
-    assert.strictEqual(renderReviews(page, reviews, profileUrl), '', page);
-    const html = fs.readFileSync(path.join(ROOT, page), 'utf8');
-    reviews.forEach((r) => assert.ok(!html.includes(r.text), `${page}: ${r.text}`));
-  });
+test('nicht freigegebene Bewertungen werden nicht ausgegeben', () => {
+  assert.strictEqual(renderReviews('index.html', [approved({ freigegeben: false })], PROFILE), '');
 });
 
 test('freigegebene Bewertung zeigt Name, Sterne, Datum, Label und Hinweis', () => {

@@ -192,7 +192,7 @@ function validateReviews(reviews, profileUrl) {
     if (review.freigegeben === true) {
       if (!review.name || PLACEHOLDER.test(review.name)) list.push(`${label}: Name fehlt für die Freigabe`);
       if (!Number.isInteger(review.sterne) || review.sterne < 1 || review.sterne > 5) list.push(`${label}: sterne muss 1 bis 5 sein`);
-      if (!/^(0[1-9]|1[0-2])\/\d{4}$/.test(review.datum || '')) list.push(`${label}: datum muss MM/JJJJ sein`);
+      if (review.datum !== undefined && !/^(0[1-9]|1[0-2])\/\d{4}$/.test(review.datum)) list.push(`${label}: datum muss MM/JJJJ sein`);
     }
     return list;
   }));
@@ -327,13 +327,17 @@ function starsHtml(sterne, className) {
   return `<div class="${className}" role="img" aria-label="${label}">${'★'.repeat(sterne)}${'☆'.repeat(5 - sterne)}</div>`;
 }
 
+function reviewMeta(review) {
+  return review.datum ? `${esc(review.datum)} · Google-Bewertung` : 'Google-Bewertung';
+}
+
 function dsReview(review, index) {
   return `<article class="ds-review reveal"${revealAttrs(index)}>
             ${starsHtml(review.sterne, 'ds-review__stars')}
             <p class="ds-review__text">„${esc(review.text)}“</p>
             <div class="ds-review__footer">
               <div class="ds-review__avatar">${esc(Array.from(review.name)[0])}</div>
-              <div><div class="ds-review__name">${esc(review.name)}</div><div class="ds-review__meta">${esc(review.datum)} · Google-Bewertung</div></div>
+              <div><div class="ds-review__name">${esc(review.name)}</div><div class="ds-review__meta">${reviewMeta(review)}</div></div>
             </div>
           </article>`;
 }
@@ -342,7 +346,7 @@ function legacyReview(review) {
   return `<figure class="rv-card">
           ${starsHtml(review.sterne, 'rv-stars')}
           <blockquote class="rv-text">„${esc(review.text)}“</blockquote>
-          <figcaption class="rv-meta"><strong>${esc(review.name)}</strong><br>${esc(review.datum)} · Google-Bewertung</figcaption>
+          <figcaption class="rv-meta"><strong>${esc(review.name)}</strong><br>${reviewMeta(review)}</figcaption>
         </figure>`;
 }
 
