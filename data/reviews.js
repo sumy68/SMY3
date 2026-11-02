@@ -14,7 +14,7 @@
    ========================================================================== */
 /* Echte Werte aus dem Google-Profil. Solange anzahl oder schnitt null ist, erscheinen
    weder aggregateRating im Schema noch die Hero-Zeile. schnitt als Zahl, z. B. 4.9. */
-window.googleRating = Object.freeze({ anzahl: null, schnitt: null, profilUrl: 'https://g.page/r/Cb-CsgZPf7TWEAE' });
+window.googleRating = Object.freeze({ anzahl: 120, schnitt: 5.0, profilUrl: 'https://g.page/r/Cb-CsgZPf7TWEAE' });
 
 window.SMY_REVIEWS = Object.freeze([
   /* ─── Startseite ─── */

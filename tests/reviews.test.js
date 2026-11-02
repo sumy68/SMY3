@@ -127,10 +127,10 @@ const schemaOf = (html) => JSON.parse(html.match(/<script type="application\/ld\
 const orgOf = (html) => schemaOf(html)['@graph'].find((node) => node['@id'].endsWith('#organization'));
 const homepage = () => fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
-test('googleRating ist zentral konfiguriert und noch nicht gesetzt', () => {
+test('googleRating ist zentral mit den echten Werten konfiguriert', () => {
   const { googleRating } = loadData(ROOT);
-  assert.strictEqual(googleRating.anzahl, null);
-  assert.strictEqual(googleRating.schnitt, null);
+  assert.strictEqual(googleRating.anzahl, 120);
+  assert.strictEqual(googleRating.schnitt, 5);
   assert.strictEqual(googleRating.profilUrl, 'https://g.page/r/Cb-CsgZPf7TWEAE');
 });
 
@@ -167,13 +167,15 @@ test('Hero-Zeile erscheint nur bei vollständigen Werten', () => {
   assert.strictEqual(renderHeroRating({ ...RATED, schnitt: 5 }), '<span>★ 5.0 aus 42 Google-Bewertungen</span>');
 });
 
-test('Startseite enthält ohne Werte weder Schema-Rating noch Hero-Zeile', () => {
+test('Startseite zeigt Schema, Hero und Bewertungsblock aus der Konfiguration', () => {
   const html = homepage();
-  ['aggregateRating', 'reviewCount', 'ratingValue', '★ 5.0', 'Google-Bewertungen</span>'].forEach((text) => {
-    assert.ok(!html.includes(text), text);
-  });
-  assert.ok(html.includes('<!-- GOOGLE_RATING:START -->'));
-  assert.strictEqual(orgOf(html).name, 'SMY Agency');
+  assert.ok(html.includes('<span>★ 5.0 aus 120 Google-Bewertungen</span>'));
+  const rating = orgOf(html).aggregateRating;
+  assert.strictEqual(rating.ratingValue, '5.0');
+  assert.strictEqual(rating.reviewCount, '120');
+  assert.ok(html.includes('Basierend auf 120 Google-Bewertungen'));
+  assert.ok(html.includes('120+ Projekte'));
+  assert.ok(html.includes('data-count="35"'));
 });
 
 test('Bewertungsblock der Startseite nimmt Zahlen nur aus der Konfiguration', () => {
