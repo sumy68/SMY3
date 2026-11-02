@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Google-Bewertungen. Die älteren Seiten (ugc, audit, leitfaden) stylen über das
+   Tailwind-CDN, das ohne JavaScript fehlt. Deshalb steht hier alles Nötige selbst.
+   ========================================================================== */
+.rv-note {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-muted, #6b7280);
+  text-align: left;
+}
+.rv-note a { color: inherit; text-decoration: underline; }
+.rv-note a:hover { color: var(--text-primary, #111827); }
+
+.rv-block {
+  --rv-card: #fff;
+  --rv-line: rgba(0, 0, 0, 0.1);
+  --rv-text: #374151;
+  --rv-muted: #6b7280;
+}
+.rv-block--dark {
+  --rv-card: #111213;
+  --rv-line: #1f2937;
+  --rv-text: #f8fafc;
+  --rv-muted: #9ca3af;
+}
+.rv-block .rv-note { color: var(--rv-muted); }
+.rv-block .rv-note a:hover { color: var(--rv-text); }
+
+.rv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1.5rem;
+}
+.rv-card {
+  margin: 0;
+  padding: 1.5rem;
+  background: var(--rv-card);
+  border: 1px solid var(--rv-line);
+  border-radius: 1rem;
+  text-align: left;
+}
+.rv-stars { margin-bottom: 0.5rem; color: #ffb400; font-size: 1.1rem; letter-spacing: 0.1em; }
+.rv-text { margin: 0; color: var(--rv-text); font-size: 0.94rem; }
+.rv-meta { margin-top: 1rem; color: var(--rv-muted); font-size: 0.8rem; }
+.rv-meta strong { color: var(--rv-text); }
