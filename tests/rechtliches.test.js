@@ -9,7 +9,6 @@ const read = (file) => fs.readFileSync(path.join(__dirname, '..', file), 'utf8')
 test('leads verspricht keine Nicht-Weitergabe mehr und verlinkt die Datenschutzerklärung', () => {
   const html = read('leads/index.html');
   assert.ok(!html.includes('Keine Weitergabe an Dritte'));
-  assert.ok(html.includes('Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Details in unserer <a href="/datenschutz/"'));
   assert.ok(html.includes('>Datenschutzerklärung</a>.'));
 });
 
@@ -85,4 +84,43 @@ test('Fragebogen zeigt ohne JavaScript nur den Hinweis statt eines leeren Formul
   const html = read('bewerbung-vertrieb/index.html');
   assert.ok(html.includes('<noscript><style>#bw-form{display:none}</style></noscript>'));
   assert.ok(html.includes('Der Fragebogen braucht JavaScript'));
+});
+
+const LEGAL_PAGES = ['impressum/index.html', 'services/index.html', 'ueber-uns/index.html', 'vertrieb/index.html'];
+const LINK_PAGES = ['leitfaden.html', 'shop.html', 'support.html', 'terms-socialpro.html', 'ugc.html', 'workbook.html', 'workbook-danke.html'];
+
+test('keine toten Links auf flache Rechts- und Portfolio-Seiten', () => {
+  LINK_PAGES.forEach((page) => {
+    assert.ok(!/href=["'](?:\.\.\/|\.\/|\/)?(?:datenschutz|impressum|Kundenportfolio)\.html/.test(read(page)), page);
+  });
+  assert.ok(read('workbook.html').includes('href="/datenschutz/"'));
+});
+
+test('weitere Seiten bleiben ohne JavaScript sichtbar', () => {
+  LEGAL_PAGES.forEach((page) => {
+    assert.ok(read(page).includes('<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>'), page);
+  });
+});
+
+test('Zähler der Startseite stehen mit Endwert im HTML', () => {
+  const counters = [...read('index.html').matchAll(/<span[^>]*data-count="(\d+)"(?: data-suffix="([^"]*)")?[^>]*>([^<]*)</g)];
+  assert.ok(counters.length >= 3);
+  counters.forEach(([, count, suffix = '', text]) => assert.strictEqual(text, `${count}${suffix}`));
+});
+
+test('leads nutzt die Du-Ansprache im Datenschutz-Satz', () => {
+  const html = read('leads/index.html');
+  assert.ok(html.includes('Deine Daten werden ausschließlich zur Bearbeitung deiner Anfrage verwendet und vertraulich behandelt. Details in unserer <a href="/datenschutz/"'));
+  assert.ok(!html.includes('Ihre Daten werden ausschließlich'));
+});
+
+test('support.html nutzt einheitlich info@smyagency.de', () => {
+  assert.ok(!read('support.html').includes('support@smyagency.de'));
+});
+
+test('Visa-Logo liegt lokal und wird von leitfaden.html genutzt', () => {
+  assert.ok(fs.existsSync(path.join(__dirname, '../images/visa.svg')));
+  const html = read('leitfaden.html');
+  assert.ok(html.includes('src="/images/visa.svg"'));
+  assert.ok(!html.includes('commons/0/04/Visa.svg'));
 });
