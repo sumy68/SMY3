@@ -23,6 +23,8 @@ const PARTNER_SUBLINE = 'Mit unseren Vertriebspartnern bieten wir Ihnen Lösunge
 const REVIEW_NOTE = 'Auszüge aus öffentlichen Google-Bewertungen unseres Unternehmensprofils.';
 const PLACEHOLDER = /\[(NAME|STERNE|MM\/JJJJ)\]/;
 const SCHEMA_ORG_ID = 'https://smyagency.de/#organization';
+const ANONYMOUS_REVIEW = 'Google-Rezension';
+const UNVERIFIED_LABEL = 'Kundenstimme';
 const ELEVATED = 'background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);';
 
 /* Rahmen je Seite: Überschriften und Abschlüsse bleiben seitenindividuell.
@@ -149,6 +151,7 @@ function loadData(root) {
     references: Array.from(sandbox.window.SMY_REFERENCES),
     reviews: Array.from(sandbox.window.SMY_REVIEWS),
     googleRating: sandbox.window.googleRating,
+    reviewsGeprueft: sandbox.window.reviewsGeprueft === true,
     profileUrl: sandbox.window.googleRating.profilUrl,
   };
 }
@@ -327,8 +330,15 @@ function starsHtml(sterne, className) {
   return `<div class="${className}" role="img" aria-label="${label}">${'★'.repeat(sterne)}${'☆'.repeat(5 - sterne)}</div>`;
 }
 
+/* Vor dem Abgleich mit dem Google-Profil nennt keine Karte Google als Quelle. */
+function reviewView(review, geprueft) {
+  if (geprueft) return { ...review, label: 'Google-Bewertung' };
+  const anonymous = review.name === ANONYMOUS_REVIEW;
+  return { ...review, name: anonymous ? UNVERIFIED_LABEL : review.name, label: anonymous ? '' : UNVERIFIED_LABEL };
+}
+
 function reviewMeta(review) {
-  return review.datum ? `${esc(review.datum)} · Google-Bewertung` : 'Google-Bewertung';
+  return [review.datum && esc(review.datum), review.label].filter(Boolean).join(' · ');
 }
 
 function dsReview(review, index) {
@@ -346,7 +356,7 @@ function legacyReview(review) {
   return `<figure class="rv-card">
           ${starsHtml(review.sterne, 'rv-stars')}
           <blockquote class="rv-text">„${esc(review.text)}“</blockquote>
-          <figcaption class="rv-meta"><strong>${esc(review.name)}</strong><br>${reviewMeta(review)}</figcaption>
+          <figcaption class="rv-meta"><strong>${esc(review.name)}</strong>${reviewMeta(review) ? `<br>${reviewMeta(review)}` : ''}</figcaption>
         </figure>`;
 }
 
@@ -354,8 +364,10 @@ function reviewNote(profileUrl) {
   return `<p class="rv-note">${esc(REVIEW_NOTE)} ${externalLink(profileUrl, 'Alle Bewertungen ansehen')}</p>`;
 }
 
-function renderReviews(page, reviews, profileUrl, rating = { anzahl: null, schnitt: null, profilUrl: profileUrl }) {
-  const visible = reviews.filter((r) => r.freigegeben === true && r.seiten.includes(page));
+function renderReviews(page, reviews, profileUrl, rating = { anzahl: null, schnitt: null, profilUrl: profileUrl }, geprueft = true) {
+  const visible = reviews
+    .filter((r) => r.freigegeben === true && r.seiten.includes(page))
+    .map((r) => reviewView(r, geprueft));
   if (!visible.length) return '';
   const config = REVIEW_PAGES[page];
   const grid = config.variante === 'ds'
@@ -364,9 +376,9 @@ function renderReviews(page, reviews, profileUrl, rating = { anzahl: null, schni
         <div class="rv-grid">
         ${visible.map(legacyReview).join('\n        ')}
         </div>
-        ${reviewNote(profileUrl)}
+        ${geprueft ? reviewNote(profileUrl) : ''}
       </div>`;
-  const note = config.variante === 'ds' ? `\n        ${reviewNote(profileUrl)}` : '';
+  const note = config.variante === 'ds' && geprueft ? `\n        ${reviewNote(profileUrl)}` : '';
   const nach = typeof config.nach === 'function' ? config.nach(rating) : config.nach;
   return [config.vor, `${grid}${note}`, nach].filter(Boolean).join('\n        ');
 }
@@ -385,7 +397,7 @@ function replaceBetween(html, name, content, file) {
 
 /* Liefert { datei: neuer Inhalt }, ohne etwas zu schreiben. */
 function buildPages(root) {
-  const { references, reviews, profileUrl, googleRating } = loadData(root);
+  const { references, reviews, profileUrl, googleRating, reviewsGeprueft } = loadData(root);
   const errors = [...validateReferences(references), ...validateReviews(reviews, profileUrl), ...validateRating(googleRating)];
   if (errors.length) throw new Error(`Ungültige Daten:\n- ${errors.join('\n- ')}`);
 
@@ -395,7 +407,7 @@ function buildPages(root) {
     'projects/index.html': replaceBetween(read('projects/index.html'), 'REFERENCES', renderReferences(references, logoFor), 'projects/index.html'),
   };
   Object.keys(REVIEW_PAGES).forEach((page) => {
-    pages[page] = replaceBetween(read(page), 'REVIEWS', renderReviews(page, reviews, profileUrl, googleRating), page);
+    pages[page] = replaceBetween(read(page), 'REVIEWS', renderReviews(page, reviews, profileUrl, googleRating, reviewsGeprueft), page);
   });
   pages['index.html'] = applyRatingToSchema(
     replaceBetween(pages['index.html'], 'GOOGLE_RATING', renderHeroRating(googleRating), 'index.html'),

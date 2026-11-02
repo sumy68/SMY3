@@ -44,10 +44,10 @@ test('Anbieter stehen mit Firmierung, Anschrift und Transfergrundlage drin', () 
   ].forEach((text) => assert.ok(html.includes(text), text));
 });
 
-test('nicht eingebundene Analysedienste sind entfernt, der Meta Pixel bleibt', () => {
+test('nicht eingebundene Dienste und Tracking-Hinweise sind entfernt', () => {
   const html = privacyVisible();
-  ['Google Analytics', 'Hotjar'].forEach((text) => assert.ok(!html.includes(text), text));
-  assert.ok(html.includes('Meta Pixel'));
+  ['Google Analytics', 'Hotjar', 'Tag Manager', 'AdSense', 'Taboola', 'Google Photos', 'Kundenrezensionen', 'Trustpilot',
+    'Meta Pixel', 'Insight Tag', 'Instagram', 'LinkedIn', 'Consent', 'Retargeting'].forEach((text) => assert.ok(!html.includes(text), text));
   assert.ok(html.includes('Stand: November 2026'));
 });
 
@@ -140,4 +140,22 @@ test('Postanschrift ist überall Ursinusstraße 7, 85077 Manching', () => {
     assert.ok(!html.includes('Alpenrosen') && !html.includes('85055'), file);
     assert.ok(html.includes('85077'), file);
   });
+});
+
+test('Datenschutzerklärung und Impressum enthalten keine TODO-Kommentare', () => {
+  ['datenschutz/index.html', 'impressum/index.html'].forEach((file) => assert.ok(!read(file).includes('TODO'), file));
+});
+
+test('Abschnitte der Datenschutzerklärung sind lückenlos nummeriert', () => {
+  const html = read('datenschutz/index.html');
+  const main = [...html.matchAll(/<h2>(\d+)\./g)].map((match) => Number(match[1]));
+  assert.deepStrictEqual(main, main.map((_, index) => index + 1));
+  const sub = [...html.matchAll(/<strong>5\.(\d+)/g)].map((match) => Number(match[1]));
+  assert.deepStrictEqual(sub, sub.map((_, index) => index + 1));
+});
+
+test('README führt die offenen Punkte und alle 20 Bewertungen', () => {
+  const readme = read('README.md');
+  ['AV-Vertrag GitHub', 'AV-Vertrag IONOS', 'AV-Vertrag Brevo', 'AV-Vertrag Calendly', 'Formspree', 'Stripe'].forEach((text) => assert.ok(readme.includes(text), text));
+  assert.strictEqual((readme.match(/^\| \d+ \|/gm) || []).length, 20);
 });

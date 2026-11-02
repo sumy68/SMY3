@@ -32,24 +32,45 @@ test('alle 20 Bewertungen sind erfasst, freigegeben und ohne Hilfsfeld', () => {
   assert.ok(!fs.readFileSync(path.join(ROOT, 'data/reviews.js'), 'utf8').includes('bisherigeAngabe:'));
 });
 
-test('anonyme Bewertungen auf webdesign heißen Google-Rezension', () => {
+test('Namen enthalten nur Vorname und Initial oder den Firmennamen', () => {
+  const companies = ['Fliesen Ideal GmbH', 'MHM Gartenbau', 'Google-Rezension'];
+  reviews.filter((r) => !companies.includes(r.name)).forEach((r) => assert.match(r.name, /^\S+ [A-ZÄÖÜ]\.$/, r.name));
+});
+
+test('anonyme Bewertungen auf webdesign behalten den neutralen Namen', () => {
   const page = reviews.filter((r) => r.seiten.includes('webdesign/index.html'));
   assert.strictEqual(page.length, 3);
   page.forEach((r) => assert.strictEqual(r.name, 'Google-Rezension'));
 });
 
-test('jede Bewertungsseite zeigt ihre Bewertungen mit Name, Sternen, Label und Hinweis', () => {
+test('bis zum Abgleich heißen die Karten Kundenstimme und nennen Google nicht', () => {
+  assert.strictEqual(loadData(ROOT).reviewsGeprueft, false);
   Object.keys(REVIEW_PAGES).forEach((page) => {
     const html = fs.readFileSync(path.join(ROOT, page), 'utf8');
-    const own = reviews.filter((r) => r.seiten.includes(page));
-    assert.ok(own.length >= 2, page);
-    own.forEach((r) => assert.ok(html.includes(r.text.replace(/&/g, '&amp;')), `${page}: ${r.text}`));
+    reviews.filter((r) => r.seiten.includes(page)).forEach((r) => assert.ok(html.includes(r.text.replace(/&/g, '&amp;')), `${page}: ${r.text}`));
     assert.ok(html.includes('★★★★★'), page);
-    assert.ok(html.includes('Google-Bewertung'), page);
-    assert.ok(html.includes('Auszüge aus öffentlichen Google-Bewertungen unseres Unternehmensprofils.'), page);
-    assert.ok(html.includes('href="https://g.page/r/Cb-CsgZPf7TWEAE" target="_blank" rel="noopener noreferrer">Alle Bewertungen ansehen'), page);
+    assert.ok(html.includes('Kundenstimme'), page);
+    ['Auszüge aus öffentlichen Google-Bewertungen', 'Alle Bewertungen ansehen', 'Google-Rezension', '>Google-Bewertung<', '<br>Google-Bewertung'].forEach((text) => {
+      assert.ok(!html.includes(text), `${page}: ${text}`);
+    });
   });
   assert.ok(fs.readFileSync(path.join(ROOT, 'ugc.html'), 'utf8').includes('14 Tage mit deinen Zielgruppen'));
+});
+
+test('nach dem Abgleich zeigen die Karten Label, Hinweis und Profil-Link', () => {
+  ['index.html', 'ugc.html'].forEach((page) => {
+    const { datum, ...undated } = approved({ seiten: [page] });
+    const html = renderReviews(page, [undated], PROFILE, undefined, true);
+    assert.ok(html.includes('Google-Bewertung'));
+    assert.ok(html.includes('Auszüge aus öffentlichen Google-Bewertungen unseres Unternehmensprofils.'));
+    assert.ok(html.includes(`href="${PROFILE}" target="_blank" rel="noopener noreferrer">Alle Bewertungen ansehen`));
+  });
+});
+
+test('anonyme Bewertung zeigt vor dem Abgleich nur Kundenstimme', () => {
+  const html = renderReviews('ugc.html', [approved({ name: 'Google-Rezension', seiten: ['ugc.html'] })], PROFILE, undefined, false);
+  assert.ok(!html.includes('Google-Rezension'));
+  assert.strictEqual((html.match(/Kundenstimme/g) || []).length, 1);
 });
 
 test('Datum ist optional: ohne Datum kein Fehler und keine Datumsausgabe', () => {

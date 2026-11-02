@@ -187,7 +187,7 @@ test('Seite ist nur per noindex ausgeschlossen, nicht per robots.txt oder Sitema
 
 test('Datenschutzerklärung enthält Bewerbungen, Talentpool und Formspree', () => {
   const html = read('datenschutz/index.html');
-  assert.ok(html.includes('5.3 Bewerbungen'));
-  assert.ok(html.includes('5.4 Formspree'));
+  assert.ok(html.includes('5.2 Bewerbungen'));
+  assert.ok(html.includes('5.3 Formspree'));
   assert.ok(html.indexOf('in die Aufnahme in unseren Talentpool') < html.indexOf('spätestens 6 Monate'));
 });
