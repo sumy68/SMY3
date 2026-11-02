@@ -7,7 +7,7 @@
    textarea, consent. Neue Skalenfragen zählen automatisch zum Score.
    ============================================================ */
 window.SMY_BEWERBUNG = {
-  endpoint: 'https://formspree.io/f/movggzpl',
+  endpoint: 'https://formspree.io/f/xgaapdaa',
   steps: [
     {
       id: 'kontakt',
