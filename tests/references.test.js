@@ -135,3 +135,11 @@ test('Logo-Pfad muss unter /public/ oder /images/ liegen', () => {
   assert.deepStrictEqual(validateReferences([{ ...entry, logo: '/images/logos/x.png' }]), []);
   assert.strictEqual(validateReferences([{ ...entry, logo: 'https://example.com/x.png' }]).length, 1);
 });
+
+test('Partner-Logos sitzen ohne Ausschnitt-Workaround mit contain in einheitlicher Höhe', () => {
+  const css = fs.readFileSync(path.join(ROOT, 'references.css'), 'utf8');
+  assert.ok(!css.includes('object-fit: cover'));
+  assert.match(css, /\.ds-vp__logo \{[^}]*height: 3\.5rem;[^}]*object-fit: contain;/);
+  assert.match(css, /max-width: 760px[\s\S]*\.ds-vp__logo \{ height: 2\.5rem; \}/);
+  assert.match(css, /\.ds-vp__head \{[^}]*text-align: center;/);
+});

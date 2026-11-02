@@ -58,3 +58,11 @@ test('lokale Fonts und Tailwind-CSS sind vorhanden und eingebunden', () => {
     .forEach((file) => assert.ok(fs.readFileSync(path.join(ROOT, file), 'utf8').includes('href="/tailwind.css"'), file));
   assert.ok(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').includes('href="/fonts/fonts.css"'));
 });
+
+test('Logo-Originale gehen nicht live, die zugeschnittenen schon', () => {
+  assert.ok(excludes.includes('images/logos/*-original.png'));
+  ['ci', 'psynow'].forEach((name) => {
+    assert.ok(fs.existsSync(path.join(ROOT, `images/logos/${name}-original.png`)), name);
+    assert.ok(fs.existsSync(path.join(ROOT, `images/logos/${name}.png`)), name);
+  });
+});
