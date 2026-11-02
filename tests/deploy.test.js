@@ -30,3 +30,10 @@ test('im Browser geladene Dateien sind nicht ausgeschlossen', () => {
   assert.ok(referenced.includes('data/bewerbung-vertrieb.js'));
   referenced.forEach((src) => assert.ok(!excludes.includes(src), src));
 });
+
+test('kein Meta Pixel mehr auf der Website', () => {
+  walk('.').forEach((file) => {
+    const source = fs.readFileSync(path.join(ROOT, file), 'utf8');
+    assert.ok(!/fbq\(|fbevents|facebook\.com\/tr|connect\.facebook\.net/.test(source), file);
+  });
+});
