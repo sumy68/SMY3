@@ -73,12 +73,14 @@
       .concat(noEquipment ? ['⚠️ Kein Equipment'] : []);
   };
 
-  var buildSubject = function (name, result, flags) {
+  var buildSubject = function (name, result, flags, talentpool) {
     var cleanName = String(name).replace(/[\r\n]+/g, ' ').trim();
-    return 'Bewerbung Vertrieb: ' + cleanName + ', Score ' + result.score + '/' + result.max + ', ' + flags.join(', ');
+    return 'Bewerbung Vertrieb: ' + cleanName + ', Score ' + result.score + '/' + result.max + ', ' + flags.join(', ') +
+      (talentpool ? ' [Talentpool]' : '');
   };
 
   var formatAnswer = function (field, value, submittedAt) {
+    if (field.yesNo) return value ? 'Ja' : 'Nein';
     if (field.type === 'consent') return value ? 'Ja, erteilt am ' + submittedAt : 'Nein';
     if (isEmpty(value)) return NO_ANSWER;
     if (Array.isArray(value)) return value.join(', ');
@@ -91,7 +93,7 @@
     var result = computeScore(config.steps, answers);
     var flags = computeFlags(answers);
     var head = {
-      _subject: buildSubject(answers.name, result, flags),
+      _subject: buildSubject(answers.name, result, flags, answers.talentpool === true),
       Score: result.score + '/' + result.max,
       Flags: flags.join(', ')
     };

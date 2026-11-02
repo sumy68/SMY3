@@ -135,13 +135,15 @@
     input.type = 'checkbox';
     input.name = field.id;
     label.appendChild(input);
-    label.appendChild(el('span', '', field.label + ' *'));
-    var link = el('a', 'bw-link', field.linkText);
-    link.href = field.linkHref;
-    link.target = '_blank';
-    link.rel = 'noopener';
+    label.appendChild(el('span', '', field.label + (field.required ? ' *' : '')));
     wrap.appendChild(label);
-    wrap.appendChild(link);
+    if (field.linkHref) {
+      var link = el('a', 'bw-link', field.linkText);
+      link.href = field.linkHref;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      wrap.appendChild(link);
+    }
     return wrap;
   };
 

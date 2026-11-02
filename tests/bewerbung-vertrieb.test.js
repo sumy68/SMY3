@@ -106,7 +106,9 @@ test('Pflichtfelder liefern Fehler, optionale nicht', () => {
   assert.ok(logik.validateField(field('andererMinijob'), '', today));
   assert.ok(logik.validateField(field('datenschutz'), false, today));
   assert.strictEqual(logik.validateField(field('stunden'), '', today), '');
-  assert.strictEqual(logik.validateField(field('rueckruf'), [], today), '');
+  assert.ok(logik.validateField(field('rueckruf'), [], today));
+  assert.ok(logik.validateField(field('ruhigerPlatz'), '', today));
+  assert.ok(logik.validateField(field('equipment'), '', today));
   assert.strictEqual(logik.validateField(field('email'), 'a@b.de', today), '');
 });
 
@@ -154,4 +156,41 @@ test('Rate-Limit: maximal 3 Einsendungen pro Stunde', () => {
   assert.strictEqual(logik.isRateLimited([minutes(1), minutes(2)], now), false);
   assert.strictEqual(logik.isRateLimited([minutes(1), minutes(2), minutes(3)], now), true);
   assert.strictEqual(logik.isRateLimited([minutes(61), minutes(62), minutes(63)], now), false);
+});
+
+const TALENTPOOL_TEXT = 'Optional: Ich möchte in den SMY-Talentpool aufgenommen werden. Dafür dürfen meine Angaben bis zu 12 Monate gespeichert werden, damit ihr mich bei passenden Stellen erneut kontaktieren könnt. Diese Einwilligung kann ich jederzeit per E-Mail an info@smyagency.de widerrufen.';
+const talentpoolField = () => config.steps.flatMap((step) => step.fields).find((field) => field.id === 'talentpool');
+
+test('Talentpool ist optional, steht nach der Datenschutz-Checkbox und hat den vereinbarten Text', () => {
+  const ids = config.steps[4].fields.map((field) => field.id);
+  assert.strictEqual(ids.indexOf('talentpool'), ids.indexOf('datenschutz') + 1);
+  assert.strictEqual(talentpoolField().label, TALENTPOOL_TEXT);
+  assert.strictEqual(logik.validateField(talentpoolField(), false, '2026-11-02'), '');
+});
+
+test('Talentpool erscheint als Ja/Nein und nur bei Ja im Betreff', () => {
+  const yes = plain(logik.buildPayload(config, answers({ talentpool: true }), 'x'));
+  assert.strictEqual(yes.Talentpool, 'Ja');
+  assert.strictEqual(yes._subject, 'Bewerbung Vertrieb: Alex Beispiel, Score 24/35, ✅ Passt zeitlich [Talentpool]');
+  const no = plain(logik.buildPayload(config, answers({ talentpool: false }), 'x'));
+  assert.strictEqual(no.Talentpool, 'Nein');
+  assert.ok(!no._subject.includes('Talentpool'));
+});
+
+const read = (file) => fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
+
+test('Seite ist nur per noindex ausgeschlossen, nicht per robots.txt oder Sitemap', () => {
+  assert.ok(!read('robots.txt').includes('bewerbung'));
+  assert.ok(!read('sitemap.xml').includes('bewerbung'));
+  assert.match(read('bewerbung-vertrieb/index.html'), /<meta name="robots" content="noindex, nofollow"/);
+});
+
+test('Datenschutzerklärung enthält Bewerbungen, Talentpool, Formspree und markierte Platzhalter', () => {
+  const html = read('datenschutz/index.html');
+  assert.ok(html.includes('5.3 Bewerbungen'));
+  assert.ok(html.includes('5.4 Formspree'));
+  assert.ok(html.indexOf('in die Aufnahme in unseren Talentpool') < html.indexOf('spätestens 6 Monate'));
+  ['[Formspree Firmierung/Anschrift]', '[Rechtsgrundlage USA-Transfer]', '[AV-Vertrag]'].forEach((placeholder) => {
+    assert.ok(html.includes(`<!-- TODO PRÜFEN --><mark class="ds-legal__todo">${placeholder}</mark>`), placeholder);
+  });
 });

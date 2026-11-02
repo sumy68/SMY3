@@ -75,8 +75,8 @@ window.SMY_BEWERBUNG = {
           options: ['B2B', 'B2C', 'Beides']
         },
         { id: 'andererMinijob', type: 'radios', label: 'Hast du aktuell bereits einen anderen Minijob?', short: 'Anderer Minijob', required: true, hint: 'Wichtig für die Verdienstgrenze', options: ['Ja', 'Nein'] },
-        { id: 'ruhigerPlatz', type: 'radios', label: 'Hast du einen ruhigen Arbeitsplatz zum Telefonieren?', short: 'Ruhiger Arbeitsplatz', options: ['Ja', 'Nein'] },
-        { id: 'equipment', type: 'radios', label: 'Hast du Laptop/PC und Headset?', short: 'Laptop/PC und Headset', options: ['Ja', 'Nur Laptop', 'Nein'] }
+        { id: 'ruhigerPlatz', type: 'radios', label: 'Hast du einen ruhigen Arbeitsplatz zum Telefonieren?', short: 'Ruhiger Arbeitsplatz', required: true, options: ['Ja', 'Nein'] },
+        { id: 'equipment', type: 'radios', label: 'Hast du Laptop/PC und Headset?', short: 'Laptop/PC und Headset', required: true, options: ['Ja', 'Nur Laptop', 'Nein'] }
       ]
     },
     {
@@ -84,12 +84,16 @@ window.SMY_BEWERBUNG = {
       title: 'Motivation & Rückruf',
       fields: [
         { id: 'motivation', type: 'textarea', label: 'Warum Vertrieb?', short: 'Warum Vertrieb', maxLength: 300 },
-        { id: 'rueckruf', type: 'checkboxes', label: 'Wann dürfen wir dich anrufen?', short: 'Rückruf', options: ['Vormittags', 'Nachmittags', 'Abends'] },
+        { id: 'rueckruf', type: 'checkboxes', label: 'Wann dürfen wir dich anrufen?', short: 'Rückruf', required: true, options: ['Vormittags', 'Nachmittags', 'Abends'] },
         {
           id: 'datenschutz', type: 'consent', short: 'Datenschutz-Einwilligung', required: true,
           label: 'Ich willige ein, dass SMY Agency meine Angaben zur Bearbeitung meiner Bewerbung speichert und verarbeitet. Die Daten werden spätestens 6 Monate nach Abschluss des Bewerbungsverfahrens gelöscht.',
           linkText: 'Zur Datenschutzerklärung',
           linkHref: '/datenschutz/'
+        },
+        {
+          id: 'talentpool', type: 'consent', submitName: 'Talentpool', yesNo: true,
+          label: 'Optional: Ich möchte in den SMY-Talentpool aufgenommen werden. Dafür dürfen meine Angaben bis zu 12 Monate gespeichert werden, damit ihr mich bei passenden Stellen erneut kontaktieren könnt. Diese Einwilligung kann ich jederzeit per E-Mail an info@smyagency.de widerrufen.'
         }
       ]
     }
