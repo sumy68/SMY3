@@ -1,23 +1,30 @@
 User-agent: *
 Allow: /
+Disallow: /bewerbung-vertrieb
 
 # KI-/Answer-Engines ausdrücklich erlauben (AI-SEO)
 User-agent: GPTBot
 Allow: /
+Disallow: /bewerbung-vertrieb
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /bewerbung-vertrieb
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /bewerbung-vertrieb
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /bewerbung-vertrieb
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /bewerbung-vertrieb
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /bewerbung-vertrieb
 
 Sitemap: https://smyagency.de/sitemap.xml
