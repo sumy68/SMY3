@@ -4,7 +4,7 @@ const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
 const {
-  REVIEW_PAGES, applyRatingToSchema, buildPages, isRatingSet, loadData, renderHeroRating, renderReviews, validateRating, validateReviews,
+  REVIEW_PAGES, applyRatingToSchema, buildPages, isRatingSet, loadData, renderHeroRating, renderReviews, validateRating, validateReviews, visibleRating,
 } = require('../scripts/build-references.js');
 
 const ROOT = path.join(__dirname, '..');
@@ -182,19 +182,30 @@ test('Schema enthält aggregateRating nur bei vollständigen Werten', () => {
   assert.strictEqual(rating.reviewCount, '42');
 });
 
-test('Hero-Zeile erscheint nur bei vollständigen Werten', () => {
-  assert.strictEqual(renderHeroRating({ anzahl: null, schnitt: null }), '');
-  assert.strictEqual(renderHeroRating({ anzahl: 42, schnitt: null }), '');
+const NEUTRAL_HERO = '<span>Kundenstimmen aus Projekten in ganz Deutschland</span>';
+
+test('Hero zeigt die Google-Zahl nur bei vollständigen Werten, sonst den neutralen Satz', () => {
+  assert.strictEqual(renderHeroRating({ anzahl: null, schnitt: null }), NEUTRAL_HERO);
+  assert.strictEqual(renderHeroRating({ anzahl: 42, schnitt: null }), NEUTRAL_HERO);
   assert.strictEqual(renderHeroRating({ ...RATED, schnitt: 5 }), '<span>★ 5.0 aus 42 Google-Bewertungen</span>');
 });
 
-test('Startseite zeigt Schema, Hero und Bewertungsblock aus der Konfiguration', () => {
+test('Google-Zahl hängt am Schalter reviewsGeprueft', () => {
+  assert.strictEqual(isRatingSet(visibleRating(RATED, false)), false);
+  assert.strictEqual(visibleRating(RATED, false).profilUrl, PROFILE);
+  assert.strictEqual(isRatingSet(visibleRating(RATED, true)), true);
+});
+
+test('Startseite nennt vor dem Abgleich keine Google-Zahl, die Werte bleiben konfiguriert', () => {
   const html = homepage();
-  assert.ok(html.includes('<span>★ 5.0 aus 120 Google-Bewertungen</span>'));
-  const rating = orgOf(html).aggregateRating;
-  assert.strictEqual(rating.ratingValue, '5.0');
-  assert.strictEqual(rating.reviewCount, '120');
-  assert.ok(html.includes('Basierend auf 120 Google-Bewertungen'));
+  const { googleRating, reviewsGeprueft } = loadData(ROOT);
+  assert.strictEqual(reviewsGeprueft, false);
+  assert.strictEqual(googleRating.anzahl, 120);
+  assert.ok(html.includes(NEUTRAL_HERO));
+  ['aggregateRating', 'reviewCount', 'ratingValue', '★ 5.0', 'Google-Bewertungen', 'ds-reviews__num'].forEach((text) => {
+    assert.ok(!html.includes(text), text);
+  });
+  assert.ok(!('aggregateRating' in orgOf(html)));
   assert.ok(html.includes('120+ Projekte'));
   assert.ok(html.includes('data-count="35"'));
 });

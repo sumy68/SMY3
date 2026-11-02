@@ -154,8 +154,23 @@ test('Abschnitte der Datenschutzerklärung sind lückenlos nummeriert', () => {
   assert.deepStrictEqual(sub, sub.map((_, index) => index + 1));
 });
 
-test('README führt die offenen Punkte und alle 20 Bewertungen', () => {
+test('interne Notizen stehen nicht in der README und INTERN.md ist ignoriert', () => {
   const readme = read('README.md');
-  ['AV-Vertrag GitHub', 'AV-Vertrag IONOS', 'AV-Vertrag Brevo', 'AV-Vertrag Calendly', 'Formspree', 'Stripe'].forEach((text) => assert.ok(readme.includes(text), text));
-  assert.strictEqual((readme.match(/^\| \d+ \|/gm) || []).length, 20);
+  assert.ok(readme.includes('Interne Notizen liegen lokal.'));
+  ['AV-Vertrag', 'Formspree', 'Stripe', 'Offene Punkte', 'Erster Satz'].forEach((text) => assert.ok(!readme.includes(text), text));
+  assert.ok(read('.gitignore').split('\n').includes('INTERN.md'));
+});
+
+test('Startseite und Fragebogen nennen Manching bei Ingolstadt', () => {
+  assert.ok(read('index.html').includes('content="SMY Agency aus Manching bei Ingolstadt:'));
+  assert.ok(read('bewerbung-vertrieb/index.html').includes('Wir sind SMY Agency aus Manching bei Ingolstadt'));
+});
+
+test('leitfaden.html lädt alle Zahlungslogos lokal', () => {
+  const html = read('leitfaden.html');
+  assert.ok(!html.includes('wikimedia'));
+  ['paypal', 'visa', 'mastercard'].forEach((name) => {
+    assert.ok(html.includes(`src="/images/${name}.svg"`), name);
+    assert.ok(fs.existsSync(path.join(__dirname, `../images/${name}.svg`)), name);
+  });
 });

@@ -23,6 +23,7 @@ const PARTNER_SUBLINE = 'Mit unseren Vertriebspartnern bieten wir Ihnen Lösunge
 const REVIEW_NOTE = 'Auszüge aus öffentlichen Google-Bewertungen unseres Unternehmensprofils.';
 const PLACEHOLDER = /\[(NAME|STERNE|MM\/JJJJ)\]/;
 const SCHEMA_ORG_ID = 'https://smyagency.de/#organization';
+const HERO_NEUTRAL = 'Kundenstimmen aus Projekten in ganz Deutschland';
 const ANONYMOUS_REVIEW = 'Google-Rezension';
 const UNVERIFIED_LABEL = 'Kundenstimme';
 const ELEVATED = 'background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);';
@@ -117,8 +118,13 @@ function ratingSummary(rating) {
           </div>`;
 }
 
+/* Google-Zahlen erscheinen erst nach dem Abgleich mit dem Google-Profil. */
+function visibleRating(rating, geprueft) {
+  return geprueft ? rating : { ...rating, anzahl: null, schnitt: null };
+}
+
 function renderHeroRating(rating) {
-  if (!isRatingSet(rating)) return '';
+  if (!isRatingSet(rating)) return `<span>${HERO_NEUTRAL}</span>`;
   return `<span>★ ${formatSchnitt(rating)} aus ${rating.anzahl} Google-Bewertungen</span>`;
 }
 
@@ -403,15 +409,16 @@ function buildPages(root) {
 
   const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
   const logoFor = (entry) => findLogo(entry, root);
+  const rating = visibleRating(googleRating, reviewsGeprueft);
   const pages = {
     'projects/index.html': replaceBetween(read('projects/index.html'), 'REFERENCES', renderReferences(references, logoFor), 'projects/index.html'),
   };
   Object.keys(REVIEW_PAGES).forEach((page) => {
-    pages[page] = replaceBetween(read(page), 'REVIEWS', renderReviews(page, reviews, profileUrl, googleRating, reviewsGeprueft), page);
+    pages[page] = replaceBetween(read(page), 'REVIEWS', renderReviews(page, reviews, profileUrl, rating, reviewsGeprueft), page);
   });
   pages['index.html'] = applyRatingToSchema(
-    replaceBetween(pages['index.html'], 'GOOGLE_RATING', renderHeroRating(googleRating), 'index.html'),
-    googleRating,
+    replaceBetween(pages['index.html'], 'GOOGLE_RATING', renderHeroRating(rating), 'index.html'),
+    rating,
   );
   return pages;
 }
@@ -439,5 +446,5 @@ if (require.main === module) {
 
 module.exports = {
   REVIEW_PAGES, applyRatingToSchema, buildPages, findLogo, isRatingSet, loadData, renderHeroRating, renderReferences,
-  renderReviews, replaceBetween, slug, validateRating, validateReferences, validateReviews,
+  renderReviews, replaceBetween, slug, validateRating, validateReferences, validateReviews, visibleRating,
 };

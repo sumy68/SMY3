@@ -16,8 +16,9 @@
    weder aggregateRating im Schema noch die Hero-Zeile. schnitt als Zahl, z. B. 4.9. */
 window.googleRating = Object.freeze({ anzahl: 120, schnitt: 5.0, profilUrl: 'https://g.page/r/Cb-CsgZPf7TWEAE' });
 
-/* Auf true setzen, sobald alle Bewertungen mit dem Google-Profil abgeglichen sind (Liste in der README).
-   Erst dann heißen die Karten "Google-Bewertung" und zeigen Hinweis und Profil-Link. */
+/* Auf true setzen, sobald alle Bewertungen mit dem Google-Profil abgeglichen sind.
+   Erst dann heißen die Karten "Google-Bewertung" und zeigen Hinweis und Profil-Link,
+   und Hero, Bewertungsblock und Schema nennen die Zahlen aus googleRating. */
 window.reviewsGeprueft = false;
 
 window.SMY_REVIEWS = Object.freeze([
