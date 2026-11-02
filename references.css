@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Referenzen & Vertriebspartner (/projects/)
+   ========================================================================== */
+/* Vier Featured-Karten als 2×2, damit keine Karte allein in der Reihe steht */
+@media (min-width: 768px) {
+  #refFeatured { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.ds-featured h3 a,
+.ds-projitem h4 a { color: inherit; text-decoration: none; }
+.ds-featured h3 a:hover,
+.ds-projitem h4 a:hover { color: var(--smy-red-bright); }
+
+.ds-ref-result { color: var(--text-primary); font-weight: 500; }
+.ds-ref-quote {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-sm);
+  border-left: 2px solid var(--border-accent);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+/* ─── Vertriebspartner ─── */
+.ds-vp { background: var(--bg-elevated); border-block: 1px solid var(--border-subtle); }
+.ds-vp__head { max-width: 46rem; }
+.ds-vp__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 22rem));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding: 0;
+  list-style: none;
+}
+.ds-vp__link { display: block; border-radius: var(--radius-md); text-decoration: none; }
+.ds-vp__link:hover .ds-vp__mark { border-color: var(--border-accent); }
+.ds-vp__link:focus-visible { outline: 2px solid var(--smy-red-bright); outline-offset: 3px; }
+
+/* Einheitliche Fläche: das Padding hält den Schutzraum um jedes Logo frei */
+.ds-vp__mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7.5rem;
+  padding: var(--space-md);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color 0.25s ease;
+}
+.ds-vp__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+/* Logos nur proportional skalieren, nie umfärben. Bis zum Laden unsichtbar. */
+.ds-vp__logo {
+  position: absolute;
+  inset: var(--space-md);
+  width: calc(100% - 2 * var(--space-md));
+  height: calc(100% - 2 * var(--space-md));
+  object-fit: contain;
+  opacity: 0;
+}
+.ds-vp__mark.has-logo { background: #fff; }
+.ds-vp__mark.has-logo .ds-vp__logo { opacity: 1; }
+.ds-vp__mark.has-logo .ds-vp__wordmark { visibility: hidden; }
+
+.ds-vp__service {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}

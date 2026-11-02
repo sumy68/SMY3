@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="/design-system.css" />
   <link rel="stylesheet" href="/design-demo.css" />
   <link rel="stylesheet" href="/subpages.css" />
+  <link rel="stylesheet" href="/references.css" />
 </head>
 
 <body>
@@ -62,34 +63,8 @@
         <span class="ds-eyebrow reveal">Featured Work</span>
         <h2 class="ds-section-title reveal" data-delay="1">Projekte, auf die wir <span class="ds-accent">stolz sind</span>.</h2>
 
-        <div class="ds-featured-grid">
-          <article class="ds-featured reveal">
-            <div class="ds-featured__tag">Full Service</div>
-            <h3>MJ Lernförderung</h3>
-            <p>Rundum-Betreuung für eine Lernförderung in Hannover: eine maßgeschneiderte Verwaltungsplattform (Schüler- &amp; Lehrkraft-Verwaltung, Stundenerfassung mit digitaler Unterschrift, Honorar-Abrechnung per Klick, PDF-/Excel-Nachweise, DSGVO-konform mit EU-Hosting) – plus Website, Logo &amp; Branding, Flyer-Druck, Google-Business-Optimierung sowie laufende Social-Media- und Google-/Meta-Ads-Betreuung.</p>
-            <div class="ds-featured__tags">
-              <span class="ds-chip">Verwaltungsplattform</span><span class="ds-chip">Website</span><span class="ds-chip">Branding</span><span class="ds-chip">Print</span><span class="ds-chip">Google &amp; Meta Ads</span><span class="ds-chip">Social Media</span><span class="ds-chip">DSGVO</span>
-            </div>
-          </article>
-
-          <article class="ds-featured reveal" data-delay="1">
-            <div class="ds-featured__tag">Enterprise Tech</div>
-            <h3>Picsart Inc.</h3>
-            <p>Entwicklung von 5 hochskalierbaren Plattformen: Analytics-Infrastruktur, Live-Kollaboration, Podcast-Hosting, Livestream-Backend und cloudbasierte Video-Editing-Lösung mit GPU-Rendering.</p>
-            <div class="ds-featured__tags">
-              <span class="ds-chip">Backend</span><span class="ds-chip">Cloud Architecture</span><span class="ds-chip">Video Processing</span>
-            </div>
-          </article>
-
-          <article class="ds-featured reveal" data-delay="2">
-            <div class="ds-featured__tag">Full Service</div>
-            <h3>CI Dienstleistungen</h3>
-            <p>Komplette digitale Transformation: Website, Printmedien, Spezialanfertigungen (Alu-Dibond), Google Business Setup, SEO-Optimierung und Ticketsystem-Integration.</p>
-            <div class="ds-featured__tags">
-              <span class="ds-chip">Webdesign</span><span class="ds-chip">Print</span><span class="ds-chip">SEO</span><span class="ds-chip">Business Setup</span>
-            </div>
-          </article>
-        </div>
+        <!-- Inhalte aus /data/references.js -->
+        <div class="ds-featured-grid" id="refFeatured"></div>
       </div>
     </section>
 
@@ -97,38 +72,21 @@
     <section class="ds-section">
       <div class="ds-container">
         <span class="ds-eyebrow reveal">Alle Projekte</span>
-        <div class="ds-projcols">
-          <div class="ds-projcat reveal">
-            <h3 class="ds-projcat__title">Web &amp; Development</h3>
-            <div class="ds-projitem"><h4>Nenessa Hotel</h4><p>Website-Erstellung &amp; Google SEO Optimierung</p></div>
-            <div class="ds-projitem"><h4>Palace Hotel</h4><p>Website &amp; Google Profil Optimierung</p></div>
-            <div class="ds-projitem"><h4>MJ Lernförderung</h4><p>Verwaltungsplattform &amp; Website</p></div>
-            <div class="ds-projitem"><h4>Cleorova Shapewear</h4><p>E-Commerce Website, KI-Produktfotos, Branding &amp; Ads</p></div>
-            <div class="ds-projitem"><h4>MHM Garten- &amp; Landschaftsbau</h4><p>Webdesign &amp; Printdesign</p></div>
-            <div class="ds-projitem"><h4>Logikids – Daniela Neuber</h4><p>Webdesign, Flyer &amp; Social Media</p></div>
-            <div class="ds-projitem"><h4>Gastpark Hotel</h4><p>Google Unternehmensprofil</p></div>
-            <div class="ds-projitem"><h4>Candelized</h4><p>Grafikdesign &amp; Webdesign</p></div>
-            <div class="ds-projitem"><h4>Elias Sterzl Gartenbau</h4><p>Website &amp; Google SEO Optimierung</p></div>
-            <div class="ds-projitem"><h4>Uwe Schuster</h4><p>Website, Flyer &amp; Social Media</p></div>
-          </div>
+        <!-- Inhalte aus /data/references.js -->
+        <div class="ds-projcols" id="refList"></div>
+      </div>
+    </section>
 
-          <div class="ds-projcat reveal" data-delay="1">
-            <h3 class="ds-projcat__title">Branding &amp; Design</h3>
-            <div class="ds-projitem"><h4>MJ Lernförderung</h4><p>Logo, Corporate Design &amp; Flyer-Print</p></div>
-            <div class="ds-projitem"><h4>Steuerberater Yusuf Kavalci</h4><p>Brand Identity: Logo, Website &amp; Visitenkarten</p></div>
-            <div class="ds-projitem"><h4>KFZ-Sachverständiger BAS</h4><p>Corporate Design &amp; Website</p></div>
-            <div class="ds-projitem"><h4>KG Handel GmbH</h4><p>Logoerstellung &amp; Firmenstempel</p></div>
-            <div class="ds-projitem"><h4>Karise UG</h4><p>Logo &amp; Brand Identity</p></div>
-            <div class="ds-projitem"><h4>DJane Anastasia Chesnocova</h4><p>Albumcover Design „LIGHTS"</p></div>
-          </div>
-
-          <div class="ds-projcat reveal" data-delay="2">
-            <h3 class="ds-projcat__title">Marketing &amp; Social</h3>
-            <div class="ds-projitem"><h4>MJ Lernförderung</h4><p>Social Media, Google &amp; Meta Ads</p></div>
-            <div class="ds-projitem"><h4>HappINess e.V.</h4><p>IT-Betreuung, Website, Print &amp; Social Content</p></div>
-            <div class="ds-projitem"><h4>Herbalife Promoter</h4><p>Instagram Management &amp; Facebook Ads</p></div>
-          </div>
+    <!-- VERTRIEBSPARTNER -->
+    <section class="ds-section ds-vp" id="vertriebspartner">
+      <div class="ds-container">
+        <div class="ds-vp__head">
+          <span class="ds-eyebrow reveal">Partner</span>
+          <h2 class="ds-section-title reveal" data-delay="1">Unsere <span class="ds-accent">Vertriebspartner</span></h2>
+          <p class="ds-lead reveal" data-delay="1">Als offizieller Vertriebspartner vermitteln wir geprüfte Lösungen für Ihr Unternehmen.</p>
         </div>
+        <!-- Inhalte aus /data/references.js -->
+        <ul class="ds-vp__grid" id="refPartners"></ul>
       </div>
     </section>
 
@@ -162,6 +120,8 @@
     </div>
   </footer>
 
+  <script src="/data/references.js"></script>
+  <script src="/references.js"></script>
   <script src="/design-demo.js"></script>
   <script src="/subpages.js"></script>
 </body>
