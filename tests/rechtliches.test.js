@@ -52,3 +52,13 @@ test('ugc.html enthält keine Bilder, deren Datei fehlt', () => {
     assert.ok(fs.existsSync(path.join(__dirname, '..', src.replace(/^\//, ''))), src);
   });
 });
+
+test('Datenschutzerklärung bleibt ohne JavaScript lesbar', () => {
+  assert.ok(read('datenschutz/index.html').includes('<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>'));
+});
+
+test('Fragebogen zeigt ohne JavaScript nur den Hinweis statt eines leeren Formulars', () => {
+  const html = read('bewerbung-vertrieb/index.html');
+  assert.ok(html.includes('<noscript><style>#bw-form{display:none}</style></noscript>'));
+  assert.ok(html.includes('Der Fragebogen braucht JavaScript'));
+});
