@@ -22,6 +22,7 @@ const COLUMNS = [
 const PARTNER_SUBLINE = 'Mit unseren Vertriebspartnern bieten wir Ihnen Lösungen über unser eigenes Leistungsportfolio hinaus.';
 const REVIEW_NOTE = 'Auszüge aus öffentlichen Google-Bewertungen unseres Unternehmensprofils.';
 const PLACEHOLDER = /\[(NAME|STERNE|MM\/JJJJ)\]/;
+const SCHEMA_ORG_ID = 'https://smyagency.de/#organization';
 const ELEVATED = 'background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);';
 
 /* Rahmen je Seite: Überschriften und Abschlüsse bleiben seitenindividuell.
@@ -33,13 +34,9 @@ const REVIEW_PAGES = {
       <div class="ds-container">
         <span class="ds-eyebrow reveal">Was unsere Kunden sagen</span>
         <h2 class="ds-section-title reveal" data-delay="1">Bewertungen, die <span class="ds-accent">für sich sprechen</span>.</h2>`,
-    nach: `<div class="ds-reviews__summary reveal">
-          <div>
-            <div class="ds-reviews__num">5.0</div>
-            <div class="ds-reviews__sumstars">★★★★★</div>
-            <div class="ds-reviews__sumtext">Basierend auf Google-Bewertungen</div>
-          </div>
-          <a href="https://g.page/r/Cb-CsgZPf7TWEAE/review" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-magnetic>Bewertung schreiben</a>
+    nach: (rating) => `<div class="ds-reviews__summary reveal">
+          ${ratingSummary(rating)}
+          <a href="${esc(rating.profilUrl)}/review" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-magnetic>Bewertung schreiben</a>
         </div>
       </div>
     </section>`,
@@ -101,6 +98,47 @@ function esc(value) {
     .replace(/"/g, '&quot;');
 }
 
+function isRatingSet(rating) {
+  return rating.anzahl !== null && rating.anzahl !== undefined && rating.schnitt !== null && rating.schnitt !== undefined;
+}
+
+function formatSchnitt(rating) {
+  return rating.schnitt.toFixed(1);
+}
+
+function ratingSummary(rating) {
+  if (!isRatingSet(rating)) return '';
+  return `<div>
+            <div class="ds-reviews__num">${formatSchnitt(rating)}</div>
+            <div class="ds-reviews__sumstars">${'★'.repeat(Math.round(rating.schnitt))}</div>
+            <div class="ds-reviews__sumtext">Basierend auf ${rating.anzahl} Google-Bewertungen</div>
+          </div>`;
+}
+
+function renderHeroRating(rating) {
+  if (!isRatingSet(rating)) return '';
+  return `<span>★ ${formatSchnitt(rating)} aus ${rating.anzahl} Google-Bewertungen</span>`;
+}
+
+/* Setzt oder entfernt aggregateRating im Schema, andere Knoten bleiben unverändert. */
+function applyRatingToSchema(html, rating) {
+  const pattern = /(<script type="application\/ld\+json">\n)([\s\S]*?)(\n\s*<\/script>)/;
+  const match = html.match(pattern);
+  if (!match) throw new Error('index.html: Schema-Block fehlt');
+  const schema = JSON.parse(match[2]);
+  const graph = schema['@graph'].map((node) => {
+    if (node['@id'] !== SCHEMA_ORG_ID) return node;
+    const { aggregateRating, ...rest } = node;
+    if (!isRatingSet(rating)) return rest;
+    return {
+      ...rest,
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: formatSchnitt(rating), reviewCount: String(rating.anzahl) },
+    };
+  });
+  const json = JSON.stringify({ ...schema, '@graph': graph }, null, 2).replace(/^/gm, '  ');
+  return html.replace(pattern, (_, open, __, close) => `${open}${json}${close}`);
+}
+
 function loadData(root) {
   const sandbox = { window: {} };
   ['references', 'reviews'].forEach((name) => {
@@ -110,7 +148,8 @@ function loadData(root) {
   return {
     references: Array.from(sandbox.window.SMY_REFERENCES),
     reviews: Array.from(sandbox.window.SMY_REVIEWS),
-    profileUrl: sandbox.window.SMY_REVIEW_PROFILE_URL,
+    googleRating: sandbox.window.googleRating,
+    profileUrl: sandbox.window.googleRating.profilUrl,
   };
 }
 
@@ -132,8 +171,16 @@ function validateReferences(entries) {
   });
 }
 
+function validateRating(rating) {
+  const errors = [];
+  if (!/^https:\/\//.test(rating.profilUrl || '')) errors.push('googleRating.profilUrl muss mit https:// beginnen');
+  if (rating.anzahl !== null && (!Number.isInteger(rating.anzahl) || rating.anzahl < 1)) errors.push('googleRating.anzahl muss eine ganze Zahl ab 1 oder null sein');
+  if (rating.schnitt !== null && (typeof rating.schnitt !== 'number' || rating.schnitt < 1 || rating.schnitt > 5)) errors.push('googleRating.schnitt muss eine Zahl von 1 bis 5 oder null sein');
+  return errors;
+}
+
 function validateReviews(reviews, profileUrl) {
-  const errors = /^https:\/\//.test(profileUrl || '') ? [] : ['SMY_REVIEW_PROFILE_URL fehlt oder ist ungültig'];
+  const errors = /^https:\/\//.test(profileUrl || '') ? [] : ['Profil-URL fehlt oder ist ungültig'];
   return errors.concat(reviews.flatMap((review, index) => {
     const label = `Bewertung ${index + 1} ("${String(review.text || '').slice(0, 30)}…")`;
     const list = [];
@@ -303,7 +350,7 @@ function reviewNote(profileUrl) {
   return `<p class="rv-note">${esc(REVIEW_NOTE)} ${externalLink(profileUrl, 'Alle Bewertungen ansehen')}</p>`;
 }
 
-function renderReviews(page, reviews, profileUrl) {
+function renderReviews(page, reviews, profileUrl, rating = { anzahl: null, schnitt: null, profilUrl: profileUrl }) {
   const visible = reviews.filter((r) => r.freigegeben === true && r.seiten.includes(page));
   if (!visible.length) return '';
   const config = REVIEW_PAGES[page];
@@ -316,7 +363,8 @@ function renderReviews(page, reviews, profileUrl) {
         ${reviewNote(profileUrl)}
       </div>`;
   const note = config.variante === 'ds' ? `\n        ${reviewNote(profileUrl)}` : '';
-  return [config.vor, `${grid}${note}`, config.nach].filter(Boolean).join('\n        ');
+  const nach = typeof config.nach === 'function' ? config.nach(rating) : config.nach;
+  return [config.vor, `${grid}${note}`, nach].filter(Boolean).join('\n        ');
 }
 
 function replaceBetween(html, name, content, file) {
@@ -333,8 +381,8 @@ function replaceBetween(html, name, content, file) {
 
 /* Liefert { datei: neuer Inhalt }, ohne etwas zu schreiben. */
 function buildPages(root) {
-  const { references, reviews, profileUrl } = loadData(root);
-  const errors = [...validateReferences(references), ...validateReviews(reviews, profileUrl)];
+  const { references, reviews, profileUrl, googleRating } = loadData(root);
+  const errors = [...validateReferences(references), ...validateReviews(reviews, profileUrl), ...validateRating(googleRating)];
   if (errors.length) throw new Error(`Ungültige Daten:\n- ${errors.join('\n- ')}`);
 
   const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -343,8 +391,12 @@ function buildPages(root) {
     'projects/index.html': replaceBetween(read('projects/index.html'), 'REFERENCES', renderReferences(references, logoFor), 'projects/index.html'),
   };
   Object.keys(REVIEW_PAGES).forEach((page) => {
-    pages[page] = replaceBetween(read(page), 'REVIEWS', renderReviews(page, reviews, profileUrl), page);
+    pages[page] = replaceBetween(read(page), 'REVIEWS', renderReviews(page, reviews, profileUrl, googleRating), page);
   });
+  pages['index.html'] = applyRatingToSchema(
+    replaceBetween(pages['index.html'], 'GOOGLE_RATING', renderHeroRating(googleRating), 'index.html'),
+    googleRating,
+  );
   return pages;
 }
 
@@ -370,6 +422,6 @@ if (require.main === module) {
 }
 
 module.exports = {
-  REVIEW_PAGES, buildPages, findLogo, loadData, renderReferences, renderReviews,
-  replaceBetween, slug, validateReferences, validateReviews,
+  REVIEW_PAGES, applyRatingToSchema, buildPages, findLogo, isRatingSet, loadData, renderHeroRating, renderReferences,
+  renderReviews, replaceBetween, slug, validateRating, validateReferences, validateReviews,
 };

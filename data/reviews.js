@@ -13,7 +13,9 @@
 
    bisherigeAngabe ist nur eine Zuordnungshilfe und wird nirgends angezeigt.
    ========================================================================== */
-window.SMY_REVIEW_PROFILE_URL = 'https://g.page/r/Cb-CsgZPf7TWEAE';
+/* Echte Werte aus dem Google-Profil. Solange anzahl oder schnitt null ist, erscheinen
+   weder aggregateRating im Schema noch die Hero-Zeile. schnitt als Zahl, z. B. 4.9. */
+window.googleRating = Object.freeze({ anzahl: null, schnitt: null, profilUrl: 'https://g.page/r/Cb-CsgZPf7TWEAE' });
 
 window.SMY_REVIEWS = Object.freeze([
   /* ─── Startseite ─── */

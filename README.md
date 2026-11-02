@@ -10,6 +10,7 @@ Das Skript schreibt das fertige HTML zwischen die Marker in den Seiten. Änderun
 
 - **Kunden und Partner:** `data/references.js`
 - **Google-Bewertungen:** `data/reviews.js`. Sichtbar erst mit `freigegeben: true` und vollständigem Namen, Sternen und Datum.
+- **Bewertungszahlen:** `googleRating` in `data/reviews.js`. Schema und Hero der Startseite erscheinen erst, wenn `anzahl` und `schnitt` gesetzt sind.
 - **Logos:** `public/clients/<name>.svg` und `public/partners/<name>.svg`, auch `.png` oder `.webp`. Der Dateiname ist der Name in Kleinbuchstaben mit Bindestrichen, z. B. `ci-dienstleistungen.svg`. Fehlt die Datei, erscheint die Wortmarke.
 
 ## Tests
