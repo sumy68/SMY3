@@ -36,3 +36,19 @@ test('support.html hat kein totes Formular mehr, sondern einen E-Mail-Button', (
   assert.match(html, /<a href="mailto:info@smyagency\.de\?subject=Support-Anfrage"[^>]*data-i18n="support\.mailButton">Support per E-Mail kontaktieren<\/a>/);
   assert.strictEqual((html.match(/'support\.mailButton':/g) || []).length, 2);
 });
+
+test('leitfaden.html hat ein gültiges Gerüst aus head und body', () => {
+  const html = read('leitfaden.html');
+  assert.strictEqual((html.match(/<\/head>/g) || []).length, 1);
+  assert.strictEqual((html.match(/<body/g) || []).length, 1);
+  assert.ok(html.indexOf('</style>') < html.indexOf('</head>'));
+  assert.ok(html.indexOf('</head>') < html.indexOf('<body'));
+  assert.ok(html.indexOf('<body') < html.indexOf('<header'));
+});
+
+test('ugc.html enthält keine Bilder, deren Datei fehlt', () => {
+  const sources = [...read('ugc.html').matchAll(/<img\b[^>]*?\bsrc="([^"]+)"/g)].map((match) => match[1]);
+  sources.filter((src) => !/^(https?:|data:)/.test(src)).forEach((src) => {
+    assert.ok(fs.existsSync(path.join(__dirname, '..', src.replace(/^\//, ''))), src);
+  });
+});
