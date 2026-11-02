@@ -68,33 +68,10 @@
       </div>
     </section>
 
-    <!-- Optionales Formular -->
+    <!-- Support per E-Mail -->
     <section class="mb-12">
       <h3 class="text-2xl font-bold mb-3" data-i18n="h.ticket">Ticket erstellen</h3>
-      <form class="bg-white rounded-2xl shadow p-6 grid gap-4" method="POST" action="#">
-        <div>
-          <label for="name" class="block text-sm font-medium" data-i18n="form.nameLabel">Name</label>
-          <input id="name" name="name" type="text" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="" data-i18n-placeholder="form.namePlaceholder">
-        </div>
-        <div>
-          <label for="email" class="block text-sm font-medium" data-i18n="form.emailLabel">E-Mail</label>
-          <input id="email" name="email" type="email" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="" data-i18n-placeholder="form.emailPlaceholder">
-        </div>
-        <div>
-          <label for="betreff" class="block text-sm font-medium" data-i18n="form.subjectLabel">Betreff</label>
-          <input id="betreff" name="betreff" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="" data-i18n-placeholder="form.subjectPlaceholder">
-        </div>
-        <div>
-          <label for="nachricht" class="block text-sm font-medium" data-i18n="form.messageLabel">Nachricht</label>
-          <textarea id="nachricht" name="nachricht" rows="5" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="" data-i18n-placeholder="form.messagePlaceholder"></textarea>
-        </div>
-        <div class="flex items-center gap-3">
-          <input id="consent" type="checkbox" required class="rounded border-gray-300">
-          <label for="consent" class="text-sm" data-i18n="form.consent">Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. Details in der <a href="/datenschutz.html" class="underline text-blue-700">Datenschutzerklärung</a>.</label>
-        </div>
-        <button type="submit" class="w-full md:w-auto bg-[#D4AF37] text-black font-semibold px-6 py-3 rounded-2xl shadow hover:shadow-md" data-i18n="form.submit">Senden</button>
-        <p class="text-xs text-gray-500" data-i18n="form.footnote">Durch Absenden akzeptierst du unsere <a href="/datenschutz.html" class="underline">Datenschutzbestimmungen</a>.</p>
-      </form>
+      <a href="mailto:info@smyagency.de?subject=Support-Anfrage" class="inline-block w-full md:w-auto text-center bg-[#D4AF37] text-black font-semibold px-6 py-3 rounded-2xl shadow hover:shadow-md" data-i18n="support.mailButton">Support per E-Mail kontaktieren</a>
     </section>
 
     <!-- Fehlerbehebung -->
@@ -176,8 +153,7 @@
         'h.supportTitle':'Support für SocialPro','p.intro':'Brauchst du Hilfe bei der Nutzung von <span class="font-semibold">SocialPro</span>? Hier findest du Antworten, Kontaktmöglichkeiten und schnelle Lösungen.',
         'cards.faqTitle':'Häufige Fragen','cards.faqText':'Schnelle Antworten zu Konto, Planung, KI-Vorschlägen u.v.m.','cards.contactTitle':'Kontaktiere uns','cards.contactText':'E-Mail-Support – in der Regel innerhalb von 1–2 Werktagen.','cards.troubleshootTitle':'Fehlerbehebung','cards.troubleshootText':'Soforthilfe bei Login-, Sync- oder Upload-Problemen.',
         'h.contact':'Kontakt','contact.email':'Support-E-Mail: <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a>','contact.hours':'Geschäftszeiten: Mo–Fr, 10:00–16:00 Uhr (MEZ)','contact.hint':'Bitte füge bei technischen Problemen folgende Infos bei: App-Version, iOS-Version, Gerät, Schritte zum Nachstellen, Screenshots (optional).',
-        'h.ticket':'Ticket erstellen','form.nameLabel':'Name','form.emailLabel':'E-Mail','form.subjectLabel':'Betreff','form.messageLabel':'Nachricht','form.namePlaceholder':'Dein Name','form.emailPlaceholder':'deine@email.de','form.subjectPlaceholder':'Worum geht es?','form.messagePlaceholder':'Beschreibe dein Anliegen…','form.consent':'Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. Details in der <a href="/datenschutz.html" class="underline text-blue-700">Datenschutzerklärung</a>.','form.submit':'Senden','form.footnote':'Durch Absenden akzeptierst du unsere <a href="/datenschutz.html" class="underline">Datenschutzbestimmungen</a>.',
-        'h.troubleshoot':'Fehlerbehebung (Schnellhilfe)','trouble.loginTitle':'App lässt sich nicht einloggen','trouble.login1':'Prüfe Internetverbindung und Uhrzeit/Datum des Geräts.','trouble.login2':'App vollständig schließen und erneut öffnen.','trouble.login3':'Passwort zurücksetzen und erneut versuchen.','trouble.aiTitle':'KI-Vorschläge erscheinen nicht','trouble.ai1':'Sorge für mindestens einige veröffentlichte/analysierte Posts, damit die KI genug Daten hat.','trouble.ai2':'Aktualisiere auf die neueste App-Version.','trouble.ai3':'Öffne <em>Einstellungen → Berechtigungen</em> und erlaube den Zugriff auf benötigte Daten/Netzwerk.','trouble.syncTitle':'Sync-/Upload-Probleme','trouble.sync1':'WLAN/Mobilfunk prüfen, ggf. Netzwerk wechseln.','trouble.sync2':'Genügend Gerätespeicher sicherstellen.','trouble.sync3':'Abmelden → erneut anmelden.',
+        'h.ticket':'Ticket erstellen','support.mailButton':'Support per E-Mail kontaktieren','h.troubleshoot':'Fehlerbehebung (Schnellhilfe)','trouble.loginTitle':'App lässt sich nicht einloggen','trouble.login1':'Prüfe Internetverbindung und Uhrzeit/Datum des Geräts.','trouble.login2':'App vollständig schließen und erneut öffnen.','trouble.login3':'Passwort zurücksetzen und erneut versuchen.','trouble.aiTitle':'KI-Vorschläge erscheinen nicht','trouble.ai1':'Sorge für mindestens einige veröffentlichte/analysierte Posts, damit die KI genug Daten hat.','trouble.ai2':'Aktualisiere auf die neueste App-Version.','trouble.ai3':'Öffne <em>Einstellungen → Berechtigungen</em> und erlaube den Zugriff auf benötigte Daten/Netzwerk.','trouble.syncTitle':'Sync-/Upload-Probleme','trouble.sync1':'WLAN/Mobilfunk prüfen, ggf. Netzwerk wechseln.','trouble.sync2':'Genügend Gerätespeicher sicherstellen.','trouble.sync3':'Abmelden → erneut anmelden.',
         'h.faq':'FAQ','faq.platformsQ':'Welche Plattformen unterstützt SocialPro?','faq.platformsA':'Aktuell iOS (iPhone/iPad). Weitere Plattformen sind in Planung.','faq.aiQ':'Ist die Nutzung der KI kostenpflichtig?','faq.aiA':'Je nach Tarif. Details findest du in der App unter <em>Einstellungen → Abos</em>.','faq.bugsQ':'Wie melde ich einen Fehler?','faq.bugsA':'Sende uns eine E-Mail an <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a> oder nutze das Formular oben. Bitte füge App-/iOS-Version und Screenshots bei.',
         'meta.appVersionLabel':'Aktuelle App-Version:','meta.updatedLabel':'Letztes Update dieser Seite:','meta.moreInfo':'Weitere Informationen:','meta.imprint':'Impressum','meta.privacy':'Datenschutz',
         'footer.rights':'Alle Rechte vorbehalten.'
@@ -187,8 +163,7 @@
         'h.supportTitle':'Support for SocialPro','p.intro':'Need help using <span class="font-semibold">SocialPro</span>? Here you will find answers, contact options and quick solutions.',
         'cards.faqTitle':'FAQ','cards.faqText':'Quick answers about account, planning, AI suggestions and more.','cards.contactTitle':'Contact us','cards.contactText':'Email support – usually within 1–2 business days.','cards.troubleshootTitle':'Troubleshooting','cards.troubleshootText':'Immediate help with login, sync or upload issues.',
         'h.contact':'Contact','contact.email':'Support email: <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a>','contact.hours':'Business hours: Mon–Fri, 10:00–16:00 (CET)','contact.hint':'For technical issues, please include: app version, iOS version, device, steps to reproduce, screenshots (optional).',
-        'h.ticket':'Create a ticket','form.nameLabel':'Name','form.emailLabel':'Email','form.subjectLabel':'Subject','form.messageLabel':'Message','form.namePlaceholder':'Your name','form.emailPlaceholder':'you@example.com','form.subjectPlaceholder':'What is it about?','form.messagePlaceholder':'Describe your request…','form.consent':'I agree that my data will be processed to handle this request. Details in our <a href="/datenschutz.html" class="underline text-blue-700">privacy policy</a>.','form.submit':'Send','form.footnote':'By submitting you accept our <a href="/datenschutz.html" class="underline">privacy terms</a>.',
-        'h.troubleshoot':'Troubleshooting (Quick help)','trouble.loginTitle':'Cannot log in','trouble.login1':'Check internet connection and device date/time.','trouble.login2':'Force close the app and reopen.','trouble.login3':'Reset your password and try again.','trouble.aiTitle':'AI suggestions do not appear','trouble.ai1':'Make sure there are some published/analyzed posts so the AI has enough data.','trouble.ai2':'Update to the latest app version.','trouble.ai3':'Open <em>Settings → Permissions</em> and allow required data/network access.','trouble.syncTitle':'Sync/Upload issues','trouble.sync1':'Check Wi‑Fi/cellular, try another network.','trouble.sync2':'Ensure enough device storage.','trouble.sync3':'Sign out and sign back in.',
+        'h.ticket':'Create a ticket','support.mailButton':'Contact support by email','h.troubleshoot':'Troubleshooting (Quick help)','trouble.loginTitle':'Cannot log in','trouble.login1':'Check internet connection and device date/time.','trouble.login2':'Force close the app and reopen.','trouble.login3':'Reset your password and try again.','trouble.aiTitle':'AI suggestions do not appear','trouble.ai1':'Make sure there are some published/analyzed posts so the AI has enough data.','trouble.ai2':'Update to the latest app version.','trouble.ai3':'Open <em>Settings → Permissions</em> and allow required data/network access.','trouble.syncTitle':'Sync/Upload issues','trouble.sync1':'Check Wi‑Fi/cellular, try another network.','trouble.sync2':'Ensure enough device storage.','trouble.sync3':'Sign out and sign back in.',
         'h.faq':'FAQ','faq.platformsQ':'Which platforms does SocialPro support?','faq.platformsA':'Currently iOS (iPhone/iPad). More platforms are planned.','faq.aiQ':'Is the AI feature paid?','faq.aiA':'Depends on your plan. See in-app under <em>Settings → Subscriptions</em>.','faq.bugsQ':'How do I report a bug?','faq.bugsA':'Email <a href="mailto:support@smyagency.de" class="text-blue-700 underline">support@smyagency.de</a> or use the form above. Please include app/iOS version and screenshots.',
         'meta.appVersionLabel':'Current app version:','meta.updatedLabel':'Last update of this page:','meta.moreInfo':'More information:','meta.imprint':'Imprint','meta.privacy':'Privacy',
         'footer.rights':'All rights reserved.'
