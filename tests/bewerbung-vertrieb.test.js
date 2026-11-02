@@ -185,12 +185,9 @@ test('Seite ist nur per noindex ausgeschlossen, nicht per robots.txt oder Sitema
   assert.match(read('bewerbung-vertrieb/index.html'), /<meta name="robots" content="noindex, nofollow"/);
 });
 
-test('Datenschutzerklärung enthält Bewerbungen, Talentpool, Formspree und markierte Platzhalter', () => {
+test('Datenschutzerklärung enthält Bewerbungen, Talentpool und Formspree', () => {
   const html = read('datenschutz/index.html');
   assert.ok(html.includes('5.3 Bewerbungen'));
   assert.ok(html.includes('5.4 Formspree'));
   assert.ok(html.indexOf('in die Aufnahme in unseren Talentpool') < html.indexOf('spätestens 6 Monate'));
-  ['[Formspree Firmierung/Anschrift]', '[Rechtsgrundlage USA-Transfer]', '[AV-Vertrag]'].forEach((placeholder) => {
-    assert.ok(html.includes(`<!-- TODO PRÜFEN --><mark class="ds-legal__todo">${placeholder}</mark>`), placeholder);
-  });
 });

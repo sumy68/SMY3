@@ -5,7 +5,6 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const read = (file) => fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
-const TODO = (placeholder) => `<!-- TODO PRÜFEN --><mark class="ds-legal__todo">${placeholder}</mark>`;
 
 test('leads verspricht keine Nicht-Weitergabe mehr und verlinkt die Datenschutzerklärung', () => {
   const html = read('leads/index.html');
@@ -14,18 +13,43 @@ test('leads verspricht keine Nicht-Weitergabe mehr und verlinkt die Datenschutze
   assert.ok(html.includes('>Datenschutzerklärung</a>.'));
 });
 
-test('Datenschutzerklärung nennt Brevo und PayPal mit markierten Platzhaltern', () => {
-  const html = read('datenschutz/index.html');
-  assert.ok(html.indexOf('5.4 Formspree') < html.indexOf('5.5 Brevo'));
-  assert.ok(html.indexOf('5.5 Brevo') < html.indexOf('5.6 PayPal'));
-  [
-    '[Brevo Firmierung/Anschrift]', '[Rechtsgrundlage Drittlandtransfer Brevo]', '[AV-Vertrag Brevo]',
-    '[PayPal Firmierung/Anschrift]', '[Rechtsgrundlage Drittlandtransfer PayPal]',
-  ].forEach((placeholder) => assert.ok(html.includes(TODO(placeholder)), placeholder));
+const privacyVisible = () => read('datenschutz/index.html').replace(/<!--[\s\S]*?-->/g, '');
+
+test('Datenschutzerklärung hat keine sichtbaren Platzhalter', () => {
+  const html = privacyVisible();
+  const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+  assert.ok(!main.includes('<mark'));
+  assert.ok(!main.includes('ds-legal__todo'));
+  assert.ok(!main.replace(/<[^>]+>/g, ' ').includes('['), 'eckige Klammer im Text');
+  assert.ok(!read('design-system.css').includes('ds-legal__todo'));
 });
 
-test('Stand der Datenschutzerklärung bleibt unverändert', () => {
-  assert.ok(read('datenschutz/index.html').includes('Stand: 31. Mai 2026'));
+test('Hosting beschreibt GitHub Pages statt IONOS-Hosting und Cloudflare', () => {
+  const html = privacyVisible();
+  assert.ok(html.includes('GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA'));
+  assert.ok(html.includes('IP-Adresse'));
+  assert.ok(!html.includes('Cloudflare'));
+  assert.ok(!html.includes('ausschließlich auf Servern innerhalb der Europäischen Union'));
+});
+
+test('Anbieter stehen mit Firmierung, Anschrift und Transfergrundlage drin', () => {
+  const html = privacyVisible();
+  [
+    'Sendinblue SAS, 106 Boulevard Haussmann, 75008 Paris, Frankreich',
+    'PayPal (Europe) S.à r.l. et Cie, S.C.A., 22–24 Boulevard Royal, L-2449 Luxembourg',
+    'Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, D02 H210, Irland',
+    'Calendly, LLC, 115 E Main St., Ste A1B, Buford, GA 30518, USA',
+    'Formspree, Inc.',
+    'Standardvertragsklauseln der EU-Kommission',
+    'EU-US Data Privacy Framework',
+  ].forEach((text) => assert.ok(html.includes(text), text));
+});
+
+test('nicht eingebundene Analysedienste sind entfernt, der Meta Pixel bleibt', () => {
+  const html = privacyVisible();
+  ['Google Analytics', 'Hotjar'].forEach((text) => assert.ok(!html.includes(text), text));
+  assert.ok(html.includes('Meta Pixel'));
+  assert.ok(html.includes('Stand: November 2026'));
 });
 
 test('support.html hat kein totes Formular mehr, sondern einen E-Mail-Button', () => {
