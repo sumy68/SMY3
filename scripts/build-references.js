@@ -172,7 +172,7 @@ function validateReferences(entries) {
     if (typeof entry.featured !== 'boolean') errors.push(`${label}: featured muss true/false sein`);
     if (typeof entry.order !== 'number') errors.push(`${label}: order muss eine Zahl sein`);
     if (entry.url && !/^https?:\/\//.test(entry.url)) errors.push(`${label}: url muss mit http(s):// beginnen`);
-    if (entry.logo && !/^\/public\/[\w./-]+$/.test(entry.logo)) errors.push(`${label}: logo muss unter /public/ liegen`);
+    if (entry.logo && !/^\/(public|images)\/[\w./-]+$/.test(entry.logo)) errors.push(`${label}: logo muss unter /public/ oder /images/ liegen`);
     if (entry.typ === 'kunde' && !entry.featured && !COLUMNS.some((c) => c.bereich === entry.bereich)) {
       errors.push(`${label}: bereich muss web, branding oder marketing sein`);
     }
@@ -227,7 +227,7 @@ function revealAttrs(index) {
 }
 
 function logoImg(entry, logo, className) {
-  return `<img class="${className}" src="${esc(logo)}" alt="Logo ${esc(entry.name)}" loading="lazy" decoding="async" />`;
+  return `<img class="${className}" src="${esc(logo)}" alt="${esc(entry.name)} Logo" loading="lazy" decoding="async" />`;
 }
 
 function externalLink(url, inner, className) {

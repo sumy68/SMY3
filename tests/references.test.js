@@ -61,8 +61,8 @@ test('Logos erscheinen unverzerrt mit Alt-Text und Lazy Loading, externe Links s
     { name: 'P', typ: 'partner', leistung: 'L', url: 'https://p.example', featured: false, order: 1 },
     { name: 'K', typ: 'kunde', bereich: 'web', leistung: 'L', featured: false, order: 2 },
   ], (entry) => `/logo-${entry.name}.svg`);
-  assert.match(html, /alt="Logo P" loading="lazy"/);
-  assert.match(html, /alt="Logo K" loading="lazy"/);
+  assert.match(html, /alt="P Logo" loading="lazy"/);
+  assert.match(html, /alt="K Logo" loading="lazy"/);
   assert.match(html, /href="https:\/\/p\.example" target="_blank" rel="noopener noreferrer"/);
   assert.ok(!html.includes('ds-vp__wordmark'));
 });
@@ -115,4 +115,23 @@ test('die entfernte Referenz kommt in Daten und Seite nicht mehr vor', () => {
   const removed = new RegExp(`tol${'gi'}`, 'i');
   assert.ok(!removed.test(projects()));
   assert.ok(!removed.test(fs.readFileSync(path.join(ROOT, 'data/references.js'), 'utf8')));
+});
+
+test('Partner-Leiste zeigt genau PSYNOW und CI mit lokalem Logo und Alt-Text', () => {
+  const html = projects();
+  const section = html.slice(html.indexOf('id="vertriebspartner"'));
+  const images = [...section.matchAll(/<img class="ds-vp__logo" src="([^"]+)" alt="([^"]+)"/g)].map((match) => [match[1], match[2]]);
+  assert.deepStrictEqual(images, [
+    ['/images/logos/psynow.png', 'PSYNOW Logo'],
+    ['/images/logos/ci.png', 'CI Dienstleistungen Logo'],
+  ]);
+  images.forEach(([src]) => assert.ok(fs.existsSync(path.join(ROOT, src)), src));
+  assert.ok(!section.includes('ds-vp__wordmark'));
+  assert.ok(section.includes('href="https://ci-dienstleistungen.com"'));
+});
+
+test('Logo-Pfad muss unter /public/ oder /images/ liegen', () => {
+  const entry = { name: 'X', typ: 'partner', leistung: 'L', featured: false, order: 1 };
+  assert.deepStrictEqual(validateReferences([{ ...entry, logo: '/images/logos/x.png' }]), []);
+  assert.strictEqual(validateReferences([{ ...entry, logo: 'https://example.com/x.png' }]).length, 1);
 });

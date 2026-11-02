@@ -39,6 +39,7 @@
 .ds-vp__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 22rem));
+  justify-content: center;
   gap: var(--space-md);
   margin-top: var(--space-lg);
   padding: 0;
@@ -60,7 +61,10 @@
   border-radius: var(--radius-md);
   transition: border-color 0.25s ease;
 }
-.ds-vp__mark.has-logo { background: #fff; }
+/* Weiße Fläche hält farbige Logos auf hellem und dunklem Grund lesbar.
+   Die PNGs sind quadratisch mit breitem Rand: cover zeigt nur die Mitte, das Bild bleibt unverändert. */
+.ds-vp__mark.has-logo { height: 10rem; padding: 0 var(--space-lg); overflow: hidden; background: #fff; }
+.ds-vp__mark.has-logo .ds-vp__logo { object-fit: cover; }
 .ds-vp__wordmark {
   font-family: var(--font-display);
   font-size: var(--fs-h3);
@@ -75,4 +79,5 @@
   margin-top: var(--space-xs);
   font-size: var(--fs-sm);
   color: var(--text-secondary);
+  text-align: center;
 }

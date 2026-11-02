@@ -7,7 +7,7 @@
    Pflicht:
      name, typ ("kunde" | "partner"), leistung, featured (true/false), order (Zahl)
    Optional:
-     branche, kurzbeschreibung, ergebnis, logo (abweichender Pfad), url, testimonial
+     branche, kurzbeschreibung, ergebnis, logo (Pfad unter /public/ oder /images/), url, testimonial
      bereich  nur Kunden: Spalte in "Alle Projekte" ("web" | "branding" | "marketing")
      tags     nur Kunden: Chips auf den großen Featured-Karten
 
@@ -76,6 +76,7 @@ window.SMY_REFERENCES = Object.freeze([
   /* ─── Vertriebspartner ─── */
   {
     name: 'PSYNOW',
+    logo: '/images/logos/psynow.png',
     typ: 'partner',
     branche: 'Gesundheit',
     leistung: 'Online-Psychologieberatung & Betriebliches Gesundheitsmanagement',
@@ -86,6 +87,7 @@ window.SMY_REFERENCES = Object.freeze([
   {
     name: 'CI Dienstleistungen',
     url: 'https://ci-dienstleistungen.com',
+    logo: '/images/logos/ci.png',
     typ: 'partner',
     branche: 'Gebäudedienstleistungen',
     leistung: 'Gebäudereinigung & Hausmeisterservice',
