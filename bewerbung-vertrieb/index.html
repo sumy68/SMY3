@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bewerbung Vertrieb | SMY Agency</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/assets/logo-header.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/design-system.css" />
+  <link rel="stylesheet" href="/design-demo.css" />
+  <link rel="stylesheet" href="/subpages.css" />
+  <link rel="stylesheet" href="/bewerbung-vertrieb.css" />
+</head>
+
+<body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="ds-header">
+    <div class="ds-container ds-nav">
+      <a href="/" class="ds-logo"><img src="/assets/logo-header.png" alt="SMY Agency" /></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="ds-page-hero bw-hero" id="bw-intro">
+      <div class="ds-container">
+        <span class="ds-eyebrow ds-rise">Bewerbung Vertrieb</span>
+        <h1 class="ds-page-hero__title ds-rise ds-rise-2">Schön, dass du dabei bist.</h1>
+        <p class="ds-lead ds-rise ds-rise-3">
+          Wir sind SMY Agency aus Ingolstadt und unterstützen Unternehmen bei Webdesign, Marketing und B2B-Vertrieb.
+          Für die Telefonakquise im B2B-Bereich suchen wir Verstärkung im Minijob, komplett remote.
+          Das Ausfüllen dauert ca. 3 Minuten, danach melden wir uns telefonisch bei dir.
+        </p>
+      </div>
+    </section>
+
+    <section class="bw-section" id="bw-form-section">
+      <div class="ds-container">
+        <noscript>
+          <p class="bw-send-error">Der Fragebogen braucht JavaScript. Schreib uns alternativ an info@smyagency.de.</p>
+        </noscript>
+        <form class="bw-card" id="bw-form" novalidate>
+          <div class="bw-progress">
+            <span class="bw-progress__text" id="bw-progress-text" aria-live="polite">Schritt 1 von 5</span>
+            <div class="bw-progress__track" id="bw-progress" role="progressbar" aria-labelledby="bw-progress-text" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
+              <div class="bw-progress__fill" id="bw-progress-fill"></div>
+            </div>
+          </div>
+
+          <div id="bw-steps"></div>
+
+          <div class="bw-trap" aria-hidden="true">
+            <label>Bitte nicht ausfüllen <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <p class="bw-send-error" id="bw-send-error" role="alert" hidden></p>
+
+          <div class="bw-actions">
+            <button class="btn btn--ghost btn--large" type="button" id="bw-back" hidden>Zurück</button>
+            <button class="btn btn--primary btn--large" type="submit" id="bw-next">Weiter</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="ds-page-hero bw-hero" id="bw-thanks" hidden>
+      <div class="ds-container bw-thanks">
+        <span class="ds-eyebrow">Bewerbung eingegangen</span>
+        <h1 class="ds-page-hero__title" tabindex="-1">Danke!</h1>
+        <p class="ds-lead">Wir melden uns innerhalb von 3 Werktagen telefonisch in deinem Wunschzeitraum.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ds-footer">
+    <div class="ds-container ds-footer__inner">
+      <a href="/" class="ds-logo">SMY <em>Agency</em></a>
+      <ul class="ds-footer__links">
+        <li><a href="/impressum/" target="_blank" rel="noopener">Impressum</a></li>
+        <li><a href="/datenschutz/" target="_blank" rel="noopener">Datenschutz</a></li>
+      </ul>
+      <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
+    </div>
+  </footer>
+
+  <script src="/design-demo.js"></script>
+  <script src="/subpages.js"></script>
+  <script src="/data/bewerbung-vertrieb.js"></script>
+  <script src="/bewerbung-logik.js"></script>
+  <script src="/bewerbung-vertrieb.js"></script>
+</body>
+</html>

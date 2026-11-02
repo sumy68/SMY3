@@ -1104,6 +1104,7 @@ h1, h2, h3, h4 {
 .ds-legal__card p:last-child { margin-bottom: 0; }
 .ds-legal__card strong { color: var(--text-primary); }
 .ds-legal__card a { color: var(--smy-red-bright); word-break: break-word; }
+.ds-legal__todo { padding-inline: 0.25em; color: var(--bg-base); background: #FFD60A; font-weight: 700; } /* offene Platzhalter, vor Veröffentlichung auflösen */
 .ds-legal__card ul {
   margin: var(--space-sm) 0;
   padding-left: 1.3em;

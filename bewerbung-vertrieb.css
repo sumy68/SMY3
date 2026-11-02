@@ -1,0 +1,229 @@
+/* ============================================================
+   SMY AGENCY — BEWERBER-FRAGEBOGEN
+   Nutzt ausschließlich die Tokens aus design-system.css.
+   Mobile first: Basis = Handy, Erweiterungen per min-width.
+   ============================================================ */
+/* display-Regeln unten dürfen das hidden-Attribut nicht aushebeln */
+.bw-card [hidden],
+#bw-thanks[hidden],
+#bw-intro[hidden],
+#bw-form-section[hidden] { display: none; }
+
+.bw-hero.ds-page-hero {
+  padding-block: calc(72px + var(--space-lg)) var(--space-lg);
+}
+.bw-hero .ds-lead { font-size: var(--fs-body); }
+
+.bw-section { padding-block: 0 var(--space-xl); }
+
+.bw-card {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: var(--space-md);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  scroll-margin-top: 96px;
+}
+
+/* ── Fortschritt ── */
+.bw-progress { margin-bottom: var(--space-md); }
+.bw-progress__text {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+.bw-progress__track {
+  height: 6px;
+  overflow: hidden;
+  background: var(--bg-base);
+  border-radius: var(--radius-full);
+}
+.bw-progress__fill {
+  height: 100%;
+  background: var(--smy-red);
+  border-radius: inherit;
+  transform: scaleX(0.2);
+  transform-origin: left;
+  transition: transform var(--transition-fast);
+}
+
+/* ── Schritt ── */
+.bw-step { display: grid; gap: var(--space-md); }
+.bw-step__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.bw-field { display: grid; gap: var(--space-xs); }.bw-group { margin: 0; padding: 0; border: 0; min-width: 0; }
+.bw-question {
+  display: block;
+  padding: 0;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: var(--lh-snug);
+  color: var(--text-primary);
+}
+.ds-field > span.bw-question {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+.bw-hint {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+.bw-card input[type="date"] { color-scheme: dark; min-height: 3rem; width: 100%; }
+.bw-card .ds-field input,
+.bw-card .ds-field select,
+.bw-card .ds-field textarea { width: 100%; min-width: 0; }
+.bw-counter {
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+/* ── Auswahl-Kacheln (Checkbox, Radio, Skala) ── */
+.bw-choices { display: grid; gap: var(--space-xs); }
+.bw-choices--compact { grid-template-columns: repeat(4, 1fr); }
+.bw-choice { position: relative; display: block; cursor: pointer; }
+.bw-choice input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.bw-choice span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: var(--space-xs) var(--space-sm);
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-base);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+.bw-choice:hover span { border-color: var(--border-accent); }
+.bw-choice input:checked + span {
+  color: var(--text-on-accent);
+  background: var(--smy-red);
+  border-color: var(--smy-red);
+}
+.bw-choice input:focus-visible + span {
+  outline: 2px solid var(--smy-red-bright);
+  outline-offset: 2px;
+}
+
+.bw-scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-xs); }
+.bw-scale .bw-choice span { padding-inline: 0; font-weight: 700; }
+.bw-scale__legend {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-top: var(--space-2xs);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+/* ── Einwilligung ── */
+.bw-consent {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  background: var(--bg-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+.bw-consent__label {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: var(--space-xs);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-base);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.bw-consent__label input {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  accent-color: var(--smy-red);
+}
+.bw-link {
+  padding-left: 2rem;
+  font-size: var(--fs-sm);
+  color: var(--smy-red-bright);
+  text-decoration: underline;
+}
+
+/* ── Fehler ── */
+.bw-error {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--smy-red-bright);
+}
+.bw-field.is-invalid .ds-field input,
+.bw-field.is-invalid .ds-field select,
+.bw-field.is-invalid .bw-choice span,
+.bw-field.is-invalid .bw-consent { border-color: var(--smy-red-bright); }
+.bw-send-error {
+  margin: var(--space-md) 0 0;
+  padding: var(--space-sm);
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  background: var(--smy-red-soft);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+}
+
+/* ── Honeypot ── */
+.bw-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ── Buttons ── */
+.bw-actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-xs);
+  margin-top: var(--space-lg);
+}
+.bw-actions .btn { width: 100%; }
+.bw-actions .btn[disabled] { opacity: 0.6; cursor: wait; }
+
+/* ── Danke ── */
+.bw-thanks { text-align: center; }
+.bw-thanks h1 { outline: none; }
+
+/* ── Ab Tablet ── */
+@media (min-width: 600px) {
+  .bw-card { padding: var(--space-lg); }
+  .bw-choices--compact { grid-template-columns: repeat(7, 1fr); }
+  .bw-choices--compact .bw-choice span { padding-inline: 0; }
+  .bw-actions { flex-direction: row; justify-content: space-between; }
+  .bw-actions .btn { width: auto; }
+  .bw-actions #bw-next { margin-left: auto; }
+}
