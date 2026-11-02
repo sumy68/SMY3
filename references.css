@@ -49,7 +49,8 @@
   list-style: none;
 }
 .ds-vp__link { display: block; border-radius: var(--radius-md); text-decoration: none; }
-.ds-vp__link:hover .ds-vp__mark { border-color: var(--border-accent); }
+.ds-vp__link:hover .ds-vp__mark { border-color: var(--border-accent); box-shadow: 0 0 0 1px var(--border-accent); }
+.ds-vp__link:hover .ds-vp__name { color: var(--smy-red-bright); }
 .ds-vp__link:focus-visible { outline: 2px solid var(--smy-red-bright); outline-offset: 3px; }
 
 /* Einheitliche Fläche: das Padding hält den Schutzraum um jedes Logo frei */
@@ -80,9 +81,21 @@
   .ds-vp__logo { height: 2.5rem; }
 }
 
+.ds-vp__name {
+  margin-top: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  transition: color 0.25s ease;
+}
 .ds-vp__service {
-  margin-top: var(--space-xs);
-  font-size: var(--fs-sm);
+  margin-top: var(--space-2xs);
+  font-size: 0.8125rem;
   color: var(--text-secondary);
   text-align: center;
+}
+@media (max-width: 760px) {
+  .ds-vp__name { font-size: 0.875rem; }
 }

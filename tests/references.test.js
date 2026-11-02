@@ -61,7 +61,7 @@ test('Logos erscheinen unverzerrt mit Alt-Text und Lazy Loading, externe Links s
     { name: 'P', typ: 'partner', leistung: 'L', url: 'https://p.example', featured: false, order: 1 },
     { name: 'K', typ: 'kunde', bereich: 'web', leistung: 'L', featured: false, order: 2 },
   ], (entry) => `/logo-${entry.name}.svg`);
-  assert.match(html, /alt="P Logo" loading="lazy"/);
+  assert.match(html, /alt="" loading="lazy"/);
   assert.match(html, /alt="K Logo" loading="lazy"/);
   assert.match(html, /href="https:\/\/p\.example" target="_blank" rel="noopener noreferrer"/);
   assert.ok(!html.includes('ds-vp__wordmark'));
@@ -120,12 +120,20 @@ test('die entfernte Referenz kommt in Daten und Seite nicht mehr vor', () => {
 test('Partner-Leiste zeigt genau PSYNOW und CI mit lokalem Logo und Alt-Text', () => {
   const html = projects();
   const section = html.slice(html.indexOf('id="vertriebspartner"'));
-  const images = [...section.matchAll(/<img class="ds-vp__logo" src="([^"]+)" alt="([^"]+)"/g)].map((match) => [match[1], match[2]]);
+  const images = [...section.matchAll(/<img class="ds-vp__logo" src="([^"]+)" alt="([^"]*)"/g)].map((match) => [match[1], match[2]]);
   assert.deepStrictEqual(images, [
-    ['/images/logos/psynow.png', 'PSYNOW Logo'],
-    ['/images/logos/ci.png', 'CI Dienstleistungen Logo'],
+    ['/images/logos/psynow.png', ''],
+    ['/images/logos/ci.png', ''],
   ]);
   images.forEach(([src]) => assert.ok(fs.existsSync(path.join(ROOT, src)), src));
+  const cards = [...section.matchAll(/<a class="ds-vp__link"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)];
+  assert.strictEqual(cards.length, 2);
+  [['https://psynow.de', 'PSYNOW'], ['https://ci-dienstleistungen.com', 'CI Dienstleistungen']].forEach(([url, name], index) => {
+    assert.strictEqual(cards[index][1], url);
+    assert.ok(cards[index][2].includes(`<p class="ds-vp__name">${name}</p>`), name);
+    assert.ok(cards[index][2].includes('ds-vp__service'), name);
+    assert.ok(cards[index][2].indexOf('<img') < cards[index][2].indexOf('ds-vp__name'), name);
+  });
   assert.ok(!section.includes('ds-vp__wordmark'));
   assert.ok(section.includes('href="https://ci-dienstleistungen.com"'));
 });

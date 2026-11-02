@@ -226,8 +226,8 @@ function revealAttrs(index) {
   return delay ? ` data-delay="${delay}"` : '';
 }
 
-function logoImg(entry, logo, className) {
-  return `<img class="${className}" src="${esc(logo)}" alt="${esc(entry.name)} Logo" loading="lazy" decoding="async" />`;
+function logoImg(logo, className, alt) {
+  return `<img class="${className}" src="${esc(logo)}" alt="${esc(alt)}" loading="lazy" decoding="async" />`;
 }
 
 function externalLink(url, inner, className) {
@@ -241,7 +241,7 @@ function nameHtml(entry) {
 
 function clientLogo(entry, logoFor) {
   const logo = logoFor(entry);
-  return logo ? `<span class="ds-ref-logo">${logoImg(entry, logo, 'ds-ref-logo__img')}</span>` : '';
+  return logo ? `<span class="ds-ref-logo">${logoImg(logo, 'ds-ref-logo__img', `${entry.name} Logo`)}</span>` : '';
 }
 
 function featuredCard(entry, index, logoFor) {
@@ -266,11 +266,13 @@ function listItem(entry, logoFor) {
 
 function partnerCard(entry, index, logoFor) {
   const logo = logoFor(entry);
-  const inner = logo
-    ? `<span class="ds-vp__mark has-logo">${logoImg(entry, logo, 'ds-vp__logo')}</span>`
+  // Mit Logo steht der Name als Text darunter, das Bild ist daher dekorativ (alt="").
+  const mark = logo
+    ? `<span class="ds-vp__mark has-logo">${logoImg(logo, 'ds-vp__logo', '')}</span><p class="ds-vp__name">${esc(entry.name)}</p>`
     : `<span class="ds-vp__mark"><span class="ds-vp__wordmark">${esc(entry.name)}</span></span>`;
-  const mark = entry.url ? externalLink(entry.url, inner, 'ds-vp__link') : inner;
-  return `<li class="ds-vp__item reveal"${revealAttrs(index)}>${mark}<p class="ds-vp__service">${esc(entry.leistung)}</p></li>`;
+  const inner = `${mark}<p class="ds-vp__service">${esc(entry.leistung)}</p>`;
+  const card = entry.url ? externalLink(entry.url, inner, 'ds-vp__link') : inner;
+  return `<li class="ds-vp__item reveal"${revealAttrs(index)}>${card}</li>`;
 }
 
 function featuredSection(entries, logoFor) {
