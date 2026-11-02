@@ -1,7 +1,6 @@
 /* ==========================================================================
    Referenzen & Vertriebspartner (/projects/)
    ========================================================================== */
-/* Vier Featured-Karten als 2×2, damit keine Karte allein in der Reihe steht */
 @media (min-width: 768px) {
   #refFeatured { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -20,6 +19,20 @@
   font-size: var(--fs-sm);
 }
 
+/* Kundenlogo: weiße Fläche mit Schutzraum, Logo nur proportional skaliert */
+.ds-ref-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 9rem;
+  height: 4rem;
+  margin-bottom: var(--space-sm);
+  padding: var(--space-xs);
+  background: #fff;
+  border-radius: var(--radius-sm);
+}
+.ds-ref-logo__img { width: 100%; height: 100%; object-fit: contain; }
+
 /* ─── Vertriebspartner ─── */
 .ds-vp { background: var(--bg-elevated); border-block: 1px solid var(--border-subtle); }
 .ds-vp__head { max-width: 46rem; }
@@ -37,7 +50,6 @@
 
 /* Einheitliche Fläche: das Padding hält den Schutzraum um jedes Logo frei */
 .ds-vp__mark {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,6 +60,7 @@
   border-radius: var(--radius-md);
   transition: border-color 0.25s ease;
 }
+.ds-vp__mark.has-logo { background: #fff; }
 .ds-vp__wordmark {
   font-family: var(--font-display);
   font-size: var(--fs-h3);
@@ -55,18 +68,8 @@
   color: var(--text-primary);
   text-align: center;
 }
-/* Logos nur proportional skalieren, nie umfärben. Bis zum Laden unsichtbar. */
-.ds-vp__logo {
-  position: absolute;
-  inset: var(--space-md);
-  width: calc(100% - 2 * var(--space-md));
-  height: calc(100% - 2 * var(--space-md));
-  object-fit: contain;
-  opacity: 0;
-}
-.ds-vp__mark.has-logo { background: #fff; }
-.ds-vp__mark.has-logo .ds-vp__logo { opacity: 1; }
-.ds-vp__mark.has-logo .ds-vp__wordmark { visibility: hidden; }
+/* Logos nur proportional skalieren, nie umfärben */
+.ds-vp__logo { width: 100%; height: 100%; object-fit: contain; }
 
 .ds-vp__service {
   margin-top: var(--space-xs);

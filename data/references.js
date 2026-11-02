@@ -1,17 +1,19 @@
 /* ==========================================================================
    ZENTRALE DATENQUELLE: Kundenreferenzen & Vertriebspartner
-   Neuer Eintrag = neues Objekt in dieser Liste. Die Seite /projects/ rendert
-   daraus automatisch. Leere oder fehlende Felder werden im UI ausgeblendet.
+   Neuer Eintrag = neues Objekt in dieser Liste, danach ausführen:
+   node scripts/build-references.js
+   Leere oder fehlende Felder werden im UI ausgeblendet.
 
    Pflicht:
      name, typ ("kunde" | "partner"), leistung, featured (true/false), order (Zahl)
    Optional:
-     branche, kurzbeschreibung, ergebnis, logo (Pfad), url, testimonial
+     branche, kurzbeschreibung, ergebnis, logo (abweichender Pfad), url, testimonial
      bereich  nur Kunden: Spalte in "Alle Projekte" ("web" | "branding" | "marketing")
      tags     nur Kunden: Chips auf den großen Featured-Karten
 
    Featured-Kunden erscheinen groß oben, alle anderen in "Alle Projekte".
-   Partner-Logos: public/partners/<name>.svg. Fehlt die Datei, erscheint die Wortmarke.
+   Logos: public/clients/<name>.svg bzw. public/partners/<name>.svg (auch .png, .webp),
+   z. B. ci-dienstleistungen.svg. Fehlt die Datei, erscheint die Wortmarke.
    ========================================================================== */
 window.SMY_REFERENCES = Object.freeze([
   /* ─── Featured-Kunden ─── */
@@ -38,22 +40,24 @@ window.SMY_REFERENCES = Object.freeze([
   {
     name: 'Picsart Inc.',
     typ: 'kunde',
+    bereich: 'web',
     branche: 'Enterprise Tech',
     leistung: 'Entwicklung von 5 hochskalierbaren Plattformen',
     kurzbeschreibung: 'Entwicklung von 5 hochskalierbaren Plattformen: Analytics-Infrastruktur, Live-Kollaboration, Podcast-Hosting, Livestream-Backend und cloudbasierte Video-Editing-Lösung mit GPU-Rendering.',
     tags: ['Backend', 'Cloud Architecture', 'Video Processing'],
-    featured: true,
-    order: 30,
+    featured: false,
+    order: 192,
   },
   {
     name: 'CI Dienstleistungen',
     typ: 'kunde',
+    bereich: 'web',
     branche: 'Full Service',
     leistung: 'B2B-Akquise & Lead-Generierung, Website, Print, SEO',
     kurzbeschreibung: 'B2B-Akquise und Lead-Generierung, dazu der komplette digitale Auftritt: Website, Printmedien, Spezialanfertigungen (Alu-Dibond), Google Business Setup, SEO-Optimierung und Ticketsystem-Integration.',
     tags: ['B2B-Akquise', 'Lead-Generierung', 'Webdesign', 'Print', 'SEO'],
-    featured: true,
-    order: 40,
+    featured: false,
+    order: 194,
   },
 
   /* ─── Web & Development ─── */
@@ -85,7 +89,6 @@ window.SMY_REFERENCES = Object.freeze([
     typ: 'partner',
     branche: 'Gesundheit',
     leistung: 'Online-Psychologieberatung & Betriebliches Gesundheitsmanagement',
-    logo: '/public/partners/psynow.svg',
     url: 'https://psynow.de',
     featured: false,
     order: 10,
@@ -95,7 +98,6 @@ window.SMY_REFERENCES = Object.freeze([
     typ: 'partner',
     branche: 'Gebäudedienstleistungen',
     leistung: 'Gebäudereinigung & Hausmeisterservice',
-    logo: '/public/partners/ci-dienstleistungen.svg',
     featured: false,
     order: 20,
   },
