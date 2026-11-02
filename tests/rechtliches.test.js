@@ -124,3 +124,20 @@ test('Visa-Logo liegt lokal und wird von leitfaden.html genutzt', () => {
   assert.ok(html.includes('src="/images/visa.svg"'));
   assert.ok(!html.includes('commons/0/04/Visa.svg'));
 });
+
+test('Impressum nennt DDG, keine OS-Plattform, Stand und die Adresse in Manching', () => {
+  const html = read('impressum/index.html');
+  assert.ok(html.includes('§ 5 DDG'));
+  assert.ok(!html.includes('TMG'));
+  assert.ok(!html.includes('ec.europa.eu/consumers/odr'));
+  assert.ok(html.includes('Stand: November 2026'));
+  assert.ok(html.includes('Ursinusstraße 7<br>85077 Manching'));
+});
+
+test('Postanschrift ist überall Ursinusstraße 7, 85077 Manching', () => {
+  ['impressum/index.html', 'datenschutz/index.html', 'datenschutz-socialpro.html', 'partials/footer.html', 'index.html'].forEach((file) => {
+    const html = read(file);
+    assert.ok(!html.includes('Alpenrosen') && !html.includes('85055'), file);
+    assert.ok(html.includes('85077'), file);
+  });
+});
