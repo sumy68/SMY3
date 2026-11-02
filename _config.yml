@@ -1,0 +1,9 @@
+# GitHub Pages: nur für Entwicklung und Build nötige Dateien nicht veröffentlichen.
+# data/bewerbung-vertrieb.js lädt der Fragebogen im Browser und muss live bleiben.
+exclude:
+  - tests/
+  - scripts/
+  - README.md
+  - package*.json
+  - data/reviews.js
+  - data/references.js
