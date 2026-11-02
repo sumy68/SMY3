@@ -17,6 +17,14 @@ Das Skript schreibt das fertige HTML zwischen die Marker in den Seiten. Änderun
 
 `node --test tests/*.test.js`
 
+## Tailwind und Schriften
+
+`tailwind.css` ist fertig gebaut und enthält nur die genutzten Klassen. Nach neuen Tailwind-Klassen in den älteren Seiten neu bauen:
+
+`npx tailwindcss@3.4.17 --content "./{audit,datenschutz-socialpro,leitfaden,shop,terms-socialpro,support,ugc,workbook-danke,website-mieten,workbook}.html,./main.js,./partials/*.html,./scripts/build-references.js" -o tailwind.css --minify`
+
+Schriften liegen in `fonts/` und werden über `fonts/fonts.css` eingebunden.
+
 ## Offene Punkte
 
 Nicht öffentlich auf der Website, aber im öffentlichen GitHub-Repo sichtbar.
