@@ -30,14 +30,6 @@ window.SMY_REVIEWS = Object.freeze([
   { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['index.html'], freigegeben: false, bisherigeAngabe: 'Mubin Ahmetovic, MHM Garten & Landschaftsbau, Google',
     text: 'Besonders beeindruckt war ich von den fairen Preisen und dem 24/7-Support – ich konnte mich jederzeit melden und bekam sofort Hilfe.' },
 
-  /* ─── Leads ─── */
-  { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['leads/index.html'], freigegeben: false, bisherigeAngabe: 'Michael K., Finanzberater, München',
-    text: 'Endlich keine stundenlange Recherche mehr. Die Leads sind sauber, aktuell und direkt in mein CRM importierbar. Habe innerhalb von 2 Wochen 3 neue Mandanten gewonnen.' },
-  { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['leads/index.html'], freigegeben: false, bisherigeAngabe: 'Sandra V., Vertriebsleiterin, Versicherung',
-    text: 'Wir haben das Professional-Paket für Steuerberater bestellt. Trefferquote war deutlich höher als bei anderen Anbietern. Preis-Leistung top!' },
-  { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['leads/index.html'], freigegeben: false, bisherigeAngabe: 'Thomas H., Geschäftsführer, Sales-Agentur',
-    text: 'Schnelle Lieferung, alle Daten korrekt. Besonders gut: Die regionale Filterung nach PLZ hat uns viel Zeit gespart. Werden definitiv nachbestellen.' },
-
   /* ─── Webdesign ─── */
   { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['webdesign/index.html'], freigegeben: false, bisherigeAngabe: 'Kundenstimme, Dienstleister',
     text: 'Endlich eine Seite, die auch auf dem Handy funktioniert — und wir bekommen Anfragen direkt übers Formular.' },
@@ -46,14 +38,6 @@ window.SMY_REVIEWS = Object.freeze([
   { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['webdesign/index.html'], freigegeben: false, bisherigeAngabe: 'Kundenstimme, Lokal',
     text: 'Wir werden jetzt bei Google gefunden, wo vorher nur die Konkurrenz war.' },
 
-  /* ─── UGC ─── */
-  { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['ugc.html'], freigegeben: false, bisherigeAngabe: 'Basil Flachsmann, Giahí AG',
-    text: 'Schnelle Umsetzung, starke UGC-Hooks, spürbar bessere Akquise­kosten. Kommunikation top.' },
-  { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['ugc.html'], freigegeben: false, bisherigeAngabe: 'Philipp Strobel, Jungholz Designprodukte',
-    text: 'Strategie einmal auf links gedreht – endlich strukturiertes Varianten-Testing. Bringt uns richtig voran.' },
-  { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['ugc.html'], freigegeben: false, bisherigeAngabe: 'Simone von Rickenbach, Fidea Design',
-    text: 'Erste Ergebnisse nach wenigen Tagen positiv. Fokus auf Zielgruppen war goldrichtig.' },
-
   /* ─── Audit ─── */
   { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['audit.html'], freigegeben: false, bisherigeAngabe: 'MHM Gartenbau',
     text: 'Website top, Ads laufen – endlich Anfragen im Postfach.' },
@@ -61,10 +45,4 @@ window.SMY_REVIEWS = Object.freeze([
     text: 'Alles aus einer Hand. Fix, fair, professionell.' },
   { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['audit.html'], freigegeben: false, bisherigeAngabe: 'Eda Dinc',
     text: 'Mehr Buchungen, weniger Aufwand. Hat sich sofort gelohnt.' },
-
-  /* ─── Leitfaden ─── */
-  { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['leitfaden.html'], freigegeben: false, bisherigeAngabe: 'Laura M., Kosmetikerin',
-    text: 'Der Leitfaden war super individuell und hat mir extrem weitergeholfen! Endlich weiß ich, wie ich auf Instagram strategisch posten kann.' },
-  { name: '[NAME]', sterne: '[STERNE]', datum: '[MM/JJJJ]', quelle: 'google', seiten: ['leitfaden.html'], freigegeben: false, bisherigeAngabe: 'Elias K., Personal Trainer',
-    text: 'Ich war zuerst skeptisch, aber die PDF war so umfangreich und auf mein Business zugeschnitten – jeden Cent wert!' },
 ]);

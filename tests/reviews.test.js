@@ -17,8 +17,18 @@ test('Bewertungsdaten sind gültig', () => {
   assert.deepStrictEqual(validateReviews(reviews, profileUrl), []);
 });
 
-test('alle 20 Kundenstimmen sind erfasst', () => {
-  assert.strictEqual(reviews.length, 20);
+test('nur die 12 zu prüfenden Bewertungen sind erfasst und keine ist freigegeben', () => {
+  assert.strictEqual(reviews.length, 12);
+  reviews.forEach((r) => assert.strictEqual(r.freigegeben, false, r.text));
+});
+
+test('leads, ugc und leitfaden enthalten keine Kundenstimmen mehr', () => {
+  ['leads/index.html', 'ugc.html', 'leitfaden.html'].forEach((page) => {
+    assert.strictEqual(reviews.filter((r) => r.seiten.includes(page)).length, 0, page);
+    const html = fs.readFileSync(path.join(ROOT, page), 'utf8');
+    ['Kundenstimmen', 'Was unsere Kunden sagen', 'Das sagen unsere', 'ds-review', 'rv-card', 'Sind unsere Creatives']
+      .forEach((text) => assert.ok(!html.includes(text), `${page}: ${text}`));
+  });
 });
 
 test('Einträge mit Platzhaltern sind nicht freigegeben', () => {

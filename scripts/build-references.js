@@ -63,8 +63,18 @@ const REVIEW_PAGES = {
       </div>
     </section>`,
   },
-  // Die Überschrift auf ugc.html erklärt das Testangebot und bleibt außerhalb der Marker.
-  'ugc.html': { variante: 'legacy', theme: 'dark', vor: '', nach: '' },
+  'ugc.html': {
+    variante: 'legacy',
+    theme: 'dark',
+    vor: `<section class="py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 will-animate">
+        <h3 class="text-2xl sm:text-3xl font-extrabold">Sind unsere Creatives auch für dich der größte Hebel für mehr Umsatz?</h3>
+        <p class="mt-2 text-[var(--text-muted)]">Wir lassen neue Creatives 14 Tage mit deinen Zielgruppen und Budgets laufen – und vergleichen fair gegen bestehende Creatives.</p>
+      </div>`,
+    nach: `</div>
+  </section>`,
+  },
   'audit.html': {
     variante: 'legacy',
     vor: `<section id="socialproof" class="bg-white py-16">
