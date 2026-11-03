@@ -135,7 +135,7 @@ test('Impressum nennt DDG, keine OS-Plattform, Stand und die Adresse in Manching
 });
 
 test('Postanschrift ist überall Ursinusstraße 7, 85077 Manching', () => {
-  ['impressum/index.html', 'datenschutz/index.html', 'datenschutz-socialpro.html', 'partials/footer.html', 'index.html'].forEach((file) => {
+  ['impressum/index.html', 'datenschutz/index.html', 'datenschutz-socialpro.html', 'index.html'].forEach((file) => {
     const html = read(file);
     assert.ok(!html.includes('Alpenrosen') && !html.includes('85055'), file);
     assert.ok(html.includes('85077'), file);

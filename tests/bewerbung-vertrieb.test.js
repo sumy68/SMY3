@@ -204,3 +204,16 @@ test('Footer aller Hauptseiten verlinkt die Bewerbungsseite als "Jobs"', () => {
     assert.ok(!header.includes('>Jobs<'), `${page}: Jobs nicht im Hauptmenü`);
   }
 });
+
+test('Jede Seite mit Footer verlinkt im Footer auf /bewerbung-vertrieb/', () => {
+  const { execSync } = require('node:child_process');
+  const pages = execSync("git ls-files '*.html'", { cwd: path.join(__dirname, '..') }).toString()
+    .split('\n').filter((f) => f && !f.startsWith('gstack/'));
+  const withFooter = pages.filter((f) => read(f).includes('<footer'));
+  assert.ok(withFooter.length >= 21, `nur ${withFooter.length} Seiten mit Footer`);
+  for (const page of withFooter) {
+    const html = read(page);
+    const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
+    assert.match(footer, /href="(https:\/\/smyagency\.de)?\/bewerbung-vertrieb\/"[^>]*>Jobs<\/a>/, page);
+  }
+});
