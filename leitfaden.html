@@ -6,6 +6,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Social Media Leitfaden – SMY Agency</title>
+  <link rel="preload" href="/fonts/poppins-latin-7e48d5.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/poppins-latin-fffe79.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/poppins-latin-4fe5f8.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <style>
     body {
@@ -19,6 +22,8 @@
     .gold-text {
       color: #D4AF37;
     }
+    /* Nav-Links mindestens 24px hoch (WCAG 2.5.8), sonst liegen umbrechende Zeilen zum Tippen zu dicht */
+    header nav a, footer nav a { display: inline-block; padding-block: 2px; }
   </style>
   <link rel="stylesheet" href="/tailwind.css" />
 </head>
@@ -65,28 +70,28 @@
       <input type="hidden" name="_subject" value="Leitfaden-Fragebogen">
 
       <div>
-        <label class="block text-left font-semibold mb-1">Dein Name</label>
-        <input type="text" name="name" required autocomplete="name" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
+        <label for="lf-name" class="block text-left font-semibold mb-1">Dein Name</label>
+        <input type="text" name="name" required autocomplete="name" id="lf-name" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
       </div>
 
       <div>
-        <label class="block text-left font-semibold mb-1">Deine E-Mail-Adresse (für den Versand der PDF)</label>
-        <input type="email" name="email" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
+        <label for="lf-email" class="block text-left font-semibold mb-1">Deine E-Mail-Adresse (für den Versand der PDF)</label>
+        <input type="email" name="email" required id="lf-email" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
       </div>
 
       <div>
-        <label class="block text-left font-semibold mb-1">Was ist dein aktuelles Problem auf Social Media?</label>
-        <textarea name="problem" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"></textarea>
+        <label for="lf-problem" class="block text-left font-semibold mb-1">Was ist dein aktuelles Problem auf Social Media?</label>
+        <textarea name="problem" required id="lf-problem" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"></textarea>
       </div>
 
       <div>
-        <label class="block text-left font-semibold mb-1">Wer ist deine Zielgruppe?</label>
-        <textarea name="zielgruppe" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"></textarea>
+        <label for="lf-zielgruppe" class="block text-left font-semibold mb-1">Wer ist deine Zielgruppe?</label>
+        <textarea name="zielgruppe" required id="lf-zielgruppe" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"></textarea>
       </div>
 
       <div>
-        <label class="block text-left font-semibold mb-1">Wie möchtest du wahrgenommen werden?</label>
-        <select name="stil" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
+        <label for="lf-stil" class="block text-left font-semibold mb-1">Wie möchtest du wahrgenommen werden?</label>
+        <select name="stil" required id="lf-stil" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
           <option value="professionell">Professionell</option>
           <option value="sympathisch">Sympathisch</option>
           <option value="beides">Eine Mischung aus beidem</option>
@@ -98,18 +103,18 @@
       </div>
 
       <div>
-        <label class="block text-left font-semibold mb-1">Welche Plattformen nutzt du aktuell oder planst du zu nutzen?</label>
-        <input type="text" name="plattformen" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
+        <label for="lf-plattformen" class="block text-left font-semibold mb-1">Welche Plattformen nutzt du aktuell oder planst du zu nutzen?</label>
+        <input type="text" name="plattformen" id="lf-plattformen" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
       </div>
 
       <div>
-        <label class="block text-left font-semibold mb-1">Was unterscheidet dich von anderen in deiner Branche?</label>
-        <textarea name="einzigartigkeit" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"></textarea>
+        <label for="lf-einzigartigkeit" class="block text-left font-semibold mb-1">Was unterscheidet dich von anderen in deiner Branche?</label>
+        <textarea name="einzigartigkeit" id="lf-einzigartigkeit" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"></textarea>
       </div>
 
       <div>
-        <label class="block text-left font-semibold mb-1">Was wünschst du dir konkret vom Leitfaden?</label>
-        <textarea name="wuensche" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"></textarea>
+        <label for="lf-wuensche" class="block text-left font-semibold mb-1">Was wünschst du dir konkret vom Leitfaden?</label>
+        <textarea name="wuensche" id="lf-wuensche" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"></textarea>
       </div>
 
       <div class="text-center">
