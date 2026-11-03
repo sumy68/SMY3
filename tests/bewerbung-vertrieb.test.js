@@ -191,3 +191,16 @@ test('Datenschutzerklärung enthält Bewerbungen, Talentpool und Formspree', () 
   assert.ok(html.includes('5.3 Formspree'));
   assert.ok(html.indexOf('in die Aufnahme in unseren Talentpool') < html.indexOf('spätestens 6 Monate'));
 });
+
+test('Footer aller Hauptseiten verlinkt die Bewerbungsseite als "Jobs"', () => {
+  const pages = ['index.html', 'services/index.html', 'webdesign/index.html', 'projects/index.html',
+    'vertrieb/index.html', 'leads/index.html', 'ueber-uns/index.html', 'impressum/index.html',
+    'datenschutz/index.html', 'bewerbung-vertrieb/index.html'];
+  for (const page of pages) {
+    const html = read(page);
+    const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
+    assert.ok(footer.includes('<li><a href="/bewerbung-vertrieb/">Jobs</a></li>'), page);
+    const header = html.slice(0, html.indexOf('<main'));
+    assert.ok(!header.includes('>Jobs<'), `${page}: Jobs nicht im Hauptmenü`);
+  }
+});
