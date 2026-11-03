@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shop – SMY Agency</title>
+  <link rel="preload" href="/fonts/poppins-latin-7e48d5.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/poppins-latin-fffe79.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/poppins-latin-4fe5f8.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <style>
     body { font-family: 'Poppins', sans-serif; }
@@ -11,6 +14,8 @@
     .gold-text { color: #D4AF37; }
     .gold-bg { background: linear-gradient(90deg,#D4AF37,#FFD700); }
     .shadow-soft { box-shadow: 0 10px 25px rgba(0,0,0,.08); }
+    /* Nav-Links mindestens 24px hoch (WCAG 2.5.8), sonst liegen umbrechende Zeilen zum Tippen zu dicht */
+    header nav a, footer nav a { display: inline-block; padding-block: 2px; }
   </style>
   <link rel="stylesheet" href="/tailwind.css" />
 </head>
@@ -42,7 +47,7 @@
     
     <!-- Leitfaden -->
     <div class="bg-white rounded-2xl shadow-soft overflow-hidden flex flex-col">
-      <img src="images/leitfaden.jpg" alt="Social Media Leitfaden" class="h-56 w-full object-cover">
+      <img src="images/leitfaden.jpg" alt="Social Media Leitfaden" class="h-56 w-full object-cover" fetchpriority="high">
       <div class="p-6 flex flex-col flex-grow">
         <h3 class="text-xl font-bold mb-2">Individueller Social Media Leitfaden</h3>
         <p class="text-sm text-gray-600 mb-4 flex-grow">Dein maßgeschneiderter Leitfaden für erfolgreiche Social Media Strategien.</p>
@@ -57,7 +62,7 @@
 
     <!-- Videopack -->
     <div class="bg-white rounded-2xl shadow-soft overflow-hidden flex flex-col">
-      <img src="images/hero.jpg" alt="30.000 Luxury Clips Pack" class="h-56 w-full object-cover">
+      <img src="images/hero.jpg" alt="30.000 Luxury Clips Pack" class="h-56 w-full object-cover" loading="lazy">
       <div class="p-6 flex flex-col flex-grow">
         <h3 class="text-xl font-bold mb-2">30.000 Luxury Aesthetic Clips Pack</h3>
         <p class="text-sm text-gray-600 mb-4 flex-grow">Perfekt für Reels, Shorts und Ads – kuratiert im edlen Gold-&-Beige-Look.</p>
