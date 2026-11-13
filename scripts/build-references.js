@@ -19,7 +19,7 @@ const COLUMNS = [
   { bereich: 'branding', title: 'Branding & Design' },
   { bereich: 'marketing', title: 'Marketing & Social' },
 ];
-const PARTNER_SUBLINE = 'Mit unseren Vertriebspartnern bieten wir Ihnen Lösungen über unser eigenes Leistungsportfolio hinaus.';
+const PARTNER_SUBLINE = 'Als offizieller Vertriebspartner gewinnen wir Neukunden für Unternehmen aus ganz unterschiedlichen Branchen.';
 const REVIEW_NOTE = 'Auszüge aus öffentlichen Google-Bewertungen unseres Unternehmensprofils.';
 const PLACEHOLDER = /\[(NAME|STERNE|MM\/JJJJ)\]/;
 const SCHEMA_ORG_ID = 'https://smyagency.de/#organization';
@@ -323,8 +323,8 @@ function partnerSection(entries, logoFor) {
   return `<section class="ds-section ds-vp" id="vertriebspartner">
       <div class="ds-container">
         <div class="ds-vp__head">
-          <span class="ds-eyebrow reveal">Partner</span>
-          <h2 class="ds-section-title reveal" data-delay="1">Unsere <span class="ds-accent">Vertriebspartner</span></h2>
+          <span class="ds-eyebrow reveal">Vertriebspartner</span>
+          <h2 class="ds-section-title reveal" data-delay="1">Wir verkaufen schon für <span class="ds-accent">diese Firmen</span>.</h2>
           <p class="ds-lead reveal" data-delay="1">${esc(PARTNER_SUBLINE)}</p>
         </div>
         <ul class="ds-vp__grid">

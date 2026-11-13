@@ -76,7 +76,7 @@ test('Dateinamen für Logos entstehen aus dem Namen', () => {
 test('Seite enthält den Inhalt statisch und lädt kein Client-Rendering', () => {
   const html = projects();
   references.forEach((entry) => assert.ok(html.includes(entry.name.replace(/&/g, '&amp;')), entry.name));
-  assert.ok(html.includes('über unser eigenes Leistungsportfolio hinaus'));
+  assert.ok(html.includes('Als offizieller Vertriebspartner gewinnen wir Neukunden'));
   assert.ok(!html.includes('/references.js'));
   assert.ok(!html.includes('/data/'));
 });
