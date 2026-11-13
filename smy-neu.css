@@ -411,3 +411,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--smy-red-bright);
 .ds-value h3 { font-weight: 400; }
 
 .ds-quickstats { border-top: 0 !important; padding-top: 0 !important; margin-top: 34px; }
+.story__leistungen { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.story__leistungen li { border: 1px solid #4a4a4a; border-radius: 999px; padding: 7px 14px; font-size: .95rem; color: #fff; }
+.story__kapitel.ist-da .story__leistungen li { border-color: rgba(227, 18, 11, .55); }
