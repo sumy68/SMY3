@@ -26,3 +26,10 @@ Das Skript schreibt das fertige HTML zwischen die Marker in den Seiten. Änderun
 Schriften liegen in `fonts/` und werden über `fonts/fonts.css` eingebunden.
 
 Interne Notizen liegen lokal.
+
+## Neuer Look (schwarz-rot, Partikel)
+
+- Startseite: `index.html` mit `startseite.js` (Interaktionen) und `smy-3d.js` (Partikel-Hintergrund).
+- Unterseiten: `smy-neu.css` wird nach allen anderen Stylesheets geladen und legt den neuen Stil über das Design-System. Dazu `smy-3d.js` für die Partikel.
+- three.js liegt lokal unter `assets/three.min.js`, die Schrift Archivo unter `fonts/` – keine externen Requests.
+- Helle Logo-Variante für dunkle Hintergründe: `assets/logo-dunkel.png`.

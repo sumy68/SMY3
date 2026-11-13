@@ -32,13 +32,17 @@ const ELEVATED = 'background: var(--bg-elevated); border-block: 1px solid var(--
 const REVIEW_PAGES = {
   'index.html': {
     variante: 'ds',
-    vor: `<section class="ds-section" id="reviews" style="${ELEVATED}">
-      <div class="ds-container">
-        <span class="ds-eyebrow reveal">Was unsere Kunden sagen</span>
-        <h2 class="ds-section-title reveal" data-delay="1">Bewertungen, die <span class="ds-accent">für sich sprechen</span>.</h2>`,
-    nach: (rating) => `<div class="ds-reviews__summary reveal">
+    vor: `<section class="bewertung" id="reviews" aria-labelledby="bew-titel" data-szene="3" data-pos="0,0,1.5,0.22">
+      <div class="wrap">
+        <p class="akt__nr" id="bew-titel">Was unsere Kunden sagen</p>
+        <div class="spot" id="spot" hidden>
+          <div class="sterne" id="spot-sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
+          <blockquote class="spot__zitat" id="spot-zitat" aria-live="polite"></blockquote>
+          <div class="spot__namen" role="tablist" aria-label="Bewertung auswählen" id="spot-namen"></div>
+        </div>`,
+    nach: (rating) => `<div class="ds-reviews__summary">
           ${ratingSummary(rating)}
-          <a href="${esc(rating.profilUrl)}/review" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-magnetic>Bewertung schreiben</a>
+          <a href="${esc(rating.profilUrl)}/review" target="_blank" rel="noopener noreferrer" class="textlink">Bewertung schreiben</a>
         </div>
       </div>
     </section>`,

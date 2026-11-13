@@ -1,0 +1,182 @@
+/* ============================================================
+   SMY AGENCY – NEUER LOOK FÜR DIE UNTERSEITEN
+   Wird nach allen anderen Stylesheets geladen und legt den
+   schwarz-roten Stil der Startseite über das Design-System.
+   ============================================================ */
+
+:root {
+  --smy-red:        #E3120B;
+  --smy-red-bright: #FF3B30;
+  --smy-red-deep:   #831613;
+  --smy-red-soft:   rgba(227, 18, 11, 0.14);
+  --smy-red-glow:   rgba(227, 18, 11, 0.40);
+
+  --bg-base:        #000;
+  --bg-elevated:    rgba(10, 8, 8, 0.55);
+  --bg-panel:       rgba(14, 11, 11, 0.72);
+  --bg-panel-hover: rgba(24, 16, 16, 0.85);
+
+  --border-subtle:  #262626;
+  --border-strong:  #444;
+  --border-accent:  rgba(227, 18, 11, 0.45);
+
+  --text-primary:   #fff;
+  --text-secondary: #B5AFA9;
+  --text-muted:     #8f8a85;
+
+  --font-display: 'Archivo', system-ui, -apple-system, sans-serif;
+  --font-body:    'Archivo', system-ui, -apple-system, sans-serif;
+
+  --tracking-tight: -0.035em;
+}
+
+html, body { background: #000; }
+body { font-size: 1.0625rem; }
+
+/* Hintergrund: rotes Glühen + Partikel (smy-3d.js) */
+.glut {
+  position: fixed; inset: -20%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(40% 35% at 78% 30%, rgba(227, 18, 11, .30), transparent 70%),
+    radial-gradient(35% 30% at 15% 85%, rgba(140, 8, 4, .35), transparent 70%);
+  filter: blur(40px);
+}
+#buehne { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; pointer-events: none; transition: opacity .6s; }
+main, .ds-footer { position: relative; z-index: 1; }
+.cursor-glow, .aurora { display: none !important; }
+
+/* Überschriften: dünn und groß wie auf der Startseite */
+h1, h2, h3, h4 { font-weight: 300; letter-spacing: -0.035em; }
+h3, h4 { font-weight: 400; letter-spacing: -0.02em; }
+.ds-section-title { font-size: clamp(2.3rem, 4.6vw, 4.4rem); line-height: 1.02; max-width: 16ch; }
+.ds-page-hero__title,
+.ds-hero__title {
+  font-size: clamp(2.8rem, 7vw, 6.4rem);
+  line-height: 1;
+  font-weight: 300;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  color: #fff;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, .7);
+}
+.ds-accent { color: var(--smy-red-bright); }
+.ds-lead { color: #D6D1CC; }
+
+/* Labels: Satzschreibung statt Mono-Großbuchstaben */
+.ds-eyebrow {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--smy-red-bright);
+}
+.ds-eyebrow::before { display: none; }
+
+/* Abstände zwischen den Abschnitten */
+.ds-section { padding-block: clamp(120px, 16vw, 220px); }
+
+/* Seitenkopf der Unterseiten: links ausgerichtet, viel Luft */
+.ds-page-hero {
+  text-align: left;
+  padding-block: calc(84px + clamp(80px, 12vw, 170px)) clamp(80px, 10vw, 140px);
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+}
+.ds-page-hero > .ds-container { width: 100%; }
+.ds-page-hero::before, .ds-page-hero::after { display: none; }
+.ds-page-hero__title { margin-inline: 0; max-width: 13ch; }
+.ds-page-hero .ds-lead { margin-inline: 0; }
+.ds-page-hero .ds-eyebrow { justify-content: flex-start; }
+.ds-page-hero__actions { justify-content: flex-start; }
+
+/* Abschnitte mit eigenem Hintergrund werden durchsichtig, damit Glühen und Partikel durchscheinen */
+.ds-section[style*="bg-elevated"] { background: transparent !important; border-block: 0 !important; }
+
+/* Buttons */
+.btn { font-family: var(--font-body); font-weight: 700; font-size: 1rem; }
+.btn--primary { background: var(--smy-red); box-shadow: none; }
+.btn--primary:hover { background: #fff; color: #000; box-shadow: none; }
+.btn--ghost { border-color: #555; color: #fff; }
+.btn--ghost:hover { border-color: #fff; color: #fff; }
+
+/* Karten und Panels: dunkles Glas */
+.ds-card, .ds-featured, .ds-panel, .ds-legal__card, .ds-faq__item, .ds-step, .ds-value, .ds-datacard, .ds-projcat, .ds-tl-item, .thread__card {
+  background: rgba(12, 10, 10, .62);
+  border: 1px solid var(--border-subtle);
+  border-radius: 22px;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.ds-card:hover, .ds-featured:hover { border-color: #5a1410; }
+.ds-card__icon { background: var(--smy-red-soft); color: var(--smy-red-bright); border-color: var(--border-accent); }
+.ds-chip { border-color: #4a4a4a; color: #fff; background: transparent; }
+
+/* CTA-Block: rotes Riffelglas wie auf der Startseite */
+.ds-cta {
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 32px;
+  isolation: isolate;
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,.22) 0, rgba(255,255,255,.035) 5px, rgba(255,255,255,.09) 7px, rgba(0,0,0,.1) 10px, rgba(0,0,0,.26) 14px),
+    linear-gradient(90deg, rgba(0,0,0,.55), transparent 30%, transparent 70%, rgba(0,0,0,.45)),
+    radial-gradient(45% 90% at 60% 50%, #ffd0c8 0, #ff3b30 18%, rgba(131,22,19,.85) 50%, transparent 80%),
+    radial-gradient(50% 110% at 30% 40%, #ff3b30, rgba(227,18,11,.6) 50%, transparent 80%),
+    #0a0101;
+}
+.ds-cta h2 { color: #fff; font-weight: 300; }
+.ds-cta p { color: rgba(255, 255, 255, .9); }
+.ds-cta .btn--primary { background: #fff; color: #000; }
+.ds-cta .btn--primary:hover { background: #000; color: #fff; }
+.ds-cta .ds-eyebrow { color: #fff; }
+
+/* Formulare */
+.ds-field input, .ds-field select, .ds-field textarea,
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="number"], select, textarea {
+  background: rgba(0, 0, 0, .55);
+  border-color: #3a3a3a;
+  color: #fff;
+  border-radius: 14px;
+}
+.ds-field input:focus, .ds-field select:focus, .ds-field textarea:focus,
+input:focus, select:focus, textarea:focus { border-color: var(--smy-red-bright); outline: none; box-shadow: 0 0 0 3px rgba(227, 18, 11, .25); }
+
+/* Kopfzeile: dunkel statt weiß, Logo in der hellen Variante */
+.ds-header {
+  background: rgba(0, 0, 0, .55);
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+.ds-header.is-scrolled { box-shadow: none; background: rgba(0, 0, 0, .8); }
+.ds-header .ds-logo img { height: 52px; }
+.ds-nav__links a { color: #fff; font-size: 1rem; font-weight: 600; }
+.ds-nav__links a:hover { color: var(--smy-red-bright); }
+.ds-nav__links a::after { display: none; }
+.ds-nav__links .btn--primary { color: #fff; padding: 11px 20px; font-size: .95rem; }
+.ds-nav__links .btn--primary:hover { color: #000; }
+
+/* Fußzeile */
+.ds-footer { border-top: 1px solid #1f1f1f; background: rgba(0, 0, 0, .6); }
+.ds-footer .ds-logo { font-weight: 700; font-stretch: 125%; }
+.ds-footer__links a:hover { color: #fff; }
+
+/* Rechtliche Seiten gut lesbar halten */
+.ds-legal__card h2 { font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 400; }
+.ds-legal__card p, .ds-legal__card li { color: #D6D1CC; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glut { filter: blur(40px); }
+}
+
+/* Mono-Labels an die Startseite angleichen */
+:root { --font-mono: 'Archivo', system-ui, sans-serif; }
+.ds-field label, .ds-stat__label, .ds-legal__meta, .ds-quickstat__label {
+  text-transform: none; letter-spacing: 0; font-size: .95rem; font-weight: 600; color: #D6D1CC;
+}
+
+/* Lange Wörter (z. B. Datenschutzerklärung) sauber trennen */
+.ds-page-hero__title { max-width: 16ch; -webkit-hyphens: auto; hyphens: auto; }
+.ds-review__stars { color: var(--smy-red-bright); }

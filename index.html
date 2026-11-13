@@ -67,363 +67,575 @@
   }
   </script>
 
-  <!-- Fonts: Space Grotesk (Display) · DM Sans (Body) · Space Mono (Labels) -->
+  <!-- Schriften lokal (keine Requests an Google) -->
   <link rel="stylesheet" href="/fonts/fonts.css" />
-
-  <!-- Design-System + Demo-Showcase (live style.css bleibt unangetastet) -->
-  <link rel="stylesheet" href="design-system.css" />
-  <link rel="stylesheet" href="design-demo.css" />
-  <link rel="stylesheet" href="showcase.css" />
-  <link rel="stylesheet" href="brand-section.css" />
   <link rel="stylesheet" href="/reviews.css" />
-  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}.hero h1 .w,.hero .lead,.hero__cta{opacity:1!important;filter:none!important;transform:none!important}.bs{opacity:1!important;transform:none!important}</style></noscript>
+  <style>
+:root{
+  --schwarz:#000;
+  --flaeche:#0D0D0D;
+  --linie:#262626;
+  --rot:#E3120B;
+  --rot-hell:#FF3B30;
+  --weiss:#fff;
+  --text:#B5AFA9;
+  --max:1240px;
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--schwarz)}
+body{font-family:"Archivo",system-ui,sans-serif;background:var(--schwarz);color:var(--text);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--rot-hell);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);width:100%}
+
+/* 3D-Bühne */
+.glut{position:fixed;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(40% 35% at 78% 30%,rgba(227,18,11,.30),transparent 70%),radial-gradient(35% 30% at 15% 85%,rgba(140,8,4,.35),transparent 70%);filter:blur(40px)}
+#buehne{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block;pointer-events:none;transition:opacity .6s}
+.seite{position:relative;z-index:1}
+
+.display{font-weight:300;font-variation-settings:"wdth" 100;color:var(--weiss);letter-spacing:-.035em;line-height:1}
+h2.display{font-size:clamp(38px,5.6vw,76px);max-width:15ch}
+h3{font-weight:800;color:var(--weiss);font-size:24px;line-height:1.2;letter-spacing:-.01em}
+p{max-width:62ch}
+.lead{font-size:clamp(19px,1.6vw,22px);color:#D6D1CC}
+.rot{color:var(--rot-hell)}
+
+.btn{display:inline-flex;align-items:center;font:inherit;font-weight:700;font-size:17px;text-decoration:none;padding:16px 26px;border-radius:999px;border:2px solid var(--rot);background:var(--rot);color:var(--weiss);cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.btn:hover{background:var(--weiss);border-color:var(--weiss);color:var(--schwarz)}
+.btn--rahmen{background:transparent;border-color:#555}
+.btn--rahmen:hover{border-color:var(--weiss);background:transparent;color:var(--weiss)}
+
+/* Header */
+.nav{display:flex;align-items:center;justify-content:space-between;padding-top:26px;padding-bottom:26px;gap:24px}
+.logo img{display:block;height:44px;width:auto}
+.logo{font-weight:700;font-variation-settings:"wdth" 125;font-size:22px;color:var(--weiss);text-decoration:none;letter-spacing:-.02em;white-space:nowrap}
+.nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+.nav ul a{text-decoration:none;font-weight:600;font-size:16px}
+.nav ul a:not(.btn){color:var(--weiss)}
+.nav ul a:not(.btn):hover{color:var(--rot-hell)}
+.nav .btn{padding:11px 20px;font-size:15px;white-space:nowrap}
+@media (max-width:420px){.nav .btn{padding:10px 14px;font-size:14px}}
+@media (max-width:860px){.nav ul li:not(:last-child){display:none}}
+
+/* Hero */
+.hero{min-height:calc(100vh - 92px);display:flex;align-items:center;padding:0}
+.hero__inner{padding-top:clamp(20px,4vh,60px);padding-bottom:clamp(60px,10vh,120px)}
+.hero h1{font-size:clamp(48px,8vw,124px);max-width:10ch;text-shadow:0 2px 40px rgba(0,0,0,.7)}
+.hero h1 .w{display:inline-block}
+.hero .lead{margin-top:34px;max-width:42ch;text-shadow:0 1px 16px #000}
+.hero__cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.hero__tel{font-weight:600;color:var(--weiss);text-decoration:none;padding:8px 4px}
+.hero__tel:hover{color:var(--rot-hell)}
+
+section{padding:clamp(160px,22vw,300px) 0}
+
+/* Zwei Wege */
+.wege__grid{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;margin-top:56px;align-items:start}
+.karte{background:rgba(12,10,10,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--linie);border-radius:28px;padding:clamp(28px,4vw,48px)}
+.karte h3{font-size:clamp(28px,3vw,38px);font-weight:400;letter-spacing:-.02em}
+.karte p{margin-top:16px}
+.karte ul{list-style:none;margin-top:26px;border-top:1px solid var(--linie)}
+.karte li{padding:14px 0;border-bottom:1px solid var(--linie);display:flex;gap:14px;color:#E4E0DC}
+.karte li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--rot);margin-top:.6em}
+.karte .btn{margin-top:30px}
+.karte--code{margin-top:clamp(0px,7vw,90px)}
+.preis{margin-top:22px;font-size:16px;border-left:3px solid var(--rot);padding:4px 0 4px 16px}
+@media (max-width:900px){.wege__grid{grid-template-columns:1fr}.karte--code{margin-top:0}}
+
+/* Ablauf */
+.ablauf ol{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin-top:64px;position:relative}
+.ablauf ol::before{content:"";position:absolute;left:0;right:0;top:29px;height:2px;background:linear-gradient(90deg,var(--rot) var(--fort,0%),#333 var(--fort,0%))}
+.ablauf li{position:relative;padding-right:28px}
+.ablauf .nr{width:60px;height:60px;border-radius:50%;background:var(--schwarz);border:1px solid var(--rot);color:var(--weiss);display:grid;place-items:center;font-weight:400;font-size:22px;position:relative}
+.ablauf h3{margin-top:26px}
+.ablauf li p{margin-top:10px;font-size:17px}
+@media (max-width:900px){
+  .ablauf ol{grid-template-columns:1fr;gap:40px}
+  .ablauf ol::before{left:29px;right:auto;top:0;bottom:0;width:2px;height:auto;background:linear-gradient(180deg,var(--rot) var(--fort,0%),#333 var(--fort,0%))}
+  .ablauf li{padding-left:90px;padding-right:0}
+  .ablauf .nr{position:absolute;left:0;top:0}
+  .ablauf h3{margin-top:12px}
+}
+
+/* Partner: der eine rote Block */
+.partner{color:var(--text)}
+.partner h2{color:var(--weiss)}
+.partner__lead{margin-top:20px;max-width:56ch}
+.partner__liste{margin-top:52px;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #3a3a3a;background:rgba(0,0,0,.45)}
+.partner__item{padding:34px 34px 10px 0}
+.partner__item+.partner__item{padding-left:34px;border-left:1px solid #3a3a3a}
+.partner__name{font-weight:300;font-size:clamp(34px,4.4vw,60px);color:var(--rot-hell);letter-spacing:-.035em;line-height:1}
+.partner__item p{margin-top:14px;font-size:17px;color:#E4E0DC}
+.partner__item .ort{color:var(--weiss);font-weight:600;font-size:15px;margin-top:16px}
+@media (max-width:760px){.partner__liste{grid-template-columns:1fr}.partner__item+.partner__item{padding-left:0;border-left:0;border-top:1px solid #3a3a3a}}
+
+/* Projekte */
+.projekte__liste{margin-top:52px;list-style:none;border-top:2px solid var(--weiss)}
+.projekt{display:grid;grid-template-columns:minmax(200px,1fr) 2fr;gap:24px 48px;padding:30px 0;border-bottom:1px solid var(--linie);background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,.5))}
+.projekt h3{font-size:clamp(22px,2.2vw,28px);font-weight:500}
+.projekt .art{font-size:16px;color:var(--rot-hell);font-weight:700;margin-top:6px}
+.projekt p{font-size:17px}
+@media (max-width:760px){.projekt{grid-template-columns:1fr;gap:10px}}
+
+/* Stimmen */
+.stimmen{padding-top:0}
+.stimmen__grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px;margin-top:52px;align-items:start}
+.zitat{background:rgba(12,10,10,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--linie);border-radius:24px;padding:30px}
+.zitat:first-child{background:var(--weiss);border-color:var(--weiss);padding:clamp(30px,4vw,46px)}
+.zitat:first-child blockquote{font-size:clamp(21px,2vw,26px);font-weight:600;color:var(--schwarz);line-height:1.35}
+.zitat:first-child figcaption{color:var(--schwarz)}
+.zitat blockquote{font-size:17px;color:#E4E0DC}
+.zitat figcaption{margin-top:18px;font-weight:700;color:var(--weiss);font-size:15px}
+.sterne{color:var(--rot);letter-spacing:2px;font-size:15px;margin-bottom:12px}
+@media (max-width:900px){.stimmen__grid{grid-template-columns:1fr}}
+
+/* Über mich */
+.ich__grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(30px,6vw,90px);align-items:start}
+.ich__text{background:rgba(0,0,0,.7);border-radius:20px}
+.ich__text p+p{margin-top:18px}
+.ich__fakten{list-style:none;margin-top:30px;display:flex;flex-wrap:wrap;gap:10px}
+.ich__fakten li{border:1px solid #444;border-radius:999px;padding:9px 18px;font-size:15px;font-weight:600;color:var(--weiss)}
+@media (max-width:900px){.ich__grid{grid-template-columns:1fr}}
+
+/* Kontakt */
+.kontakt__box{background:rgba(10,8,8,.3);border:1px solid var(--linie);border-radius:36px;padding:clamp(34px,6vw,80px)}
+.kontakt__box h2{max-width:13ch}
+.kontakt__box>*{max-width:min(100%,640px)}
+.kontakt__wege{grid-template-columns:auto auto!important}
+@media (max-width:860px){.kontakt__wege{grid-template-columns:1fr!important}.kontakt{padding-bottom:230px}}
+.kontakt__box .lead{margin-top:22px;max-width:48ch}
+.kontakt__wege{margin-top:46px;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:16px 56px}
+.kontakt__wege dt{font-size:15px;color:var(--rot-hell);font-weight:600}
+.kontakt__wege dd{margin-top:4px;font-size:clamp(19px,1.8vw,24px);font-weight:700;color:var(--weiss)}
+.kontakt__wege dd a{text-decoration:none}
+.kontakt__wege dd a:hover{color:var(--rot-hell)}
+.kontakt .btn{margin-top:46px}
+@media (max-width:860px){.kontakt__wege{grid-template-columns:1fr}}
+
+footer{padding:0 0 50px;position:relative;z-index:1}
+.fuss{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:15px}
+.fuss nav{display:flex;gap:24px}
+.fuss a{text-decoration:none}
+.fuss a:hover{color:var(--weiss)}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero h1 .w{opacity:0;filter:blur(14px);transform:translateY(.25em);animation:auf 1.2s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.25s + var(--i)*.09s)}
+  .hero .lead,.hero__cta{opacity:0;filter:blur(8px);animation:auf 1.1s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero .lead{animation-delay:1s}.hero__cta{animation-delay:1.2s}
+  @keyframes auf{to{opacity:1;filter:none;transform:none}}
+}
+
+/* ---- v4: Inhalte der aktuellen Startseite ---- */
+.hero h1{max-width:12ch}
+.wechsel{display:inline-block;color:var(--rot-hell);transition:opacity .3s,filter .3s,transform .3s}
+.wechsel.raus{opacity:0;filter:blur(10px);transform:translateY(-.15em)}
+.btn--rahmen.groß{padding:16px 26px}
+
+/* Laufband */
+.band{position:relative;z-index:1;border-block:1px solid #2a2a2a;overflow:hidden;padding:22px 0;background:rgba(0,0,0,.35)}
+.band__spur{display:flex;gap:56px;width:max-content;animation:laufen 38s linear infinite}
+.band span{font-size:clamp(28px,3.4vw,46px);font-weight:300;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1px #6b6b6b;white-space:nowrap}
+.band span:nth-child(3n+1){color:var(--weiss);-webkit-text-stroke:0}
+@keyframes laufen{to{transform:translateX(-50%)}}
+
+/* Akte */
+.akt{min-height:88vh;display:flex;align-items:center}
+.akt__inhalt{max-width:560px}
+.akt--rechts .akt__inhalt{margin-left:auto}
+.akt__nr{color:var(--rot-hell);font-weight:600;font-size:16px;margin-bottom:22px}
+.akt h2.display{font-size:clamp(40px,5.2vw,72px);max-width:13ch}
+.akt .lead{margin-top:24px}
+.akt ul{list-style:none;margin-top:30px;border-top:1px solid #333}
+.akt li{padding:14px 0;border-bottom:1px solid #333;color:#E4E0DC;display:flex;gap:14px}
+.akt li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--rot);margin-top:.6em}
+.akt .btn{margin-top:32px}
+.akt__inhalt{background:radial-gradient(120% 100% at 30% 50%,rgba(0,0,0,.72),rgba(0,0,0,0) 75%);padding:20px 0}
+
+/* Zahlen */
+.zahlen__grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #333;border-bottom:1px solid #333}
+.zahl{padding:44px 28px 40px 0}
+.zahl+.zahl{border-left:1px solid #333;padding-left:28px}
+.zahl__wert{font-size:clamp(64px,8vw,120px);font-weight:200;letter-spacing:-.05em;color:var(--weiss);line-height:1}
+.zahl:nth-child(3) .zahl__wert{color:var(--rot-hell)}
+.zahl__text{margin-top:12px;font-size:17px}
+@media (max-width:760px){.zahlen__grid{grid-template-columns:1fr}.zahl+.zahl{border-left:0;border-top:1px solid #333;padding-left:0}}
+
+/* Services */
+.services__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+.service{background:rgba(12,10,10,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--linie);border-radius:22px;padding:30px;transition:border-color .25s,transform .25s}
+.service:hover{border-color:#5a1410;transform:translateY(-3px)}
+.service h3{font-weight:400;font-size:26px}
+.service p{margin-top:12px;font-size:17px}
+.service--breit{grid-column:span 2;background:linear-gradient(135deg,rgba(227,18,11,.22),rgba(12,10,10,.7) 60%)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;list-style:none}
+.chips li{border:1px solid #4a4a4a;border-radius:999px;padding:7px 14px;font-size:14px;color:var(--weiss)}
+@media (max-width:900px){.services__grid{grid-template-columns:1fr}.service--breit{grid-column:auto}}
+
+/* Studio */
+.studio__grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.studio ul{list-style:none;margin-top:26px}
+.studio li{padding:12px 0;border-bottom:1px solid #333;color:#E4E0DC}
+.studio .btn{margin-top:30px}
+.studio__marke{border:1px solid #3a3a3a;border-radius:28px;padding:clamp(30px,4vw,50px);background:rgba(0,0,0,.5)}
+.studio__logo{font-size:clamp(44px,5vw,68px);font-weight:300;letter-spacing:-.04em;color:var(--weiss);line-height:1}
+.studio__logo span{color:var(--rot-hell)}
+.studio__marke p{margin-top:14px}
+@media (max-width:900px){.studio__grid{grid-template-columns:1fr}}
+
+/* Bewertungen */
+.stimmen{padding-top:clamp(80px,11vw,150px)}
+.stimmen__grid{grid-template-columns:repeat(3,1fr)}
+.zitat:first-child{background:rgba(12,10,10,.62);border-color:var(--linie);padding:30px}
+.zitat:first-child blockquote{font-size:17px;font-weight:400;color:#E4E0DC;line-height:1.55}
+.zitat:first-child figcaption{color:var(--weiss)}
+.zitat:nth-child(2){background:var(--weiss);border-color:var(--weiss)}
+.zitat:nth-child(2) blockquote{color:var(--schwarz);font-size:19px;font-weight:500}
+.zitat:nth-child(2) figcaption{color:var(--schwarz)}
+.stimmen__mehr{margin-top:36px}
+
+/* COPA */
+.copa__kopf{max-width:720px}
+.copa__grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:48px}
+.copa__karte{border:1px solid #3a3a3a;border-radius:22px;padding:30px;background:rgba(0,0,0,.55)}
+.copa__karte h3{font-weight:400}
+.copa__karte ul{list-style:none;margin-top:16px}
+.copa__karte li{padding:10px 0;border-bottom:1px solid #2c2c2c;color:#E4E0DC;font-size:17px}
+.textlink{display:inline-block;margin-top:30px;color:var(--weiss);font-weight:600;text-underline-offset:5px}
+.textlink:hover{color:var(--rot-hell)}
+@media (max-width:760px){.copa__grid{grid-template-columns:1fr}}
+
+/* Abschluss */
+.abschluss{min-height:90vh;display:flex;align-items:center;padding-bottom:clamp(220px,32vh,320px)}
+.abschluss .display{font-size:clamp(44px,7vw,104px);max-width:12ch}
+.abschluss .lead{margin-top:24px;max-width:46ch}
+.abschluss .btn{margin-top:36px}
+.abschluss__klein{margin-top:14px;font-size:15px;color:#8f8a85}
+
+/* Footer */
+.fuss{align-items:center}
+.fuss ul{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none}
+
+/* ---- v5: kreative Abschnitte ---- */
+.akt{min-height:92vh}
+.akt__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
+.akt__grid--umgekehrt{grid-template-columns:1fr 1fr}
+.akt--rechts .akt__inhalt{margin-left:0}
+.akt__inhalt{background:none;padding:0}
+@media (max-width:960px){.akt__grid,.akt__grid--umgekehrt{grid-template-columns:1fr}.akt__grid--umgekehrt .faecher{order:2}}
+
+/* Akt 1: Code + Vorschau */
+.bau{position:relative;height:520px}
+.bau__code{position:absolute;left:0;top:0;width:78%;background:rgba(10,10,10,.92);border:1px solid #2c2c2c;border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.bau__leiste{display:flex;gap:7px;align-items:center;padding:12px 16px;border-bottom:1px solid #222}
+.bau__leiste i{width:10px;height:10px;border-radius:50%;background:#333}
+.bau__leiste i:first-child{background:var(--rot)}
+.bau__leiste span{margin-left:10px;font-size:13px;color:#8a8580}
+.bau pre{margin:0;padding:20px 20px 26px;min-height:250px;font:500 14px/1.75 ui-monospace,Menlo,Consolas,monospace;color:#d9d3cc;white-space:pre-wrap}
+.bau .t{color:var(--rot-hell)}.bau .a{color:#ffb4ad}
+.cursor{display:inline-block;width:8px;height:16px;background:var(--rot-hell);vertical-align:-3px;animation:blinken 1s steps(1) infinite}
+@keyframes blinken{50%{opacity:0}}
+.bau__seite{position:absolute;right:0;bottom:0;width:62%;background:#fff;border-radius:16px;padding:18px 20px 22px;color:#111;box-shadow:0 30px 90px rgba(227,18,11,.25)}
+.bs{opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s}
+.bs.da{opacity:1;transform:none}
+.bs--nav{display:flex;gap:10px;align-items:center;font-size:11px;letter-spacing:.06em}
+.bs--nav b{margin-right:auto}
+.bs--nav span{width:28px;height:5px;border-radius:3px;background:#ddd}
+.bs--h1{margin-top:22px;font-size:26px;font-weight:300;letter-spacing:-.03em;line-height:1.05}
+.bs--p{margin-top:8px;font-size:13px;color:#555}
+.bs--btn{margin-top:14px;display:inline-block;background:var(--rot);color:#fff;font-size:12px;font-weight:700;padding:9px 14px;border-radius:999px}
+.bs--form{margin-top:16px;display:grid;gap:7px}
+.bs--form span{height:24px;border:1px solid #ddd;border-radius:7px}
+.bs--form .kurz{width:60%}
+@media (max-width:960px){.bau{height:480px}.bau__code{width:92%}.bau__seite{width:78%}}
+
+/* Akt 2: Brand-Kit-Fächer */
+.faecher{position:relative;height:480px}
+.kk{position:absolute;left:50%;top:50%;width:210px;height:300px;margin:-150px 0 0 -105px;border-radius:18px;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 24px 60px rgba(0,0,0,.55);transform-origin:50% 130%;transform:rotate(calc(var(--f,0)*var(--r)*1deg)) translateX(calc(var(--f,0)*var(--x)*1px));transition:transform .15s linear}
+.kk__name{font-size:26px;font-weight:400;letter-spacing:-.02em;line-height:1.05}
+.kk__strich{width:34px;height:2px;background:currentColor;opacity:.8;margin:12px 0 10px}
+.kk__hex{font-size:12px;font-weight:600;opacity:.85}
+.kk--rot{background:var(--rot);color:#fff;--r:-20;--x:-110}
+.kk--tief{background:#831613;color:#fff;--r:-10;--x:-55}
+.kk--schwarz{background:#000;border:1px solid #333;color:#fff;--r:0;--x:0}
+.kk--typo{background:#f2f0ee;color:#000;--r:10;--x:55;justify-content:space-between}
+.kk__aa{font-size:96px;font-weight:200;letter-spacing:-.05em;line-height:1}
+.kk--logo{background:#0d0d0d;border:1px solid #3a1412;color:#fff;--r:20;--x:110;justify-content:space-between}
+.faecher{max-width:560px}
+@media (max-width:600px){.faecher{height:400px}.kk{width:160px;height:240px;margin:-120px 0 0 -80px}.kk--rot{--x:-70}.kk--tief{--x:-35}.kk--typo{--x:35}.kk--logo{--x:70}.kk__aa{font-size:70px}.kk__name{font-size:20px}}
+
+/* Riffelglas-Panel (Zahlen) */
+.riffel{position:relative;border-radius:32px;overflow:hidden;isolation:isolate;background:#0a0101;border:1px solid rgba(255,255,255,.08)}
+.riffel .zahlen__grid{min-height:340px;align-items:end}
+.riffel__glut{position:absolute;inset:-20%;z-index:-2;filter:blur(40px)}
+.riffel__glut i{position:absolute;border-radius:50%}
+.riffel__glut i:nth-child(1){width:50%;height:110%;left:18%;top:5%;background:radial-gradient(closest-side,#ff3b30,rgba(227,18,11,.6) 50%,transparent);animation:treiben1 14s ease-in-out infinite alternate}
+.riffel__glut i:nth-child(2){width:45%;height:90%;left:45%;top:10%;background:radial-gradient(closest-side,#ffd0c8,#ff3b30 35%,rgba(131,22,19,.7) 65%,transparent);animation:treiben2 11s ease-in-out infinite alternate}
+.riffel__glut i:nth-child(3){width:70%;height:110%;left:40%;top:-30%;background:radial-gradient(closest-side,#831613,transparent);animation:treiben1 17s ease-in-out infinite alternate-reverse}
+@keyframes treiben1{to{transform:translate(18%,10%) scale(1.15)}}
+@keyframes treiben2{to{transform:translate(-30%,-8%) scale(.85)}}
+.riffel__glas{position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(90deg,rgba(0,0,0,.22) 0,rgba(255,255,255,.035) 5px,rgba(255,255,255,.09) 7px,rgba(0,0,0,.1) 10px,rgba(0,0,0,.26) 14px),linear-gradient(90deg,rgba(0,0,0,.55),transparent 30%,transparent 70%,rgba(0,0,0,.45));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.riffel .zahlen__grid{border:0}
+.riffel .zahl{padding:clamp(40px,6vw,80px) clamp(24px,3vw,44px)}
+.riffel .zahl+.zahl{border-left:1px solid rgba(255,255,255,.18)}
+.riffel .zahl__wert,.riffel .zahl:nth-child(3) .zahl__wert{color:#fff}
+.riffel .zahl__text{color:rgba(255,255,255,.85)}
+@media (max-width:760px){.riffel .zahl+.zahl{border-left:0;border-top:1px solid rgba(255,255,255,.18)}}
+@media (prefers-reduced-motion:reduce){.riffel__glut i{animation:none}}
+
+/* Akt 3: Handy mit Feed */
+.handy{position:relative;width:300px;height:610px;margin:0 auto;border-radius:48px;border:10px solid #161616;background:#000;box-shadow:0 0 0 1px #333,0 40px 120px rgba(227,18,11,.25);overflow:hidden}
+.handy__insel{position:absolute;top:10px;left:50%;width:90px;height:26px;margin-left:-45px;border-radius:20px;background:#000;z-index:3}
+.handy__bild{position:absolute;inset:0;overflow:hidden}
+.feed{display:flex;flex-direction:column;gap:14px;padding:46px 12px 0;animation:feed 18s linear infinite}
+@keyframes feed{to{transform:translateY(-50%)}}
+.post{background:#0e0e0e;border-radius:14px;overflow:hidden;border:1px solid #1f1f1f}
+.post__kopf{display:flex;gap:8px;align-items:center;padding:10px}
+.post__kopf i{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--rot),#ff8a7a)}
+.post__kopf span{width:80px;height:6px;border-radius:3px;background:#333}
+.post__flaeche{height:240px;display:flex;align-items:flex-end;padding:14px;font-size:20px;font-weight:300;color:#fff;letter-spacing:-.02em}
+.p1 .post__flaeche{background:radial-gradient(80% 60% at 30% 30%,#ff3b30,#5a0703 70%,#140100)}
+.p2 .post__flaeche{background:linear-gradient(90deg,#222 50%,#E3120B 50%)}
+.p3 .post__flaeche{background:radial-gradient(60% 60% at 70% 40%,#fff 0,#ffd6cf 18%,#E3120B 50%,#000 100%)}
+.post__fuss{display:flex;gap:10px;align-items:center;padding:10px}
+.post__fuss .herz{color:var(--rot-hell);font-size:16px}
+.post__fuss span:last-child{width:120px;height:6px;border-radius:3px;background:#2a2a2a}
+.herzen{position:absolute;right:22px;bottom:70px;width:40px;height:300px;pointer-events:none}
+.herzen span{position:absolute;bottom:0;left:10px;color:var(--rot-hell);font-size:22px;opacity:0;animation:steigen 5s ease-in infinite}
+.herzen span:nth-child(2){animation-delay:1s;left:0}.herzen span:nth-child(3){animation-delay:2s;left:16px}
+.herzen span:nth-child(4){animation-delay:3s;left:4px}.herzen span:nth-child(5){animation-delay:4s;left:12px}
+@keyframes steigen{0%{opacity:0;transform:translateY(0) scale(.6)}15%{opacity:1}100%{opacity:0;transform:translateY(-280px) translateX(-14px) scale(1.2)}}
+
+/* Services als Zeilen */
+.leistungen{list-style:none;margin-top:56px;border-top:1px solid #333}
+.l{border-bottom:1px solid #333;position:relative;overflow:hidden}
+.l::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(227,18,11,.22),rgba(227,18,11,0) 70%);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.l:hover::before,.l.offen::before{transform:scaleX(1)}
+.l__kopf{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 0;position:relative}
+.l__kopf:focus-visible{outline:3px solid var(--rot-hell);outline-offset:-3px}
+.l__name{font-size:clamp(34px,5vw,68px);font-weight:300;letter-spacing:-.04em;color:var(--weiss);line-height:1;transition:transform .35s,color .35s}
+.l:hover .l__name,.l.offen .l__name{transform:translateX(18px);color:var(--rot-hell)}
+.l__plus{position:relative;width:34px;height:34px;flex:none;border:1px solid #555;border-radius:50%}
+.l__plus::before,.l__plus::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.5px;background:var(--weiss);transform:translate(-50%,-50%);transition:transform .3s}
+.l__plus::after{transform:translate(-50%,-50%) rotate(90deg)}
+.l.offen .l__plus::after{transform:translate(-50%,-50%) rotate(0)}
+.l__text{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1)}
+.l__text>*{overflow:hidden}
+.l.offen .l__text{grid-template-rows:1fr}
+.l__text>div,.l__text p{margin:0}
+.l__text p{padding:0 0 6px 18px;max-width:56ch;color:#E4E0DC;font-size:19px;position:relative}
+.l__text .chips{padding:0 0 28px 18px;margin-top:14px}
+.l.offen .l__text p:last-child{padding-bottom:30px}
+
+/* Bewertung im Rampenlicht */
+.bewertung{min-height:90vh;display:flex;align-items:center}
+.spot{margin-top:30px}
+.spot .sterne{font-size:20px;letter-spacing:5px}
+.spot__zitat{margin-top:22px;font-size:clamp(30px,4.2vw,58px);font-weight:300;letter-spacing:-.035em;line-height:1.12;color:var(--weiss);max-width:24ch;min-height:3.4em;transition:opacity .45s,filter .45s,transform .45s}
+.spot__zitat.raus{opacity:0;filter:blur(12px);transform:translateY(12px)}
+.spot__namen{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:44px}
+.spot__name{all:unset;cursor:pointer;position:relative;padding:10px 0 14px;font-size:16px;font-weight:600;color:#8f8a85;transition:color .25s}
+.spot__name:hover{color:var(--weiss)}
+.spot__name[aria-selected="true"]{color:var(--weiss)}
+.spot__name::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#333}
+.spot__name i{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--rot);z-index:1}
+.spot__name[aria-selected="true"] i{animation:fuellen var(--dauer,7s) linear forwards}
+.spot.pause .spot__name i{animation-play-state:paused}
+.spot__name:focus-visible{outline:3px solid var(--rot-hell);outline-offset:4px}
+@keyframes fuellen{to{width:100%}}
+@media (prefers-reduced-motion:reduce){.feed,.herzen span,.band__spur{animation:none}.spot__name[aria-selected="true"] i{animation:none;width:100%}}
+
+/* Bewertungen ohne JavaScript: Karten aus dem Build */
+.bewertung .ds-reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.bewertung .ds-review{background:rgba(12,10,10,.62);border:1px solid var(--linie);border-radius:22px;padding:28px}
+.bewertung .ds-review__stars{color:var(--rot);letter-spacing:2px}
+.bewertung .ds-review__text{margin-top:12px;color:#E4E0DC;font-size:17px}
+.bewertung .ds-review__footer{display:flex;gap:12px;align-items:center;margin-top:16px}
+.bewertung .ds-review__avatar{display:none}
+.bewertung .ds-review__name{color:var(--weiss);font-weight:700;font-size:15px}
+.bewertung .ds-review__meta{font-size:13px;color:#8f8a85}
+.bewertung.spot-aktiv .ds-reviews-grid{display:none}
+.bewertung .ds-reviews__summary{margin-top:36px;display:flex;gap:30px;align-items:center;flex-wrap:wrap}
+.bewertung .ds-reviews__summary .textlink{margin-top:0}
+@media (max-width:900px){.bewertung .ds-reviews-grid{grid-template-columns:1fr}}
+</style>
 </head>
-
 <body>
-  <!-- folgender Glow folgt der Maus -->
-  <div class="cursor-glow" aria-hidden="true"></div>
+<div class="glut" aria-hidden="true"></div>
+<canvas id="buehne" aria-hidden="true"></canvas>
 
-  <!-- ══════════ HEADER ══════════ -->
-  <header class="ds-header">
-    <div class="ds-container ds-nav">
-      <a href="/" class="ds-logo"><img src="assets/logo-header.png" alt="SMY Agency" /></a>
-      <nav>
-        <ul class="ds-nav__links">
-          <li><a href="/services/">Services</a></li>
-          <li><a href="/projects/">Projekte</a></li>
-          <li><a href="/ueber-uns/">Über uns</a></li>
-          <li><a href="/services/#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<div class="seite">
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/"><img src="/assets/logo-dunkel.png" alt="SMY Agency" width="470" height="210"></a>
+    <nav aria-label="Hauptnavigation">
+      <ul>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/projects/">Projekte</a></li>
+        <li><a href="/ueber-uns/">Über uns</a></li>
+        <li><a class="btn" href="/services/#kontakt">Projekt anfragen</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <!-- ══════════ HERO ══════════ -->
-    <section class="ds-hero">
-      <div class="aurora" aria-hidden="true"></div>
-      <canvas class="hero-particles" aria-hidden="true"></canvas>
-      <div class="ds-container ds-hero__inner">
-        <h1 class="ds-hero__title ds-rise ds-rise-2">
-          Wir <span id="rotatingWord" class="ds-hero__word">designen</span><br>
-          digitale Produkte<br>
-          für deinen Erfolg
-        </h1>
-
-        <p class="ds-lead ds-rise ds-rise-3">
-          Wir holen dir Kunden. Wir bauen dir die Präsenz.
-          Du fokussierst dich aufs Business.
-        </p>
-
-        <div class="ds-hero__actions ds-rise ds-rise-4">
-          <a href="/services/#kontakt" class="btn btn--primary btn--large" data-magnetic>Projekt anfragen</a>
-          <a href="#services" class="btn btn--ghost btn--large" data-magnetic>Unsere Services</a>
-        </div>
-
-        <!-- GOOGLE_RATING:START -->
+<main id="top">
+  <section class="hero" data-szene="0">
+    <div class="wrap hero__inner">
+      <h1 class="display" aria-label="Wir designen digitale Produkte für deinen Erfolg">
+        <span class="w" style="--i:0">Wir</span>
+        <span class="w" style="--i:1"><span class="wechsel" id="wechsel">designen</span></span>
+        <span class="w" style="--i:2">digitale</span>
+        <span class="w" style="--i:3">Produkte</span>
+        <span class="w" style="--i:4">für</span>
+        <span class="w" style="--i:5">deinen</span>
+        <span class="w" style="--i:6">Erfolg.</span>
+      </h1>
+      <p class="lead">Wir holen dir Kunden. Wir bauen dir die Präsenz. Du fokussierst dich aufs Business.</p>
+      <div class="hero__cta">
+        <a class="btn" href="/services/#kontakt">Projekt anfragen</a>
+        <a class="btn btn--rahmen" href="#services">Unsere Services</a>
+      </div>
+      <!-- GOOGLE_RATING:START -->
     <!-- GOOGLE_RATING:END -->
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ══════════ MARQUEE ══════════ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span>Webdesign</span><span>Branding</span><span>KI-Visuals</span>
-        <span>B2B Vertrieb</span><span>Ads</span><span>Print</span><span>SEO</span>
-        <span>Webdesign</span><span>Branding</span><span>KI-Visuals</span>
-        <span>B2B Vertrieb</span><span>Ads</span><span>Print</span><span>SEO</span>
+  <div class="band" aria-hidden="true">
+    <div class="band__spur">
+      <span>Webdesign</span><span>Branding</span><span>B2B Vertrieb</span><span>Ads</span><span>Print</span><span>SEO</span><span>Social Media</span>
+      <span>Webdesign</span><span>Branding</span><span>B2B Vertrieb</span><span>Ads</span><span>Print</span><span>SEO</span><span>Social Media</span>
+    </div>
+  </div>
+
+  <!-- Akt 1: Web & Tech – Code tippt sich, die Website baut sich daneben auf -->
+  <section class="akt" aria-labelledby="akt1" data-szene="3" data-pos="3.4,0,0.9,0.35">
+    <div class="wrap akt__grid">
+      <div class="akt__inhalt">
+        <p class="akt__nr">Web &amp; Tech</p>
+        <h2 class="display" id="akt1">Websites, die laden, bevor man blinzelt.</h2>
+        <p class="lead">Schnelle, saubere Builds mit Premium-Look. Responsive, SEO-ready und gebaut für Wachstum – kein Baukasten-Gefühl.</p>
+        <ul>
+          <li>Ladezeit unter 1 Sekunde</li>
+          <li>Perfekt auf jedem Gerät</li>
+          <li>SEO &amp; Conversion eingebaut</li>
+        </ul>
+        <a class="btn" href="/services/">Web-Projekte ansehen</a>
+      </div>
+      <div class="bau" id="bau" aria-hidden="true">
+        <div class="bau__code">
+          <div class="bau__leiste"><i></i><i></i><i></i><span>index.html</span></div>
+          <pre><code id="code"></code><span class="cursor"></span></pre>
+        </div>
+        <div class="bau__seite">
+          <div class="bs bs--nav"><b>DEIN LOGO</b><span></span><span></span><span></span></div>
+          <div class="bs bs--h1">Dein Business. Online.</div>
+          <div class="bs bs--p">Mehr Anfragen, weniger Aufwand.</div>
+          <div class="bs bs--btn">Jetzt anfragen</div>
+          <div class="bs bs--form"><span></span><span></span><span class="kurz"></span></div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- ══════════ SIGNATURE SHOWCASE (Apple-Style) ══════════ -->
-    <section class="sc" id="showcase" aria-label="Was wir bauen">
-
-      <!-- ─── AKT 1 · WEB & TECH ─── -->
-      <div class="sc-act sc-act--web">
-        <div class="sc-act__stage">
-          <div class="sc-act__inner">
-            <div class="sc-act__copy">
-              <div class="sc-act__index">01 — Web &amp; Tech</div>
-              <h2 class="sc-act__title">Websites, die <em>laden, bevor man blinzelt</em>.</h2>
-              <p class="sc-act__lead">
-                Schnelle, saubere Builds mit Premium-Look. Responsive, SEO-ready
-                und gebaut für Wachstum – kein Baukasten-Gefühl.
-              </p>
-              <ul class="sc-act__features">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Ladezeit unter 1 Sekunde</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Perfekt auf jedem Gerät</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> SEO &amp; Conversion eingebaut</li>
-              </ul>
-              <a href="/services/" class="btn btn--primary" data-magnetic>Web-Projekte ansehen</a>
-            </div>
-
-            <div class="sc-act__visual">
-              <span class="sc-tag sc-tag--1">⚡ <b>0.8s</b> Ladezeit</span>
-              <span class="sc-tag sc-tag--2">100/100 <b>Speed</b></span>
-              <span class="sc-tag sc-tag--3">SEO <b>ready</b></span>
-              <div class="sc-laptop-wrap">
-                <div class="sc-laptop">
-                  <div class="sc-laptop__lid">
-                    <div class="sc-laptop__screen">
-                      <div class="sc-ui">
-                        <div class="sc-ui__bar">
-                          <span class="sc-ui__dot"></span><span class="sc-ui__dot"></span><span class="sc-ui__dot"></span>
-                          <span class="sc-ui__url">smyagency.de</span>
-                        </div>
-                        <div class="sc-ui__body">
-                          <span class="sc-ui__pill"></span>
-                          <div class="sc-ui__h"></div>
-                          <div class="sc-ui__h sc-ui__h--2"></div>
-                          <span class="sc-ui__btn">Projekt anfragen</span>
-                          <div class="sc-ui__cards">
-                            <div class="sc-ui__card"></div>
-                            <div class="sc-ui__card"></div>
-                            <div class="sc-ui__card"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="sc-laptop__base"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <!-- Akt 2: Design – Brand-Kit-Karten fächern beim Scrollen auf -->
+  <section class="akt akt--rechts" aria-labelledby="akt2" data-szene="1" data-pos="-3.6,0,0.75,0.35">
+    <div class="wrap akt__grid akt__grid--umgekehrt">
+      <div class="faecher" id="faecher" aria-hidden="true">
+        <div class="kk kk--typo"><div class="kk__aa">Aa</div><div class="kk__fuss"><div class="kk__name">Inter<br>Light</div><div class="kk__strich"></div><div class="kk__hex">Typografie</div></div></div>
+        <div class="kk kk--schwarz"><div class="kk__fuss"><div class="kk__name">Raven<br>Black</div><div class="kk__strich"></div><div class="kk__hex">#000000</div></div></div>
+        <div class="kk kk--tief"><div class="kk__fuss"><div class="kk__name">Deep<br>Red</div><div class="kk__strich"></div><div class="kk__hex">#831613</div></div></div>
+        <div class="kk kk--rot"><div class="kk__fuss"><div class="kk__name">Signal<br>Red</div><div class="kk__strich"></div><div class="kk__hex">#E3120B</div></div></div>
+        <div class="kk kk--logo">
+          <svg viewBox="0 0 120 120" width="96" height="96"><path d="M78 18c-18 6-32 22-38 42l-12 4 10 10-4 8 8 8 8-4 10 10 4-12c20-6 36-20 42-38l2-30-30 2z" fill="none" stroke="#E3120B" stroke-width="5" stroke-linejoin="round"/><circle cx="76" cy="44" r="8" fill="none" stroke="#E3120B" stroke-width="5"/><path d="M30 90l-12 12M40 98l-8 8M22 80l-8 8" stroke="#E3120B" stroke-width="5" stroke-linecap="round"/></svg>
+          <div class="kk__fuss"><div class="kk__name">Dein<br>Logo</div><div class="kk__strich"></div><div class="kk__hex">Brand Identity</div></div>
         </div>
       </div>
+      <div class="akt__inhalt">
+        <p class="akt__nr">Design</p>
+        <h2 class="display" id="akt2">Eine Marke, die hängen bleibt.</h2>
+        <p class="lead">Logo, Farbwelt, Visuals – wir gestalten ein Erscheinungsbild, das premium wirkt und überall konsistent funktioniert.</p>
+        <ul>
+          <li>Logo &amp; Brand Identity</li>
+          <li>Visuals &amp; Brandfotos</li>
+          <li>Print &amp; Social aus einem Guss</li>
+        </ul>
+        <a class="btn" href="/services/">Design entdecken</a>
+      </div>
+    </div>
+  </section>
 
-      <!-- ─── AKT 2 · DESIGN ─── -->
-      <div class="sc-act sc-act--design sc-act--reverse">
-        <div class="sc-act__stage">
-          <div class="sc-act__inner">
-            <div class="sc-act__copy">
-              <div class="sc-act__index">02 — Design</div>
-              <h2 class="sc-act__title">Eine Marke, die <em>hängen bleibt</em>.</h2>
-              <p class="sc-act__lead">
-                Logo, Farbwelt, Visuals – wir gestalten ein Erscheinungsbild,
-                das premium wirkt und überall konsistent funktioniert.
-              </p>
-              <ul class="sc-act__features">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Logo &amp; Brand Identity</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> KI-Visuals &amp; Brandfotos</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Print &amp; Social aus einem Guss</li>
-              </ul>
-              <a href="/services/" class="btn btn--primary" data-magnetic>Design entdecken</a>
-            </div>
-
-            <div class="sc-act__visual">
-              <span class="sc-tag sc-tag--1">🎨 <b>Brand</b> Kit</span>
-              <span class="sc-tag sc-tag--2">Logo · Print · <b>Web</b></span>
-              <div class="sc-canvas">
-                <div class="sc-canvas__bar">
-                  <i></i><i></i><i></i>
-                  <span class="sc-canvas__title">SMY · artboard</span>
-                </div>
-                <div class="sc-canvas__grid"></div>
-                <div class="sc-canvas__art">
-                  <svg viewBox="0 0 400 280" preserveAspectRatio="xMidYMid meet">
-                    <!-- Rahmen, der sich zeichnet -->
-                    <rect class="sc-draw sc-draw--soft" x="40" y="36" width="200" height="120" rx="14"/>
-                    <!-- S-Schwung (Marke) -->
-                    <path class="sc-draw" d="M250 70 C300 50 320 110 270 120 C230 128 250 175 305 158"/>
-                    <!-- Kreis -->
-                    <circle class="sc-draw" cx="320" cy="210" r="34"/>
-                    <!-- Form-Bausteine, die einploppen -->
-                    <rect class="sc-shape" x="60" y="60" width="80" height="14" rx="7" fill="#E10600"/>
-                    <rect class="sc-shape" x="60" y="86" width="150" height="9" rx="4.5" fill="rgba(255,255,255,.28)"/>
-                    <rect class="sc-shape" x="60" y="102" width="120" height="9" rx="4.5" fill="rgba(255,255,255,.18)"/>
-                    <rect class="sc-shape" x="60" y="124" width="62" height="20" rx="10" fill="#E10600"/>
-                    <polygon class="sc-shape" points="150,200 185,255 115,255" fill="rgba(255,176,32,.85)"/>
-                  </svg>
-                </div>
-                <div class="sc-swatches">
-                  <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="sc-cursor">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 2l16 8-6.5 1.8L10 20 4 2z"/></svg>
-                </div>
-              </div>
-            </div>
+  <!-- Akt 3: Social Media – ein Handy mit laufendem Feed -->
+  <section class="akt" aria-labelledby="akt3" data-szene="2" data-pos="3.3,0,0.85,0.4">
+    <div class="wrap akt__grid">
+      <div class="akt__inhalt">
+        <p class="akt__nr">Social Media</p>
+        <h2 class="display" id="akt3">Content, der den Scroll stoppt.</h2>
+        <p class="lead">Reels, Ads &amp; Creatives, die Reichweite in Umsatz verwandeln – geplant, produziert und ausgespielt aus einer Hand.</p>
+        <ul>
+          <li>Reels &amp; Short-Form Content</li>
+          <li>Performance-Ads, die konvertieren</li>
+          <li>Strategie &amp; Content-Planung</li>
+        </ul>
+        <a class="btn" href="/services/">Social Media ansehen</a>
+      </div>
+      <div class="handy" aria-hidden="true">
+        <div class="handy__insel"></div>
+        <div class="handy__bild">
+          <div class="feed">
+            <div class="post p1"><div class="post__kopf"><i></i><span></span></div><div class="post__flaeche"><b>Neu bei uns</b></div><div class="post__fuss"><span class="herz">♥</span><span></span></div></div>
+            <div class="post p2"><div class="post__kopf"><i></i><span></span></div><div class="post__flaeche"><b>Vorher / Nachher</b></div><div class="post__fuss"><span class="herz">♥</span><span></span></div></div>
+            <div class="post p3"><div class="post__kopf"><i></i><span></span></div><div class="post__flaeche"><b>3 Tipps für …</b></div><div class="post__fuss"><span class="herz">♥</span><span></span></div></div>
+            <div class="post p1"><div class="post__kopf"><i></i><span></span></div><div class="post__flaeche"><b>Neu bei uns</b></div><div class="post__fuss"><span class="herz">♥</span><span></span></div></div>
+            <div class="post p2"><div class="post__kopf"><i></i><span></span></div><div class="post__flaeche"><b>Vorher / Nachher</b></div><div class="post__fuss"><span class="herz">♥</span><span></span></div></div>
+            <div class="post p3"><div class="post__kopf"><i></i><span></span></div><div class="post__flaeche"><b>3 Tipps für …</b></div><div class="post__fuss"><span class="herz">♥</span><span></span></div></div>
           </div>
+          <div class="herzen"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- ─── AKT 3 · SOCIAL MEDIA ─── -->
-      <div class="sc-act sc-act--social">
-        <div class="sc-act__stage">
-          <div class="sc-act__inner">
-            <div class="sc-act__copy">
-              <div class="sc-act__index">03 — Social Media</div>
-              <h2 class="sc-act__title">Content, der <em>scrollt-stoppt</em>.</h2>
-              <p class="sc-act__lead">
-                Reels, Ads &amp; Creatives, die Reichweite in Umsatz verwandeln –
-                inkl. KI-Videos von SMY STUDIO, in 48–72h.
-              </p>
-              <ul class="sc-act__features">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Reels &amp; Short-Form Content</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Performance-Ads, die konvertieren</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> KI-Videos ohne Drehtag</li>
-              </ul>
-              <a href="https://smystudio.eu" target="_blank" rel="noopener" class="btn btn--primary" data-magnetic>Zu SMY STUDIO →</a>
-            </div>
-
-            <div class="sc-act__visual">
-              <span class="sc-tag sc-tag--1">📈 <b>+340%</b> Reichweite</span>
-              <span class="sc-tag sc-tag--2">⚡ <b>48h</b> Lieferung</span>
-              <div class="sc-phone">
-                <div class="sc-phone__island"></div>
-                <div class="sc-phone__screen">
-                  <video autoplay muted loop playsinline preload="auto">
-                    <source src="assets/examples/16268877-hd_1080_1920_25fps.mp4" type="video/mp4">
-                  </video>
-                  <div class="sc-phone__rail">
-                    <button aria-label="Gefällt mir">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.2C.4 8.6 1.9 5 5.3 5c2 0 3.3 1.1 4.2 2.4C10.4 6.1 11.7 5 13.7 5c3.4 0 4.9 3.6 3.3 6.8C19.5 16.4 12 21 12 21z"/></svg>
-                      12,4k
-                    </button>
-                    <button aria-label="Kommentare">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/></svg>
-                      842
-                    </button>
-                    <button aria-label="Teilen">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                      Share
-                    </button>
-                  </div>
-                  <div class="sc-phone__cap">
-                    <b>@smyagency</b>
-                    <span>Dein Content. Unsere Reichweite. 🚀</span>
-                  </div>
-                  <div class="sc-burst" aria-hidden="true"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <section class="zahlen" aria-label="SMY Agency in Zahlen" data-szene="0" data-pos="0,0,1.75,0.28">
+    <div class="wrap">
+      <div class="riffel">
+        <div class="riffel__glut" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="riffel__glas" aria-hidden="true"></div>
+      <div class="zahlen__grid">
+        <div class="zahl"><div class="zahl__wert"><span data-count="120" data-suffix="+">120+</span></div><div class="zahl__text">Projekte umgesetzt</div></div>
+        <div class="zahl"><div class="zahl__wert"><span data-count="7">7</span></div><div class="zahl__text">Tage bis zum Entwurf</div></div>
+        <div class="zahl"><div class="zahl__wert"><span data-count="35" data-suffix="%">35%</span></div><div class="zahl__text">Conversion-Boost</div></div>
       </div>
-
-    </section>
-
-    <!-- ══════════ STATS ══════════ -->
-    <section class="ds-section" id="stats">
-      <div class="ds-container">
-        <div class="ds-stats reveal">
-          <div class="ds-stat">
-            <div class="ds-stat__num"><span data-count="120" data-suffix="+">120+</span></div>
-            <div class="ds-stat__label">Projekte umgesetzt</div>
-          </div>
-          <div class="ds-stat">
-            <div class="ds-stat__num"><span data-count="7">7</span></div>
-            <div class="ds-stat__label">Tage bis zum Entwurf</div>
-          </div>
-          <div class="ds-stat">
-            <div class="ds-stat__num"><span class="ds-accent" data-count="35" data-suffix="%">35%</span></div>
-            <div class="ds-stat__label">Conversion-Boost</div>
-          </div>
-        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ══════════ SERVICES ══════════ -->
-    <section class="ds-section" id="services" style="background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);">
-      <div class="ds-container">
-        <span class="ds-eyebrow reveal">Was wir liefern</span>
-        <h2 class="ds-section-title reveal" data-delay="1">
-          Eine Brand, die <span class="ds-accent">hängen bleibt</span> – on- und offline.
-        </h2>
+  <!-- Services als große, aufklappbare Zeilen -->
+  <section class="services" id="services" aria-labelledby="services-titel" data-szene="1" data-pos="3.8,0.4,0.8,0.3">
+    <div class="wrap">
+      <h2 class="display" id="services-titel">Eine Brand, die hängen bleibt – on- und offline.</h2>
+      <ul class="leistungen" id="leistungen">
+        <li class="l offen"><button class="l__kopf" aria-expanded="true"><span class="l__name">Designen</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Brand, der hängen bleibt. Web &amp; Visuals, die nicht „okay“ sind – sondern premium wirken.</p></div></li>
+        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Entwickeln</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Builds, die schnell sind. Saubere Technik, responsive – und ready für Wachstum.</p></div></li>
+        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Drucken</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Offline sichtbar. Flyer, Schilder, Branding – alles im selben Look &amp; Feel.</p></div></li>
+        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Optimieren</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Mehr Leads, weniger Bounce. Conversion-Flow, Speed, SEO-Basics – ohne Rumgefrickel.</p></div></li>
+        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Vermarkten</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Reichweite wird Umsatz. Ads, Content, Funnels – passend zur Brand, nicht random.</p></div></li>
+        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">B2B Leads</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Verifizierte Kontaktdaten für Vertrieb &amp; Akquise. Branchenspezifisch, regional filterbar – als CSV.</p></div></li>
+        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">B2B Vertrieb</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Kompletter Neukundenvertrieb – von der Zielgruppenanalyse bis zur Terminvereinbarung. Du lehnst dich zurück, wir bringen die Anfragen.</p><ul class="chips"><li>Galabau</li><li>Reinigung</li><li>Handwerk</li><li>Umzug</li><li>Facility</li></ul></div></li>
+      </ul>
+    </div>
+  </section>
 
-        <div class="ds-grid" style="margin-top: var(--space-xl);">
-          <article class="ds-card reveal" data-delay="1">
-            <div class="ds-card__icon">→</div>
-            <h3>Designen</h3>
-            <p>Brand, der hängen bleibt. Web &amp; Visuals, die nicht „okay" sind – sondern premium wirken.</p>
-          </article>
-
-          <article class="ds-card reveal" data-delay="2">
-            <div class="ds-card__icon">⚡</div>
-            <h3>Entwickeln</h3>
-            <p>Builds, die schnell sind. Saubere Technik, responsive – und ready für Wachstum.</p>
-          </article>
-
-          <article class="ds-card reveal" data-delay="3">
-            <div class="ds-card__icon">✦</div>
-            <h3>Drucken</h3>
-            <p>Offline sichtbar. Flyer, Schilder, Branding – alles im selben Look &amp; Feel.</p>
-          </article>
-
-          <article class="ds-card reveal" data-delay="1">
-            <div class="ds-card__icon">↗</div>
-            <h3>Optimieren</h3>
-            <p>Mehr Leads, weniger Bounce. Conversion-Flow, Speed, SEO-Basics – ohne Rumgefrickel.</p>
-          </article>
-
-          <article class="ds-card reveal" data-delay="2">
-            <div class="ds-card__icon">◉</div>
-            <h3>Vermarkten</h3>
-            <p>Reichweite → Umsatz. Ads, Content, Funnels – passend zur Brand, nicht random.</p>
-          </article>
-
-          <article class="ds-card reveal" data-delay="3">
-            <div class="ds-card__icon">🗂️</div>
-            <h3>B2B Leads</h3>
-            <p>Verifizierte Kontaktdaten für Vertrieb &amp; Akquise. Branchenspezifisch, regional filterbar – als CSV.</p>
-          </article>
-
-          <article class="ds-card reveal" data-delay="1">
-            <div class="ds-card__icon">📊</div>
-            <h3>B2B Vertrieb</h3>
-            <p>Kompletter Neukundenvertrieb – von der Zielgruppenanalyse bis zur Terminvereinbarung. Du lehnst dich zurück, wir bringen die Anfragen.</p>
-            <div style="margin-top: var(--space-md); display:flex; flex-wrap:wrap; gap:var(--space-2xs);">
-              <span class="ds-chip">🌿 Galabau</span>
-              <span class="ds-chip">🧹 Reinigung</span>
-              <span class="ds-chip">🏗️ Handwerk</span>
-              <span class="ds-chip">🚛 Umzug</span>
-              <span class="ds-chip">🔧 Facility</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════ SMY STUDIO ══════════ -->
-    <section class="ds-section" id="studio">
-      <div class="ds-container">
-        <span class="ds-eyebrow reveal">Unser KI-Visual Label</span>
-        <div class="ds-studio__inner">
-          <div class="reveal" data-delay="1">
-            <h2 class="ds-studio__title">Neu: <span class="ds-accent">SMY STUDIO</span></h2>
-            <p class="ds-lead">
-              Premium KI-Brandfotos &amp; KI-Videos für Personal Brands, Beauty Clinics &amp;
-              E-Commerce – ohne Fotoshooting, in 48–72h geliefert.
-            </p>
-            <ul class="ds-studio__list">
-              <li>KI-Brandfotos in mehreren Looks &amp; Settings</li>
-              <li>KI-Brand Videos &amp; Reels für Instagram &amp; TikTok</li>
-              <li>Ads Creatives &amp; Performance Visuals</li>
-              <li>Lieferung in 48–72h – kein Drehtag, keine Kamera</li>
-            </ul>
-            <a href="https://smystudio.eu" target="_blank" rel="noopener" class="btn btn--primary" data-magnetic>Zu SMY STUDIO →</a>
-          </div>
-          <div class="ds-studio__card reveal" data-delay="2">
-            <div class="ds-studio__logo">SMY <em>STUDIO</em></div>
-            <p>KI-Brandfotos &amp; KI-Videos</p>
-            <div class="ds-studio__tags">
-              <span class="ds-chip">Personal Brand</span>
-              <span class="ds-chip">Beauty</span>
-              <span class="ds-chip">E-Commerce</span>
-              <span class="ds-chip">Ads</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════ REVIEWS ══════════ -->
     <!-- REVIEWS:START -->
-    <section class="ds-section" id="reviews" style="background: var(--bg-elevated); border-block: 1px solid var(--border-subtle);">
-      <div class="ds-container">
-        <span class="ds-eyebrow reveal">Was unsere Kunden sagen</span>
-        <h2 class="ds-section-title reveal" data-delay="1">Bewertungen, die <span class="ds-accent">für sich sprechen</span>.</h2>
+    <section class="bewertung" id="reviews" aria-labelledby="bew-titel" data-szene="3" data-pos="0,0,1.5,0.22">
+      <div class="wrap">
+        <p class="akt__nr" id="bew-titel">Was unsere Kunden sagen</p>
+        <div class="spot" id="spot" hidden>
+          <div class="sterne" id="spot-sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
+          <blockquote class="spot__zitat" id="spot-zitat" aria-live="polite"></blockquote>
+          <div class="spot__namen" role="tablist" aria-label="Bewertung auswählen" id="spot-namen"></div>
+        </div>
         <div class="ds-reviews-grid">
           <article class="ds-review reveal">
             <div class="ds-review__stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
@@ -474,68 +686,44 @@
             </div>
           </article>
         </div>
-        <div class="ds-reviews__summary reveal">
+        <div class="ds-reviews__summary">
           
-          <a href="https://g.page/r/Cb-CsgZPf7TWEAE/review" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-magnetic>Bewertung schreiben</a>
+          <a href="https://g.page/r/Cb-CsgZPf7TWEAE/review" target="_blank" rel="noopener noreferrer" class="textlink">Bewertung schreiben</a>
         </div>
       </div>
     </section>
     <!-- REVIEWS:END -->
 
-    <!-- ══════════ PARTNER (COPA) ══════════ -->
-    <section class="ds-section" id="partner">
-      <div class="ds-container" style="text-align:center;">
-        <span class="ds-eyebrow reveal" style="justify-content:center;">Technologiepartner</span>
-        <h2 class="ds-section-title reveal" data-delay="1" style="margin-inline:auto;">
-          Unser Partner: <span class="ds-accent">COPA</span> 🇩🇪🤝🇦🇲
-        </h2>
-        <p class="ds-lead reveal" data-delay="1" style="margin-inline:auto;">
-          Enterprise-Technologie &amp; KI-Systeme kombiniert mit lokaler Umsetzung durch SMY Agency.
-        </p>
-
-        <div class="ds-partner-grid">
-          <div class="ds-partner-card reveal" data-delay="1" style="text-align:left;">
-            <h4>Strategisch &amp; Kreativ</h4>
-            <ul>
-              <li>Strategie &amp; Kampagnen</li>
-              <li>Bewegtbild &amp; Cloud-Editing</li>
-              <li>Audioproduktion &amp; Sounddesign</li>
-              <li>Reporting &amp; Visualisierung</li>
-            </ul>
-          </div>
-          <div class="ds-partner-card reveal" data-delay="2" style="text-align:left;">
-            <h4>KI &amp; Daten</h4>
-            <ul>
-              <li>Generative AI &amp; Chatbots</li>
-              <li>Dashboards &amp; Predictive Models</li>
-              <li>Knowledge Graphs</li>
-              <li>Sentiment- &amp; Topic-Analyse</li>
-            </ul>
-          </div>
-        </div>
-
-        <a href="https://www.copa.team" target="_blank" rel="noopener" class="ds-link reveal">Mehr über COPA →</a>
+  <section class="copa" id="partner" aria-labelledby="copa-titel" data-szene="1">
+    <div class="wrap">
+      <div class="copa__kopf">
+        <p class="akt__nr">Technologiepartner</p>
+        <h2 class="display" id="copa-titel">Unser Partner: COPA 🇩🇪🤝🇦🇲</h2>
+        <p class="lead" style="margin-top:22px">Enterprise-Technologie &amp; KI-Systeme kombiniert mit lokaler Umsetzung durch SMY Agency.</p>
       </div>
-    </section>
-
-    <!-- ══════════ CTA ══════════ -->
-    <section class="ds-section" id="kontakt">
-      <div class="ds-container">
-        <div class="ds-cta reveal">
-          <span class="ds-eyebrow" style="justify-content:center;">Kostenlose Erstberatung</span>
-          <h2>Bereit für dein nächstes Projekt?</h2>
-          <p>Erzähl uns von deiner Idee – wir entwickeln gemeinsam die perfekte Lösung.</p>
-          <a href="/services/#kontakt" class="btn btn--primary btn--large" data-magnetic>🚀 Projekt anfragen</a>
-        </div>
+      <div class="copa__grid">
+        <div class="copa__karte"><h3>Strategisch &amp; Kreativ</h3><ul><li>Strategie &amp; Kampagnen</li><li>Bewegtbild &amp; Cloud-Editing</li><li>Audioproduktion &amp; Sounddesign</li><li>Reporting &amp; Visualisierung</li></ul></div>
+        <div class="copa__karte"><h3>KI &amp; Daten</h3><ul><li>Generative AI &amp; Chatbots</li><li>Dashboards &amp; Predictive Models</li><li>Knowledge Graphs</li><li>Sentiment- &amp; Topic-Analyse</li></ul></div>
       </div>
-    </section>
-  </main>
+      <a class="textlink" href="https://www.copa.team" target="_blank" rel="noopener">Mehr über COPA</a>
+    </div>
+  </section>
 
-  <!-- ══════════ FOOTER ══════════ -->
-  <footer class="ds-footer">
-    <div class="ds-container ds-footer__inner">
-      <a href="/" class="ds-logo">SMY <em>Agency</em></a>
-      <ul class="ds-footer__links">
+  <section class="abschluss" id="kontakt" aria-labelledby="kontakt-titel" data-szene="4">
+    <div class="wrap">
+      <h2 class="display" id="kontakt-titel">Bereit für dein nächstes Projekt?</h2>
+      <p class="lead">Erzähl uns von deiner Idee – wir entwickeln gemeinsam die perfekte Lösung.</p>
+      <a class="btn" href="/services/#kontakt">Projekt anfragen</a>
+      <p class="abschluss__klein">Kostenlose Erstberatung</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap fuss">
+    <span>© 2026 SMY Agency</span>
+    <nav aria-label="Footer">
+      <ul>
         <li><a href="/services/">Services</a></li>
         <li><a href="/projects/">Projekte</a></li>
         <li><a href="/ueber-uns/">Über uns</a></li>
@@ -543,12 +731,13 @@
         <li><a href="/datenschutz/">Datenschutz</a></li>
         <li><a href="/bewerbung-vertrieb/">Jobs</a></li>
       </ul>
-      <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
-    </div>
-  </footer>
+    </nav>
+  </div>
+</footer>
+</div>
 
-  <script src="design-demo.js"></script>
-  <script src="showcase.js"></script>
-  <script src="brand-section.js"></script>
+<script src="/assets/three.min.js"></script>
+<script src="/smy-3d.js"></script>
+<script src="/startseite.js"></script>
 </body>
 </html>
