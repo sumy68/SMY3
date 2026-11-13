@@ -411,6 +411,18 @@ input:focus, select:focus, textarea:focus { border-color: var(--smy-red-bright);
 .ds-value h3 { font-weight: 400; }
 
 .ds-quickstats { border-top: 0 !important; padding-top: 0 !important; margin-top: 34px; }
-.story__leistungen { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.story__leistungen li { border: 1px solid #4a4a4a; border-radius: 999px; padding: 7px 14px; font-size: .95rem; color: #fff; }
-.story__kapitel.ist-da .story__leistungen li { border-color: rgba(227, 18, 11, .55); }
+.story__leistungen {
+  list-style: none; margin: 22px 0 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px;
+  border-top: 1px solid #2c2c2c;
+}
+.story__leistungen li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 0; border-bottom: 1px solid #2c2c2c;
+  font-size: 1.05rem; color: #fff;
+}
+.story__leistungen li::before {
+  content: ""; flex: none; width: 14px; height: 2px; background: #555; transition: background .5s, width .5s;
+}
+.story__kapitel.ist-da .story__leistungen li::before { background: var(--smy-red-bright); width: 18px; }
+@media (max-width: 560px) { .story__leistungen { grid-template-columns: 1fr; } }
