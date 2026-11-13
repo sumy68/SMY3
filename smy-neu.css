@@ -426,3 +426,5 @@ input:focus, select:focus, textarea:focus { border-color: var(--smy-red-bright);
 }
 .story__kapitel.ist-da .story__leistungen li::before { background: var(--smy-red-bright); width: 18px; }
 @media (max-width: 560px) { .story__leistungen { grid-template-columns: 1fr; } }
+.ds-about-foto { margin: 0; }
+.ds-about-name { margin-top: 16px; font-size: 1rem; color: var(--text-muted); }
