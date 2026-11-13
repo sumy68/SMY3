@@ -180,3 +180,111 @@ input:focus, select:focus, textarea:focus { border-color: var(--smy-red-bright);
 /* Lange Wörter (z. B. Datenschutzerklärung) sauber trennen */
 .ds-page-hero__title { max-width: 16ch; -webkit-hyphens: auto; hyphens: auto; }
 .ds-review__stars { color: var(--smy-red-bright); }
+
+/* ===================== PROJEKTE ===================== */
+/* Featured: große Case-Panels, rechts der Leistungs-Stapel */
+.ds-featured-grid { grid-template-columns: 1fr; gap: 28px; }
+.ds-case {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+  padding: clamp(32px, 5vw, 64px);
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+}
+.ds-case--solo { grid-template-columns: 1fr; }
+.ds-case::before {
+  content: ""; position: absolute; right: -10%; top: -30%; width: 60%; height: 160%;
+  background: radial-gradient(closest-side, rgba(227, 18, 11, .28), transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.ds-case > * { position: relative; z-index: 1; }
+.ds-case:hover { transform: none; }
+.ds-case .ds-featured__tag {
+  display: inline-block; background: none; border: 0; padding: 0;
+  color: var(--smy-red-bright); font-family: var(--font-body);
+  font-size: 1rem; font-weight: 600; letter-spacing: 0; text-transform: none; margin-bottom: 18px;
+}
+.ds-case h3 { font-size: clamp(2.4rem, 5vw, 4.6rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1; margin-bottom: 22px; }
+.ds-case p { font-size: 1.1rem; color: #D6D1CC; max-width: 52ch; margin-bottom: 0; }
+.ds-case .ds-featured__tags { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+.ds-case .ds-chip {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 22px; border-radius: 16px; font-size: 1.05rem; font-weight: 500;
+  background: rgba(0, 0, 0, .45); border: 1px solid #333; color: #fff;
+  transform: translateX(calc(min(var(--i, 0), 3) * 10px)); margin-right: 30px;
+  transition: background .3s, border-color .3s, transform .3s;
+}
+.ds-case .ds-chip::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--smy-red); box-shadow: 0 0 12px var(--smy-red); }
+.ds-case:hover .ds-chip { transform: translateX(0); border-color: #5a1410; }
+.ds-case .ds-chip:hover { background: rgba(227, 18, 11, .18); border-color: var(--smy-red); }
+@media (max-width: 900px) {
+  .ds-case { grid-template-columns: 1fr; }
+  .ds-case .ds-chip { transform: none; }
+}
+
+/* Alle Projekte: Filter + große Zeilen */
+.ds-pfilter { display: flex; flex-wrap: wrap; gap: 10px; margin: 40px 0 10px; }
+.ds-pfilter[hidden] { display: none; }
+.ds-pfilter__btn {
+  font: inherit; font-weight: 600; font-size: .98rem; cursor: pointer;
+  padding: 11px 18px; border-radius: 999px; border: 1px solid #444; background: transparent; color: #fff;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.ds-pfilter__btn span { color: var(--text-muted); margin-left: 4px; font-weight: 500; }
+.ds-pfilter__btn:hover { border-color: #fff; }
+.ds-pfilter__btn[aria-pressed="true"] { background: var(--smy-red); border-color: var(--smy-red); }
+.ds-pfilter__btn[aria-pressed="true"] span { color: rgba(255, 255, 255, .8); }
+.ds-pfilter__btn:focus-visible { outline: 3px solid var(--smy-red-bright); outline-offset: 3px; }
+
+.ds-plist { list-style: none; margin: 30px 0 0; padding: 0; border-top: 1px solid #333; }
+.ds-prow {
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, .8fr);
+  gap: 12px 40px; align-items: center;
+  padding: 26px 0; border-bottom: 1px solid #333;
+  animation: prowEin .45s ease both;
+}
+.ds-prow[hidden] { display: none; }
+.ds-prow::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(227, 18, 11, .2), transparent 70%);
+  transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+}
+.ds-prow:hover::before { transform: scaleX(1); }
+.ds-prow > * { position: relative; }
+.ds-prow__name {
+  font-size: clamp(1.6rem, 2.8vw, 2.5rem); font-weight: 300; letter-spacing: -0.035em; line-height: 1.05;
+  color: #fff; margin: 0; transition: transform .35s, color .35s;
+}
+.ds-prow:hover .ds-prow__name { transform: translateX(14px); color: var(--smy-red-bright); }
+.ds-prow__name a { color: inherit; text-decoration: none; }
+.ds-prow__name a::after { content: " ↗"; font-size: .6em; vertical-align: .3em; }
+.ds-prow__info p { margin: 0; color: #D6D1CC; font-size: 1.02rem; }
+.ds-prow__meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; text-align: right; }
+.ds-prow__bereich { font-size: .9rem; font-weight: 600; color: var(--smy-red-bright); }
+.ds-prow__branche { font-size: .9rem; color: var(--text-muted); }
+@keyframes prowEin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (max-width: 900px) {
+  .ds-prow { grid-template-columns: 1fr; gap: 8px; }
+  .ds-prow__meta { flex-direction: row; align-items: center; text-align: left; gap: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .ds-prow { animation: none; } }
+
+/* Vertriebspartner: groß und links ausgerichtet */
+.ds-vp { background: transparent; border: 0; }
+.ds-vp__head { text-align: left; margin-inline: 0; }
+.ds-vp__head .ds-eyebrow { justify-content: flex-start; }
+.ds-vp__head .ds-section-title, .ds-vp__head .ds-lead { margin-inline: 0; }
+.ds-vp__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: none; margin-top: 48px; }
+.ds-vp__link { padding: 22px; border: 1px solid var(--border-subtle); border-radius: 26px; background: rgba(12, 10, 10, .62); transition: border-color .3s; }
+.ds-vp__link:hover { border-color: var(--smy-red); }
+.ds-vp__mark.has-logo { height: 10rem; border-radius: 18px; }
+.ds-vp__logo { height: 5rem; }
+.ds-vp__name { font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 300; letter-spacing: -0.03em; color: #fff; margin-top: 20px; text-align: left; }
+.ds-vp__service { text-align: left; color: #D6D1CC; font-size: 1rem; }
+@media (max-width: 700px) { .ds-vp__grid { grid-template-columns: 1fr; } }
+#refFeatured.ds-featured-grid { grid-template-columns: 1fr; }
+.ds-nav__toggle span, .ds-burger span, .ds-nav__toggle::before, .ds-nav__toggle::after { background: #fff; }

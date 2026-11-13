@@ -255,16 +255,18 @@ function featuredCard(entry, index, logoFor) {
     `<p>${esc(entry.kurzbeschreibung || entry.leistung)}</p>`,
     entry.ergebnis ? `<p class="ds-ref-result">${esc(entry.ergebnis)}</p>` : '',
     entry.testimonial ? `<blockquote class="ds-ref-quote">${esc(entry.testimonial)}</blockquote>` : '',
-    entry.tags && entry.tags.length
-      ? `<div class="ds-featured__tags">${entry.tags.map((t) => `<span class="ds-chip">${esc(t)}</span>`).join('')}</div>`
-      : '',
   ];
-  return `<article class="ds-featured reveal"${revealAttrs(index)}>${parts.join('')}</article>`;
+  // Rechts: die Leistungen als leuchtender Stapel (fehlen Tags, bleibt die Karte einspaltig)
+  const stack = entry.tags && entry.tags.length
+    ? `<div class="ds-featured__tags">${entry.tags.map((t, i) => `<span class="ds-chip" style="--i:${i}">${esc(t)}</span>`).join('')}</div>`
+    : '';
+  return `<article class="ds-featured ds-case${stack ? '' : ' ds-case--solo'} reveal"${revealAttrs(index)}><div class="ds-case__text">${parts.join('')}</div>${stack}</article>`;
 }
 
-function listItem(entry, logoFor) {
+function listItem(entry, logoFor, title) {
   const result = entry.ergebnis ? `<p class="ds-ref-result">${esc(entry.ergebnis)}</p>` : '';
-  return `<div class="ds-projitem">${clientLogo(entry, logoFor)}<h4>${nameHtml(entry)}</h4><p>${esc(entry.leistung)}</p>${result}</div>`;
+  const branche = entry.branche ? `<span class="ds-prow__branche">${esc(entry.branche)}</span>` : '';
+  return `<li class="ds-prow" data-bereich="${esc(entry.bereich)}">${clientLogo(entry, logoFor)}<h3 class="ds-prow__name">${nameHtml(entry)}</h3><div class="ds-prow__info"><p>${esc(entry.leistung)}</p>${result}</div><div class="ds-prow__meta"><span class="ds-prow__bereich">${esc(title)}</span>${branche}</div></li>`;
 }
 
 function partnerCard(entry, index, logoFor) {
@@ -293,19 +295,25 @@ function featuredSection(entries, logoFor) {
 
 function listSection(entries, logoFor) {
   const columns = COLUMNS
-    .map((c) => ({ title: c.title, items: entries.filter((e) => e.bereich === c.bereich) }))
+    .map((c) => ({ bereich: c.bereich, title: c.title, items: entries.filter((e) => e.bereich === c.bereich) }))
     .filter((c) => c.items.length);
   if (!columns.length) return '';
-  const html = columns.map((c, i) => `<div class="ds-projcat reveal"${revealAttrs(i)}>
-            <h3 class="ds-projcat__title">${esc(c.title)}</h3>
-            ${c.items.map((e) => listItem(e, logoFor)).join('\n            ')}
-          </div>`).join('\n          ');
-  return `<section class="ds-section">
+  const total = columns.reduce((n, c) => n + c.items.length, 0);
+  // Filter-Knöpfe erscheinen erst mit JavaScript (/projekte.js); ohne JS ist die ganze Liste sichtbar.
+  const filter = [`<button type="button" class="ds-pfilter__btn" data-filter="alle" aria-pressed="true">Alle <span>${total}</span></button>`]
+    .concat(columns.map((c) => `<button type="button" class="ds-pfilter__btn" data-filter="${esc(c.bereich)}" aria-pressed="false">${esc(c.title)} <span>${c.items.length}</span></button>`))
+    .join('\n          ');
+  const rows = columns.flatMap((c) => c.items.map((e) => listItem(e, logoFor, c.title))).join('\n          ');
+  return `<section class="ds-section" id="alle-projekte">
       <div class="ds-container">
         <span class="ds-eyebrow reveal">Alle Projekte</span>
-        <div class="ds-projcols">
-          ${html}
+        <h2 class="ds-section-title reveal" data-delay="1">Vom Hotel bis zum <span class="ds-accent">Handwerksbetrieb</span>.</h2>
+        <div class="ds-pfilter" role="group" aria-label="Projekte nach Bereich filtern" hidden>
+          ${filter}
         </div>
+        <ul class="ds-plist">
+          ${rows}
+        </ul>
       </div>
     </section>`;
 }
