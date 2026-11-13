@@ -35,3 +35,9 @@
   .gw-hero{padding-top:110px;text-align:left}
 }
 @media (prefers-reduced-motion:reduce){.gw-box,.gw-lid,.gw-glow,.gw-rays,.gw-shadow{animation:none}}
+.gw-guess{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 6px}
+.gw-guess span{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:9px 18px;font-size:15px;color:rgba(255,255,255,.8);transition:all .35s ease;animation:gwGuess 6s ease-in-out infinite}
+.gw-guess span:nth-child(2){animation-delay:1.5s}.gw-guess span:nth-child(3){animation-delay:3s}.gw-guess span:nth-child(4){animation-delay:4.5s}
+@keyframes gwGuess{0%,20%,100%{background:transparent;border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.8)}8%,14%{background:#E3120B;border-color:#E3120B;color:#fff}}
+.gw-guess.vid span{animation:none}
+.gw-guess.vid span.on{background:#E3120B;border-color:#E3120B;color:#fff;transform:scale(1.08)}
