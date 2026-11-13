@@ -398,3 +398,14 @@ input:focus, select:focus, textarea:focus { border-color: var(--smy-red-bright);
 .story__rakete { width: 40px; height: 40px; }
 .story__rakete svg { max-width: none; width: 40px; height: 40px; display: block; }
 @media (max-width: 760px) { .story__rakete, .story__rakete svg { width: 30px; height: 30px; } }
+
+/* Über uns: Werte ohne Rahmen, nur feine Trennlinien */
+.ds-values { gap: 0; border-top: 1px solid #2c2c2c; }
+.ds-value {
+  background: none !important; border: 0 !important; border-radius: 0 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important; box-shadow: none !important;
+  padding: 22px 0 !important; border-bottom: 1px solid #2c2c2c !important;
+}
+.ds-value:hover { transform: none; }
+.ds-value__num { background: none; border: 0; color: var(--smy-red-bright); font-family: var(--font-body); font-weight: 300; font-size: 1.6rem; width: auto; min-width: 2.2ch; height: auto; }
+.ds-value h3 { font-weight: 400; }
