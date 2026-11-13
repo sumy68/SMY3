@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gewinnspiel – 2 Jahre SMY | SMY Agency</title>
+  <meta name="description" content="Zu unserem 2. Geburtstag verlosen wir etwas für Selbstständige. Jetzt vorab anmelden." />
+  <link rel="canonical" href="https://smyagency.de/gewinnspiel/" />
+  <link rel="icon" href="/assets/logo-header.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SMY Agency" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:title" content="Gewinnspiel – 2 Jahre SMY" />
+  <meta property="og:description" content="Zu unserem 2. Geburtstag verlosen wir etwas für Selbstständige. Jetzt vorab anmelden." />
+  <meta property="og:url" content="https://smyagency.de/gewinnspiel/" />
+  <meta property="og:image" content="https://smyagency.de/images/hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://smyagency.de/images/hero.jpg" />
+
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+
+  <link rel="stylesheet" href="/design-system.css" />
+  <link rel="stylesheet" href="/design-demo.css" />
+  <link rel="stylesheet" href="/subpages.css" />
+  <link rel="stylesheet" href="/gewinnspiel/gewinnspiel.css" />
+  <link rel="stylesheet" href="/smy-neu.css" />
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+
+<body>
+  <div class="glut" aria-hidden="true"></div>
+  <canvas id="buehne" aria-hidden="true"></canvas>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="ds-header">
+    <div class="ds-container ds-nav">
+      <a href="/" class="ds-logo"><img src="/assets/logo-dunkel.png" alt="SMY Agency" /></a>
+      <nav>
+        <ul class="ds-nav__links">
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projekte</a></li>
+          <li><a href="/ueber-uns/">Über uns</a></li>
+          <li><a href="/services/#kontakt" class="btn btn--primary" data-magnetic>Projekt anfragen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+    <main>
+    <section class="gw-hero">
+      <div class="ds-container gw-hero__grid">
+        <div class="gw-hero__text">
+          <span class="ds-eyebrow ds-rise">2 Jahre SMY</span>
+          <h1 class="ds-page-hero__title ds-rise ds-rise-2">Wir verlosen etwas.<br><span class="gw-red">Für dich.</span></h1>
+          <p class="ds-lead ds-rise ds-rise-3">
+            Zu unserem 2. Geburtstag haben wir etwas für Selbstständige vorbereitet.
+            Was in der Box steckt, verraten wir in den nächsten Tagen.
+          </p>
+          <div class="ds-page-hero__actions ds-rise ds-rise-4">
+            <a class="btn btn--primary btn--large" href="#anmelden" data-magnetic>Jetzt vorab anmelden</a>
+          </div>
+        </div>
+        <div class="gw-stage ds-rise ds-rise-3" aria-hidden="true">
+          <div class="gw-glow"></div>
+          <div class="gw-rays"></div>
+          <div class="gw-box">
+            <div class="gw-lid"><div class="gw-bow"><i></i><i></i><b></b></div><div class="gw-ribbon-v"></div></div>
+            <div class="gw-body"><div class="gw-ribbon-v"></div><div class="gw-ribbon-h"></div><span class="gw-q">?</span></div>
+          </div>
+          <div class="gw-shadow"></div>
+          <div class="gw-sparks"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-section" id="anmelden">
+      <div class="ds-container">
+        <span class="ds-eyebrow reveal" style="justify-content:center; display:flex;">Vorab-Anmeldung</span>
+        <h2 class="ds-section-title reveal" data-delay="1" style="margin-inline:auto; text-align:center;">Sei von Anfang an dabei</h2>
+        <p class="ds-lead reveal" data-delay="1" style="margin-inline:auto; text-align:center;">
+          Trag dich jetzt ein – sobald das Gewinnspiel startet, bist du die erste Person, die davon erfährt.
+        </p>
+
+        <form class="ds-form reveal gw-form" data-delay="2" action="https://formspree.io/f/mrpqelaq" method="POST">
+          <input type="hidden" name="_subject" value="🎁 Gewinnspiel Vorab-Anmeldung" />
+          <input type="hidden" name="quelle" value="Gewinnspiel 2 Jahre SMY" />
+          <div class="ds-form__grid">
+            <label class="ds-field"><span>Vorname *</span><input name="vorname" type="text" autocomplete="given-name" required /></label>
+            <label class="ds-field"><span>Nachname *</span><input name="nachname" type="text" autocomplete="family-name" required /></label>
+          </div>
+          <div class="ds-form__grid">
+            <label class="ds-field"><span>Telefon *</span><input name="telefon" type="tel" autocomplete="tel" required /></label>
+            <label class="ds-field"><span>E-Mail (optional)</span><input name="email" type="email" autocomplete="email" /></label>
+          </div>
+          <label class="ds-field"><span>Branche *</span><input name="branche" type="text" placeholder="z. B. Friseur, Handwerk, Coaching" required /></label>
+          <div class="ds-form__grid">
+            <label class="ds-field"><span>Website (falls vorhanden)</span><input name="website" type="text" placeholder="www.deine-firma.de" /></label>
+            <label class="ds-field"><span>Instagram (optional)</span><input name="instagram" type="text" placeholder="@deinname" /></label>
+          </div>
+          <label class="gw-check"><input type="checkbox" name="einwilligung_gewinnspiel" value="ja" required />
+            <span>Ich bin selbstständig bzw. Unternehmer:in und möchte über den Start des Gewinnspiels informiert werden. Die <a href="/datenschutz/">Datenschutzerklärung</a> habe ich gelesen. *</span></label>
+          <label class="gw-check"><input type="checkbox" name="einwilligung_werbung" value="ja" />
+            <span>Optional: SMY Agency darf mich zusätzlich per E-Mail oder Telefon zu Angeboten kontaktieren. Jederzeit widerrufbar.</span></label>
+          <button class="btn btn--primary btn--large" type="submit" data-magnetic>Vorab anmelden →</button>
+          <p class="gw-note">Kostenlos &amp; unverbindlich. Die vollständigen Teilnahmebedingungen veröffentlichen wir zum Start des Gewinnspiels.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="ds-footer">
+    <div class="ds-container ds-footer__inner">
+      <a href="/" class="ds-logo">SMY <em>Agency</em></a>
+      <ul class="ds-footer__links">
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/projects/">Projekte</a></li>
+        <li><a href="/ueber-uns/">Über uns</a></li>
+        <li><a href="/services/#kontakt">Kontakt</a></li>
+        <li><a href="/bewerbung-vertrieb/">Jobs</a></li>
+      </ul>
+      <span style="font-family:var(--font-mono); font-size:var(--fs-xs);">© 2026 SMY Agency</span>
+    </div>
+  </footer>
+
+  <script src="/design-demo.js"></script>
+  <script src="/subpages.js"></script>
+  <script src="/gewinnspiel/gewinnspiel.js"></script>
+  <script src="/assets/three.min.js"></script>
+  <script src="/smy-3d.js"></script>
+</body>
+</html>
