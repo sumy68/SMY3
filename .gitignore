@@ -4,3 +4,7 @@
 gstack/
 .gstack/
 INTERN.md
+
+# ElevenLabs API-Key (nie committen)
+.env.local
+.env*
