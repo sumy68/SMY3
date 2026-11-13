@@ -51,7 +51,6 @@ window.SMY_REFERENCES = Object.freeze([
   },
 
   /* ─── Web & Development ─── */
-  { name: 'Palace Hotel', typ: 'kunde', bereich: 'web', branche: 'Hotellerie', leistung: 'Website & Google Profil Optimierung', featured: false, order: 110 },
   { name: 'Fastreinigung', typ: 'kunde', bereich: 'web', branche: 'Reinigung', leistung: 'Website-Relaunch mit Webflow', featured: false, order: 120 },
   { name: 'Cleorova Shapewear', typ: 'kunde', bereich: 'web', branche: 'E-Commerce', leistung: 'E-Commerce Website, KI-Produktfotos, Branding & Ads', featured: false, order: 130 },
   { name: 'MHM Garten- & Landschaftsbau', typ: 'kunde', bereich: 'web', branche: 'Garten- & Landschaftsbau', leistung: 'Webdesign & Printdesign', featured: false, order: 140 },
