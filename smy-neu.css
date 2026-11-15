@@ -428,3 +428,10 @@ input:focus, select:focus, textarea:focus { border-color: var(--smy-red-bright);
 @media (max-width: 560px) { .story__leistungen { grid-template-columns: 1fr; } }
 .ds-about-foto { margin: 0; }
 .ds-about-name { margin-top: 16px; font-size: 1rem; color: var(--text-muted); }
+
+/* Über uns: Technologiepartner COPA */
+.copa__grid { margin-top: 48px; }
+.copa .ds-card h3 { font-weight: 400; font-size: clamp(1.4rem, 2.2vw, 1.9rem); letter-spacing: -0.02em; color: #fff; }
+.copa__liste { grid-template-columns: 1fr; }
+.copa__liste li::before { background: var(--smy-red-bright); width: 18px; }
+.copa__link { margin-top: 40px; display: inline-flex; }
