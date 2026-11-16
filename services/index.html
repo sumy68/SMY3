@@ -263,6 +263,17 @@
             <label class="ds-field"><span>Ziel *</span><input name="goal" type="text" placeholder="z.B. mehr Leads / neue Website" required /></label>
             <label class="ds-field"><span>Budget (optional)</span><input name="budget" type="text" placeholder="z.B. 1.500€ / 3.000€ / 5k+" /></label>
           </div>
+          <label class="ds-field">
+            <span>Wie haben Sie von uns erfahren? *</span>
+            <select name="quelle" required>
+              <option value="" disabled selected>Bitte auswählen</option>
+              <option>Empfehlung</option>
+              <option>Website / Google-Suche</option>
+              <option>Social Media</option>
+              <option>KI (z. B. ChatGPT)</option>
+              <option>Sonstiges</option>
+            </select>
+          </label>
           <label class="ds-field"><span>Nachricht *</span><textarea name="message" rows="5" placeholder="Erzähl kurz was du brauchst…" required></textarea></label>
           <button class="btn btn--primary btn--large" type="submit" data-magnetic>Absenden →</button>
         </form>

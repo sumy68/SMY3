@@ -79,3 +79,21 @@ test('leitfaden.html hat Pflichtfeld Name und lädt das Skript', () => {
   assert.ok(/<input type="text" name="name" required/.test(formOf(html)));
   assert.ok(html.includes('<script src="/leitfaden.js"></script>'));
 });
+
+test('Kontaktformular hat Pflichtfeld Quelle direkt vor der Nachricht', () => {
+  const form = formOf(read('services/index.html'));
+  const select = form.match(/<select name="quelle" required>([\s\S]*?)<\/select>/);
+  assert.ok(select, 'select name="quelle" required fehlt');
+  assert.ok(form.includes('<span>Wie haben Sie von uns erfahren? *</span>'));
+  const options = [...select[1].matchAll(/<option([^>]*)>([^<]*)<\/option>/g)].map(([, attrs, text]) => [attrs.trim(), text]);
+  assert.deepStrictEqual(options, [
+    ['value="" disabled selected', 'Bitte auswählen'],
+    ['', 'Empfehlung'],
+    ['', 'Website / Google-Suche'],
+    ['', 'Social Media'],
+    ['', 'KI (z. B. ChatGPT)'],
+    ['', 'Sonstiges']
+  ]);
+  assert.ok(form.indexOf('name="quelle"') < form.indexOf('name="message"'));
+  assert.ok(!/<label[^>]*>(?:(?!<\/label>)[\s\S])*name="quelle"(?:(?!<\/label>)[\s\S])*name="message"/.test(form), 'eigenes Label');
+});
