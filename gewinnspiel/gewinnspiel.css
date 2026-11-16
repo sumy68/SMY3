@@ -41,3 +41,20 @@
 @keyframes gwGuess{0%,20%,100%{background:transparent;border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.8)}8%,14%{background:#E3120B;border-color:#E3120B;color:#fff}}
 .gw-guess.vid span{animation:none}
 .gw-guess.vid span.on{background:#E3120B;border-color:#E3120B;color:#fff;transform:scale(1.08)}
+
+/* Auflösung: Website-Verlosung */
+.gw-steps{list-style:none;padding:0;margin:24px 0 8px;display:grid;gap:12px}
+.gw-steps li{display:flex;gap:14px;align-items:center;font-size:17px;color:#fff}
+.gw-steps b{flex:none;width:34px;height:34px;border-radius:50%;background:#E3120B;color:#fff;display:grid;place-items:center;font-size:16px}
+.gw-open .gw-lid{animation:none;transform:translate(-40px,-70px) rotate(-24deg)}
+.gw-site{position:absolute;left:50%;top:34px;width:270px;transform:translateX(-50%);border-radius:12px;background:#fff;box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 50px rgba(227,18,11,.35);overflow:hidden;animation:gwRise 3.6s ease-in-out infinite;z-index:1}
+.gw-site__bar{display:flex;gap:5px;align-items:center;padding:8px 10px;background:#eee}
+.gw-site__bar i{width:8px;height:8px;border-radius:50%;background:#ccc}.gw-site__bar i:first-child{background:#E3120B}
+.gw-site__bar span{margin-left:8px;font-size:10px;color:#666;background:#fff;border-radius:6px;padding:2px 8px}
+.gw-site__body{padding:12px}
+.gw-site__hero{height:64px;border-radius:8px;background:linear-gradient(120deg,#111,#3a0705 60%,#E3120B)}
+.gw-site__line{height:9px;border-radius:5px;background:#ddd;margin-top:10px}.gw-site__line--s{width:60%}
+.gw-site__btn{width:84px;height:20px;border-radius:999px;background:#E3120B;margin-top:10px}
+.gw-open{margin-top:150px}
+@keyframes gwRise{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-14px)}}
+@media (max-width:860px){.gw-stage{height:440px}}
