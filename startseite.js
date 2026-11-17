@@ -22,7 +22,11 @@
     setTimeout(wechseln,WECHSEL_MS);
   }
 
+  // Alles Folgende liegt unterhalb des sichtbaren Bereichs: im Leerlauf einrichten, je Abschnitt ein
+  // eigener kurzer Task (statt eines langen Init-Tasks beim Laden).
+  var aufgaben=[];
   // Zahlen: Endwert steht im HTML, beim ersten Sichtbarwerden zählen sie hoch
+  aufgaben.push(function(){
   if(!ruhig){
     document.querySelectorAll('[data-count]').forEach(function(el){
       var ziel=+el.dataset.count,nach=el.dataset.suffix||'';
@@ -32,8 +36,10 @@
       },.6);
     });
   }
+  });
 
   // Web & Tech: Code tippt sich, die Seite daneben baut sich auf
+  aufgaben.push(function(){
   var codeEl=document.getElementById('code'),teile=document.querySelectorAll('.bs');
   if(codeEl){
     var zeilen=[
@@ -57,8 +63,10 @@
       })();
     });
   }
+  });
 
   // Design: Brand-Kit-Karten fächern beim Scrollen auf
+  aufgaben.push(function(){
   var faecher=document.getElementById('faecher');
   if(faecher){
     var faechern=function(){
@@ -68,16 +76,20 @@
     };
     addEventListener('scroll',faechern,{passive:true});faechern();
   }
+  });
 
   // Services: aufklappbare Zeilen, immer eine offen
+  aufgaben.push(function(){
   var ls=[].slice.call(document.querySelectorAll('#leistungen .l'));
   ls.forEach(function(l){
     var oeffnen=function(){ls.forEach(function(x){x.classList.toggle('offen',x===l);x.querySelector('.l__kopf').setAttribute('aria-expanded',x===l);});};
     l.querySelector('.l__kopf').addEventListener('click',oeffnen);
     if(window.matchMedia('(hover:hover)').matches)l.addEventListener('mouseenter',oeffnen);
   });
+  });
 
   // Bewertungen: die Karten aus dem Build werden zur Rampenlicht-Ansicht
+  aufgaben.push(function(){
   var spot=document.getElementById('spot'),karten=[].slice.call(document.querySelectorAll('#reviews .ds-review'));
   if(spot&&karten.length){
     var stimmen=karten.map(function(k){
@@ -105,4 +117,14 @@
     spot.addEventListener('mouseleave',function(){pause=false;spot.classList.remove('pause');planen();});
     zeige(0);
   }
+  });
+
+  var leerlauf=function(fn){if('requestIdleCallback' in window)requestIdleCallback(fn,{timeout:1000});else setTimeout(fn,50);};
+  (function naechste(){
+    var a=aufgaben.shift();if(!a)return;
+    leerlauf(function(){
+      try{a();}catch(e){console.warn('[startseite] Abschnitt konnte nicht eingerichtet werden',e);}
+      naechste();
+    });
+  })();
 })();

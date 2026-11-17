@@ -4,6 +4,7 @@
 
    Performance:
    - Start erst nach window.load + requestIdleCallback; three.js wird bei Bedarf nachgeladen.
+   - Init in kurzen Häppchen (scheduler.yield / setTimeout-Fallback) statt eines langen Tasks.
    - Partikelanzahl an die Bildschirmfläche gekoppelt; Punktgröße gleicht die Dichte aus (gleiche Helligkeit).
    - Adaptive Qualität: sind Frames dauerhaft zu teuer, wird ein zufälliger Teil der Partikel ausgeblendet.
    - Pause bei verstecktem Tab; devicePixelRatio max. 1.5.
@@ -38,7 +39,10 @@
     s.onerror=()=>{canvas.style.display='none';console.warn('[smy-3d] three.js konnte nicht geladen werden');};
     document.head.appendChild(s);
   }
-  nachDemLaden(()=>threeLaden(start));
+  nachDemLaden(()=>threeLaden(()=>{start().catch(e=>{canvas.style.display='none';console.warn('[smy-3d] Start fehlgeschlagen',e);});}));
+
+  // Main-Thread kurz freigeben, damit der Init nicht ein einziger langer Task ist (TBT)
+  const pause=()=>(window.scheduler&&typeof scheduler.yield==='function')?scheduler.yield():new Promise(r=>setTimeout(r,0));
 
   function istSoftwareRenderer(r){
     try{
@@ -49,7 +53,7 @@
     }catch(e){return false;}
   }
 
-  function start(){
+  async function start(){
   // Unterseiten ohne eigene Szenen: Kugel im Hero, danach eine blasse Galaxie im Hintergrund
   if(!document.querySelector('[data-szene]')){
     const teile=[...document.querySelectorAll('main > section, main > div > section')];
@@ -66,6 +70,7 @@
   const softwareGL=istSoftwareRenderer(renderer);
   let statisch=ruhig||softwareGL;
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,softwareGL?1:MAX_DPR));
+  await pause();
 
   let vw=innerWidth,vh=innerHeight;
   const mobil=vw<760;
@@ -121,6 +126,7 @@
   const formen=new Array(5);
   const holeForm=k=>formen[k]||(formen[k]=bauer[k]());
   const kugel=holeForm(0);
+  await pause();
   const imLeerlauf=fn=>('requestIdleCallback' in window)?requestIdleCallback(fn,{timeout:3000}):setTimeout(fn,50);
   (function weiterBauen(k){if(k>=bauer.length)return;imLeerlauf(()=>{holeForm(k);weiterBauen(k+1);});})(1);
   // 4: Raketen-Logo aus Partikeln (wird im Leerlauf nach dem Laden des Logos befüllt, bis dahin Kugel)
@@ -205,6 +211,9 @@
   });
   const punkte=new THREE.Points(geo,mat);
   const gruppe=new THREE.Group();gruppe.add(punkte);scene.add(gruppe);
+  await pause();
+  renderer.compile(scene,cam); // Shader vorab übersetzen – eigener Task statt Teil des ersten Frames
+  await pause();
 
   // Abschnittsmitten in Dokument-Koordinaten – nur bei Resize/Größenänderung gemessen, nie pro Frame
   const abschnitte=[...document.querySelectorAll('[data-szene]')];
@@ -251,6 +260,7 @@
   if('ResizeObserver' in window)new ResizeObserver(spaeterMessen).observe(document.body);
   groesseSetzen();
   misch=mischZiel;
+  await pause();
 
   const akt={...lage[0]};let zeit=0,t0=performance.now(),letzteVon=-1,letzteNach=-1;letzteMisch=-1;
   // Einstieg: Partikel kommen aus einer weiten Wolke zusammen

@@ -4,6 +4,7 @@ exclude:
   - tests/
   - scripts/
   - README.md
+  - CLOUDFLARE-SETUP.md
   - package*.json
   - data/reviews.js
   - data/references.js
