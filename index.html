@@ -421,12 +421,15 @@ footer{padding:0 0 50px;position:relative;z-index:1}
 .l__plus::before,.l__plus::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.5px;background:var(--weiss);transform:translate(-50%,-50%);transition:transform .3s}
 .l__plus::after{transform:translate(-50%,-50%) rotate(90deg)}
 .l.offen .l__plus::after{transform:translate(-50%,-50%) rotate(0)}
-.l__text{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1)}
+.l__text{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1),visibility 0s .45s}
 .l__text>*{overflow:hidden}
-.l.offen .l__text{grid-template-rows:1fr}
+.l.offen .l__text{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
 .l__text>div,.l__text p{margin:0}
 .l__text p{padding:0 0 6px 18px;max-width:56ch;color:#E4E0DC;font-size:19px;position:relative}
 .l__text .chips{padding:0 0 28px 18px;margin-top:14px}
+/* Mehrere Inhalte stecken in EINEM Wrapper (sonst landen sie in einer impliziten auto-Zeile und klappen nie zu); dessen 6px ersetzen das Rest-Padding des Absatzes */
+.l__text>div{padding-bottom:6px}
+.l__text>div .chips{padding-bottom:22px}
 .l.offen .l__text p:last-child{padding-bottom:30px}
 
 /* Bewertung im Rampenlicht */
@@ -617,15 +620,39 @@ footer{padding:0 0 50px;position:relative;z-index:1}
     <div class="wrap">
       <h2 class="display" id="services-titel">Eine Brand, die hängen bleibt – on- und offline.</h2>
       <ul class="leistungen" id="leistungen">
-        <li class="l offen"><button class="l__kopf" aria-expanded="true"><span class="l__name">Designen</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Brand, der hängen bleibt. Web &amp; Visuals, die nicht „okay“ sind – sondern premium wirken.</p></div></li>
-        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Entwickeln</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Builds, die schnell sind. Saubere Technik, responsive – und ready für Wachstum.</p></div></li>
-        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Drucken</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Offline sichtbar. Flyer, Schilder, Branding – alles im selben Look &amp; Feel.</p></div></li>
-        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Optimieren</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Mehr Leads, weniger Bounce. Conversion-Flow, Speed, SEO-Basics – ohne Rumgefrickel.</p></div></li>
-        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Vermarkten</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Reichweite wird Umsatz. Content, Social Media, Funnels – passend zur Brand, nicht random.</p></div></li>
-        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">Ads</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Google &amp; Meta Ads, die verkaufen. Kampagnen, Landingpages und A/B-Tests – sauber getrackt über Pixel &amp; CAPI.</p><ul class="chips"><li>Google Ads</li><li>Meta Ads</li></ul></div></li>
-        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">B2B Leads</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Verifizierte Kontaktdaten für Vertrieb &amp; Akquise. Branchenspezifisch, regional filterbar – als CSV.</p></div></li>
-        <li class="l"><button class="l__kopf" aria-expanded="false"><span class="l__name">B2B Vertrieb</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text"><p>Kompletter Neukundenvertrieb – von der Zielgruppenanalyse bis zur Terminvereinbarung. Du lehnst dich zurück, wir bringen die Anfragen.</p></div></li>
+        <li class="l offen"><button type="button" class="l__kopf" id="leistung-kopf-1" aria-expanded="true" aria-controls="leistung-1"><span class="l__name">Designen</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text" id="leistung-1" role="region" aria-labelledby="leistung-kopf-1"><p>Brand, der hängen bleibt. Web &amp; Visuals, die nicht „okay“ sind – sondern premium wirken.</p></div></li>
+        <li class="l"><button type="button" class="l__kopf" id="leistung-kopf-2" aria-expanded="false" aria-controls="leistung-2"><span class="l__name">Entwickeln</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text" id="leistung-2" role="region" aria-labelledby="leistung-kopf-2"><p>Builds, die schnell sind. Saubere Technik, responsive – und ready für Wachstum.</p></div></li>
+        <li class="l"><button type="button" class="l__kopf" id="leistung-kopf-3" aria-expanded="false" aria-controls="leistung-3"><span class="l__name">Drucken</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text" id="leistung-3" role="region" aria-labelledby="leistung-kopf-3"><p>Offline sichtbar. Flyer, Schilder, Branding – alles im selben Look &amp; Feel.</p></div></li>
+        <li class="l"><button type="button" class="l__kopf" id="leistung-kopf-4" aria-expanded="false" aria-controls="leistung-4"><span class="l__name">Optimieren</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text" id="leistung-4" role="region" aria-labelledby="leistung-kopf-4"><p>Mehr Leads, weniger Bounce. Conversion-Flow, Speed, SEO-Basics – ohne Rumgefrickel.</p></div></li>
+        <li class="l"><button type="button" class="l__kopf" id="leistung-kopf-5" aria-expanded="false" aria-controls="leistung-5"><span class="l__name">Vermarkten</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text" id="leistung-5" role="region" aria-labelledby="leistung-kopf-5"><p>Reichweite wird Umsatz. Content, Social Media, Funnels – passend zur Brand, nicht random.</p></div></li>
+        <li class="l"><button type="button" class="l__kopf" id="leistung-kopf-6" aria-expanded="false" aria-controls="leistung-6"><span class="l__name">Ads</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text" id="leistung-6" role="region" aria-labelledby="leistung-kopf-6"><div><p>Google &amp; Meta Ads, die verkaufen. Kampagnen, Landingpages und A/B-Tests – sauber getrackt über Pixel &amp; CAPI.</p><ul class="chips"><li>Google Ads</li><li>Meta Ads</li></ul></div></div></li>
+        <li class="l"><button type="button" class="l__kopf" id="leistung-kopf-7" aria-expanded="false" aria-controls="leistung-7"><span class="l__name">B2B Leads</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text" id="leistung-7" role="region" aria-labelledby="leistung-kopf-7"><p>Verifizierte Kontaktdaten für Vertrieb &amp; Akquise. Branchenspezifisch, regional filterbar – als CSV.</p></div></li>
+        <li class="l"><button type="button" class="l__kopf" id="leistung-kopf-8" aria-expanded="false" aria-controls="leistung-8"><span class="l__name">B2B Vertrieb</span><span class="l__plus" aria-hidden="true"></span></button><div class="l__text" id="leistung-8" role="region" aria-labelledby="leistung-kopf-8"><p>Kompletter Neukundenvertrieb – von der Zielgruppenanalyse bis zur Terminvereinbarung. Du lehnst dich zurück, wir bringen die Anfragen.</p></div></li>
       </ul>
+      <script>
+      /* Leistungen-Akkordeon: direkt hier eingebunden, damit es ab dem ersten Moment bedienbar ist
+         (nicht im Leerlauf-Init von startseite.js). Eine Event-Delegation auf der Liste, Zustand
+         nur aus aria-expanded; Klasse .offen (Optik, +/–) wird daraus gesetzt. Die Höhe animiert
+         CSS über grid-template-rows 0fr↔1fr – eine laufende Transition kehrt beim nächsten Klick
+         vom aktuellen Wert aus um, es gibt kein transitionend, auf das gewartet werden müsste. */
+      (function(){
+        var liste=document.getElementById('leistungen');
+        if(!liste||liste.getAttribute('data-akkordeon'))return;
+        liste.setAttribute('data-akkordeon','bereit');
+        var setzen=function(kopf,offen){
+          kopf.setAttribute('aria-expanded',offen?'true':'false');
+          kopf.parentNode.classList.toggle('offen',offen);
+        };
+        var koepfe=liste.querySelectorAll('.l__kopf');
+        for(var i=0;i<koepfe.length;i++)setzen(koepfe[i],koepfe[i].getAttribute('aria-expanded')==='true');
+        liste.addEventListener('click',function(e){
+          var kopf=e.target.closest?e.target.closest('.l__kopf'):null;
+          if(!kopf||!liste.contains(kopf))return;
+          var oeffnen=kopf.getAttribute('aria-expanded')!=='true';
+          for(var j=0;j<koepfe.length;j++)setzen(koepfe[j],koepfe[j]===kopf&&oeffnen);
+        });
+      })();
+      </script>
     </div>
   </section>
 

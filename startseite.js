@@ -78,15 +78,8 @@
   }
   });
 
-  // Services: aufklappbare Zeilen, immer eine offen
-  aufgaben.push(function(){
-  var ls=[].slice.call(document.querySelectorAll('#leistungen .l'));
-  ls.forEach(function(l){
-    var oeffnen=function(){ls.forEach(function(x){x.classList.toggle('offen',x===l);x.querySelector('.l__kopf').setAttribute('aria-expanded',x===l);});};
-    l.querySelector('.l__kopf').addEventListener('click',oeffnen);
-    if(window.matchMedia('(hover:hover)').matches)l.addEventListener('mouseenter',oeffnen);
-  });
-  });
+  // Services-Akkordeon (#leistungen): bewusst NICHT hier – es ist als kleines Inline-Skript direkt
+  // in index.html eingebunden, damit es sofort bedienbar ist (siehe tests/leistungen.test.js).
 
   // Bewertungen: die Karten aus dem Build werden zur Rampenlicht-Ansicht
   aufgaben.push(function(){
