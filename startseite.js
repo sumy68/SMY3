@@ -9,11 +9,17 @@
     io.observe(el);
   };
 
-  // Wechselndes Wort in der Headline
+  // Wechselndes Wort in der Headline: der Slot hat per CSS die Breite des längsten Worts,
+  // der Wechsel läuft nur über opacity/transform (Klasse .raus) – kein Layout-Shift.
   var wort=document.getElementById('wechsel');
   if(wort&&!ruhig){
-    var woerter=['designen','entwickeln','vermarkten','optimieren'],wi=0;
-    setInterval(function(){wort.classList.add('raus');setTimeout(function(){wi=(wi+1)%woerter.length;wort.textContent=woerter[wi];wort.classList.remove('raus');},320);},2600);
+    var woerter=['designen','entwickeln','vermarkten','optimieren'],wi=0,WECHSEL_MS=2600,AUSBLENDEN_MS=320;
+    var wechseln=function(){
+      if(document.hidden){setTimeout(wechseln,WECHSEL_MS);return;}
+      wort.classList.add('raus');
+      setTimeout(function(){wi=(wi+1)%woerter.length;wort.textContent=woerter[wi];wort.classList.remove('raus');setTimeout(wechseln,WECHSEL_MS-AUSBLENDEN_MS);},AUSBLENDEN_MS);
+    };
+    setTimeout(wechseln,WECHSEL_MS);
   }
 
   // Zahlen: Endwert steht im HTML, beim ersten Sichtbarwerden zählen sie hoch

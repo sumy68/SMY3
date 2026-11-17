@@ -67,8 +67,15 @@
   }
   </script>
 
-  <!-- Schriften lokal (keine Requests an Google) -->
-  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <!-- Schriften lokal (keine Requests an Google). Die Startseite nutzt nur Archivo:
+       Hero-Schrift vorladen, @font-face inline (spart das render-blockierende fonts.css). -->
+  <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;src:url(/fonts/archivo-latin-ext.woff2) format('woff2-variations');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;src:url(/fonts/archivo-latin.woff2) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Fallback mit Archivo-Laufweite (gemessen: Archivo ≈ 97,5 % von Arial) – kein Umbruch-Sprung beim Font-Swap */
+@font-face{font-family:'Archivo Fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans'),local('Helvetica');size-adjust:97.5%}
+  </style>
   <link rel="stylesheet" href="/reviews.css" />
   <noscript><style>.reveal{opacity:1!important;transform:none!important}.hero h1 .w,.hero .lead,.hero__cta{opacity:1!important;filter:none!important;transform:none!important}.bs{opacity:1!important;transform:none!important}</style></noscript>
   <style>
@@ -85,7 +92,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--schwarz)}
-body{font-family:"Archivo",system-ui,sans-serif;background:var(--schwarz);color:var(--text);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{font-family:"Archivo","Archivo Fallback",system-ui,sans-serif;background:var(--schwarz);color:var(--text);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--rot-hell);outline-offset:3px;border-radius:4px}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);width:100%}
@@ -229,8 +236,11 @@ footer{padding:0 0 50px;position:relative;z-index:1}
 
 /* ---- v4: Inhalte der aktuellen Startseite ---- */
 .hero h1{max-width:12ch}
-.wechsel{display:inline-block;color:var(--rot-hell);transition:opacity .3s,filter .3s,transform .3s}
-.wechsel.raus{opacity:0;filter:blur(10px);transform:translateY(-.15em)}
+/* Wechselwort: Slot so breit wie das längste Wort (unsichtbarer Platzhalter in derselben Grid-Zelle) -> kein Layout-Shift */
+.wechsel{display:inline-grid;color:var(--rot-hell)}
+.wechsel::after{content:attr(data-breit);grid-area:1/1;visibility:hidden;pointer-events:none}
+.wechsel__wort{grid-area:1/1;justify-self:start;transition:opacity .3s,filter .3s,transform .3s;will-change:opacity,transform}
+.wechsel__wort.raus{opacity:0;filter:blur(10px);transform:translateY(-.15em)}
 .btn--rahmen.groß{padding:16px 26px}
 
 /* Laufband */
@@ -430,12 +440,12 @@ footer{padding:0 0 50px;position:relative;z-index:1}
 .spot__name:hover{color:var(--weiss)}
 .spot__name[aria-selected="true"]{color:var(--weiss)}
 .spot__name::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#333}
-.spot__name i{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--rot);z-index:1}
+.spot__name i{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--rot);z-index:1;transform:scaleX(0);transform-origin:left}
 .spot__name[aria-selected="true"] i{animation:fuellen var(--dauer,7s) linear forwards}
 .spot.pause .spot__name i{animation-play-state:paused}
 .spot__name:focus-visible{outline:3px solid var(--rot-hell);outline-offset:4px}
-@keyframes fuellen{to{width:100%}}
-@media (prefers-reduced-motion:reduce){.feed,.herzen span,.band__spur{animation:none}.spot__name[aria-selected="true"] i{animation:none;width:100%}}
+@keyframes fuellen{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.feed,.herzen span,.band__spur{animation:none}.spot__name[aria-selected="true"] i{animation:none;transform:none}}
 
 /* Bewertungen ohne JavaScript: Karten aus dem Build */
 .bewertung .ds-reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
@@ -459,7 +469,7 @@ footer{padding:0 0 50px;position:relative;z-index:1}
 <div class="seite">
 <header>
   <div class="wrap nav">
-    <a class="logo" href="/"><img src="/assets/logo-dunkel.png" alt="SMY Agency" width="470" height="210"></a>
+    <a class="logo" href="/"><picture><source srcset="/assets/logo-dunkel.webp" type="image/webp"><img src="/assets/logo-dunkel.png" alt="SMY Agency" width="470" height="210" fetchpriority="high"></picture></a>
     <nav aria-label="Hauptnavigation">
       <ul>
         <li><a href="/services/">Services</a></li>
@@ -476,7 +486,7 @@ footer{padding:0 0 50px;position:relative;z-index:1}
     <div class="wrap hero__inner">
       <h1 class="display" aria-label="Wir designen digitale Produkte für deinen Erfolg">
         <span class="w" style="--i:0">Wir</span>
-        <span class="w" style="--i:1"><span class="wechsel" id="wechsel">designen</span></span>
+        <span class="w" style="--i:1"><span class="wechsel" data-breit="vermarkten"><span class="wechsel__wort" id="wechsel">designen</span></span></span>
         <span class="w" style="--i:2">digitale</span>
         <span class="w" style="--i:3">Produkte</span>
         <span class="w" style="--i:4">für</span>
@@ -713,8 +723,8 @@ footer{padding:0 0 50px;position:relative;z-index:1}
 </footer>
 </div>
 
-<script src="/assets/three.min.js"></script>
-<script src="/smy-3d.js"></script>
-<script src="/startseite.js"></script>
+<!-- three.js lädt smy-3d.js selbst nach window.load im Leerlauf nach -->
+<script src="/smy-3d.js" defer></script>
+<script src="/startseite.js" defer></script>
 </body>
 </html>

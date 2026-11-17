@@ -1,10 +1,55 @@
 /* SMY Agency – Partikel-Hintergrund (three.js, lokal unter /assets/three.min.js)
    Abschnitte mit data-szene bestimmen die Form: 0 Kugel, 1 zwei Wolken, 2 Spirale, 3 Würfel, 4 Rakete.
-   data-pos="x,y,Größe,Deckkraft" setzt die Lage am Desktop. */
-(function(){
-  const canvas=document.getElementById('buehne');
-  const ruhig=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   data-pos="x,y,Größe,Deckkraft" setzt die Lage am Desktop.
 
+   Performance:
+   - Start erst nach window.load + requestIdleCallback; three.js wird bei Bedarf nachgeladen.
+   - Partikelanzahl an die Bildschirmfläche gekoppelt; Punktgröße gleicht die Dichte aus (gleiche Helligkeit).
+   - Adaptive Qualität: sind Frames dauerhaft zu teuer, wird ein zufälliger Teil der Partikel ausgeblendet.
+   - Pause bei verstecktem Tab; devicePixelRatio max. 1.5.
+   - Keine Layout-Abfragen im Animations-Loop: Abschnittspositionen werden nur bei Resize/Größenänderung gemessen. */
+(function(){
+  'use strict';
+  const canvas=document.getElementById('buehne');
+  if(!canvas)return;
+  const ruhig=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const THREE_URL='/assets/three.min.js';
+  const MAX_DPR=1.5;
+  const DICHTE_REF=22000/(1350*940);   // ursprüngliche Desktop-Dichte (Partikel pro px²)
+  const N_FAKTOR_DESKTOP=0.5,N_FAKTOR_MOBIL=0.7; // Anteil der ursprünglichen Partikel, Rest gleicht die Punktgröße aus
+  const N_MIN=4000, N_MAX=12000;
+  const ADAPT_FRAMES=30, ADAPT_ARBEIT_MS=12, ADAPT_ABSTAND_MS=40, ADAPT_STATISCH_MS=60, ADAPT_MIN_ANTEIL=0.35;
+  const RESIZE_DEBOUNCE_MS=150;
+  const STARTVERZUG_MS=1200;
+
+  // Start nach window.load, frühestens STARTVERZUG_MS nach Navigationsbeginn (Headline/LCP zuerst),
+  // dann im Leerlauf – three.js (600 KB) konkurriert so nicht mit dem ersten Rendern.
+  function nachDemLaden(fn){
+    const leerlauf=()=>('requestIdleCallback' in window)?requestIdleCallback(fn,{timeout:1500}):setTimeout(fn,200);
+    const nachVerzug=()=>setTimeout(leerlauf,Math.max(0,STARTVERZUG_MS-performance.now()));
+    if(document.readyState==='complete')nachVerzug();
+    else addEventListener('load',nachVerzug,{once:true});
+  }
+  function threeLaden(fertig){
+    if(window.THREE){fertig();return;}
+    const s=document.createElement('script');
+    s.src=THREE_URL;s.async=true;
+    s.onload=fertig;
+    s.onerror=()=>{canvas.style.display='none';console.warn('[smy-3d] three.js konnte nicht geladen werden');};
+    document.head.appendChild(s);
+  }
+  nachDemLaden(()=>threeLaden(start));
+
+  function istSoftwareRenderer(r){
+    try{
+      const gl=r.getContext();
+      const ext=gl.getExtension('WEBGL_debug_renderer_info');
+      const name=String(gl.getParameter(ext?ext.UNMASKED_RENDERER_WEBGL:gl.RENDERER));
+      return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(name);
+    }catch(e){return false;}
+  }
+
+  function start(){
   // Unterseiten ohne eigene Szenen: Kugel im Hero, danach eine blasse Galaxie im Hintergrund
   if(!document.querySelector('[data-szene]')){
     const teile=[...document.querySelectorAll('main > section, main > div > section')];
@@ -14,72 +59,98 @@
   if(!window.THREE){canvas.style.display='none';return;}
   let renderer;
   try{renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:'high-performance'});}
-  catch(e){canvas.style.display='none';return;}
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  catch(e){canvas.style.display='none';console.warn('[smy-3d] WebGL nicht verfügbar',e);return;}
+  // Ohne GPU (Software-Rendering) muss der Browser das Vollbild-Canvas jeden Frame auf die CPU zurücklesen
+  // (ReadPixels) – unabhängig von der Partikelzahl. Dann wie bei reduzierter Bewegung: statisches Bild,
+  // das beim Scrollen weiter zwischen den Formen wechselt.
+  const softwareGL=istSoftwareRenderer(renderer);
+  let statisch=ruhig||softwareGL;
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,softwareGL?1:MAX_DPR));
 
-  const mobil=innerWidth<760;
-  const N=mobil?9000:22000;
+  let vw=innerWidth,vh=innerHeight;
+  const mobil=vw<760;
+  // Partikelanzahl nach Bildschirmfläche; die Referenzdichte der alten Version bleibt optisch erhalten
+  const nAlt=mobil?9000:Math.round(DICHTE_REF*vw*vh);
+  const N=Math.max(N_MIN,Math.min(N_MAX,Math.round(nAlt*(mobil?N_FAKTOR_MOBIL:N_FAKTOR_DESKTOP))));
+  const dichteAusgleich=n=>Math.sqrt(Math.max(1,nAlt/n));
   const scene=new THREE.Scene();
   const cam=new THREE.PerspectiveCamera(42,1,0.1,100);
   cam.position.set(0,0,11);
 
-  // Zufall mit festem Startwert, damit die Formen bei jedem Laden gleich sind
-  let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};
-  const gauss=()=>{let u=0,v=0;while(!u)u=rnd();while(!v)v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+  // Zufall mit festem Startwert, damit die Formen bei jedem Laden gleich sind.
+  // Jede Form hat eine eigene Folge -> Formen können unabhängig voneinander (später) berechnet werden.
+  function zufall(start){
+    let seed=start;
+    const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};
+    const gauss=()=>{let u=0,v=0;while(!u)u=rnd();while(!v)v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+    return {rnd,gauss};
+  }
+  const {rnd,gauss}=zufall(7);
 
-  function form(fn){const a=new Float32Array(N*3);for(let i=0;i<N;i++){const p=fn(i);a[i*3]=p[0];a[i*3+1]=p[1];a[i*3+2]=p[2];}return a;}
+  // Zufällige Reihenfolge der Slots: so ist jeder Anfangsbereich (drawRange) eine gleichmäßige Stichprobe der Form
+  const slot=new Uint32Array(N);for(let i=0;i<N;i++)slot[i]=i;
+  for(let i=N-1;i>0;i--){const j=Math.floor(rnd()*(i+1));const t=slot[i];slot[i]=slot[j];slot[j]=t;}
+  function form(fn){const a=new Float32Array(N*3);for(let i=0;i<N;i++){const p=fn(i),k=slot[i]*3;a[k]=p[0];a[k+1]=p[1];a[k+2]=p[2];}return a;}
 
-  // 0: Kugel, die atmet – dichter Kern, lockere Hülle
-  const kugel=form(i=>{
-    const y=1-2*(i+0.5)/N, r=Math.sqrt(1-y*y), phi=i*2.39996;
-    const schale=rnd()<0.75?2.6+gauss()*0.12:rnd()*2.4;
-    return [Math.cos(phi)*r*schale,y*schale,Math.sin(phi)*r*schale];
-  });
-  // 1: zwei Wolken – Vertrieb und Programmierung
-  const zwei=form(i=>{
-    const links=i%2===0, c=links?[-2.4,0.3,0]:[2.4,-0.3,0];
-    const rr=Math.cbrt(rnd())*1.7; const th=rnd()*Math.PI*2, ph=Math.acos(2*rnd()-1);
-    return [c[0]+rr*Math.sin(ph)*Math.cos(th),c[1]+rr*Math.cos(ph),c[2]+rr*Math.sin(ph)*Math.sin(th)];
-  });
-  // 2: Spiralgalaxie mit drei Armen
-  const spirale=form(i=>{
-    const arm=i%3, t=Math.pow(rnd(),0.7), r=0.3+t*4.2;
-    const a=arm*2.0944+t*5.2+gauss()*0.22/(0.4+t);
-    return [Math.cos(a)*r+gauss()*0.12,gauss()*0.18*(1.2-t),Math.sin(a)*r+gauss()*0.12];
-  });
-  // 3: Gitterwürfel – Code und Struktur
-  const n=Math.ceil(Math.cbrt(N)), sp=4.4/(n-1);
-  const wuerfel=form(i=>{
-    const x=i%n,y=Math.floor(i/n)%n,z=Math.floor(i/(n*n))%n;
-    return [-2.2+x*sp+gauss()*0.015,-2.2+y*sp+gauss()*0.015,-2.2+z*sp+gauss()*0.015];
-  });
-  // 4: Raketen-Logo aus Partikeln (wird nach dem Laden des Logos befüllt, bis dahin Kugel)
-  const rakete=new Float32Array(N*3);rakete.set(kugel);
-  const logoBild=new Image();
-  logoBild.onload=function(){
-    const W=logoBild.width,H=logoBild.height,c=document.createElement('canvas');c.width=W;c.height=H;
-    const g=c.getContext('2d');g.drawImage(logoBild,0,0);
+  const bauer=[
+    // 0: Kugel, die atmet – dichter Kern, lockere Hülle
+    ()=>{const {rnd,gauss}=zufall(11);return form(i=>{
+      const y=1-2*(i+0.5)/N, r=Math.sqrt(1-y*y), phi=i*2.39996;
+      const schale=rnd()<0.75?2.6+gauss()*0.12:rnd()*2.4;
+      return [Math.cos(phi)*r*schale,y*schale,Math.sin(phi)*r*schale];
+    });},
+    // 1: zwei Wolken – Vertrieb und Programmierung
+    ()=>{const {rnd}=zufall(13);return form(i=>{
+      const links=i%2===0, c=links?[-2.4,0.3,0]:[2.4,-0.3,0];
+      const rr=Math.cbrt(rnd())*1.7; const th=rnd()*Math.PI*2, ph=Math.acos(2*rnd()-1);
+      return [c[0]+rr*Math.sin(ph)*Math.cos(th),c[1]+rr*Math.cos(ph),c[2]+rr*Math.sin(ph)*Math.sin(th)];
+    });},
+    // 2: Spiralgalaxie mit drei Armen
+    ()=>{const {rnd,gauss}=zufall(17);return form(i=>{
+      const arm=i%3, t=Math.pow(rnd(),0.7), r=0.3+t*4.2;
+      const a=arm*2.0944+t*5.2+gauss()*0.22/(0.4+t);
+      return [Math.cos(a)*r+gauss()*0.12,gauss()*0.18*(1.2-t),Math.sin(a)*r+gauss()*0.12];
+    });},
+    // 3: Gitterwürfel – Code und Struktur
+    ()=>{const {gauss}=zufall(19);const n=Math.ceil(Math.cbrt(N)), sp=4.4/(n-1);return form(i=>{
+      const x=i%n,y=Math.floor(i/n)%n,z=Math.floor(i/(n*n))%n;
+      return [-2.2+x*sp+gauss()*0.015,-2.2+y*sp+gauss()*0.015,-2.2+z*sp+gauss()*0.015];
+    });}
+  ];
+  // Formen erst bei Bedarf berechnen: Kugel sofort, der Rest stückweise im Leerlauf (kurzer Init-Task)
+  const formen=new Array(5);
+  const holeForm=k=>formen[k]||(formen[k]=bauer[k]());
+  const kugel=holeForm(0);
+  const imLeerlauf=fn=>('requestIdleCallback' in window)?requestIdleCallback(fn,{timeout:3000}):setTimeout(fn,50);
+  (function weiterBauen(k){if(k>=bauer.length)return;imLeerlauf(()=>{holeForm(k);weiterBauen(k+1);});})(1);
+  // 4: Raketen-Logo aus Partikeln (wird im Leerlauf nach dem Laden des Logos befüllt, bis dahin Kugel)
+  const rakete=new Float32Array(N*3);rakete.set(kugel);formen[4]=rakete;
+  var letzteMisch=-1;
+  function raketeBauen(bild){
+    const W=bild.width,H=bild.height,c=document.createElement('canvas');c.width=W;c.height=H;
+    const g=c.getContext('2d');g.drawImage(bild,0,0);
     const d=g.getImageData(0,0,W,H).data,pts=[];
     for(let y=0;y<H;y+=1)for(let x=0;x<W;x+=1){
       const k=(y*W+x)*4;if(d[k+3]<128)continue;
       const istRakete=x<140&&d[k]>150&&d[k+1]<120; // rote Linien der Rakete
       const wdh=istRakete?3:((x+y)%2===0?1:0);
-      for(let r=0;r<wdh;r++)pts.push([x,y]);
+      for(let r=0;r<wdh;r++)pts.push(y*W+x);
     }
     if(!pts.length)return;
     for(let i=0;i<N;i++){
-      const p=pts[Math.floor(rnd()*pts.length)];
-      rakete[i*3]=(p[0]-W/2)/W*8.6+gauss()*0.012;
-      rakete[i*3+1]=-(p[1]-H/2)/W*8.6+gauss()*0.012;
+      const p=pts[Math.floor(rnd()*pts.length)],px=p%W,py=(p-px)/W;
+      rakete[i*3]=(px-W/2)/W*8.6+gauss()*0.012;
+      rakete[i*3+1]=-(py-H/2)/W*8.6+gauss()*0.012;
       rakete[i*3+2]=gauss()*0.08;
     }
     letzteMisch=-1;
-  };
+  }
+  const logoBild=new Image();
+  logoBild.onload=()=>imLeerlauf(()=>raketeBauen(logoBild));
+  logoBild.onerror=()=>console.warn('[smy-3d] Logo für die Raketen-Form nicht geladen');
   logoBild.src='/assets/logo-header.png';
-  const formen=[kugel,zwei,spirale,wuerfel,rakete];
 
   // Platz der Form auf dem Bildschirm je Szene
-  var letzteMisch=-1;
   const desk=!mobil;
   const lage=[
     {x:desk?3.3:0.8,y:desk?0:-1.6,s:desk?1:0.75,op:1},
@@ -98,16 +169,20 @@
     groesse[i]=(rnd()<0.04?2.6:1)*(0.6+rnd()*0.8);phase[i]=rnd()*6.283;
   }
   const geo=new THREE.BufferGeometry();
-  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const posAttr=new THREE.BufferAttribute(pos,3);
+  if(posAttr.setUsage)posAttr.setUsage(THREE.DynamicDrawUsage);
+  geo.setAttribute('position',posAttr);
   geo.setAttribute('farbe',new THREE.BufferAttribute(farbe,3));
   geo.setAttribute('groesse',new THREE.BufferAttribute(groesse,1));
   geo.setAttribute('phase',new THREE.BufferAttribute(phase,1));
+  let aktivN=N;
+  geo.setDrawRange(0,aktivN);
   const mat=new THREE.ShaderMaterial({
     transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
-    uniforms:{uZeit:{value:0},uPx:{value:renderer.getPixelRatio()},uMaus:{value:new THREE.Vector3(99,99,0)},uAlpha:{value:1}},
+    uniforms:{uZeit:{value:0},uPx:{value:renderer.getPixelRatio()},uDichte:{value:dichteAusgleich(aktivN)},uMaus:{value:new THREE.Vector3(99,99,0)},uAlpha:{value:1}},
     vertexShader:`
       attribute vec3 farbe;attribute float groesse;attribute float phase;
-      uniform float uZeit,uPx;uniform vec3 uMaus;
+      uniform float uZeit,uPx,uDichte;uniform vec3 uMaus;
       varying vec3 vF;varying float vA;
       void main(){
         vec3 p=position;
@@ -117,7 +192,7 @@
         w.xy+=normalize(d+1e-4)*smoothstep(1.6,0.0,l)*0.9;
         vec4 mv=viewMatrix*w;
         gl_Position=projectionMatrix*mv;
-        gl_PointSize=groesse*uPx*(40.0/-mv.z);
+        gl_PointSize=groesse*uDichte*uPx*(40.0/-mv.z);
         vF=farbe;vA=0.55+0.45*sin(uZeit*1.7+phase);
       }`,
     fragmentShader:`
@@ -131,52 +206,89 @@
   const punkte=new THREE.Points(geo,mat);
   const gruppe=new THREE.Group();gruppe.add(punkte);scene.add(gruppe);
 
-  // Scroll -> Szene als Kommazahl (z. B. 1.4 = zwischen Form 1 und der nächsten)
+  // Abschnittsmitten in Dokument-Koordinaten – nur bei Resize/Größenänderung gemessen, nie pro Frame
   const abschnitte=[...document.querySelectorAll('[data-szene]')];
   const eigeneLage=abschnitte.map(el=>{const p=el.dataset.pos;if(!p||!desk)return null;const v=p.split(',').map(Number);return {x:v[0],y:v[1],s:v[2],op:v[3]};});
+  let mittenDok=[],seitenHoehe=0;
+  function messen(){
+    const y=scrollY;
+    mittenDok=abschnitte.map(a=>{const r=a.getBoundingClientRect();return y+(r.top+r.bottom)/2;});
+    seitenHoehe=document.documentElement.scrollHeight;
+    vw=innerWidth;vh=innerHeight;
+  }
+
+  // Scroll -> Szene als Kommazahl (z. B. 1.4 = zwischen Form 1 und der nächsten); rechnet nur mit gecachten Werten
   let vonI=0,nachI=0;
   let von=0,nach=0,mischZiel=0,misch=0;
   function scrollSzene(){
-    const m=innerHeight*0.5;
-    const mitten=abschnitte.map(a=>{const r=a.getBoundingClientRect();return (r.top+r.bottom)/2;});
+    if(!abschnitte.length)return;
+    const sy=scrollY,m=vh*0.5;
+    const mitten=mittenDok.map(v=>v-sy);
     let i=0;while(i<mitten.length-1&&mitten[i+1]<m)i++;
     const a=+abschnitte[i].dataset.szene,b=+abschnitte[Math.min(i+1,abschnitte.length-1)].dataset.szene;
     let f=0;if(i<mitten.length-1&&mitten[i]<m){f=(m-mitten[i])/(mitten[i+1]-mitten[i]);}
     f=Math.min(1,Math.max(0,f));
     f=f<0.2?0:f>0.8?1:(f-0.2)/0.6; // Form hält, dann gleitet sie
     von=a;nach=b;vonI=i;nachI=Math.min(i+1,abschnitte.length-1);mischZiel=f*f*(3-2*f);
-    const rest=abschnitte.length<2?1e9:document.documentElement.scrollHeight-(scrollY+innerHeight);
+    const rest=abschnitte.length<2?1e9:seitenHoehe-(sy+vh);
     const letzte=+abschnitte[abschnitte.length-1].dataset.szene;
-    if(rest<innerHeight*0.9){vonI=abschnitte.length-2;nachI=abschnitte.length-1;if(a===letzte)vonI=nachI;const v=+abschnitte[abschnitte.length-2].dataset.szene;const g=Math.min(1,Math.max(0,1-rest/(innerHeight*0.9)));von=v;nach=letzte;mischZiel=Math.max(mischZiel*(a===v?1:0),g*g*(3-2*g));if(a===letzte){von=letzte;mischZiel=1;}}
+    if(rest<vh*0.9){vonI=abschnitte.length-2;nachI=abschnitte.length-1;if(a===letzte)vonI=nachI;const v=+abschnitte[abschnitte.length-2].dataset.szene;const g=Math.min(1,Math.max(0,1-rest/(vh*0.9)));von=v;nach=letzte;mischZiel=Math.max(mischZiel*(a===v?1:0),g*g*(3-2*g));if(a===letzte){von=letzte;mischZiel=1;}}
   }
-  addEventListener('scroll',scrollSzene,{passive:true});
 
   let mx=99,my=99,mzx=0,mzy=0,mausDa=false;
-  addEventListener('pointermove',e=>{mausDa=true;mzx=e.clientX/innerWidth*2-1;mzy=-(e.clientY/innerHeight*2-1);},{passive:true});
+  addEventListener('pointermove',e=>{mausDa=true;mzx=e.clientX/vw*2-1;mzy=-(e.clientY/vh*2-1);},{passive:true});
   const ray=new THREE.Vector3();
 
-  function groesseSetzen(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
-  addEventListener('resize',groesseSetzen);groesseSetzen();scrollSzene();
+  function groesseSetzen(){
+    messen();
+    renderer.setSize(vw,vh,false);cam.aspect=vw/vh;cam.updateProjectionMatrix();
+    scrollSzene();
+  }
+  let resizeUhr=0;
+  const spaeterMessen=()=>{clearTimeout(resizeUhr);resizeUhr=setTimeout(()=>{groesseSetzen();anstossen();},RESIZE_DEBOUNCE_MS);};
+  addEventListener('resize',spaeterMessen,{passive:true});
+  // Inhalt ändert seine Höhe (Akkordeon, Bewertungen, Schriften) -> Abschnitte neu vermessen
+  if('ResizeObserver' in window)new ResizeObserver(spaeterMessen).observe(document.body);
+  groesseSetzen();
   misch=mischZiel;
 
   const akt={...lage[0]};let zeit=0,t0=performance.now(),letzteVon=-1,letzteNach=-1;letzteMisch=-1;
   // Einstieg: Partikel kommen aus einer weiten Wolke zusammen
-  let intro=ruhig?1:0;const start=form(()=>[gauss()*9,gauss()*6,gauss()*5]);
+  let intro=statisch?1:0;const startWolke=statisch?null:form(()=>[gauss()*9,gauss()*6,gauss()*5]);
 
-  function frame(now){
-    const dt=Math.min(0.05,(now-t0)/1000);t0=now;zeit+=ruhig?0:dt;
-    const k=1-Math.pow(0.03,dt);
+  // Adaptive Qualität: bei dauerhaft teuren Frames weniger Partikel zeichnen (größer, damit die Helligkeit bleibt)
+  let messFrames=0,arbeitSumme=0,abstandSumme=0,aufwaermen=20;
+  function qualitaetPruefen(arbeit,abstand){
+    if(aufwaermen>0){aufwaermen--;return;}
+    messFrames++;arbeitSumme+=arbeit;abstandSumme+=abstand;
+    if(messFrames<ADAPT_FRAMES)return;
+    const schnittAbstand=abstandSumme/messFrames;
+    const zuTeuer=arbeitSumme/messFrames>ADAPT_ARBEIT_MS||schnittAbstand>ADAPT_ABSTAND_MS;
+    messFrames=0;arbeitSumme=0;abstandSumme=0;
+    if(!zuTeuer)return;
+    // Letzte Stufe: auch mit minimaler Partikelzahl unter ~17 fps -> statisches Bild statt ruckelnder Animation
+    if(aktivN<=Math.ceil(N*ADAPT_MIN_ANTEIL)){if(schnittAbstand>ADAPT_STATISCH_MS){statisch=true;intro=1;}return;}
+    aktivN=Math.max(Math.ceil(N*ADAPT_MIN_ANTEIL),Math.round(aktivN*0.6));
+    geo.setDrawRange(0,aktivN);
+    mat.uniforms.uDichte.value=dichteAusgleich(aktivN);
+    letzteMisch=-1;aufwaermen=10;
+  }
+
+  function zeichnen(now){
+    const dt=Math.min(0.05,(now-t0)/1000);t0=now;zeit+=statisch?0:dt;
+    const k=statisch?1:1-Math.pow(0.03,dt);
     misch+=(mischZiel-misch)*k;
     if(intro<1)intro=Math.min(1,intro+dt*0.45);
     const ie=1-Math.pow(1-intro,3);
-    // Positionen mischen (nur wenn sich etwas ändert)
+    // Positionen mischen (nur wenn sich etwas ändert, nur für sichtbare Partikel)
     if(intro<1||von!==letzteVon||nach!==letzteNach||Math.abs(misch-letzteMisch)>0.0005){
-      const A=formen[von],B=formen[nach];
-      for(let i=0;i<N*3;i++){
+      const A=holeForm(von),B=holeForm(nach),ende=aktivN*3;
+      for(let i=0;i<ende;i++){
         const v=A[i]+(B[i]-A[i])*misch;
-        pos[i]=intro<1?start[i]+(v-start[i])*ie:v;
+        pos[i]=intro<1?startWolke[i]+(v-startWolke[i])*ie:v;
       }
-      geo.attributes.position.needsUpdate=true;
+      posAttr.updateRange.offset=0;posAttr.updateRange.count=ende;
+      posAttr.needsUpdate=true;
       letzteVon=von;letzteNach=nach;letzteMisch=misch;
     }
     const L1=eigeneLage[vonI]||lage[von],L2=eigeneLage[nachI]||lage[nach];
@@ -195,8 +307,31 @@
     mat.uniforms.uZeit.value=zeit;
     mat.uniforms.uAlpha.value=akt.op;
     renderer.render(scene,cam);
-    if(!ruhig)requestAnimationFrame(frame);
   }
-  if(ruhig){frame(performance.now());addEventListener('scroll',()=>{scrollSzene();misch=mischZiel;frame(performance.now());},{passive:true});}
-  else requestAnimationFrame(frame);
+
+  // Animations-Loop ausschließlich über requestAnimationFrame
+  let rafId=0,letzterFrame=0;
+  function frame(now){
+    rafId=0;
+    const abstand=letzterFrame?now-letzterFrame:16;letzterFrame=now;
+    const t=performance.now();
+    zeichnen(now);
+    if(!statisch)qualitaetPruefen(performance.now()-t,abstand);
+    if(!statisch&&!document.hidden)rafId=requestAnimationFrame(frame);
+  }
+  function anstossen(){
+    if(rafId||document.hidden)return;
+    t0=performance.now();letzterFrame=0;
+    rafId=requestAnimationFrame(frame);
+  }
+  // Tab im Hintergrund -> Loop anhalten, beim Zurückkehren ohne Zeitsprung weiter
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
+    else if(!statisch)anstossen();
+  });
+
+  // Statisch (reduzierte Bewegung / Software-Rendering / zu langsam): nur beim Scrollen neu zeichnen, gebündelt pro Frame
+  addEventListener('scroll',()=>{scrollSzene();if(statisch)anstossen();},{passive:true});
+  anstossen();
+  }
 })();

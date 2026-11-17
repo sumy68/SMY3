@@ -56,7 +56,13 @@ test('lokale Fonts und Tailwind-CSS sind vorhanden und eingebunden', () => {
   assert.ok(fs.statSync(path.join(ROOT, 'tailwind.css')).size > 1000);
   ['audit.html', 'datenschutz-socialpro.html', 'leitfaden.html', 'shop.html', 'terms-socialpro.html', 'support.html', 'ugc.html', 'workbook-danke.html', 'website-mieten.html', 'workbook.html']
     .forEach((file) => assert.ok(fs.readFileSync(path.join(ROOT, file), 'utf8').includes('href="/tailwind.css"'), file));
-  assert.ok(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').includes('href="/fonts/fonts.css"'));
+  // Startseite: Archivo inline per @font-face (spart render-blockierendes fonts.css) + Preload der Hero-Schrift
+  const index = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  assert.ok(index.includes('rel="preload" href="/fonts/archivo-latin.woff2"'), 'Preload Hero-Schrift');
+  const indexFonts = [...index.matchAll(/url\((\/fonts\/[^)]+\.woff2)\)/g)].map((match) => match[1]);
+  assert.ok(indexFonts.length >= 2, 'Archivo @font-face inline');
+  indexFonts.forEach((file) => assert.ok(fs.existsSync(path.join(ROOT, file)), file));
+  assert.ok(/font-display:\s*swap/.test(index), 'font-display: swap');
 });
 
 test('Logo-Originale gehen nicht live, die zugeschnittenen schon', () => {
