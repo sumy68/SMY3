@@ -1,0 +1,79 @@
+<!doctype html>
+<!--
+  Vorlage für das Social-Media-/OG-Bild (1200 × 630).
+  Rendern: node scripts/build-og.js  → images/smy-agency-webdesign-vertrieb-digitalagentur.jpg
+  Der Ordner _src/ wird von GitHub Pages (Jekyll) nicht veröffentlicht.
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>OG-Bild SMY Agency</title>
+<style>
+@font-face{font-family:'Archivo';font-weight:100 900;font-stretch:62% 125%;src:url(../../fonts/archivo-latin.woff2) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:'Archivo';font-weight:100 900;font-stretch:62% 125%;src:url(../../fonts/archivo-latin-ext.woff2) format('woff2-variations');unicode-range:U+0100-02BA,U+1E00-1EFF}
+:root{
+  --schwarz:#000;
+  --rot:#E3120B;
+  --rot-hell:#FF3B30;
+  --weiss:#fff;
+  --text:#B5AFA9;
+  --safe:64px; /* Safe Zone: nichts Wichtiges näher als 64 px am Rand */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1200px;height:630px;background:var(--schwarz);overflow:hidden}
+body{position:relative;font-family:'Archivo',Arial,sans-serif;color:var(--weiss);-webkit-font-smoothing:antialiased}
+#partikel{position:absolute;inset:0;width:1200px;height:630px}
+/* weicher roter Schimmer hinter der Partikelwolke, Text-Seite bleibt dunkel */
+.schimmer{position:absolute;inset:0;background:
+  radial-gradient(520px 420px at 900px 330px,rgba(227,18,11,.16),transparent 70%),
+  linear-gradient(90deg,#000 0%,rgba(0,0,0,.85) 38%,rgba(0,0,0,0) 70%)}
+.inhalt{position:absolute;inset:var(--safe);display:flex;flex-direction:column}
+/* Logo-PNG hat transparenten Rand -> negativer Versatz, damit die Rakete an der Safe Zone sitzt */
+.logo{height:112px;width:auto;margin:-14px 0 0 -6px;align-self:flex-start}
+h1{margin-top:auto;font-weight:300;font-variation-settings:"wdth" 100;font-size:78px;line-height:1.02;letter-spacing:-.035em;max-width:12ch;text-wrap:balance}
+h1 .rot{color:var(--rot-hell)}
+.fuss{margin-top:34px;display:flex;align-items:baseline;justify-content:space-between;gap:24px;font-size:25px;letter-spacing:-.005em;white-space:nowrap}
+.leistungen{color:var(--text)}
+.leistungen i{font-style:normal;color:var(--rot-hell);padding:0 .35em}
+.domain{color:var(--weiss);font-weight:500}
+</style>
+</head>
+<body>
+<canvas id="partikel" width="1200" height="630"></canvas>
+<div class="schimmer"></div>
+<div class="inhalt">
+  <img class="logo" src="../../assets/smy-agency-logo-dunkel.png" alt="SMY Agency">
+  <h1>Wir <span class="rot">entwickeln</span> digitale Produkte für deinen Erfolg.</h1>
+  <p class="fuss"><span class="leistungen">Webdesign<i>·</i>Programmierung<i>·</i>B2B-Vertrieb</span><span class="domain">smyagency.de</span></p>
+</div>
+<script>
+// Statische Partikelwolke im Look des Website-Hintergrunds: feine rote Punkte, zur Mitte der Wolke dichter.
+// Fester Seed -> jedes Rendern ergibt exakt dasselbe Bild.
+(function(){
+  var c=document.getElementById('partikel'),g=c.getContext('2d');
+  var seed=20261117;
+  function rnd(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;}
+  function gauss(){var u=rnd()||1e-9,v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v);}
+  var MX=905,MY=320,N=5200;
+  for(var i=0;i<N;i++){
+    // Kugelschale + Streuung, leicht geneigt -> wirkt räumlich wie die 3D-Form
+    var th=rnd()*6.2832,ph=Math.acos(2*rnd()-1),r=205+gauss()*26;
+    var x=r*Math.sin(ph)*Math.cos(th),y=r*Math.cos(ph),z=r*Math.sin(ph)*Math.sin(th);
+    var tilt=.42,yy=y*Math.cos(tilt)-z*Math.sin(tilt),zz=y*Math.sin(tilt)+z*Math.cos(tilt);
+    var tiefe=(zz+260)/520; // 0 hinten .. 1 vorne
+    var px=MX+x*(.85+.3*tiefe),py=MY+yy*(.85+.3*tiefe);
+    var a=.18+.62*tiefe*tiefe,s=.6+1.3*tiefe;
+    g.fillStyle='rgba(255,59,48,'+a.toFixed(3)+')';
+    g.beginPath();g.arc(px,py,s,0,6.2832);g.fill();
+  }
+  // vereinzelte Punkte im ganzen Bild (Staub), sehr zurückhaltend
+  for(var j=0;j<700;j++){
+    var sx=rnd()*1200,sy=rnd()*630;
+    g.fillStyle='rgba(227,18,11,'+(.06+rnd()*.22).toFixed(3)+')';
+    g.beginPath();g.arc(sx,sy,.5+rnd()*.9,0,6.2832);g.fill();
+  }
+  document.body.dataset.fertig='1';
+})();
+</script>
+</body>
+</html>

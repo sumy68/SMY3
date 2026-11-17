@@ -38,4 +38,6 @@ Interne Notizen liegen lokal.
 
 Bilder SEO-sprechend benennen: Inhalt + Leistung/Kontext (+ Ort), Kleinbuchstaben, Bindestriche, keine Umlaute. KI-Bilder im Alt-Text (und wo sinnvoll im Namen) als „Symbolbild“ kennzeichnen. Wichtige Bilder je Seite stehen als `image:image` in `sitemap.xml`.
 
+**OG-/Social-Bild:** Vorlage `_src/og/og.html` (wird nicht veröffentlicht). Nach Änderungen `node scripts/build-og.js` ausführen (braucht `PLAYWRIGHT_CORE`): rendert `images/smy-agency-webdesign-vertrieb-digitalagentur.jpg` (1200 × 630, ≤ 200 KB) und setzt `og:image`/`twitter:image` aller Seiten mit neuem `?v=`-Hash, damit WhatsApp/LinkedIn die neue Vorschau laden.
+
 Alt-URLs, die extern verlinkt sein können, bleiben als Kopie liegen, werden aber nirgends verlinkt (GitHub Pages kann keine 301): `assets/logo-header.png`, `assets/logo-dunkel.png`, `assets/logo-dunkel.webp`, `assets/logo.jpg`, `assets/suemi.jpg`, `images/hero.jpg`, `images/logo-signatur.png`. `tests/deploy.test.js` stellt sicher, dass sie nicht wieder verlinkt werden.

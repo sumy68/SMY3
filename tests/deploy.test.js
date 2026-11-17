@@ -116,3 +116,43 @@ test('sitemap.xml führt die wichtigsten Bilder als image:image', () => {
     'images/logos/psynow-logo-online-psychologieberatung.png', 'images/logos/ci-dienstleistungen-logo-gebaeudereinigung.png']
     .forEach((img) => assert.ok(sitemap.includes(`<image:loc>https://smyagency.de/${img}</image:loc>`), img));
 });
+
+/* ─── OG-/Social-Bild (gerendert aus _src/og/og.html via scripts/build-og.js) ─── */
+const OG_FILE = 'images/smy-agency-webdesign-vertrieb-digitalagentur.jpg';
+const jpegSize = (buffer) => {
+  for (let i = 2; i < buffer.length - 9;) {
+    if (buffer[i] !== 0xff) { i++; continue; }
+    const marker = buffer[i + 1];
+    if (marker >= 0xc0 && marker <= 0xc3) return { height: buffer.readUInt16BE(i + 5), width: buffer.readUInt16BE(i + 7) };
+    i += 2 + buffer.readUInt16BE(i + 2);
+  }
+  return null;
+};
+
+test('OG-Bild: 1200 × 630, höchstens 200 KB, Vorlage nicht veröffentlicht', () => {
+  const buffer = fs.readFileSync(path.join(ROOT, OG_FILE));
+  assert.ok(buffer.length <= 200 * 1024, `${buffer.length} Bytes`);
+  assert.deepStrictEqual(jpegSize(buffer), { width: 1200, height: 630 });
+  assert.ok(excludes.includes('_src/'));
+  assert.ok(fs.existsSync(path.join(ROOT, '_src/og/og.html')));
+});
+
+test('alle Seiten mit og:image nutzen das aktuelle OG-Bild mit Versions-Hash, Maßen und Alt-Text', () => {
+  const version = require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(ROOT, OG_FILE))).digest('hex').slice(0, 10);
+  const url = `https://smyagency.de/${OG_FILE}?v=${version}`;
+  const pages = allPages().filter((file) => !file.startsWith('_src')).filter((file) => fs.readFileSync(path.join(ROOT, file), 'utf8').includes('property="og:image"'));
+  assert.ok(pages.length >= 9, pages.join(', '));
+  pages.forEach((file) => {
+    const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
+    assert.ok(html.includes(`<meta property="og:image" content="${url}" />`), `${file}: og:image`);
+    assert.ok(html.includes('<meta property="og:image:width" content="1200" />'), `${file}: width`);
+    assert.ok(html.includes('<meta property="og:image:height" content="630" />'), `${file}: height`);
+    assert.match(html, /<meta property="og:image:alt" content="[^"]{20,}" \/>/, `${file}: alt`);
+    assert.ok(html.includes(`<meta name="twitter:image" content="${url}" />`), `${file}: twitter:image`);
+  });
+});
+
+test('Shop behält das Luxury-Clips-Produktbild', () => {
+  assert.ok(fs.readFileSync(path.join(ROOT, 'shop.html'), 'utf8').includes('images/luxury-clips-pack-social-media-videos.jpg'));
+  assert.ok(fs.existsSync(path.join(ROOT, 'images/luxury-clips-pack-social-media-videos.jpg')));
+});

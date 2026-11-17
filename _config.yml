@@ -9,3 +9,4 @@ exclude:
   - data/reviews.js
   - data/references.js
   - images/logos/*-original.png
+  - _src/
