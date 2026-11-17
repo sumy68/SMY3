@@ -6,20 +6,25 @@
    - Start erst nach window.load + requestIdleCallback; three.js wird bei Bedarf nachgeladen.
    - Init in kurzen Häppchen (scheduler.yield / setTimeout-Fallback) statt eines langen Tasks.
    - Partikelanzahl an die Bildschirmfläche gekoppelt; Punktgröße gleicht die Dichte aus (gleiche Helligkeit).
-   - Adaptive Qualität: sind Frames dauerhaft zu teuer, wird ein zufälliger Teil der Partikel ausgeblendet.
-   - Pause bei verstecktem Tab; devicePixelRatio max. 1.5.
+   - Mit GPU volle Qualität (22.000/9.000 Partikel, Antialiasing, devicePixelRatio bis 2).
+   - Ohne GPU (Software-Rendering) / reduzierte Bewegung: Standbild; ohne GPU zusätzlich weniger Partikel.
+   - Adaptive Qualität: erst bei mehreren Sekunden unter 40 fps werden schrittweise Partikel ausgeblendet.
+   - Pause bei verstecktem Tab.
    - Keine Layout-Abfragen im Animations-Loop: Abschnittspositionen werden nur bei Resize/Größenänderung gemessen. */
 (function(){
   'use strict';
-  const canvas=document.getElementById('buehne');
+  let canvas=document.getElementById('buehne');
   if(!canvas)return;
   const ruhig=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const THREE_URL='/assets/three.min.js';
-  const MAX_DPR=1.5;
-  const DICHTE_REF=22000/(1350*940);   // ursprüngliche Desktop-Dichte (Partikel pro px²)
-  const N_FAKTOR_DESKTOP=0.5,N_FAKTOR_MOBIL=0.7; // Anteil der ursprünglichen Partikel, Rest gleicht die Punktgröße aus
-  const N_MIN=4000, N_MAX=12000;
-  const ADAPT_FRAMES=30, ADAPT_ARBEIT_MS=12, ADAPT_ABSTAND_MS=40, ADAPT_STATISCH_MS=60, ADAPT_MIN_ANTEIL=0.35;
+  // Echte GPU: volle Qualität wie im Original (fein, scharf auf Retina)
+  const MAX_DPR=2;
+  const N_DESKTOP=22000, N_MOBIL=9000;
+  // Nur Software-Rendering (ohne GPU): reduziertes Setup, größere Punkte gleichen die Helligkeit aus
+  const SW_N_FAKTOR=0.5, SW_N_MIN=4000;
+  // Adaptive Reduktion: nur wenn die Bildrate mehrere Sekunden am Stück unter 40 fps liegt
+  const ADAPT_FENSTER_MS=2000, ADAPT_SCHLECHTE_FENSTER=2, ADAPT_ZIEL_FPS=40, ADAPT_STATISCH_FPS=17;
+  const ADAPT_AUFWAERMEN_MS=2500, ADAPT_SCHRITT=0.75, ADAPT_MIN_ANTEIL=0.35;
   const RESIZE_DEBOUNCE_MS=150;
   const STARTVERZUG_MS=1200;
 
@@ -52,6 +57,7 @@
       return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(name);
     }catch(e){return false;}
   }
+  const neuerRenderer=aa=>new THREE.WebGLRenderer({canvas,antialias:aa,alpha:true,powerPreference:'high-performance'});
 
   async function start(){
   // Unterseiten ohne eigene Szenen: Kugel im Hero, danach eine blasse Galaxie im Hintergrund
@@ -61,23 +67,34 @@
   }
 
   if(!window.THREE){canvas.style.display='none';return;}
-  let renderer;
-  try{renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:'high-performance'});}
-  catch(e){canvas.style.display='none';console.warn('[smy-3d] WebGL nicht verfügbar',e);return;}
   // Ohne GPU (Software-Rendering) muss der Browser das Vollbild-Canvas jeden Frame auf die CPU zurücklesen
   // (ReadPixels) – unabhängig von der Partikelzahl. Dann wie bei reduzierter Bewegung: statisches Bild,
   // das beim Scrollen weiter zwischen den Formen wechselt.
+  let renderer;
+  try{renderer=neuerRenderer(false);}
+  catch(e){canvas.style.display='none';console.warn('[smy-3d] WebGL nicht verfügbar',e);return;}
   const softwareGL=istSoftwareRenderer(renderer);
   let statisch=ruhig||softwareGL;
-  renderer.setPixelRatio(Math.min(devicePixelRatio||1,softwareGL?1:MAX_DPR));
+  if(!softwareGL){
+    // Echte GPU: auf frischem Canvas mit Antialiasing neu anlegen (Kontext-Attribute sind nachträglich fix).
+    // Ohne GPU bleibt der erste Kontext – kein zweiter Kontext im teuren Software-Pfad.
+    await pause();
+    renderer.dispose(); // alter Kontext wird mit dem entfernten Canvas freigegeben
+    const frisch=canvas.cloneNode(false);canvas.replaceWith(frisch);canvas=frisch;
+    try{renderer=neuerRenderer(true);}
+    catch(e){canvas.style.display='none';console.warn('[smy-3d] WebGL nicht verfügbar',e);return;}
+  }
+  const pixeldichte=()=>softwareGL?1:Math.min(devicePixelRatio||1,MAX_DPR);
+  renderer.setPixelRatio(pixeldichte());
   await pause();
 
   let vw=innerWidth,vh=innerHeight;
   const mobil=vw<760;
-  // Partikelanzahl nach Bildschirmfläche; die Referenzdichte der alten Version bleibt optisch erhalten
-  const nAlt=mobil?9000:Math.round(DICHTE_REF*vw*vh);
-  const N=Math.max(N_MIN,Math.min(N_MAX,Math.round(nAlt*(mobil?N_FAKTOR_MOBIL:N_FAKTOR_DESKTOP))));
-  const dichteAusgleich=n=>Math.sqrt(Math.max(1,nAlt/n));
+  // Partikelanzahl: mit GPU wie im Original; ohne GPU reduziert (dort nur ein Standbild)
+  const nVoll=mobil?N_MOBIL:N_DESKTOP;
+  const N=softwareGL?Math.max(SW_N_MIN,Math.round(nVoll*SW_N_FAKTOR)):nVoll;
+  // Punktgröße nur im Software-Fall anheben (Helligkeit trotz weniger Punkte) – mit GPU bleiben die Punkte fein
+  const dichteAusgleich=n=>softwareGL?Math.sqrt(Math.max(1,nVoll/n)):1;
   const scene=new THREE.Scene();
   const cam=new THREE.PerspectiveCamera(42,1,0.1,100);
   cam.position.set(0,0,11);
@@ -250,6 +267,8 @@
 
   function groesseSetzen(){
     messen();
+    // Pixeldichte kann sich ändern (Fenster auf anderen Bildschirm gezogen) – Punktgröße bleibt daran gekoppelt
+    renderer.setPixelRatio(pixeldichte());mat.uniforms.uPx.value=renderer.getPixelRatio();
     renderer.setSize(vw,vh,false);cam.aspect=vw/vh;cam.updateProjectionMatrix();
     scrollSzene();
   }
@@ -266,23 +285,31 @@
   // Einstieg: Partikel kommen aus einer weiten Wolke zusammen
   let intro=statisch?1:0;const startWolke=statisch?null:form(()=>[gauss()*9,gauss()*6,gauss()*5]);
 
-  // Adaptive Qualität: bei dauerhaft teuren Frames weniger Partikel zeichnen (größer, damit die Helligkeit bleibt)
-  let messFrames=0,arbeitSumme=0,abstandSumme=0,aufwaermen=20;
-  function qualitaetPruefen(arbeit,abstand){
-    if(aufwaermen>0){aufwaermen--;return;}
-    messFrames++;arbeitSumme+=arbeit;abstandSumme+=abstand;
-    if(messFrames<ADAPT_FRAMES)return;
-    const schnittAbstand=abstandSumme/messFrames;
-    const zuTeuer=arbeitSumme/messFrames>ADAPT_ARBEIT_MS||schnittAbstand>ADAPT_ABSTAND_MS;
-    messFrames=0;arbeitSumme=0;abstandSumme=0;
-    if(!zuTeuer)return;
-    // Letzte Stufe: auch mit minimaler Partikelzahl unter ~17 fps -> statisches Bild statt ruckelnder Animation
-    if(aktivN<=Math.ceil(N*ADAPT_MIN_ANTEIL)){if(schnittAbstand>ADAPT_STATISCH_MS){statisch=true;intro=1;}return;}
-    aktivN=Math.max(Math.ceil(N*ADAPT_MIN_ANTEIL),Math.round(aktivN*0.6));
+  // Adaptive Qualität: misst die Bildrate in Zeitfenstern. Erst wenn mehrere Fenster am Stück (= mehrere
+  // Sekunden) unter ADAPT_ZIEL_FPS liegen, werden schrittweise Partikel ausgeblendet. Kurze Ruckler
+  // (Scrollen, Tab-Wechsel, Shader-Übersetzung beim Start) lösen nichts aus.
+  let fensterStart=0,fensterFrames=0,schlechteFenster=0,adaptAb=performance.now()+ADAPT_AUFWAERMEN_MS;
+  function qualitaetPruefen(now){
+    if(now<adaptAb)return;
+    if(!fensterStart){fensterStart=now;fensterFrames=0;return;}
+    fensterFrames++;
+    const dauer=now-fensterStart;
+    if(dauer<ADAPT_FENSTER_MS)return;
+    const fps=fensterFrames*1000/dauer;
+    fensterStart=now;fensterFrames=0;
+    if(fps>=ADAPT_ZIEL_FPS){schlechteFenster=0;return;}
+    if(++schlechteFenster<ADAPT_SCHLECHTE_FENSTER)return;
+    schlechteFenster=0;
+    const minimum=Math.ceil(N*ADAPT_MIN_ANTEIL);
+    // Letzte Stufe: auch mit minimaler Partikelzahl unter ~17 fps -> Standbild statt ruckelnder Animation
+    if(aktivN<=minimum){if(fps<ADAPT_STATISCH_FPS){statisch=true;intro=1;}return;}
+    aktivN=Math.max(minimum,Math.round(aktivN*ADAPT_SCHRITT));
     geo.setDrawRange(0,aktivN);
     mat.uniforms.uDichte.value=dichteAusgleich(aktivN);
-    letzteMisch=-1;aufwaermen=10;
+    letzteMisch=-1;adaptAb=now+ADAPT_FENSTER_MS; // nach jeder Stufe neu einschwingen lassen
   }
+  // Pause (Tab im Hintergrund) zählt nicht als langsame Bildrate
+  function messungZuruecksetzen(){fensterStart=0;fensterFrames=0;schlechteFenster=0;}
 
   function zeichnen(now){
     const dt=Math.min(0.05,(now-t0)/1000);t0=now;zeit+=statisch?0:dt;
@@ -320,18 +347,16 @@
   }
 
   // Animations-Loop ausschließlich über requestAnimationFrame
-  let rafId=0,letzterFrame=0;
+  let rafId=0;
   function frame(now){
     rafId=0;
-    const abstand=letzterFrame?now-letzterFrame:16;letzterFrame=now;
-    const t=performance.now();
     zeichnen(now);
-    if(!statisch)qualitaetPruefen(performance.now()-t,abstand);
+    if(!statisch)qualitaetPruefen(now);
     if(!statisch&&!document.hidden)rafId=requestAnimationFrame(frame);
   }
   function anstossen(){
     if(rafId||document.hidden)return;
-    t0=performance.now();letzterFrame=0;
+    t0=performance.now();messungZuruecksetzen();
     rafId=requestAnimationFrame(frame);
   }
   // Tab im Hintergrund -> Loop anhalten, beim Zurückkehren ohne Zeitsprung weiter
