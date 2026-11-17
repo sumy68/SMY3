@@ -122,8 +122,8 @@ test('Partner-Leiste zeigt genau PSYNOW und CI mit lokalem Logo und Alt-Text', (
   const section = html.slice(html.indexOf('id="vertriebspartner"'));
   const images = [...section.matchAll(/<img class="ds-vp__logo" src="([^"]+)" alt="([^"]*)"/g)].map((match) => [match[1], match[2]]);
   assert.deepStrictEqual(images, [
-    ['/images/logos/psynow.png', ''],
-    ['/images/logos/ci.png', ''],
+    ['/images/logos/psynow-logo-online-psychologieberatung.png', ''],
+    ['/images/logos/ci-dienstleistungen-logo-gebaeudereinigung.png', ''],
   ]);
   images.forEach(([src]) => assert.ok(fs.existsSync(path.join(ROOT, src)), src));
   const cards = [...section.matchAll(/<a class="ds-vp__link"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)];

@@ -171,7 +171,7 @@
   const logoBild=new Image();
   logoBild.onload=()=>imLeerlauf(()=>raketeBauen(logoBild));
   logoBild.onerror=()=>console.warn('[smy-3d] Logo für die Raketen-Form nicht geladen');
-  logoBild.src='/assets/logo-header.png';
+  logoBild.src='/assets/smy-agency-logo-hell.png';
 
   // Platz der Form auf dem Bildschirm je Szene
   const desk=!mobil;
@@ -272,8 +272,9 @@
     renderer.setSize(vw,vh,false);cam.aspect=vw/vh;cam.updateProjectionMatrix();
     scrollSzene();
   }
-  let resizeUhr=0;
-  const spaeterMessen=()=>{clearTimeout(resizeUhr);resizeUhr=setTimeout(()=>{groesseSetzen();anstossen();},RESIZE_DEBOUNCE_MS);};
+  // Resize kann während der gestückelten Init feuern -> Loop erst anstoßen, wenn er fertig aufgesetzt ist
+  let resizeUhr=0,loopBereit=false;
+  const spaeterMessen=()=>{clearTimeout(resizeUhr);resizeUhr=setTimeout(()=>{groesseSetzen();if(loopBereit)anstossen();},RESIZE_DEBOUNCE_MS);};
   addEventListener('resize',spaeterMessen,{passive:true});
   // Inhalt ändert seine Höhe (Akkordeon, Bewertungen, Schriften) -> Abschnitte neu vermessen
   if('ResizeObserver' in window)new ResizeObserver(spaeterMessen).observe(document.body);
@@ -367,6 +368,7 @@
 
   // Statisch (reduzierte Bewegung / Software-Rendering / zu langsam): nur beim Scrollen neu zeichnen, gebündelt pro Frame
   addEventListener('scroll',()=>{scrollSzene();if(statisch)anstossen();},{passive:true});
+  loopBereit=true;
   anstossen();
   }
 })();

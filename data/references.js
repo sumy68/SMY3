@@ -74,7 +74,7 @@ window.SMY_REFERENCES = Object.freeze([
   /* ─── Vertriebspartner ─── */
   {
     name: 'PSYNOW',
-    logo: '/images/logos/psynow.png',
+    logo: '/images/logos/psynow-logo-online-psychologieberatung.png',
     typ: 'partner',
     branche: 'Gesundheit',
     leistung: 'Online-Psychologieberatung & Betriebliches Gesundheitsmanagement',
@@ -85,7 +85,7 @@ window.SMY_REFERENCES = Object.freeze([
   {
     name: 'CI Dienstleistungen',
     url: 'https://ci-dienstleistungen.com',
-    logo: '/images/logos/ci.png',
+    logo: '/images/logos/ci-dienstleistungen-logo-gebaeudereinigung.png',
     typ: 'partner',
     branche: 'Gebäudedienstleistungen',
     leistung: 'Gebäudereinigung & Hausmeisterservice',

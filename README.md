@@ -32,4 +32,10 @@ Interne Notizen liegen lokal.
 - Startseite: `index.html` mit `startseite.js` (Interaktionen) und `smy-3d.js` (Partikel-Hintergrund).
 - Unterseiten: `smy-neu.css` wird nach allen anderen Stylesheets geladen und legt den neuen Stil über das Design-System. Dazu `smy-3d.js` für die Partikel.
 - three.js liegt lokal unter `assets/three.min.js`, die Schrift Archivo unter `fonts/` – keine externen Requests.
-- Helle Logo-Variante für dunkle Hintergründe: `assets/logo-dunkel.png`.
+- Logo für dunkle Hintergründe (weiße Schrift): `assets/smy-agency-logo-dunkel.png` / `.webp`. Für helle Hintergründe, Favicon, Schema und Partikel-Form: `assets/smy-agency-logo-hell.png`.
+
+## Bilddateien
+
+Bilder SEO-sprechend benennen: Inhalt + Leistung/Kontext (+ Ort), Kleinbuchstaben, Bindestriche, keine Umlaute. KI-Bilder im Alt-Text (und wo sinnvoll im Namen) als „Symbolbild“ kennzeichnen. Wichtige Bilder je Seite stehen als `image:image` in `sitemap.xml`.
+
+Alt-URLs, die extern verlinkt sein können, bleiben als Kopie liegen, werden aber nirgends verlinkt (GitHub Pages kann keine 301): `assets/logo-header.png`, `assets/logo-dunkel.png`, `assets/logo-dunkel.webp`, `assets/logo.jpg`, `assets/suemi.jpg`, `images/hero.jpg`, `images/logo-signatur.png`. `tests/deploy.test.js` stellt sicher, dass sie nicht wieder verlinkt werden.

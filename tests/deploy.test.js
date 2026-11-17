@@ -67,8 +67,52 @@ test('lokale Fonts und Tailwind-CSS sind vorhanden und eingebunden', () => {
 
 test('Logo-Originale gehen nicht live, die zugeschnittenen schon', () => {
   assert.ok(excludes.includes('images/logos/*-original.png'));
-  ['ci', 'psynow'].forEach((name) => {
+  ['ci-dienstleistungen-logo-gebaeudereinigung', 'psynow-logo-online-psychologieberatung'].forEach((name) => {
     assert.ok(fs.existsSync(path.join(ROOT, `images/logos/${name}-original.png`)), name);
     assert.ok(fs.existsSync(path.join(ROOT, `images/logos/${name}.png`)), name);
   });
+});
+
+/* ─── Bilddateien: SEO-sprechende Namen, keine toten Verweise, Alt-URLs nur als Kopie ─── */
+const IMAGE_EXT = /\.(png|jpe?g|webp|avif|gif|svg|ico)$/i;
+const LEGACY_IMAGES = [
+  'assets/logo-header.png', 'assets/logo-dunkel.png', 'assets/logo-dunkel.webp', 'assets/logo.jpg',
+  'assets/suemi.jpg', 'images/hero.jpg', 'images/logo-signatur.png',
+];
+const IMAGE_DIRS = ['assets', 'images', 'public'];
+const listImages = (dir) => fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((entry) => {
+  const rel = path.posix.join(dir, entry.name);
+  if (entry.isDirectory()) return listImages(rel);
+  return IMAGE_EXT.test(entry.name) ? [rel] : [];
+});
+const sourcesWithImages = () => [...walk('.'), 'sitemap.xml', ...fs.readdirSync(ROOT).filter((f) => f.endsWith('.css'))];
+const referencedImages = () => sourcesWithImages().flatMap((file) => {
+  const source = fs.readFileSync(path.join(ROOT, file), 'utf8');
+  return [...source.matchAll(/(?:https:\/\/smyagency\.de)?\/?((?:assets|images|public)\/[\w./-]+\.(?:png|jpe?g|webp|avif|gif|svg|ico))/gi)]
+    .map((match) => ({ file, src: match[1] }));
+});
+
+test('alle Bilddateien sind SEO-sprechend benannt (klein, Bindestriche, keine Umlaute)', () => {
+  IMAGE_DIRS.flatMap(listImages).filter((file) => !LEGACY_IMAGES.includes(file)).forEach((file) => {
+    assert.match(path.basename(file), /^[a-z0-9]+(?:-[a-z0-9]+)+\.(png|jpe?g|webp|avif|gif|svg|ico)$/, file);
+  });
+});
+
+test('jedes verlinkte Bild existiert', () => {
+  const refs = referencedImages();
+  assert.ok(refs.length > 20);
+  refs.forEach(({ file, src }) => assert.ok(fs.existsSync(path.join(ROOT, src)), `${file}: ${src}`));
+});
+
+test('alte Bild-URLs bleiben erreichbar, werden aber nirgends mehr verlinkt', () => {
+  LEGACY_IMAGES.forEach((legacy) => assert.ok(fs.existsSync(path.join(ROOT, legacy)), legacy));
+  referencedImages().forEach(({ file, src }) => assert.ok(!LEGACY_IMAGES.includes(src), `${file}: ${src}`));
+});
+
+test('sitemap.xml führt die wichtigsten Bilder als image:image', () => {
+  const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
+  assert.ok(sitemap.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'));
+  ['assets/smy-agency-logo-dunkel.png', 'assets/suemeyye-abur-gruenderin-smy-agency.jpg',
+    'images/logos/psynow-logo-online-psychologieberatung.png', 'images/logos/ci-dienstleistungen-logo-gebaeudereinigung.png']
+    .forEach((img) => assert.ok(sitemap.includes(`<image:loc>https://smyagency.de/${img}</image:loc>`), img));
 });

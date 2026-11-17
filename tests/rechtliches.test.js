@@ -119,9 +119,9 @@ test('support.html nutzt einheitlich info@smyagency.de', () => {
 });
 
 test('Visa-Logo liegt lokal und wird von leitfaden.html genutzt', () => {
-  assert.ok(fs.existsSync(path.join(__dirname, '../images/visa.svg')));
+  assert.ok(fs.existsSync(path.join(__dirname, '../images/zahlungsart-visa-logo.svg')));
   const html = read('leitfaden.html');
-  assert.ok(html.includes('src="/images/visa.svg"'));
+  assert.ok(html.includes('src="/images/zahlungsart-visa-logo.svg"'));
   assert.ok(!html.includes('commons/0/04/Visa.svg'));
 });
 
@@ -170,7 +170,7 @@ test('leitfaden.html lädt alle Zahlungslogos lokal', () => {
   const html = read('leitfaden.html');
   assert.ok(!html.includes('wikimedia'));
   ['paypal', 'visa', 'mastercard'].forEach((name) => {
-    assert.ok(html.includes(`src="/images/${name}.svg"`), name);
-    assert.ok(fs.existsSync(path.join(__dirname, `../images/${name}.svg`)), name);
+    assert.ok(html.includes(`src="/images/zahlungsart-${name}-logo.svg"`), name);
+    assert.ok(fs.existsSync(path.join(__dirname, `../images/zahlungsart-${name}-logo.svg`)), name);
   });
 });
